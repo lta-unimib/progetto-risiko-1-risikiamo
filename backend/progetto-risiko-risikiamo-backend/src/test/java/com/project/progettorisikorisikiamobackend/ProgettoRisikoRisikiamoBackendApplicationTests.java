@@ -8,6 +8,8 @@ class ProgettoRisikoRisikiamoBackendApplicationTests {
 
 	@Test
 	void contextLoads() {
+		// Test per conferma coverege
+		assert true;
 	}
 
 }
