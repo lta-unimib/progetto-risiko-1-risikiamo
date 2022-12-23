@@ -9,17 +9,26 @@ jobs:
   sonarcloud:
     name: SonarCloud
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./frontend/progetto-risiko-risikiamo-frontend
     steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
+
+      - name: Install dependencies
+        run: npm install
+      - name: Test and coverage
+        run: npx jest --coverage
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@master
         with:
-          projectBaseDir: ./frontend/progetto-risiko-risikiamo-frontend/src
           args: >
             -Dsonar.projectKey=progetto-risiko-risikiamo-forntend
             -Dsonar.organization=se-unimib
+            -Dsonar.sources="./frontend/progetto-risiko-risikiamo-frontend/src"
+            -Dsonar.javascript.lcov.reportPaths="./frontend/progetto-risiko-risikiamo-frontend/coverage/lcov.info"
 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
