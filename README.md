@@ -14,6 +14,7 @@ Progetto Risiko Dinamico ingegneria del software
 
 - Junit 5 (Nativo spring)
 - Jacoco 0.8.8
+- Postman
 
 ## FrontEnd
 
