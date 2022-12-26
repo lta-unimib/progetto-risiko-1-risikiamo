@@ -26,7 +26,7 @@ jobs:
         uses: sonarsource/sonarcloud-github-action@master
         with:
           args: >
-            -Dsonar.projectKey=progetto-risiko-risikiamo-forntend
+            -Dsonar.projectKey=progetto-risiko-1-risikiamo-frontend
             -Dsonar.organization=se-unimib
             -Dsonar.sources="./frontend/progetto-risiko-risikiamo-frontend/src"
             -Dsonar.javascript.lcov.reportPaths="./frontend/progetto-risiko-risikiamo-frontend/coverage/lcov.info"
