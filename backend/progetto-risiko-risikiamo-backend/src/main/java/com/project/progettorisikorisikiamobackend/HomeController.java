@@ -12,4 +12,15 @@ public class HomeController {
         return "Hello, World";
     }
 
+    // simple code to test
+    @RequestMapping("/test")
+    public @ResponseBody String testEndpoint() {
+        return test();
+    }
+
+    // funzione test per quality gate
+    public String test() {
+        return "test";
+    }
+
 }
