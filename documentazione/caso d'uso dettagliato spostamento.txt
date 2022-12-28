@@ -1,0 +1,37 @@
+CASO D'USO : Spostamento
+Portata: DRisk
+
+LIVELLO: Obiettivo Sistema
+
+Parti interessate ed interessi: 
+- Sistema e giocatore, il giocatore vuole spostare le sue armate, 
+- il sistema permette lo spostamento.  
+
+Attore primario:
+giocatore
+
+Pre-condizioni: 
+il ha il turno.
+
+Post-condizioni:
+Il giocatore passa il turno al successivo.
+
+Scenario Principale di successo: 
+    1. Il giocatore sceglie da quale e in quale territorio spostare i suoi carriarmati, 
+    2. il sistema controlla che lo spostamento sia possibile,
+    3. il giocatore svolge lo spostamento,
+    4. il giocatore finisce il suo turno,
+    
+
+Estensioni:
+    2.a il giocatore non possiede il territorio di arrivo dello spostamento,
+        2.a.1 il sistema segnala l'errore e richiede di selezionare un altro territorio di arrivo
+    2.b il giocatore non ha sufficenti carriarmati sul territorio di partenza per effettuare lo spostamento,
+        2.b.1 il sistema segnala l'errore e richiede di selezionare un altro territorio di partenza 
+    4.a  il giocatore nel corso del suo turno ha conquistato almeno un territorio, 
+        4.a.1 il sistema assegna al giocatore una carta territorio al giocatore
+        4.a.2 il sistema passa il turno al giocatore successivo.
+    
+   
+Frequenza di ripetizione:
+    ogni volta che un giocatore invoca uno spostamento.
