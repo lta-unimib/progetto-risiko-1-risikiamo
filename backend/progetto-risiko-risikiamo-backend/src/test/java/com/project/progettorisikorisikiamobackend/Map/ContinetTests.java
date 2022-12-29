@@ -84,8 +84,8 @@ public class ContinetTests {
         territory3.setOwner(player1);
         territory4.setOwner(player2);
 
-        assertEquals(3, continet1.getOwnedTerritories(player1).size());
-        assertEquals(1, continet1.getOwnedTerritories(player2).size());
+        assertEquals(3, continet1.getTerritories(player1).size());
+        assertEquals(1, continet1.getTerritories(player2).size());
 
     }
 }

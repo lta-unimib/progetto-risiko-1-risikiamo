@@ -7,7 +7,12 @@ import java.util.HashMap;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
-//Risiko Continent
+/**
+ * Continet class
+ * 
+ * @author - Mauro Zorzin
+ * @version 1.0
+ */
 @Getter
 @EqualsAndHashCode
 public class Continet {
@@ -109,7 +114,7 @@ public class Continet {
      * 
      */
     public void addTerritory(Territory territory, String id) {
-        if (id.isEmpty()) {
+        if (id.isEmpty() || id.isBlank()) {
             throw new IllegalArgumentException("The territory id is empty");
         }
         if (territories.containsKey(id)) {
@@ -118,6 +123,7 @@ public class Continet {
         if (territories.containsValue(territory)) {
             throw new IllegalArgumentException("The territory is already in the continent");
         }
+
         territories.put(id, territory);
     }
 
@@ -159,6 +165,21 @@ public class Continet {
     }
 
     /**
+     * Get the number of territories owned by the player
+     * 
+     * @aurhor Mauro Zozin
+     * @param player the player to check
+     * @return the number of territories owned by the player
+     * 
+     */
+    public int getNumberOfTerritories(PlayerPlaceholder player) {
+        if (player == null) {
+            return 0;
+        }
+        return territories.size();
+    }
+
+    /**
      * Get the territories owned by the player
      * 
      * @aurhor Mauro Zozin
@@ -166,14 +187,17 @@ public class Continet {
      * @return the territories owned by the player
      * 
      */
-    public Collection<Territory> getOwnedTerritories(PlayerPlaceholder player) {
-        Collection<Territory> ownedTerritories = new ArrayList<>();
-        for (Territory territory : territories.values()) {
+    public Collection<Territory> getTerritories(PlayerPlaceholder player) {
+        if (player == null) {
+            return new ArrayList<>();
+        }
+        Collection<Territory> territoriesTemporaneo = new ArrayList<>();
+        for (Territory territory : this.territories.values()) {
             if (territory.getOwner() == player) {
-                ownedTerritories.add(territory);
+                territoriesTemporaneo.add(territory);
             }
         }
-        return ownedTerritories;
+        return territoriesTemporaneo;
     }
 
 }
