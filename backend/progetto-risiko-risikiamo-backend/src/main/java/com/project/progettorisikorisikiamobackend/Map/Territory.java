@@ -1,13 +1,17 @@
 package com.project.progettorisikorisikiamobackend.Map;
 
-import io.micrometer.common.lang.Nullable;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import java.util.ArrayList;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
-//Risiko Territory
+/**
+ * Territory class
+ * 
+ * @author - Mauro Zorzin
+ * @version 1.0
+ */
 @EqualsAndHashCode
 @ToString
 @Getter
@@ -15,21 +19,28 @@ public class Territory {
 
     private final String name;
     private int army;
-    private final Territory[] neighbors;
-    @Nullable
+    private ArrayList<Territory> neighbors;
     private PlayerPlaceholder owner;
 
-    private Territory(String name, int army, Territory[] neighbors, PlayerPlaceholder owner) {
+    private Territory(String name, int army, ArrayList<Territory> neighbors, PlayerPlaceholder owner) {
         this.name = name;
         this.army = army;
         this.neighbors = neighbors;
         this.owner = owner;
     }
 
-    public Territory(String name, Territory[] neighbors) {
-        this(name, 0, neighbors, null);
+    public Territory(String name) {
+        this(name, 0, new ArrayList<Territory>(), null);
     }
 
+    /**
+     * Set the owner of the territory, if the army is = 0
+     * 
+     * @author - Mauro Zorzin
+     * @param owner
+     * @throws IllegalArgumentException if owner is null
+     * @throws IllegalArgumentException if territory have an owner and army > 0
+     */
     public void setOwner(PlayerPlaceholder owner) {
         if (owner == null) {
             throw new IllegalArgumentException("Owner can't be null");
@@ -40,6 +51,14 @@ public class Territory {
         this.owner = owner;
     }
 
+    /**
+     * Add army to the territory, if the army become = 0 the owner is set null
+     * 
+     * @author - Mauro Zorzin
+     * @param army
+     * @throws IllegalArgumentException if owner is null
+     * @throws IllegalArgumentException if army become negative
+     */
     public void addArmy(int army) {
 
         if (this.owner == null) {
@@ -54,6 +73,11 @@ public class Territory {
         this.army += army;
     }
 
+    /**
+     * @author - Mauro Zorzin
+     * @param territory
+     * @return true if the territory is a neighbor of this territory
+     */
     public boolean isNeighbor(Territory territory) {
         for (Territory neighborTemporanei : this.neighbors) {
             if (neighborTemporanei.equals(territory)) {
@@ -63,6 +87,11 @@ public class Territory {
         return false;
     }
 
+    /**
+     * @author - Mauro Zorzin
+     * @param territoryName
+     * @return true if the territory is a neighbor of this territory
+     */
     public boolean isNeighbor(String territoryName) {
         for (Territory neighborTemporanei : this.neighbors) {
             if (neighborTemporanei.getName().equals(territoryName)) {
@@ -72,6 +101,11 @@ public class Territory {
         return false;
     }
 
+    /**
+     * @author - MauroZorzin
+     * @return the neighbors of this territory not owned by the owner of this
+     *         territory
+     */
     public Territory[] notOwnedNeighbor() {
         int count = 0;
         for (Territory neighborTemporanei : this.neighbors) {
@@ -90,6 +124,10 @@ public class Territory {
         return notOwnedTerritories;
     }
 
+    /**
+     * @author - Mauro Zorzin
+     * @return the neighbors of this territory owned by the owner of this territory
+     */
     public Territory[] ownedNeighbor() {
         int count = 0;
         for (Territory neighborTemporanei : this.neighbors) {
@@ -106,6 +144,26 @@ public class Territory {
             }
         }
         return ownedTerritories;
+    }
+
+    /**
+     * Add a neighbor to the neighbors list
+     * 
+     * @author - Mauro Zorzin
+     * @param territory the neighbor to add
+     */
+    public void addNeighbor(Territory territory) {
+        this.neighbors.add(territory);
+    }
+
+    /**
+     * Remove a neighbor from the neighbors list
+     * 
+     * @author - Mauro Zorzin
+     * @param territory the neighbor to remove
+     */
+    public void removeNeighbor(Territory territory) {
+        this.neighbors.remove(territory);
     }
 
 }
