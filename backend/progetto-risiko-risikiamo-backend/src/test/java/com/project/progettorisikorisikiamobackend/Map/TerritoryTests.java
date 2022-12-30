@@ -11,7 +11,7 @@ public class TerritoryTests {
 
     // test: Constructor
     @Test
-    void testConstructor() {
+    public void testConstructor() {
         Territory territory = new Territory("Territory1");
         assertEquals("Territory1", territory.getName());
         assertEquals(0, territory.getArmy());
@@ -21,7 +21,7 @@ public class TerritoryTests {
 
     // test setOwner
     @Test
-    void testSetOwner() {
+    public void testSetOwner() {
         Territory territory = new Territory("Territory1");
         territory.setOwner(new PlayerPlaceholder("Player1"));
         assertEquals("Player1", territory.getOwner().getName());
@@ -34,7 +34,7 @@ public class TerritoryTests {
 
     // test addArmy
     @Test
-    void testAddArmy() {
+    public void testAddArmy() {
         Territory territory = new Territory("Territory1");
         territory.getArmy();
         assertEquals(0, territory.getArmy());
@@ -65,7 +65,7 @@ public class TerritoryTests {
 
     // test isNeighbor
     @Test
-    void testIsNeighbor() {
+    public void testIsNeighbor() {
         Territory territory1 = new Territory("Territory1");
         Territory territory2 = new Territory("Territory2");
         Territory territory3 = new Territory("Territory3");
@@ -87,7 +87,7 @@ public class TerritoryTests {
 
     // test addNeighbor
     @Test
-    void testAddNeighbor() {
+    public void testAddNeighbor() {
         Territory territory1 = new Territory("Territory1");
         Territory territory2 = new Territory("Territory2");
         Territory territory3 = new Territory("Territory3");
@@ -100,7 +100,7 @@ public class TerritoryTests {
 
     // test removeNeighbor
     @Test
-    void testRemoveNeighbor() {
+    public void testRemoveNeighbor() {
         Territory territory1 = new Territory("Territory1");
         Territory territory2 = new Territory("Territory2");
         Territory territory3 = new Territory("Territory3");
@@ -114,7 +114,7 @@ public class TerritoryTests {
 
     // test getNeighbors
     @Test
-    void testGetNeighbors() {
+    public void testGetNeighbors() {
         Territory territory1 = new Territory("Territory1");
         Territory territory2 = new Territory("Territory2");
         Territory territory3 = new Territory("Territory3");
@@ -128,7 +128,7 @@ public class TerritoryTests {
 
     // test getNotOwnedNeighbor
     @Test
-    void testGetNotOwnedNeighbor() {
+    public void testGetNotOwnedNeighbor() {
         PlayerPlaceholder player1 = new PlayerPlaceholder("Player1");
         PlayerPlaceholder player2 = new PlayerPlaceholder("Player2");
         Territory territory1 = new Territory("Territory1");
@@ -155,7 +155,7 @@ public class TerritoryTests {
 
     // test getOwnedNeighbor
     @Test
-    void testGetOwnedNeighbor() {
+    public void testGetOwnedNeighbor() {
         PlayerPlaceholder player1 = new PlayerPlaceholder("Player1");
         PlayerPlaceholder player2 = new PlayerPlaceholder("Player2");
         Territory territory1 = new Territory("Territory1");
@@ -186,7 +186,7 @@ public class TerritoryTests {
 
     // test equals
     @Test
-    void testEquals() {
+    public void testEquals() {
         Territory territory1 = new Territory("Territory1");
         Territory territory2 = new Territory("Territory2");
         Territory territory3 = new Territory("Territory3");
@@ -212,7 +212,7 @@ public class TerritoryTests {
 
     // test hashCode @EqualsAndHashCode lombok
     @Test
-    void testHashCode() {
+    public void testHashCode() {
         Territory territory1 = new Territory("Territory1");
         Territory territory2 = new Territory("Territory2");
         Territory territory3 = new Territory("Territory3");
