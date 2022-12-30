@@ -23,7 +23,7 @@ public class ContinetTests {
     public void testGetOwner() {
         PlayerPlaceholder player1 = new PlayerPlaceholder("Player1");
         Continet continet = new Continet("Continet1", 1);
-        assertThrows(IllegalArgumentException.class, () -> continet.getOwner());
+        assertEquals(null, continet.getOwner());
         Territory territory1 = new Territory("Territory1");
         Territory territory2 = new Territory("Territory2");
         territory1.setOwner(player1);
@@ -40,7 +40,7 @@ public class ContinetTests {
     public void testIsOwnedBy() {
         PlayerPlaceholder player1 = new PlayerPlaceholder("Player1");
         Continet continet = new Continet("Continet1", 1);
-        assertThrows(IllegalArgumentException.class, () -> continet.isOwnedBy(player1));
+        assertEquals(false, continet.isOwnedBy(player1));
         Territory territory1 = new Territory("Territory1");
         Territory territory2 = new Territory("Territory2");
         territory1.setOwner(player1);
@@ -57,7 +57,7 @@ public class ContinetTests {
     public void testIsOwned() {
         PlayerPlaceholder player1 = new PlayerPlaceholder("Player1");
         Continet continet = new Continet("Continet1", 1);
-        assertThrows(IllegalArgumentException.class, () -> continet.isOwned());
+        assertEquals(false, continet.isOwned());
         Territory territory1 = new Territory("Territory1");
         Territory territory2 = new Territory("Territory2");
         territory1.setOwner(player1);

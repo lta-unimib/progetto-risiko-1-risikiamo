@@ -35,8 +35,13 @@ public class Map {
      * 
      * @param continet   the continet to add
      * @param continetId the id of the continet
+     * @throws IllegalArgumentException if the continet is already in the map
+     * @throws IllegalArgumentException if the continet id is already in the map
+     * @throws IllegalArgumentException if the continet is null
+     * @throws IllegalArgumentException if the continet id is null
+     * @author Mauro Zorzin
      */
-    public void addContinet(Continet continet, String continetId) {
+    public void addContinet(Continet continet, String continetId) throws IllegalArgumentException {
         if (isContinetInMap(continetId)) {
             throw new IllegalArgumentException("Continet already in the map");
         }
@@ -60,6 +65,7 @@ public class Map {
      * 
      * @param continet the continet to check
      * @return true if the continet is in the map, false otherwise
+     * @author Mauro Zorzin
      */
     public boolean isContinetInMap(Continet continet) {
         return continets.containsValue(continet);
@@ -70,6 +76,7 @@ public class Map {
      * 
      * @param continetId the id of the continet to check
      * @return true if the continet is in the map, false otherwise
+     * @author Mauro Zorzin
      */
     public boolean isContinetInMap(String continetId) {
         return continets.containsKey(continetId);
@@ -80,6 +87,7 @@ public class Map {
      * 
      * @param territory the territory to check
      * @return true if the territory is in the map, false otherwise
+     * @author Mauro Zorzin
      */
     public boolean isTerritoryInMap(Territory territory) {
         for (Continet continet : continets.values()) {
@@ -95,6 +103,7 @@ public class Map {
      * 
      * @param territoryId the id of the territory to check
      * @return true if the territory is in the map, false otherwise
+     * @author Mauro Zorzin
      */
     public boolean isTerritoryInMap(String territoryId) {
         for (Continet continet : continets.values()) {
@@ -110,6 +119,7 @@ public class Map {
      * 
      * @param continetId the id of the continet to get
      * @return the continet, null if the continet is not in the map
+     * @author Mauro Zorzin
      */
     public Continet getContinet(String continetId) {
         return continets.get(continetId);
@@ -120,6 +130,7 @@ public class Map {
      * 
      * @param territory the territory to get
      * @return the territory, null if the territory is not in the map
+     * @author Mauro Zorzin
      */
     public Territory getTerritory(String territoryId) {
         for (Continet continet : continets.values()) {
@@ -153,13 +164,14 @@ public class Map {
      * 
      * @param player
      * @return the number of continents owned by the player
+     * @author Mauro Zorzin
      */
     public int getNumberOfContinent(PlayerPlaceholder player) {
         if (player == null)
             return 0;
         int ownedContinets = 0;
         for (Continet continet : continets.values()) {
-            if (continet.isOwned(player)) {
+            if (continet.isOwnedBy(player)) {
                 ownedContinets++;
             }
         }
@@ -171,6 +183,7 @@ public class Map {
      * 
      * @param player
      * @return the number of territories owned by the player
+     * @author Mauro Zorzin
      */
     public int getNumberOfTerritories(PlayerPlaceholder player) {
         if (player == null)
@@ -187,6 +200,7 @@ public class Map {
      * 
      * @param player
      * @return the territories owned by the player
+     * @author Mauro Zorzin
      */
     public Collection<Territory> getTerritories(PlayerPlaceholder player) {
         if (player == null)
@@ -204,14 +218,16 @@ public class Map {
      * 
      * @param player
      * @return the continents owned by the player
+     * @throws IllegalArgumentException if the player is null
+     * @author Mauro Zorzin
      */
-    public Collection<Continet> getContinents(PlayerPlaceholder player) {
+    public Collection<Continet> getContinents(PlayerPlaceholder player) throws IllegalArgumentException {
         Collection<Continet> continents = new ArrayList<>();
         if (player == null)
-            return continents;
+            throw new IllegalArgumentException("Player can't be null");
 
         for (Continet continet : continets.values()) {
-            if (continet.isOwned(player)) {
+            if (continet.isOwnedBy(player)) {
                 continents.add(continet);
             }
         }
@@ -223,6 +239,7 @@ public class Map {
      * 
      * @param player
      * @return the continents owned by the player
+     * @author Mauro Zorzin
      */
     public Collection<Continet> getContinents() {
         return continets.values();
