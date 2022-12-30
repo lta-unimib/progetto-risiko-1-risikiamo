@@ -297,6 +297,8 @@ class TestTurn {
         assertEquals("p1", p1.getPlayerName());
         assertEquals("red", p1.getColor());
         assertEquals(true, p1.getIsIngame());
+        assertEquals(0, p1.getObiettivo());
+        assertEquals(0, p1.getStatoObiettivo());
         
     }
     //constructor PlayerPlaceHolder default
@@ -306,6 +308,7 @@ class TestTurn {
         assertEquals("player", p1.getPlayerName());
         assertEquals("white", p1.getColor());
         assertEquals(false, p1.getIsIngame());
+
     
     }
     //constructor
