@@ -35,6 +35,9 @@ public class Continet {
      * @return the owner of the continent, null if the continent is not owned
      */
     public PlayerPlaceholder getOwner() {
+        if (territories.isEmpty()) {
+            throw new IllegalArgumentException("Continent have no territories");
+        }
         PlayerPlaceholder owner = territories.values().iterator().next().getOwner();
         if (owner == null) {
             return null;
@@ -127,6 +130,13 @@ public class Continet {
         territories.put(id, territory);
     }
 
+    /**
+     * Add a territory to the continent
+     * 
+     * @aurhor Mauro Zozin
+     * @param territory the territory to add
+     * 
+     */
     public void addTerritory(Territory territory) {
         if (territories.containsKey(territory.getName())) {
             throw new IllegalArgumentException("The territory id is already in the continent");

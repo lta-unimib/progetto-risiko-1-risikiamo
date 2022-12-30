@@ -8,6 +8,32 @@ import org.junit.jupiter.api.Test;
 
 public class ContinetTests {
 
+    // test: Constructor
+    @Test
+    public void testConstructor() {
+        Continet continet = new Continet("Continet1", 1);
+        assertEquals("Continet1", continet.getName());
+        assertEquals(1, continet.getBonus());
+        assertEquals(0, continet.getTerritories().values().size());
+    }
+
+    // test: getOwner()
+    @Test
+    public void testGetOwner() {
+        PlayerPlaceholder player1 = new PlayerPlaceholder("Player1");
+        Continet continet = new Continet("Continet1", 1);
+        assertThrows(IllegalArgumentException.class, () -> continet.getOwner());
+        Territory territory1 = new Territory("Territory1");
+        Territory territory2 = new Territory("Territory2");
+        territory1.setOwner(player1);
+        territory2.setOwner(player1);
+        continet.addTerritory(territory1, "id1");
+        continet.addTerritory(territory2, "id2");
+        assertEquals("Player1", continet.getOwner().getName());
+        territory2.setOwner(new PlayerPlaceholder("Player2"));
+        assertEquals(null, continet.getOwner());
+    }
+
     // Test: testContinet
     @Test
     public void testContinet() {
