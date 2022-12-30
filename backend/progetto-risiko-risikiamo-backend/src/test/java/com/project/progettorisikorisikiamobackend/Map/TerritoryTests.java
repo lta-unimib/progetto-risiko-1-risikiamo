@@ -38,8 +38,12 @@ public class TerritoryTests {
         Territory territory = new Territory("Territory1");
         territory.getArmy();
         assertEquals(0, territory.getArmy());
+
+        assertEquals(null, territory.getOwner());
+        assertThrowsExactly(IllegalArgumentException.class, () -> territory.addArmy(0));
         assertThrowsExactly(IllegalArgumentException.class, () -> territory.addArmy(-1));
         assertThrowsExactly(IllegalArgumentException.class, () -> territory.addArmy(+1));
+
         territory.setOwner(new PlayerPlaceholder("Player1"));
         assertDoesNotThrow(() -> territory.addArmy(+1));
         assertEquals(1, territory.getArmy());
@@ -193,6 +197,11 @@ public class TerritoryTests {
         assertEquals(false, territory1.equals(null));
         assertEquals(false, territory1.equals(new Territory("Territory1")));
 
+        Territory territory4 = new Territory("Territory1");
+        territory4.addNeighbor(territory2);
+        territory4.addNeighbor(territory3);
+        assertEquals(true, territory1.equals(territory4));
+
         Object object = new Object();
         assertEquals(false, territory1.equals(object));
 
@@ -201,7 +210,7 @@ public class TerritoryTests {
 
     }
 
-    // test hashCode
+    // test hashCode @EqualsAndHashCode lombok
     @Test
     public void testHashCode() {
         Territory territory1 = new Territory("Territory1");
@@ -210,8 +219,15 @@ public class TerritoryTests {
         territory1.addNeighbor(territory2);
         territory1.addNeighbor(territory3);
         assertEquals(territory1.hashCode(), territory1.hashCode());
+        assertNotEquals(territory1.hashCode(), new Territory("Territory1").hashCode());
         assertNotEquals(territory1.hashCode(), territory2.hashCode());
         assertNotEquals(territory1.hashCode(), territory3.hashCode());
+
+        Territory territory4 = new Territory("Territory1");
+        territory4.addNeighbor(territory2);
+        territory4.addNeighbor(territory3);
+
+        assertEquals(territory1.hashCode(), territory4.hashCode());
 
         Object object = new Object();
         assertNotEquals(territory1.hashCode(), object.hashCode());
