@@ -142,6 +142,12 @@ public class Continet {
      * 
      */
     public void addTerritory(Territory territory) throws IllegalArgumentException {
+        if (territory == null) {
+            throw new IllegalArgumentException("The territory is null");
+        }
+        if (territory.getName().isEmpty() || territory.getName().isBlank()) {
+            throw new IllegalArgumentException("The territory id is empty");
+        }
         if (territories.containsKey(territory.getName())) {
             throw new IllegalArgumentException("The territory id is already in the continent");
         }

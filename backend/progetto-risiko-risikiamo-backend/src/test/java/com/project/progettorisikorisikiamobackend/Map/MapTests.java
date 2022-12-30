@@ -35,6 +35,15 @@ public class MapTests {
         Collection<Continet> continets = map.getContinents();
         assertEquals(continet1, continets.toArray()[1]);
         assertEquals(continet2, continets.toArray()[0]);
+
+        assertThrows(IllegalArgumentException.class, () -> map.addContinet(continet1, "id1"));
+        assertThrows(IllegalArgumentException.class, () -> map.addContinet(continet2, "id2"));
+        assertThrows(IllegalArgumentException.class, () -> map.addContinet(continet1, "id2"));
+        assertThrows(IllegalArgumentException.class, () -> map.addContinet(continet2, "id1"));
+        assertThrows(IllegalArgumentException.class, () -> map.addContinet(null, "id1"));
+        assertThrows(IllegalArgumentException.class, () -> map.addContinet(continet1, null));
+        assertThrows(IllegalArgumentException.class, () -> map.addContinet(null, null));
+
     }
 
     // Test: isContinetInMap(Continet continet)

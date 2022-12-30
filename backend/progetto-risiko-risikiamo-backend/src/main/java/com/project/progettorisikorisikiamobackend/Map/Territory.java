@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
-import lombok.ToString;
 
 /**
  * Territory class
@@ -14,7 +13,6 @@ import lombok.ToString;
  * @version 1.0
  */
 @EqualsAndHashCode
-@ToString
 @Getter
 public class Territory {
 

@@ -121,6 +121,20 @@ public class ContinetTests {
         assertEquals(2, continet.getTerritories().values().size());
         assertEquals(territory1, continet.getTerritories().get("id1"));
         assertEquals(territory2, continet.getTerritories().get("id2"));
+
+        assertThrows(IllegalArgumentException.class, () -> continet.addTerritory(territory1, "id1"));
+        assertThrows(IllegalArgumentException.class, () -> continet.addTerritory(territory2, "id2"));
+
+        assertThrows(IllegalArgumentException.class, () -> continet.addTerritory(territory1, "id2"));
+        assertThrows(IllegalArgumentException.class, () -> continet.addTerritory(territory2, "id1"));
+
+        assertThrows(IllegalArgumentException.class, () -> continet.addTerritory(territory1, "id3"));
+        assertThrows(IllegalArgumentException.class, () -> continet.addTerritory(territory2, "id3"));
+        assertThrows(IllegalArgumentException.class, () -> continet.addTerritory(territory1, "id4"));
+        assertThrows(IllegalArgumentException.class, () -> continet.addTerritory(territory1, null));
+        assertThrows(IllegalArgumentException.class, () -> continet.addTerritory(territory1, ""));
+        assertThrows(IllegalArgumentException.class, () -> continet.addTerritory(null, "id1"));
+
     }
 
     // test: addTerritory(Territory territory)
@@ -134,6 +148,12 @@ public class ContinetTests {
         assertEquals(2, continet.getTerritories().values().size());
         assertEquals(territory1, continet.getTerritories().get("Territory1"));
         assertEquals(territory2, continet.getTerritories().get("Territory2"));
+
+        assertThrows(IllegalArgumentException.class, () -> continet.addTerritory(territory1));
+        assertThrows(IllegalArgumentException.class, () -> continet.addTerritory(territory2));
+
+        assertThrows(IllegalArgumentException.class, () -> continet.addTerritory(null));
+
     }
 
     // test: removeTerritory(String territoryId)
