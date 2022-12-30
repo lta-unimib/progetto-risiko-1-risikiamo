@@ -8,7 +8,7 @@ import java.util.Collection;
 
 import org.junit.jupiter.api.Test;
 
-public class MapTests {
+class MapTests {
 
     // Test: constructor
     @Test

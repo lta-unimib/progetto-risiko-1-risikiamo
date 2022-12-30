@@ -61,6 +61,13 @@ public class TerritoryTests {
         territory2.addArmy(-1);
         assertEquals(null, territory2.getOwner());
 
+        // coverege
+
+        territory2.setOwner(new PlayerPlaceholder("Player2"));
+        territory2.addArmy(-1);
+        assertEquals(0, territory2.getArmy());
+        assertEquals(null, territory2.getOwner());
+
     }
 
     // test isNeighbor
