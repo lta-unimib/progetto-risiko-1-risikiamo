@@ -29,8 +29,8 @@ class TestTurn {
          playerList.add(p4);
          Turn t = new Turn(playerList);
          assertEquals(4, t.getPlayerList().size());
-         assertEquals(0, t.getTurnNumber());
-         assertEquals(0, t.getDice());
+         assertEquals(1, t.getTurnNumber());
+         assertEquals(6, t.getDiceSides());
     }
     //test setTurnNumber
     @Test
@@ -96,17 +96,17 @@ class TestTurn {
         playerList.add(p4);
         Turn t = new Turn(playerList);
         t.setDice(1);
-        assertEquals(1, t.getDice());
+        assertEquals(1, t.getDiceSides());
         t.setDice(2);
-        assertEquals(2, t.getDice());
+        assertEquals(2, t.getDiceSides());
         t.setDice(3);
-        assertEquals(3, t.getDice());
+        assertEquals(3, t.getDiceSides());
         t.setDice(4);
-        assertEquals(4, t.getDice());
+        assertEquals(4, t.getDiceSides());
         t.setDice(5);
-        assertEquals(5, t.getDice());
+        assertEquals(5, t.getDiceSides());
         t.setDice(6);
-        assertEquals(6, t.getDice());
+        assertEquals(6, t.getDiceSides());
     }
     //test setPlayerList
     @Test
@@ -271,6 +271,7 @@ class TestTurn {
         assertEquals(p4, t.getCurrentPlayer());
         t.goHeadTurn();
         assertEquals(p1, t.getCurrentPlayer());
+      
     }
     //constructor
     @Test

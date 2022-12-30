@@ -62,7 +62,14 @@ public class Turn {
     public Dice getDice(){
         return this.d;
     }
-    
+    //get Dice sides
+    /**
+     * ritorna il numero di facce del dado
+     * @return d.getSides()
+     */
+    public int getDiceSides(){
+        return this.d.getSides();
+    }
     public void setPlayerList(List <PlayerPlaceHolder> playerList){
         this.playerList = playerList;
     }
@@ -160,7 +167,6 @@ public class Turn {
      */
     public void goHeadTurn(){
         if(getTurnNumber() < playerList.size() - 1 ){
-            
             if(getCurrentPlayer().getIsIngame())
                 setCurrentPlayer(playerList.get(turnNumber));
                 else
@@ -169,14 +175,19 @@ public class Turn {
                         setNextPlayer(playerList);  
                 
     }         
-        else if(getTurnNumber() == playerList.size() - 1 )
-            this.nextPlayer = playerList.get(playerList.size() - 1);
-        
+        else if(getTurnNumber() == playerList.size() - 1 ){
+            this.currentPlayer = playerList.get(playerList.size() - 1);
+            this.nextPlayer = playerList.get(0);
+            this.turnNumber = -1;
+}
         else {
         setCurrentPlayer(playerList.get(turnNumber));
         setNextPlayer(playerList);
         }
-        this.turnNumber = turnNumber + 1;
+        
+                this.turnNumber = turnNumber + 1;
+        
+        
     }
     //ritorna il vincitore
     /**
