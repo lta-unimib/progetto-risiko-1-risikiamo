@@ -109,6 +109,24 @@ public class Turn {
     public int getTurnNumber(){
         return this.turnNumber;
     }
+    //setta il numero del turno
+    /**
+     * 
+     * @param turnNumber numero del turno
+     */
+    public void setTurnNumber(int turnNumber){
+        this.turnNumber = turnNumber;
+    }
+    //setta il dado
+    /**
+     * 
+     * @param d dado
+     */
+    public void setDice(int sides){
+        Dice d = new Dice(sides);
+        this.d = d;
+    }
+
     //setta il giocatore corrente
     /**
      * 
