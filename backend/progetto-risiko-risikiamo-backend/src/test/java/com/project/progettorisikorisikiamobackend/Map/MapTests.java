@@ -8,6 +8,11 @@ import java.util.Collection;
 
 import org.junit.jupiter.api.Test;
 
+import com.project.progettorisikorisikiamobackend.map.Continet;
+import com.project.progettorisikorisikiamobackend.map.Map;
+import com.project.progettorisikorisikiamobackend.map.PlayerPlaceholder;
+import com.project.progettorisikorisikiamobackend.map.Territory;
+
 public class MapTests {
 
     // Test: constructor

@@ -1,4 +1,4 @@
-package com.project.progettorisikorisikiamobackend.Map;
+package com.project.progettorisikorisikiamobackend.map;
 
 public class PlayerPlaceholder {
 

@@ -1,4 +1,4 @@
-package com.project.progettorisikorisikiamobackend.Map;
+package com.project.progettorisikorisikiamobackend.map;
 
 import java.util.ArrayList;
 import java.util.Collection;

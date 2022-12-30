@@ -7,6 +7,9 @@ import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
 import org.junit.Test;
 
+import com.project.progettorisikorisikiamobackend.map.PlayerPlaceholder;
+import com.project.progettorisikorisikiamobackend.map.Territory;
+
 public class TerritoryTests {
 
     // test: Constructor

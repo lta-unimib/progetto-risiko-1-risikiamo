@@ -7,6 +7,10 @@ import java.util.Iterator;
 
 import org.junit.jupiter.api.Test;
 
+import com.project.progettorisikorisikiamobackend.map.Continet;
+import com.project.progettorisikorisikiamobackend.map.PlayerPlaceholder;
+import com.project.progettorisikorisikiamobackend.map.Territory;
+
 public class ContinetTests {
 
     // test: Constructor
