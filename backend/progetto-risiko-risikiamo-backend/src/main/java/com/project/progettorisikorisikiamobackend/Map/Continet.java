@@ -58,7 +58,7 @@ public class Continet {
      * @return true if the continent is owned by the player, false otherwise
      * 
      */
-    public boolean isOwned(PlayerPlaceholder player) {
+    public boolean isOwnedBy(PlayerPlaceholder player) {
         return getOwner() == player;
     }
 
@@ -81,6 +81,8 @@ public class Continet {
      * 
      */
     public boolean isTerritoryInContinet(Territory territory) {
+        if (territory == null)
+            return false;
         return territories.containsValue(territory);
     }
 
@@ -93,6 +95,8 @@ public class Continet {
      * 
      */
     public boolean isTerritoryInContinet(String territoryId) {
+        if (territoryId == null || territoryId.isEmpty() || territoryId.isBlank())
+            return false;
         return territories.containsKey(territoryId);
     }
 
@@ -197,7 +201,7 @@ public class Continet {
         if (player == null) {
             return 0;
         }
-        return territories.size();
+        return (int) territories.values().stream().filter(territory -> territory.getOwner() == player).count();
     }
 
     /**
