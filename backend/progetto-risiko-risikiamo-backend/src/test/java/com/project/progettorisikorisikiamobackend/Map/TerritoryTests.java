@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
 import org.junit.Test;
 
-
 public class TerritoryTests {
 
     // test: Constructor
