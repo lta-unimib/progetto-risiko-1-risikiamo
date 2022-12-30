@@ -11,7 +11,7 @@ public class ContinetTests {
 
     // test: Constructor
     @Test
-    public void testConstructor() {
+    void testConstructor() {
         Continet continet = new Continet("Continet1", 1);
         assertEquals("Continet1", continet.getName());
         assertEquals(1, continet.getBonus());
@@ -20,7 +20,7 @@ public class ContinetTests {
 
     // test: getOwner()
     @Test
-    public void testGetOwner() {
+    void testGetOwner() {
         PlayerPlaceholder player1 = new PlayerPlaceholder("Player1");
         Continet continet = new Continet("Continet1", 1);
         assertEquals(null, continet.getOwner());
@@ -37,7 +37,7 @@ public class ContinetTests {
 
     // test: isOwnedBy()
     @Test
-    public void testIsOwnedBy() {
+    void testIsOwnedBy() {
         PlayerPlaceholder player1 = new PlayerPlaceholder("Player1");
         Continet continet = new Continet("Continet1", 1);
         assertEquals(false, continet.isOwnedBy(player1));
@@ -54,7 +54,7 @@ public class ContinetTests {
 
     // test: isOwned()
     @Test
-    public void testIsOwned() {
+    void testIsOwned() {
         PlayerPlaceholder player1 = new PlayerPlaceholder("Player1");
         Continet continet = new Continet("Continet1", 1);
         assertEquals(false, continet.isOwned());
@@ -72,7 +72,7 @@ public class ContinetTests {
 
     // test: isTerritoryInContinet(Territory territory)
     @Test
-    public void testIsTerritoryInContinet() {
+    void testIsTerritoryInContinet() {
         Continet continet = new Continet("Continet1", 1);
         Territory territory1 = new Territory("Territory1");
         Territory territory2 = new Territory("Territory2");
@@ -86,7 +86,7 @@ public class ContinetTests {
 
     // test: isTerritoryInContinet(String territoryId)
     @Test
-    public void testIsTerritoryInContinet2() {
+    void testIsTerritoryInContinet2() {
         Continet continet = new Continet("Continet1", 1);
         Territory territory1 = new Territory("Territory1");
         Territory territory2 = new Territory("Territory2");
@@ -99,7 +99,7 @@ public class ContinetTests {
 
     // test: getTerritory(String territoryId)
     @Test
-    public void testGetTerritory() {
+    void testGetTerritory() {
         Continet continet = new Continet("Continet1", 1);
         Territory territory1 = new Territory("Territory1");
         Territory territory2 = new Territory("Territory2");
@@ -112,7 +112,7 @@ public class ContinetTests {
 
     // test: addTerritory(Territory territory, String id)
     @Test
-    public void testAddTerritory() {
+    void testAddTerritory() {
         Continet continet = new Continet("Continet1", 1);
         Territory territory1 = new Territory("Territory1");
         Territory territory2 = new Territory("Territory2");
@@ -139,7 +139,7 @@ public class ContinetTests {
 
     // test: addTerritory(Territory territory)
     @Test
-    public void testAddTerritory2() {
+    void testAddTerritory2() {
         Continet continet = new Continet("Continet1", 1);
         Territory territory1 = new Territory("Territory1");
         Territory territory2 = new Territory("Territory2");
@@ -158,7 +158,7 @@ public class ContinetTests {
 
     // test: removeTerritory(String territoryId)
     @Test
-    public void testRemoveTerritory() {
+    void testRemoveTerritory() {
         Continet continet = new Continet("Continet1", 1);
         Territory territory1 = new Territory("Territory1");
         Territory territory2 = new Territory("Territory2");
@@ -175,7 +175,7 @@ public class ContinetTests {
 
     // test: removeTerritory(Territory territory)
     @Test
-    public void testRemoveTerritory2() {
+    void testRemoveTerritory2() {
         Continet continet = new Continet("Continet1", 1);
         Territory territory1 = new Territory("Territory1");
         Territory territory2 = new Territory("Territory2");
@@ -192,7 +192,7 @@ public class ContinetTests {
 
     // test: getNumberOfTerritories()
     @Test
-    public void testGetNumberOfTerritories() {
+    void testGetNumberOfTerritories() {
         Continet continet = new Continet("Continet1", 1);
         Territory territory1 = new Territory("Territory1");
         Territory territory2 = new Territory("Territory2");
@@ -203,7 +203,7 @@ public class ContinetTests {
 
     // test: getNumberOfTerritories(PlayerPlaceholder player)
     @Test
-    public void testGetNumberOfTerritories2() {
+    void testGetNumberOfTerritories2() {
         Continet continet = new Continet("Continet1", 1);
         Territory territory1 = new Territory("Territory1");
         Territory territory2 = new Territory("Territory2");
@@ -225,7 +225,7 @@ public class ContinetTests {
 
     // test: getTerritories(PlayerPlaceholder player)
     @Test
-    public void testGetTerritories() {
+    void testGetTerritories() {
         Continet continet = new Continet("Continet1", 1);
         Territory territory1 = new Territory("Territory1");
         Territory territory2 = new Territory("Territory2");
@@ -250,7 +250,7 @@ public class ContinetTests {
 
     // test: Equals
     @Test
-    public void testEquals() {
+    void testEquals() {
         Continet continet1 = new Continet("Continet1", 1);
         Continet continet2 = new Continet("Continet1", 1);
 
@@ -282,7 +282,7 @@ public class ContinetTests {
 
     // test: hashCode
     @Test
-    public void testHashCode() {
+    void testHashCode() {
         Continet continet1 = new Continet("Continet1", 1);
         Continet continet2 = new Continet("Continet1", 1);
 
@@ -314,7 +314,7 @@ public class ContinetTests {
 
     // test: setOwner(PlayerPlaceholder player)
     @Test
-    public void testSetOwner() {
+    void testSetOwner() {
         Continet continet = new Continet("Continet1", 1);
         Territory territory1 = new Territory("Territory1");
         Territory territory2 = new Territory("Territory2");

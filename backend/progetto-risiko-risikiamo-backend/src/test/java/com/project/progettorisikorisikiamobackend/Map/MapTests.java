@@ -12,7 +12,7 @@ public class MapTests {
 
     // Test: constructor
     @Test
-    public void constructor() {
+    void constructor() {
         Map map = new Map("Map1");
         assertEquals("Map1", map.getMapId());
         assertEquals(0, map.getContinents().size());
@@ -20,7 +20,7 @@ public class MapTests {
 
     // Test: addContinet(Continet continet, String continetId)
     @Test
-    public void addContinet() {
+    void addContinet() {
         Map map = new Map("Map1");
         assertEquals("Map1", map.getMapId());
         assertEquals(0, map.getContinents().size());
@@ -48,7 +48,7 @@ public class MapTests {
 
     // Test: isContinetInMap(Continet continet)
     @Test
-    public void isContinetInMap() {
+    void isContinetInMap() {
         Map map = new Map("Map1");
         assertEquals("Map1", map.getMapId());
         assertEquals(0, map.getContinents().size());
@@ -66,7 +66,7 @@ public class MapTests {
 
     // Test: isContinetInMap(String continetId)
     @Test
-    public void isContinetInMap2() {
+    void isContinetInMap2() {
         Map map = new Map("Map1");
         assertEquals("Map1", map.getMapId());
         assertEquals(0, map.getContinents().size());
@@ -84,7 +84,7 @@ public class MapTests {
 
     // Test : isTerritoryInMap(Territory territory)
     @Test
-    public void isTerritoryInMap() {
+    void isTerritoryInMap() {
         Map map = new Map("Map1");
         assertEquals("Map1", map.getMapId());
         assertEquals(0, map.getContinents().size());
@@ -108,7 +108,7 @@ public class MapTests {
 
     // Test : isTerritoryInMap(String territoryId)
     @Test
-    public void isTerritoryInMap2() {
+    void isTerritoryInMap2() {
         Map map = new Map("Map1");
         assertEquals("Map1", map.getMapId());
         assertEquals(0, map.getContinents().size());
@@ -132,7 +132,7 @@ public class MapTests {
 
     // Test: Continet getContinet(String continetId)
     @Test
-    public void getContinet() {
+    void getContinet() {
         Map map = new Map("Map1");
         assertEquals("Map1", map.getMapId());
         assertEquals(0, map.getContinents().size());
@@ -151,7 +151,7 @@ public class MapTests {
 
     // Test: Territory getTerritory(String territoryId)
     @Test
-    public void getTerritory() {
+    void getTerritory() {
         Map map = new Map("Map1");
         assertEquals("Map1", map.getMapId());
         assertEquals(0, map.getContinents().size());
@@ -175,7 +175,7 @@ public class MapTests {
 
     // Test : void removeContinet(String continetId)
     @Test
-    public void removeContinet() {
+    void removeContinet() {
         Map map = new Map("Map1");
         assertEquals("Map1", map.getMapId());
         assertEquals(0, map.getContinents().size());
@@ -195,7 +195,7 @@ public class MapTests {
 
     // Test : void removeContinet(Continet continet)
     @Test
-    public void removeContinet2() {
+    void removeContinet2() {
         Map map = new Map("Map1");
         assertEquals("Map1", map.getMapId());
         assertEquals(0, map.getContinents().size());
@@ -215,7 +215,7 @@ public class MapTests {
 
     // Test : int getNumberOfContinent(PlayerPlaceholder player)
     @Test
-    public void getNumberOfContinent() {
+    void getNumberOfContinent() {
         PlayerPlaceholder player1 = new PlayerPlaceholder("Player1");
         PlayerPlaceholder player2 = new PlayerPlaceholder("Player2");
         Map map = new Map("Map1");
@@ -256,7 +256,7 @@ public class MapTests {
 
     // test : int getNumberOfTerritories(PlayerPlaceholder player)
     @Test
-    public void getNumberOfTerritories() {
+    void getNumberOfTerritories() {
         PlayerPlaceholder player1 = new PlayerPlaceholder("Player1");
         PlayerPlaceholder player2 = new PlayerPlaceholder("Player2");
         Map map = new Map("Map1");
@@ -296,7 +296,7 @@ public class MapTests {
     // Test : getContinents(PlayerPlaceholder player) throws
     // IllegalArgumentException
     @Test
-    public void getContinents() {
+    void getContinents() {
         PlayerPlaceholder player1 = new PlayerPlaceholder("Player1");
         PlayerPlaceholder player2 = new PlayerPlaceholder("Player2");
         Map map = new Map("Map1");
@@ -335,7 +335,7 @@ public class MapTests {
 
     // Test : getContinents()
     @Test
-    public void getContinents2() {
+    void getContinents2() {
         Map map = new Map("Map1");
         assertEquals("Map1", map.getMapId());
         assertEquals(0, map.getContinents().size());
@@ -351,7 +351,7 @@ public class MapTests {
 
     // Test : equals(Object obj)
     @Test
-    public void equals() {
+    void equals() {
         Map map1 = new Map("Map1");
         Map map2 = new Map("Map2");
         Map map3 = new Map("Map1");
@@ -362,7 +362,7 @@ public class MapTests {
 
     // Test : hashCode()
     @Test
-    public void hashCodeTest() {
+    void hashCodeTest() {
         Map map1 = new Map("Map1");
         Map map2 = new Map("Map2");
         Map map3 = new Map("Map1");
