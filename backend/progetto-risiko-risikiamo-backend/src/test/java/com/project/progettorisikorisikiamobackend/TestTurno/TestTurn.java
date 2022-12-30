@@ -108,6 +108,70 @@ class TestTurn {
         t.setDice(6);
         assertEquals(6, t.getDice());
     }
+    //test setPlayerList
+    @Test
+    public void testSetPlayerList(){
+        List<PlayerPlaceHolder> playerList = new ArrayList<PlayerPlaceHolder>();
+        PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0);
+        PlayerPlaceHolder p2 = new PlayerPlaceHolder("p2", "blue", true, 0, 0, 0);
+        PlayerPlaceHolder p3 = new PlayerPlaceHolder("p3", "green", true, 0, 0, 0);
+        PlayerPlaceHolder p4 = new PlayerPlaceHolder("p4", "yellow", true, 0, 0, 0);
+        playerList.add(p1);
+        playerList.add(p2);
+        playerList.add(p3);
+        playerList.add(p4);
+        Turn t = new Turn(playerList);
+        List<PlayerPlaceHolder> playerList2 = new ArrayList<PlayerPlaceHolder>();
+        PlayerPlaceHolder p5 = new PlayerPlaceHolder("p5", "red", true, 0, 0, 0);
+        PlayerPlaceHolder p6 = new PlayerPlaceHolder("p6", "blue", true, 0, 0, 0);
+        PlayerPlaceHolder p7 = new PlayerPlaceHolder("p7", "green", true, 0, 0, 0);
+        PlayerPlaceHolder p8 = new PlayerPlaceHolder("p8", "yellow", true, 0, 0, 0);
+        playerList2.add(p5);
+        playerList2.add(p6);
+        playerList2.add(p7);
+        playerList2.add(p8);
+        t.setPlayerList(playerList2);
+        assertEquals(4, t.getPlayerList().size());
+    }
+    //test setcurrentPlayer
+    @Test
+    public void testSetCurrentPlayer(){
+        List<PlayerPlaceHolder> playerList = new ArrayList<PlayerPlaceHolder>();
+        PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0);
+        PlayerPlaceHolder p2 = new PlayerPlaceHolder("p2", "blue", true, 0, 0, 0);
+        PlayerPlaceHolder p3 = new PlayerPlaceHolder("p3", "green", true, 0, 0, 0);
+        PlayerPlaceHolder p4 = new PlayerPlaceHolder("p4", "yellow", true, 0, 0, 0);
+        playerList.add(p1);
+        playerList.add(p2);
+        playerList.add(p3);
+        playerList.add(p4);
+        Turn t = new Turn(playerList);
+        t.setCurrentPlayer(p1);
+        assertEquals(p1, t.getCurrentPlayer());
+        t.setCurrentPlayer(p2);
+        assertEquals(p2, t.getCurrentPlayer());
+        t.setCurrentPlayer(p3);
+        assertEquals(p3, t.getCurrentPlayer());
+        t.setCurrentPlayer(p4);
+        assertEquals(p4, t.getCurrentPlayer());
+    }
+//setPlayerOrder
+    @Test
+    public void testSetPlayerOrder(){
+        List<PlayerPlaceHolder> playerList = new ArrayList<PlayerPlaceHolder>();
+        PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0);
+        PlayerPlaceHolder p2 = new PlayerPlaceHolder("p2", "blue", true, 0, 0, 0);
+        PlayerPlaceHolder p3 = new PlayerPlaceHolder("p3", "green", true, 0, 0, 0);
+        PlayerPlaceHolder p4 = new PlayerPlaceHolder("p4", "yellow", true, 0, 0, 0);
+        playerList.add(p1);
+        playerList.add(p2);
+        playerList.add(p3);
+        playerList.add(p4);
+        Turn t = new Turn(playerList);
+        t.setPlayerOrder(playerList, new Dice(6));
+        assertEquals(4, t.getPlayerList().size());
+
+    }
     //playerListInGame
     @Test
     public void testPlayersInGame(){
