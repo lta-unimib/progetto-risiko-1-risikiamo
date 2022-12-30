@@ -15,14 +15,14 @@ import lombok.Getter;
  */
 @Getter
 @EqualsAndHashCode
-public class Continet {
+public class Continent {
 
     private String name;
     private int bonus;
     private HashMap<String, Territory> territories;
 
     // Constructor
-    public Continet(String name, int bonus) {
+    public Continent(String name, int bonus) {
         this.name = name;
         this.bonus = bonus;
         territories = new HashMap<>();

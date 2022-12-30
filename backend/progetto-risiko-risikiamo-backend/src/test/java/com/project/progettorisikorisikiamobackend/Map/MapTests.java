@@ -8,7 +8,6 @@ import java.util.Collection;
 
 import org.junit.jupiter.api.Test;
 
-
 public class MapTests {
 
     // Test: constructor
@@ -26,23 +25,23 @@ public class MapTests {
         assertEquals("Map1", map.getMapId());
         assertEquals(0, map.getContinents().size());
 
-        Continet continet1 = new Continet("Continet1", 1);
-        Continet continet2 = new Continet("Continet2", 2);
+        Continent Continent = new Continent("Continent", 1);
+        Continent continet2 = new Continent("Continet2", 2);
 
-        map.addContinet(continet1, "id1");
+        map.addContinet(Continent, "id1");
         map.addContinet(continet2, "id2");
 
         assertEquals(2, map.getContinents().size());
-        Collection<Continet> continets = map.getContinents();
-        assertEquals(continet1, continets.toArray()[1]);
+        Collection<Continent> continets = map.getContinents();
+        assertEquals(Continent, continets.toArray()[1]);
         assertEquals(continet2, continets.toArray()[0]);
 
-        assertThrows(IllegalArgumentException.class, () -> map.addContinet(continet1, "id1"));
+        assertThrows(IllegalArgumentException.class, () -> map.addContinet(Continent, "id1"));
         assertThrows(IllegalArgumentException.class, () -> map.addContinet(continet2, "id2"));
-        assertThrows(IllegalArgumentException.class, () -> map.addContinet(continet1, "id2"));
+        assertThrows(IllegalArgumentException.class, () -> map.addContinet(Continent, "id2"));
         assertThrows(IllegalArgumentException.class, () -> map.addContinet(continet2, "id1"));
         assertThrows(IllegalArgumentException.class, () -> map.addContinet(null, "id1"));
-        assertThrows(IllegalArgumentException.class, () -> map.addContinet(continet1, null));
+        assertThrows(IllegalArgumentException.class, () -> map.addContinet(Continent, null));
         assertThrows(IllegalArgumentException.class, () -> map.addContinet(null, null));
 
     }
@@ -54,15 +53,15 @@ public class MapTests {
         assertEquals("Map1", map.getMapId());
         assertEquals(0, map.getContinents().size());
 
-        Continet continet1 = new Continet("Continet1", 1);
-        Continet continet2 = new Continet("Continet2", 2);
+        Continent Continent = new Continent("Continent", 1);
+        Continent continet2 = new Continent("Continet2", 2);
 
-        map.addContinet(continet1, "id1");
+        map.addContinet(Continent, "id1");
         map.addContinet(continet2, "id2");
 
-        assertEquals(true, map.isContinetInMap(continet1));
+        assertEquals(true, map.isContinetInMap(Continent));
         assertEquals(true, map.isContinetInMap(continet2));
-        assertEquals(false, map.isContinetInMap(new Continet("Continet3", 3)));
+        assertEquals(false, map.isContinetInMap(new Continent("Continet3", 3)));
     }
 
     // Test: isContinetInMap(String continetId)
@@ -72,10 +71,10 @@ public class MapTests {
         assertEquals("Map1", map.getMapId());
         assertEquals(0, map.getContinents().size());
 
-        Continet continet1 = new Continet("Continet1", 1);
-        Continet continet2 = new Continet("Continet2", 2);
+        Continent Continent = new Continent("Continent", 1);
+        Continent continet2 = new Continent("Continet2", 2);
 
-        map.addContinet(continet1, "id1");
+        map.addContinet(Continent, "id1");
         map.addContinet(continet2, "id2");
 
         assertEquals(true, map.isContinetInMap("id1"));
@@ -90,16 +89,16 @@ public class MapTests {
         assertEquals("Map1", map.getMapId());
         assertEquals(0, map.getContinents().size());
 
-        Continet continet1 = new Continet("Continet1", 1);
-        Continet continet2 = new Continet("Continet2", 2);
+        Continent Continent = new Continent("Continent", 1);
+        Continent continet2 = new Continent("Continet2", 2);
 
-        map.addContinet(continet1, "id1");
+        map.addContinet(Continent, "id1");
         map.addContinet(continet2, "id2");
 
         Territory territory1 = new Territory("Territory1");
         Territory territory2 = new Territory("Territory2");
 
-        continet1.addTerritory(territory1, "id1");
+        Continent.addTerritory(territory1, "id1");
         continet2.addTerritory(territory2, "id2");
 
         assertEquals(true, map.isTerritoryInMap(territory1));
@@ -114,16 +113,16 @@ public class MapTests {
         assertEquals("Map1", map.getMapId());
         assertEquals(0, map.getContinents().size());
 
-        Continet continet1 = new Continet("Continet1", 1);
-        Continet continet2 = new Continet("Continet2", 2);
+        Continent Continent = new Continent("Continent", 1);
+        Continent continet2 = new Continent("Continet2", 2);
 
-        map.addContinet(continet1, "id1");
+        map.addContinet(Continent, "id1");
         map.addContinet(continet2, "id2");
 
         Territory territory1 = new Territory("Territory1");
         Territory territory2 = new Territory("Territory2");
 
-        continet1.addTerritory(territory1, "id1");
+        Continent.addTerritory(territory1, "id1");
         continet2.addTerritory(territory2, "id2");
 
         assertEquals(true, map.isTerritoryInMap("id1"));
@@ -138,13 +137,13 @@ public class MapTests {
         assertEquals("Map1", map.getMapId());
         assertEquals(0, map.getContinents().size());
 
-        Continet continet1 = new Continet("Continet1", 1);
-        Continet continet2 = new Continet("Continet2", 2);
+        Continent Continent = new Continent("Continent", 1);
+        Continent continet2 = new Continent("Continet2", 2);
 
-        map.addContinet(continet1, "id1");
+        map.addContinet(Continent, "id1");
         map.addContinet(continet2, "id2");
 
-        assertEquals(continet1, map.getContinet("id1"));
+        assertEquals(Continent, map.getContinet("id1"));
         assertEquals(continet2, map.getContinet("id2"));
         assertEquals(null, map.getContinet("id3"));
 
@@ -157,16 +156,16 @@ public class MapTests {
         assertEquals("Map1", map.getMapId());
         assertEquals(0, map.getContinents().size());
 
-        Continet continet1 = new Continet("Continet1", 1);
-        Continet continet2 = new Continet("Continet2", 2);
+        Continent Continent = new Continent("Continent", 1);
+        Continent continet2 = new Continent("Continet2", 2);
 
-        map.addContinet(continet1, "id1");
+        map.addContinet(Continent, "id1");
         map.addContinet(continet2, "id2");
 
         Territory territory1 = new Territory("Territory1");
         Territory territory2 = new Territory("Territory2");
 
-        continet1.addTerritory(territory1, "id1");
+        Continent.addTerritory(territory1, "id1");
         continet2.addTerritory(territory2, "id2");
 
         assertEquals(territory1, map.getTerritory("id1"));
@@ -181,10 +180,10 @@ public class MapTests {
         assertEquals("Map1", map.getMapId());
         assertEquals(0, map.getContinents().size());
 
-        Continet continet1 = new Continet("Continet1", 1);
-        Continet continet2 = new Continet("Continet2", 2);
+        Continent Continent = new Continent("Continent", 1);
+        Continent continet2 = new Continent("Continet2", 2);
 
-        map.addContinet(continet1, "id1");
+        map.addContinet(Continent, "id1");
         map.addContinet(continet2, "id2");
 
         assertEquals(2, map.getContinents().size());
@@ -201,14 +200,14 @@ public class MapTests {
         assertEquals("Map1", map.getMapId());
         assertEquals(0, map.getContinents().size());
 
-        Continet continet1 = new Continet("Continet1", 1);
-        Continet continet2 = new Continet("Continet2", 2);
+        Continent Continent = new Continent("Continent", 1);
+        Continent continet2 = new Continent("Continet2", 2);
 
-        map.addContinet(continet1, "id1");
+        map.addContinet(Continent, "id1");
         map.addContinet(continet2, "id2");
 
         assertEquals(2, map.getContinents().size());
-        map.removeContinet(continet1);
+        map.removeContinet(Continent);
         assertEquals(1, map.getContinents().size());
         map.removeContinet(continet2);
         assertEquals(0, map.getContinents().size());
@@ -223,25 +222,25 @@ public class MapTests {
         assertEquals("Map1", map.getMapId());
         assertEquals(0, map.getContinents(player1).size());
 
-        Continet continet1 = new Continet("Continet1", 1);
-        Continet continet2 = new Continet("Continet2", 2);
+        Continent Continent = new Continent("Continent", 1);
+        Continent continet2 = new Continent("Continet2", 2);
 
-        map.addContinet(continet1, "id1");
+        map.addContinet(Continent, "id1");
         map.addContinet(continet2, "id2");
 
         assertEquals(0, map.getNumberOfContinent(player1));
         assertEquals(0, map.getNumberOfContinent(player2));
 
-        continet1.setOwner(player1);
+        Continent.setOwner(player1);
 
         assertEquals(0, map.getNumberOfContinent(player1));
         assertEquals(0, map.getNumberOfContinent(player2));
 
         Territory territory1 = new Territory("Territory1");
 
-        continet1.addTerritory(territory1, "id1");
+        Continent.addTerritory(territory1, "id1");
 
-        continet1.setOwner(player1);
+        Continent.setOwner(player1);
 
         assertEquals(1, map.getNumberOfContinent(player1));
         assertEquals(0, map.getNumberOfContinent(player2));
@@ -264,10 +263,10 @@ public class MapTests {
         assertEquals("Map1", map.getMapId());
         assertEquals(0, map.getContinents(player1).size());
 
-        Continet continet1 = new Continet("Continet1", 1);
-        Continet continet2 = new Continet("Continet2", 2);
+        Continent Continent = new Continent("Continent", 1);
+        Continent continet2 = new Continent("Continet2", 2);
 
-        map.addContinet(continet1, "id1");
+        map.addContinet(Continent, "id1");
         map.addContinet(continet2, "id2");
 
         assertEquals(0, map.getNumberOfTerritories(player1));
@@ -276,7 +275,7 @@ public class MapTests {
         Territory territory1 = new Territory("Territory1");
         Territory territory2 = new Territory("Territory2");
 
-        continet1.addTerritory(territory1, "id1");
+        Continent.addTerritory(territory1, "id1");
         continet2.addTerritory(territory2, "id2");
 
         assertEquals(0, map.getNumberOfTerritories(player1));
@@ -304,10 +303,10 @@ public class MapTests {
         assertEquals("Map1", map.getMapId());
         assertEquals(0, map.getContinents(player1).size());
 
-        Continet continet1 = new Continet("Continet1", 1);
-        Continet continet2 = new Continet("Continet2", 2);
+        Continent Continent = new Continent("Continent", 1);
+        Continent continet2 = new Continent("Continet2", 2);
 
-        map.addContinet(continet1, "id1");
+        map.addContinet(Continent, "id1");
         map.addContinet(continet2, "id2");
 
         assertEquals(0, map.getContinents(player1).size());
@@ -316,7 +315,7 @@ public class MapTests {
         Territory territory1 = new Territory("Territory1");
         Territory territory2 = new Territory("Territory2");
 
-        continet1.addTerritory(territory1, "id1");
+        Continent.addTerritory(territory1, "id1");
         continet2.addTerritory(territory2, "id2");
 
         assertEquals(0, map.getContinents(player1).size());
@@ -341,10 +340,10 @@ public class MapTests {
         assertEquals("Map1", map.getMapId());
         assertEquals(0, map.getContinents().size());
 
-        Continet continet1 = new Continet("Continet1", 1);
-        Continet continet2 = new Continet("Continet2", 2);
+        Continent Continent = new Continent("Continent", 1);
+        Continent continet2 = new Continent("Continet2", 2);
 
-        map.addContinet(continet1, "id1");
+        map.addContinet(Continent, "id1");
         map.addContinet(continet2, "id2");
 
         assertEquals(2, map.getContinents().size());
