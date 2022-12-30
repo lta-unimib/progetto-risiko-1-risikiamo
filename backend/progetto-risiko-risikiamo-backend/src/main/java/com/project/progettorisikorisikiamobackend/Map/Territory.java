@@ -33,7 +33,7 @@ public class Territory {
     }
 
     public Territory(String name) {
-        this(name, 0, new ArrayList<Territory>(), null);
+        this(name, 0, new ArrayList<>(), null);
     }
 
     /**
@@ -44,7 +44,7 @@ public class Territory {
      * @throws IllegalArgumentException if owner is null
      * @throws IllegalArgumentException if territory have an owner and army > 0
      */
-    public void setOwner(PlayerPlaceholder owner) {
+    public void setOwner(PlayerPlaceholder owner) throws IllegalArgumentException {
         if (owner == null) {
             throw new IllegalArgumentException("Owner can't be null");
         }
@@ -62,7 +62,7 @@ public class Territory {
      * @throws IllegalArgumentException if owner is null
      * @throws IllegalArgumentException if army become negative
      */
-    public void addArmy(int army) {
+    public void addArmy(int army) throws IllegalArgumentException {
 
         if (this.owner == null) {
             throw new IllegalArgumentException("Territory must have an owner");
@@ -155,7 +155,7 @@ public class Territory {
      * @author - Mauro Zorzin
      * @param territory the neighbor to add
      */
-    public void addNeighbor(Territory territory) {
+    public void addNeighbor(Territory territory) throws IllegalArgumentException {
         if (territory == this)
             throw new IllegalArgumentException("Territory can't be itself");
         if (territory == null)

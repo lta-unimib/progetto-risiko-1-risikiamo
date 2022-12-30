@@ -2,7 +2,6 @@ package com.project.progettorisikorisikiamobackend.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.util.Iterator;
 
@@ -290,6 +289,37 @@ public class ContinetTests {
         territory1.setOwner(new PlayerPlaceholder("Player2"));
 
         assertEquals(continet1.hashCode(), continet2.hashCode());
+
+    }
+
+    // test: setOwner(PlayerPlaceholder player)
+    @Test
+    public void testSetOwner() {
+        Continet continet = new Continet("Continet1", 1);
+        Territory territory1 = new Territory("Territory1");
+        Territory territory2 = new Territory("Territory2");
+        Territory territory3 = new Territory("Territory3");
+
+        PlayerPlaceholder player1 = new PlayerPlaceholder("Player1");
+
+        continet.addTerritory(territory1, "id1");
+        continet.addTerritory(territory2, "id2");
+        continet.addTerritory(territory3, "id3");
+
+        territory1.setOwner(player1);
+        territory2.setOwner(player1);
+
+        assertEquals(2, continet.getNumberOfTerritories(player1));
+        assertEquals(0, continet.getNumberOfTerritories(null));
+
+        continet.setOwner(player1);
+
+        assertEquals(3, continet.getNumberOfTerritories(player1));
+        assertEquals(0, continet.getNumberOfTerritories(null));
+
+        territory1.addArmy(2);
+
+        assertThrows(IllegalArgumentException.class, () -> continet.setOwner(player1));
 
     }
 }

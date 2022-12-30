@@ -36,7 +36,7 @@ public class Continet {
      */
     public PlayerPlaceholder getOwner() {
         if (territories.isEmpty()) {
-            throw new IllegalArgumentException("Continent have no territories");
+            return null;
         }
         PlayerPlaceholder owner = territories.values().iterator().next().getOwner();
         if (owner == null) {
@@ -120,7 +120,7 @@ public class Continet {
      * @param id        the id of the territory
      * 
      */
-    public void addTerritory(Territory territory, String id) {
+    public void addTerritory(Territory territory, String id) throws IllegalArgumentException {
         if (id.isEmpty() || id.isBlank()) {
             throw new IllegalArgumentException("The territory id is empty");
         }
@@ -141,7 +141,7 @@ public class Continet {
      * @param territory the territory to add
      * 
      */
-    public void addTerritory(Territory territory) {
+    public void addTerritory(Territory territory) throws IllegalArgumentException {
         if (territories.containsKey(territory.getName())) {
             throw new IllegalArgumentException("The territory id is already in the continent");
         }
@@ -225,4 +225,19 @@ public class Continet {
         return territoriesTemporaneo;
     }
 
+    /**
+     * Set all the territories in the continent to the player
+     * 
+     * 
+     * @aurhor Mauro Zozin
+     * @param player the player to set
+     * @return
+     * @throws IllegalArgumentException if the territory is already owned by someone
+     * 
+     */
+    public void setOwner(PlayerPlaceholder owner) throws IllegalArgumentException {
+        for (Territory territory : territories.values()) {
+            territory.setOwner(owner);
+        }
+    }
 }
