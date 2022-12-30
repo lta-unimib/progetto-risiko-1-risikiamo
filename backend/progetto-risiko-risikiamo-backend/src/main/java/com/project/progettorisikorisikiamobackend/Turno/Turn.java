@@ -1,4 +1,4 @@
-package com.project.progettorisikorisikiamobackend;
+package com.project.progettorisikorisikiamobackend.Turno;
 import java.util.*;
 
 
@@ -29,7 +29,13 @@ public class Turn {
         this.nextPlayer = playerList.get(1);
        
     }
-    //ordina i giocatori in base al lancio del dado
+    
+    /**ordina i giocatori in base al lancio del dado
+     * 
+     * @param playerList lista dei giocatori
+     * @param d dado
+     * @return lista dei giocatori ordinata in base al lancio del dado
+     */
     public List<PlayerPlaceHolder> setPlayerOrder(List<PlayerPlaceHolder> playerList, Dice d){
         int rollMax = 0;
        
@@ -47,7 +53,12 @@ public class Turn {
      playerList.sort(Comparator.comparing(PlayerPlaceHolder::getPlayerId).reversed());
      return playerList;
     }
-    //get dice
+    
+    /**
+     * ritorna il dado
+     * @return d
+     */
+     
     public Dice getDice(){
         return this.d;
     }
@@ -60,7 +71,11 @@ public class Turn {
     }
     
    
-    //ritorna la lista dei giocatori ancora in gioco
+    /**
+     * ritorna la lista dei giocatori in gioco
+     * @param playerList lista dei giocatori
+     * @return lista dei giocatori in gioco
+     */
     public List <PlayerPlaceHolder> playersInGame(List<PlayerPlaceHolder>playerList){
        List<PlayerPlaceHolder> playerListInGame = new ArrayList<>();
         for(PlayerPlaceHolder p : playerList){
@@ -71,18 +86,34 @@ public class Turn {
         return playerListInGame;
     }
     //ritorna il giocatore corrente
+    /**
+     * 
+     * @return currentPlayer
+     */
     public PlayerPlaceHolder getCurrentPlayer(){
         return this.currentPlayer;
     }
     //ritorna il giocatore successivo
+    /**
+     * 
+     * @return nextPlayer
+     */
     public PlayerPlaceHolder getNextPlayer(){
         return this.nextPlayer;
     }
     //ritorna il numero del turno
+    /**
+     * 
+     * @return turnNumber
+     */
     public int getTurnNumber(){
         return this.turnNumber;
     }
     //setta il giocatore corrente
+    /**
+     * 
+     * @param currentPlayer giocatore corrente
+     */
     public void setCurrentPlayer(PlayerPlaceHolder currentPlayer){
      if(currentPlayer.getIsIngame())
             this.currentPlayer = currentPlayer;
@@ -92,6 +123,10 @@ public class Turn {
             this.currentPlayer = playerList.get(0);
     }
     //setta il giocatore successivo
+    /**
+     * 
+     * @param playerList lista dei giocatori
+     */
     public void setNextPlayer(List <PlayerPlaceHolder> playerList){
         if(getTurnNumber() > playerList.size() - 1)
             this.nextPlayer = playerList.get(0);
@@ -101,6 +136,10 @@ public class Turn {
           
     }
     //setta il numero del turno
+    /**
+     * 
+     * @param turnNumber numero del turno
+     */
     public void goHeadTurn(){
         if(getTurnNumber() < playerList.size() - 1 ){
             
@@ -122,6 +161,11 @@ public class Turn {
         this.turnNumber = turnNumber + 1;
     }
     //ritorna il vincitore
+    /**
+     * 
+     * @param playerListInGame lista dei giocatori in gioco
+     * @return vincitore
+     */
     public PlayerPlaceHolder winner(List<PlayerPlaceHolder> playerListInGame){
         if(playerListInGame.size() == 1)
             return playerList.get(0);
@@ -129,6 +173,10 @@ public class Turn {
             return null;
     }
     //dice chi ha vinto se un giocatore raggiunge l'obiettivo e setta gli altri giocatori come fuori gioco
+    /**
+     * 
+     * @param playerList lista dei giocatori
+     */
     public void winningCondition(List<PlayerPlaceHolder> playerList){
     PlayerPlaceHolder p1 = nextPlayer;
         for(PlayerPlaceHolder p : playerList){
