@@ -1,4 +1,4 @@
-package com.project.progettorisikorisikiamobackend;
+package com.project.progettorisikorisikiamobackend.Turno;
 //dado a facce variabili
 
 import java.security.SecureRandom;

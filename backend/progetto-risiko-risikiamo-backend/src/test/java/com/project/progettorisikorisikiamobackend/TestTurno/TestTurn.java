@@ -1,7 +1,14 @@
 package com.project.progettorisikorisikiamobackend.TestTurno;
 
+
+
 //jupiter
 import org.junit.jupiter.api.Test;
+
+import com.project.progettorisikorisikiamobackend.Turno.PlayerPlaceHolder;
+import com.project.progettorisikorisikiamobackend.Turno.Turn;
+import com.project.progettorisikorisikiamobackend.Turno.Dice;
+import com.project.progettorisikorisikiamobackend.Turno.iPlayerPlaceHolder;
 
 import static org.junit.Assert.assertEquals;
 
@@ -12,7 +19,7 @@ class TestTurn {
     //playerListInGame
     @Test
     public void testPlayersInGame(){
-        List<PlayerPlaceHolder> playerList = new ArrayList<PlayerPlaceHolder>();
+    List<PlayerPlaceHolder> playerList = new ArrayList<PlayerPlaceHolder>();
     PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0);
     PlayerPlaceHolder p2 = new PlayerPlaceHolder("p2", "blue", true, 0, 0, 0);
     PlayerPlaceHolder p3 = new PlayerPlaceHolder("p3", "green", true, 0, 0, 0);

@@ -1,4 +1,4 @@
-package com.project.progettorisikorisikiamobackend;
+package com.project.progettorisikorisikiamobackend.Turno;
 
 public interface iPlayerPlaceHolder {
     public void setPlayerName(String name);
