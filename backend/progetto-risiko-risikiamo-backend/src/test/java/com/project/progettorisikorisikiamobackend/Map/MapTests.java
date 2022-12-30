@@ -1,4 +1,4 @@
-package com.project.progettorisikorisikiamobackend.Map;
+package com.project.progettorisikorisikiamobackend.map;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -8,10 +8,6 @@ import java.util.Collection;
 
 import org.junit.jupiter.api.Test;
 
-import com.project.progettorisikorisikiamobackend.map.Continet;
-import com.project.progettorisikorisikiamobackend.map.Map;
-import com.project.progettorisikorisikiamobackend.map.PlayerPlaceholder;
-import com.project.progettorisikorisikiamobackend.map.Territory;
 
 public class MapTests {
 

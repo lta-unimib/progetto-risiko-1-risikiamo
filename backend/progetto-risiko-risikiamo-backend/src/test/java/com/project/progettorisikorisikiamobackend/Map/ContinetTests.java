@@ -1,4 +1,4 @@
-package com.project.progettorisikorisikiamobackend.Map;
+package com.project.progettorisikorisikiamobackend.map;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
@@ -6,10 +6,6 @@ import static org.junit.Assert.assertThrows;
 import java.util.Iterator;
 
 import org.junit.jupiter.api.Test;
-
-import com.project.progettorisikorisikiamobackend.map.Continet;
-import com.project.progettorisikorisikiamobackend.map.PlayerPlaceholder;
-import com.project.progettorisikorisikiamobackend.map.Territory;
 
 public class ContinetTests {
 

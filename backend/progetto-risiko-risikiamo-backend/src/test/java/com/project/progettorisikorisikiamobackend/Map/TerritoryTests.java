@@ -1,4 +1,4 @@
-package com.project.progettorisikorisikiamobackend.Map;
+package com.project.progettorisikorisikiamobackend.map;
 
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -7,8 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
 import org.junit.Test;
 
-import com.project.progettorisikorisikiamobackend.map.PlayerPlaceholder;
-import com.project.progettorisikorisikiamobackend.map.Territory;
 
 public class TerritoryTests {
 
