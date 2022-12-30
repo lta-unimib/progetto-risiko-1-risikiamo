@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.ToString;
 
 /**
@@ -17,12 +18,14 @@ import lombok.ToString;
 @Getter
 public class Territory {
 
+    @NonNull
     private final String name;
     private int army;
     private ArrayList<Territory> neighbors;
     private PlayerPlaceholder owner;
 
     private Territory(String name, int army, ArrayList<Territory> neighbors, PlayerPlaceholder owner) {
+
         this.name = name;
         this.army = army;
         this.neighbors = neighbors;
@@ -106,7 +109,7 @@ public class Territory {
      * @return the neighbors of this territory not owned by the owner of this
      *         territory
      */
-    public Territory[] notOwnedNeighbor() {
+    public Territory[] getNotOwnedNeighbor() {
         int count = 0;
         for (Territory neighborTemporanei : this.neighbors) {
             if (neighborTemporanei.getOwner() != this.owner) {
@@ -128,7 +131,7 @@ public class Territory {
      * @author - Mauro Zorzin
      * @return the neighbors of this territory owned by the owner of this territory
      */
-    public Territory[] ownedNeighbor() {
+    public Territory[] getOwnedNeighbor() {
         int count = 0;
         for (Territory neighborTemporanei : this.neighbors) {
             if (neighborTemporanei.getOwner() == this.owner) {
@@ -153,6 +156,13 @@ public class Territory {
      * @param territory the neighbor to add
      */
     public void addNeighbor(Territory territory) {
+        if (territory == this)
+            throw new IllegalArgumentException("Territory can't be itself");
+        if (territory == null)
+            throw new IllegalArgumentException("Territory can't be null");
+        if (this.isNeighbor(territory)) {
+            throw new IllegalArgumentException("Territory already a neighbor");
+        }
         this.neighbors.add(territory);
     }
 

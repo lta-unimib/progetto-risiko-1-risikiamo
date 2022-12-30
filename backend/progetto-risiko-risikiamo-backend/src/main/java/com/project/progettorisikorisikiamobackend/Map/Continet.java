@@ -127,6 +127,17 @@ public class Continet {
         territories.put(id, territory);
     }
 
+    public void addTerritory(Territory territory) {
+        if (territories.containsKey(territory.getName())) {
+            throw new IllegalArgumentException("The territory id is already in the continent");
+        }
+        if (territories.containsValue(territory)) {
+            throw new IllegalArgumentException("The territory is already in the continent");
+        }
+
+        territories.put(territory.getName(), territory);
+    }
+
     /**
      * Remove a territory from the continent
      * 
