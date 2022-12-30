@@ -172,6 +172,23 @@ class TestTurn {
         assertEquals(4, t.getPlayerList().size());
 
     }
+    //test getDice
+    @Test
+    public void testGetDice(){
+        List<PlayerPlaceHolder> playerList = new ArrayList<PlayerPlaceHolder>();
+        PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0);
+        PlayerPlaceHolder p2 = new PlayerPlaceHolder("p2", "blue", true, 0, 0, 0);
+        PlayerPlaceHolder p3 = new PlayerPlaceHolder("p3", "green", true, 0, 0, 0);
+        PlayerPlaceHolder p4 = new PlayerPlaceHolder("p4", "yellow", true, 0, 0, 0);
+        playerList.add(p1);
+        playerList.add(p2);
+        playerList.add(p3);
+        playerList.add(p4);
+        Turn t = new Turn(playerList);
+        Dice d = new Dice(6);
+        t.setDice(d);
+        assertEquals(d, t.getDice());
+    }
     //playerListInGame
     @Test
     public void testPlayersInGame(){
@@ -273,6 +290,24 @@ class TestTurn {
         assertEquals(p1, t.getCurrentPlayer());
       
     }
+    //constructor PlayerPlaceHolder
+    @Test
+    public void testConstructor1(){
+        PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0);
+        assertEquals("p1", p1.getPlayerName());
+        assertEquals("red", p1.getColor());
+        assertEquals(true, p1.getIsIngame());
+        
+    }
+    //constructor PlayerPlaceHolder default
+    @Test
+    public void testConstructor1Default(){
+        PlayerPlaceHolder p1 = new PlayerPlaceHolder();
+        assertEquals("player", p1.getPlayerName());
+        assertEquals("white", p1.getColor());
+        assertEquals(false, p1.getIsIngame());
+    
+    }
     //constructor
     @Test
     public void testConstructor2(){
@@ -293,5 +328,5 @@ class TestTurn {
     
         
     }
-   
+
 }

@@ -189,6 +189,14 @@ public class Turn {
         
         
     }
+    //set Dice
+    /**
+     * 
+     * @param d dado
+     */
+    public void setDice(Dice d){
+        this.d = d;
+    }
     //ritorna il vincitore
     /**
      * 
