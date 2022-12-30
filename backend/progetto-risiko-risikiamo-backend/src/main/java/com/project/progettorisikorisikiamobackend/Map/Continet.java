@@ -121,6 +121,9 @@ public class Continet {
      * 
      */
     public void addTerritory(Territory territory, String id) throws IllegalArgumentException {
+        if (territory == null || id == null) {
+            throw new IllegalArgumentException("Null argument not allowed");
+        }
         if (id.isEmpty() || id.isBlank()) {
             throw new IllegalArgumentException("The territory id is empty");
         }
