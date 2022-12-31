@@ -1,42 +1,20 @@
-# DRisk
+# Progetto DRisk
 
-Progetto Risiko Dinamico ingegneria del software
+## Università degli studi Milano Bicocca
 
-# TechStack
+- Anno 2022/23
+- Corso : Ingegneria Del Software (Dipartimento di Informatica U14)
+- Docenti Prof. Riganelli e Prof. Archelli
 
-## BackEnd
+## Membri
 
-#### Api
-
-- Java 17 Maven Boot Spring (3.0.1)
-
-#### Test Freamwork
-
-- Junit 5 (Nativo spring)
-- Jacoco 0.8.8
-- Postman
-
-## FrontEnd
-
-#### Presentazione
-
-- TypeScript Vue.js (@vue/cli 5.0.8) (Nodejs 18.12.1 LTS ) (Build npm 9.2.0)
-
-#### Test Freamwork
-
-- Jest 27.5.1
-
-## Code Analysis Tools
-
-#### SonarCloud
-
-- progetto-risiko-risikiamo-forntend
-
-- progetto-risiko-risikiamo-backend
-
-# Membri
-
-- Mauro Zorzin 866001
+- [Mauro Zorzin 866001](https://github.com/MauroZorzin)
 - Davide Mauri 856746
 - Palmerini Paolo 841784
 - Francesco Ambrogio Marinoni 869276
+
+## Pages
+
+- [Installing](https://github.com/lta-unimib/progetto-risiko-1-risikiamo/wiki/Installing)
+- [Organizational Flow](https://github.com/lta-unimib/progetto-risiko-1-risikiamo/wiki/Organizational-Flow)
+- [Tech Stack](https://github.com/lta-unimib/progetto-risiko-1-risikiamo/wiki/Tech-Stack)
