@@ -1,17 +1,18 @@
 package com.project.progettorisikorisikiamobackend.map;
 
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class TerritoryTests {
+class TerritoryTests {
 
     // test: Constructor
     @Test
-    public void testConstructor() {
+    void testConstructor() {
         Territory territory = new Territory("Territory1");
         assertEquals("Territory1", territory.getName());
         assertEquals(0, territory.getArmy());
@@ -21,11 +22,11 @@ public class TerritoryTests {
 
     // test setOwner
     @Test
-    public void testSetOwner() {
+    void testSetOwner() {
         Territory territory = new Territory("Territory1");
         territory.setOwner(new PlayerPlaceholder("Player1"));
         assertEquals("Player1", territory.getOwner().getName());
-        assertThrowsExactly(IllegalArgumentException.class, () -> territory.setOwner(null));
+        assertThrows(IllegalArgumentException.class, () -> territory.setOwner(null));
         territory.setOwner(new PlayerPlaceholder("Player2"));
         assertEquals("Player2", territory.getOwner().getName());
         territory.addArmy(+1);
@@ -34,7 +35,7 @@ public class TerritoryTests {
 
     // test addArmy
     @Test
-    public void testAddArmy() {
+    void testAddArmy() {
         Territory territory = new Territory("Territory1");
         territory.getArmy();
         assertEquals(0, territory.getArmy());
@@ -61,18 +62,11 @@ public class TerritoryTests {
         territory2.addArmy(-1);
         assertEquals(null, territory2.getOwner());
 
-        // coverege
-
-        territory2.setOwner(new PlayerPlaceholder("Player2"));
-        territory2.addArmy(-1);
-        assertEquals(0, territory2.getArmy());
-        assertEquals(null, territory2.getOwner());
-
     }
 
     // test isNeighbor
     @Test
-    public void testIsNeighbor() {
+    void testIsNeighbor() {
         Territory territory1 = new Territory("Territory1");
         Territory territory2 = new Territory("Territory2");
         Territory territory3 = new Territory("Territory3");
@@ -94,7 +88,7 @@ public class TerritoryTests {
 
     // test addNeighbor
     @Test
-    public void testAddNeighbor() {
+    void testAddNeighbor() {
         Territory territory1 = new Territory("Territory1");
         Territory territory2 = new Territory("Territory2");
         Territory territory3 = new Territory("Territory3");
@@ -107,7 +101,7 @@ public class TerritoryTests {
 
     // test removeNeighbor
     @Test
-    public void testRemoveNeighbor() {
+    void testRemoveNeighbor() {
         Territory territory1 = new Territory("Territory1");
         Territory territory2 = new Territory("Territory2");
         Territory territory3 = new Territory("Territory3");
@@ -121,7 +115,7 @@ public class TerritoryTests {
 
     // test getNeighbors
     @Test
-    public void testGetNeighbors() {
+    void testGetNeighbors() {
         Territory territory1 = new Territory("Territory1");
         Territory territory2 = new Territory("Territory2");
         Territory territory3 = new Territory("Territory3");
@@ -135,7 +129,7 @@ public class TerritoryTests {
 
     // test getNotOwnedNeighbor
     @Test
-    public void testGetNotOwnedNeighbor() {
+    void testGetNotOwnedNeighbor() {
         PlayerPlaceholder player1 = new PlayerPlaceholder("Player1");
         PlayerPlaceholder player2 = new PlayerPlaceholder("Player2");
         Territory territory1 = new Territory("Territory1");
@@ -162,7 +156,7 @@ public class TerritoryTests {
 
     // test getOwnedNeighbor
     @Test
-    public void testGetOwnedNeighbor() {
+    void testGetOwnedNeighbor() {
         PlayerPlaceholder player1 = new PlayerPlaceholder("Player1");
         PlayerPlaceholder player2 = new PlayerPlaceholder("Player2");
         Territory territory1 = new Territory("Territory1");
@@ -193,7 +187,7 @@ public class TerritoryTests {
 
     // test equals
     @Test
-    public void testEquals() {
+    void testEquals() {
         Territory territory1 = new Territory("Territory1");
         Territory territory2 = new Territory("Territory2");
         Territory territory3 = new Territory("Territory3");
@@ -219,7 +213,7 @@ public class TerritoryTests {
 
     // test hashCode @EqualsAndHashCode lombok
     @Test
-    public void testHashCode() {
+    void testHashCode() {
         Territory territory1 = new Territory("Territory1");
         Territory territory2 = new Territory("Territory2");
         Territory territory3 = new Territory("Territory3");

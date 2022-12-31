@@ -57,20 +57,20 @@ public class Territory {
      * 
      * @author - Mauro Zorzin
      * @param army
+     * @return
      * @throws IllegalArgumentException if owner is null
      * @throws IllegalArgumentException if army become negative
      */
     public void addArmy(int army) throws IllegalArgumentException {
 
         if (this.owner == null) {
-            throw new IllegalArgumentException("Territory must have an owner");
+            throw new IllegalArgumentException("Territory don't have an owner");
         }
         if (this.army + army < 0) {
             throw new IllegalArgumentException("Army can't be negative");
         } else if (this.army + army == 0) {
             this.owner = null;
         }
-
         this.army += army;
     }
 
@@ -80,6 +80,7 @@ public class Territory {
      * @return true if the territory is a neighbor of this territory
      */
     public boolean isNeighbor(Territory territory) {
+
         for (Territory neighborTemporanei : this.neighbors) {
             if (neighborTemporanei.equals(territory)) {
                 return true;
@@ -94,6 +95,7 @@ public class Territory {
      * @return true if the territory is a neighbor of this territory
      */
     public boolean isNeighbor(String territoryName) {
+
         for (Territory neighborTemporanei : this.neighbors) {
             if (neighborTemporanei.getName().equals(territoryName)) {
                 return true;

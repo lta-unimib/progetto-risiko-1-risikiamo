@@ -1,40 +1,38 @@
 package com.project.progettorisikorisikiamobackend.TestTurno;
 
-
-
 //jupiter
 import org.junit.jupiter.api.Test;
 
 import com.project.progettorisikorisikiamobackend.Turno.PlayerPlaceHolder;
 import com.project.progettorisikorisikiamobackend.Turno.Turn;
 import com.project.progettorisikorisikiamobackend.Turno.Dice;
-import com.project.progettorisikorisikiamobackend.Turno.iPlayerPlaceHolder;
 
 import static org.junit.Assert.assertEquals;
 
 import java.util.*;
 
 class TestTurn {
-   @Test
-   //test Constructor
-    public void testConstructor(){
-         List<PlayerPlaceHolder> playerList = new ArrayList<PlayerPlaceHolder>();
-         PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0);
-         PlayerPlaceHolder p2 = new PlayerPlaceHolder("p2", "blue", true, 0, 0, 0);
-         PlayerPlaceHolder p3 = new PlayerPlaceHolder("p3", "green", true, 0, 0, 0);
-         PlayerPlaceHolder p4 = new PlayerPlaceHolder("p4", "yellow", true, 0, 0, 0);
-         playerList.add(p1);
-         playerList.add(p2);
-         playerList.add(p3);
-         playerList.add(p4);
-         Turn t = new Turn(playerList);
-         assertEquals(4, t.getPlayerList().size());
-         assertEquals(1, t.getTurnNumber());
-         assertEquals(6, t.getDiceSides());
-    }
-    //test setTurnNumber
     @Test
-    public void testSetTurnNumber(){
+    // test Constructor
+    public void testConstructor() {
+        List<PlayerPlaceHolder> playerList = new ArrayList<PlayerPlaceHolder>();
+        PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0);
+        PlayerPlaceHolder p2 = new PlayerPlaceHolder("p2", "blue", true, 0, 0, 0);
+        PlayerPlaceHolder p3 = new PlayerPlaceHolder("p3", "green", true, 0, 0, 0);
+        PlayerPlaceHolder p4 = new PlayerPlaceHolder("p4", "yellow", true, 0, 0, 0);
+        playerList.add(p1);
+        playerList.add(p2);
+        playerList.add(p3);
+        playerList.add(p4);
+        Turn t = new Turn(playerList);
+        assertEquals(4, t.getPlayerList().size());
+        assertEquals(1, t.getTurnNumber());
+        assertEquals(6, t.getDiceSides());
+    }
+
+    // test setTurnNumber
+    @Test
+    public void testSetTurnNumber() {
         List<PlayerPlaceHolder> playerList = new ArrayList<PlayerPlaceHolder>();
         PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0);
         PlayerPlaceHolder p2 = new PlayerPlaceHolder("p2", "blue", true, 0, 0, 0);
@@ -82,9 +80,10 @@ class TestTurn {
         t.setTurnNumber(18);
         assertEquals(18, t.getTurnNumber());
     }
-    //test setDice
+
+    // test setDice
     @Test
-    public void testSetDice(){
+    public void testSetDice() {
         List<PlayerPlaceHolder> playerList = new ArrayList<PlayerPlaceHolder>();
         PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0);
         PlayerPlaceHolder p2 = new PlayerPlaceHolder("p2", "blue", true, 0, 0, 0);
@@ -108,9 +107,10 @@ class TestTurn {
         t.setDice(6);
         assertEquals(6, t.getDiceSides());
     }
-    //test setPlayerList
+
+    // test setPlayerList
     @Test
-    public void testSetPlayerList(){
+    public void testSetPlayerList() {
         List<PlayerPlaceHolder> playerList = new ArrayList<PlayerPlaceHolder>();
         PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0);
         PlayerPlaceHolder p2 = new PlayerPlaceHolder("p2", "blue", true, 0, 0, 0);
@@ -133,9 +133,10 @@ class TestTurn {
         t.setPlayerList(playerList2);
         assertEquals(4, t.getPlayerList().size());
     }
-    //test setcurrentPlayer
+
+    // test setcurrentPlayer
     @Test
-    public void testSetCurrentPlayer(){
+    public void testSetCurrentPlayer() {
         List<PlayerPlaceHolder> playerList = new ArrayList<PlayerPlaceHolder>();
         PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0);
         PlayerPlaceHolder p2 = new PlayerPlaceHolder("p2", "blue", true, 0, 0, 0);
@@ -155,9 +156,10 @@ class TestTurn {
         t.setCurrentPlayer(p4);
         assertEquals(p4, t.getCurrentPlayer());
     }
-//setPlayerOrder
+
+    // setPlayerOrder
     @Test
-    public void testSetPlayerOrder(){
+    public void testSetPlayerOrder() {
         List<PlayerPlaceHolder> playerList = new ArrayList<PlayerPlaceHolder>();
         PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0);
         PlayerPlaceHolder p2 = new PlayerPlaceHolder("p2", "blue", true, 0, 0, 0);
@@ -172,9 +174,10 @@ class TestTurn {
         assertEquals(4, t.getPlayerList().size());
 
     }
-    //test getDice
+
+    // test getDice
     @Test
-    public void testGetDice(){
+    public void testGetDice() {
         List<PlayerPlaceHolder> playerList = new ArrayList<PlayerPlaceHolder>();
         PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0);
         PlayerPlaceHolder p2 = new PlayerPlaceHolder("p2", "blue", true, 0, 0, 0);
@@ -189,21 +192,22 @@ class TestTurn {
         t.setDice(d);
         assertEquals(d, t.getDice());
     }
-    //playerListInGame
+
+    // playerListInGame
     @Test
-    public void testPlayersInGame(){
-    List<PlayerPlaceHolder> playerList = new ArrayList<PlayerPlaceHolder>();
-    PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0);
-    PlayerPlaceHolder p2 = new PlayerPlaceHolder("p2", "blue", true, 0, 0, 0);
-    PlayerPlaceHolder p3 = new PlayerPlaceHolder("p3", "green", true, 0, 0, 0);
-    PlayerPlaceHolder p4 = new PlayerPlaceHolder("p4", "yellow", true, 0, 0, 0);
-    playerList.add(p1);
-    playerList.add(p2);
-    playerList.add(p3);
-    playerList.add(p4);
-       Turn t = new Turn(playerList);
+    public void testPlayersInGame() {
+        List<PlayerPlaceHolder> playerList = new ArrayList<PlayerPlaceHolder>();
+        PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0);
+        PlayerPlaceHolder p2 = new PlayerPlaceHolder("p2", "blue", true, 0, 0, 0);
+        PlayerPlaceHolder p3 = new PlayerPlaceHolder("p3", "green", true, 0, 0, 0);
+        PlayerPlaceHolder p4 = new PlayerPlaceHolder("p4", "yellow", true, 0, 0, 0);
+        playerList.add(p1);
+        playerList.add(p2);
+        playerList.add(p3);
+        playerList.add(p4);
+        Turn t = new Turn(playerList);
         List<PlayerPlaceHolder> playerListInGame = t.playersInGame(playerList);
-        assertEquals(4, playerListInGame.size() );
+        assertEquals(4, playerListInGame.size());
         p1.setIsIngame(false);
         playerListInGame = t.playersInGame(playerList);
         assertEquals(3, playerListInGame.size());
@@ -217,26 +221,27 @@ class TestTurn {
         playerListInGame = t.playersInGame(playerList);
         assertEquals(0, playerListInGame.size());
     }
-    //winningPlayer
+
+    // winningPlayer
     @Test
-    public void testWinningPlayer(){
-        
-           List<PlayerPlaceHolder> playerList = new ArrayList<PlayerPlaceHolder>();
-    PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0);
-    PlayerPlaceHolder p2 = new PlayerPlaceHolder("p2", "blue", true, 0, 0, 0);
-    PlayerPlaceHolder p3 = new PlayerPlaceHolder("p3", "green", true, 0, 0, 0);
-    PlayerPlaceHolder p4 = new PlayerPlaceHolder("p4", "yellow", true, 0, 0, 0);
-    playerList.add(p1);
-    playerList.add(p2);
-    playerList.add(p3);
-    playerList.add(p4);
+    public void testWinningPlayer() {
+
+        List<PlayerPlaceHolder> playerList = new ArrayList<PlayerPlaceHolder>();
+        PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0);
+        PlayerPlaceHolder p2 = new PlayerPlaceHolder("p2", "blue", true, 0, 0, 0);
+        PlayerPlaceHolder p3 = new PlayerPlaceHolder("p3", "green", true, 0, 0, 0);
+        PlayerPlaceHolder p4 = new PlayerPlaceHolder("p4", "yellow", true, 0, 0, 0);
+        playerList.add(p1);
+        playerList.add(p2);
+        playerList.add(p3);
+        playerList.add(p4);
         Turn t = new Turn(playerList);
-        
+
         PlayerPlaceHolder winningPlayer = t.winner(playerList);
-        assertEquals(null, winningPlayer );
+        assertEquals(null, winningPlayer);
         p1.setIsIngame(false);
         winningPlayer = t.winner(playerList);
-        assertEquals(null, winningPlayer );
+        assertEquals(null, winningPlayer);
         p2.setIsIngame(false);
         winningPlayer = t.winner(playerList);
         assertEquals(null, winningPlayer);
@@ -244,41 +249,43 @@ class TestTurn {
         winningPlayer = t.winner(playerList);
         assertEquals(null, winningPlayer);
     }
-    //nextPlayer
+
+    // nextPlayer
     @Test
-    public void testNextPlayer(){
+    public void testNextPlayer() {
         List<PlayerPlaceHolder> playerList = new ArrayList<PlayerPlaceHolder>();
-    PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0);
-    PlayerPlaceHolder p2 = new PlayerPlaceHolder("p2", "blue", true, 0, 0, 0);
-    PlayerPlaceHolder p3 = new PlayerPlaceHolder("p3", "green", true, 0, 0, 0);
-    PlayerPlaceHolder p4 = new PlayerPlaceHolder("p4", "yellow", true, 0, 0, 0);
-    playerList.add(p1);
-    playerList.add(p2);
-    playerList.add(p3);
-    playerList.add(p4);
+        PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0);
+        PlayerPlaceHolder p2 = new PlayerPlaceHolder("p2", "blue", true, 0, 0, 0);
+        PlayerPlaceHolder p3 = new PlayerPlaceHolder("p3", "green", true, 0, 0, 0);
+        PlayerPlaceHolder p4 = new PlayerPlaceHolder("p4", "yellow", true, 0, 0, 0);
+        playerList.add(p1);
+        playerList.add(p2);
+        playerList.add(p3);
+        playerList.add(p4);
         Turn t = new Turn(playerList);
         PlayerPlaceHolder nextPlayer = t.getNextPlayer();
         assertEquals(p2, nextPlayer);
         t.goHeadTurn();
-        nextPlayer =t.getNextPlayer();
+        nextPlayer = t.getNextPlayer();
         assertEquals(p3, nextPlayer);
         t.goHeadTurn();
-       
+
         nextPlayer = t.getNextPlayer();
         assertEquals(p4, nextPlayer);
     }
-    //goHeadTurn
+
+    // goHeadTurn
     @Test
-    public void testGoHeadTurn(){
+    public void testGoHeadTurn() {
         List<PlayerPlaceHolder> playerList = new ArrayList<PlayerPlaceHolder>();
-    PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0);
-    PlayerPlaceHolder p2 = new PlayerPlaceHolder("p2", "blue", true, 0, 0, 0);
-    PlayerPlaceHolder p3 = new PlayerPlaceHolder("p3", "green", true, 0, 0, 0);
-    PlayerPlaceHolder p4 = new PlayerPlaceHolder("p4", "yellow", true, 0, 0, 0);
-    playerList.add(p1);
-    playerList.add(p2);
-    playerList.add(p3);
-    playerList.add(p4);
+        PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0);
+        PlayerPlaceHolder p2 = new PlayerPlaceHolder("p2", "blue", true, 0, 0, 0);
+        PlayerPlaceHolder p3 = new PlayerPlaceHolder("p3", "green", true, 0, 0, 0);
+        PlayerPlaceHolder p4 = new PlayerPlaceHolder("p4", "yellow", true, 0, 0, 0);
+        playerList.add(p1);
+        playerList.add(p2);
+        playerList.add(p3);
+        playerList.add(p4);
         Turn t = new Turn(playerList);
         t.goHeadTurn();
         assertEquals(p2, t.getCurrentPlayer());
@@ -288,48 +295,49 @@ class TestTurn {
         assertEquals(p4, t.getCurrentPlayer());
         t.goHeadTurn();
         assertEquals(p1, t.getCurrentPlayer());
-      
+
     }
-    //constructor PlayerPlaceHolder
+
+    // constructor PlayerPlaceHolder
     @Test
-    public void testConstructor1(){
+    public void testConstructor1() {
         PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0);
         assertEquals("p1", p1.getPlayerName());
         assertEquals("red", p1.getColor());
         assertEquals(true, p1.getIsIngame());
         assertEquals(0, p1.getObiettivo());
         assertEquals(0, p1.getStatoObiettivo());
-        
+
     }
-    //constructor PlayerPlaceHolder default
+
+    // constructor PlayerPlaceHolder default
     @Test
-    public void testConstructor1Default(){
+    public void testConstructor1Default() {
         PlayerPlaceHolder p1 = new PlayerPlaceHolder();
         assertEquals("player", p1.getPlayerName());
         assertEquals("white", p1.getColor());
         assertEquals(false, p1.getIsIngame());
 
-    
     }
-    //constructor
+
+    // constructor
     @Test
-    public void testConstructor2(){
+    public void testConstructor2() {
         List<PlayerPlaceHolder> playerList = new ArrayList<PlayerPlaceHolder>();
-    PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0);
-    PlayerPlaceHolder p2 = new PlayerPlaceHolder("p2", "blue", true, 0, 0, 0);
-    PlayerPlaceHolder p3 = new PlayerPlaceHolder("p3", "green", true, 0, 0, 0);
-    PlayerPlaceHolder p4 = new PlayerPlaceHolder("p4", "yellow", true, 0, 0, 0);
-    playerList.add(p1);
-    playerList.add(p2);
-    playerList.add(p3);
-    playerList.add(p4);
-    try {
-        Turn t = new Turn(playerList, new Dice(6), 0);
-    } catch (Exception e) {
-       System.out.println("Exception");
-    }    
-    
-        
+        PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0);
+        PlayerPlaceHolder p2 = new PlayerPlaceHolder("p2", "blue", true, 0, 0, 0);
+        PlayerPlaceHolder p3 = new PlayerPlaceHolder("p3", "green", true, 0, 0, 0);
+        PlayerPlaceHolder p4 = new PlayerPlaceHolder("p4", "yellow", true, 0, 0, 0);
+        playerList.add(p1);
+        playerList.add(p2);
+        playerList.add(p3);
+        playerList.add(p4);
+        try {
+            Turn t = new Turn(playerList, new Dice(6), 0);
+        } catch (Exception e) {
+            System.out.println("Exception");
+        }
+
     }
 
 }
