@@ -61,7 +61,6 @@ public class Turn {
         return this.d;
     }
 
-    // get Dice sides
     /**
      * ritorna il numero di facce del dado
      * 
@@ -113,7 +112,6 @@ public class Turn {
         return this.nextPlayer;
     }
 
-    // ritorna il numero del turno
     /**
      * 
      * @return turnNumber
