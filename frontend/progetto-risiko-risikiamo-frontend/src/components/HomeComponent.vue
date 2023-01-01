@@ -1,5 +1,31 @@
-<script setup>
+<script>
 import { ref } from 'vue'
+
+export default {
+
+    name: "HomeComponent",
+    data() {
+        return {
+            hoverValue: hoverValue,
+        }
+    },
+
+    methods: {
+        changeHoverValue: changeHoverValue,
+        setSelectedPath: setSelectedPath
+
+
+    },
+
+    mounted() {
+        let paths = document.querySelectorAll("path");
+        for (let i = 0; i < paths.length; i++) {
+            paths[i].addEventListener("mouseover", this.changeHoverValue);
+            paths[i].addEventListener("click", this.setSelectedPath);
+        }
+    }
+
+}
 
 const hoverValue = ref("place your mouse over a country");
 
@@ -46,9 +72,7 @@ function setSelectedPath(value) {
 
     <div class="map">
 
-        <svg baseprofile="tiny" fill="#ececec" height="857" stroke="black" stroke-linecap="round"
-            stroke-linejoin="round" stroke-width=".2" version="1.2" viewbox="0 0 2000 857" width="2000"
-            @mouseover="changeHoverValue" @click="setSelectedPath">
+        <svg height="857" viewbox="0 0 2000 857" width="2000" stroke="white" baseprofile="tiny" fill="#ececec">
 
             <g>
                 <path id="AD" title="Andorra" class="land"
