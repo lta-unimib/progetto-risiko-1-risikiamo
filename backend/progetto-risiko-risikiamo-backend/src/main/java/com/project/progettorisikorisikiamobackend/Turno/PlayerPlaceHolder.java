@@ -7,18 +7,20 @@ public class PlayerPlaceHolder implements iPlayerPlaceHolder {
     private boolean isIngame;
     private int Obiettivo;
     private int statoObiettivo;
-//costruttore
-    public PlayerPlaceHolder(String playerName, String color,  boolean isIngame, int Obiettivo, int statoObiettivo, int playerId) {
+
+    // costruttore
+    public PlayerPlaceHolder(String playerName, String color, boolean isIngame, int Obiettivo, int statoObiettivo,
+            int playerId) {
         setColor(color);
         setPlayerName(playerName);
-       setPlayerId(playerId);
+        setPlayerId(playerId);
         setIsIngame(isIngame);
         setObiettivo(Obiettivo);
         setStatoObiettivo(statoObiettivo);
-        
 
     }
-    //costruttore vuoto
+
+    // costruttore vuoto
     public PlayerPlaceHolder() {
         setColor("white");
         setPlayerName("player");
@@ -28,7 +30,7 @@ public class PlayerPlaceHolder implements iPlayerPlaceHolder {
         setStatoObiettivo(0);
     }
 
-//getters e setters
+    // getters e setters
     public void setPlayerName(String name) {
         this.playerName = name;
     }
@@ -52,24 +54,29 @@ public class PlayerPlaceHolder implements iPlayerPlaceHolder {
     public int getPlayerId() {
         return this.playerId;
     }
+
     public void setIsIngame(boolean isIngame) {
         this.isIngame = isIngame;
     }
+
     public boolean getIsIngame() {
         return this.isIngame;
     }
+
     public void setObiettivo(int Obiettivo) {
         this.Obiettivo = Obiettivo;
     }
+
     public int getObiettivo() {
         return this.Obiettivo;
     }
+
     public void setStatoObiettivo(int statoObiettivo) {
         this.statoObiettivo = statoObiettivo;
     }
+
     public int getStatoObiettivo() {
         return this.statoObiettivo;
     }
 
-    
 }
