@@ -1,15 +1,17 @@
 package com.project.progettorisikorisikiamobackend.obiettivi;
+import com.project.progettorisikorisikiamobackend.map.Map;
+import com.project.progettorisikorisikiamobackend.map.PlayerPlaceholder;
 
-import jakarta.annotation.Nonnull;
 
-@Nonnull
+
 
 public class NumTerritories implements Objective {
     private int numberTerritories;
+    private Map map;
 
-
-    public NumTerritories(int numTerritories) {
+    public NumTerritories(int numTerritories, Map map) {
         this.numberTerritories = numTerritories;
+        this.map = map;
   
     }
 
@@ -19,17 +21,12 @@ public class NumTerritories implements Objective {
     }
 
     @Override
-    public boolean isCompleted(PlayerPlaceholder player) throws NullPointerException{
-        try {
+    public boolean isCompleted(PlayerPlaceholder player){
             if (player.getName() == null) {
-                throw new NullPointerException();
+                return false;
             }
-        } catch (NullPointerException e) {
-            System.out.println("Il Player non esiste");
-            return false;
-        }
 
-        return this.numberTerritories <= player.TerritoriesOwned();
+        return this.numberTerritories <= map.getNumberOfTerritories(player);
     }
     
 

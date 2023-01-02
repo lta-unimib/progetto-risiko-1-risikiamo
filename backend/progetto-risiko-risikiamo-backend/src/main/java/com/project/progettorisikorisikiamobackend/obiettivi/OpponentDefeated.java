@@ -18,25 +18,17 @@ public class OpponentDefeated implements Objective {
     }
 
     @Override
-    public boolean isCompleted(ContinentPlaceholder continent) throws NullPointerException{
+    public boolean isCompleted(PlayerPlaceholder player) throws NullPointerException{
         try {
-            if (continent.getOwner() == null) {
+            if (player.getName() == null) {
                 throw new NullPointerException();
             }
         } catch (NullPointerException e) {
-            System.out.println("Il continente non ha un proprietario");
-            return completed;
+            System.out.println("Player non esiste");
+            return false;
         }
-        if (continent.getNumberOfTerritories(opponent) == 0) {
-            setCompleted();
-        }
-
-        return completed;
-    }
-
-    @Override
-    public void setCompleted() {
-        this.completed = true;
+        // TODO: implementare metodo isDefeatedBy(PlayerPlaceholder player)
+        return false;
     }
 
     public PlayerPlaceholder getOpponent() {
