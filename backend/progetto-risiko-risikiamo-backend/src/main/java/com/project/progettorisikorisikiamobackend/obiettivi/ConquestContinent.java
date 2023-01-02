@@ -1,9 +1,12 @@
 package com.project.progettorisikorisikiamobackend.obiettivi;
 
 import com.project.progettorisikorisikiamobackend.map.PlayerPlaceholder;
+
+import lombok.Getter;
+
 import com.project.progettorisikorisikiamobackend.map.Continent;
 
-
+@Getter
 public class ConquestContinent implements Objective {
     private Continent continent;
 
@@ -19,20 +22,9 @@ public class ConquestContinent implements Objective {
     @Override
     public boolean isCompleted(PlayerPlaceholder player) {
         
-            if (player.getName() == null || continent.getOwner() == null) {
+            if (player == null || continent.getOwner() == null) {
                 return false;
             }
         return this.continent.getOwner().equals(player);
     }
-
-    
-
-    public Continent getContinent() {
-        return continent;
-    }
-
-    public void setContinent(Continent continent) {
-        this.continent = continent;
-    }
-    
 }

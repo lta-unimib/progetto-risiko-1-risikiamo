@@ -2,8 +2,10 @@ package com.project.progettorisikorisikiamobackend.obiettivi;
 import com.project.progettorisikorisikiamobackend.map.Map;
 import com.project.progettorisikorisikiamobackend.map.PlayerPlaceholder;
 
+import lombok.Getter;
 
 
+@Getter
 
 public class TotTerritories implements Objective {
     private int numberTerritories;
@@ -22,20 +24,11 @@ public class TotTerritories implements Objective {
 
     @Override
     public boolean isCompleted(PlayerPlaceholder player){
-            if (player.getName() == null) {
+            if (player == null) {
                 return false;
             }
 
         return this.numberTerritories <= map.getNumberOfTerritories(player);
-    }
-    
-
-    public int getTotTerritories() {
-        return numberTerritories;
-    }
-
-    public void setTotTerritories(int numTerritories) {
-        this.numberTerritories = numTerritories;
     }
     
 }
