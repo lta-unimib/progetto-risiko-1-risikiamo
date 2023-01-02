@@ -1,41 +1,37 @@
 package com.project.progettorisikorisikiamobackend.obiettivi;
 
-import jakarta.annotation.Nonnull;
+import com.project.progettorisikorisikiamobackend.map.PlayerPlaceholder;
+import com.project.progettorisikorisikiamobackend.map.Continent;
 
-@Nonnull
 
 public class ConquestContinent implements Objective {
-    private ContinentPlaceholder continent;
+    private Continent continent;
 
-    public ConquestContinent(ContinentPlaceholder continent) {
+    public ConquestContinent(Continent continent) {
         this.continent = continent;
     }
 
     @Override
     public String getObjDescription() {
-        return "Ottieni il continente " + continent.getName();
+        return "Conquista il continente " + continent.getName();
     }
 
     @Override
-    public boolean isCompleted(PlayerPlaceholder player) throws NullPointerException {
-        try {
-            if (player.getName() == null) {
-                throw new NullPointerException();
+    public boolean isCompleted(PlayerPlaceholder player) {
+        
+            if (player.getName() == null || continent.getOwner() == null) {
+                return false;
             }
-        } catch (NullPointerException e) {
-            System.out.println("Il continente non ha un proprietario");
-            return false;
-        }
         return this.continent.getOwner().equals(player);
     }
 
     
 
-    public ContinentPlaceholder getContinent() {
+    public Continent getContinent() {
         return continent;
     }
 
-    public void setContinent(ContinentPlaceholder continent) {
+    public void setContinent(Continent continent) {
         this.continent = continent;
     }
     

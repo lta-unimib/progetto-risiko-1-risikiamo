@@ -1,8 +1,6 @@
 package com.project.progettorisikorisikiamobackend.obiettivi;
+import com.project.progettorisikorisikiamobackend.map.PlayerPlaceholder;
 
-import jakarta.annotation.Nonnull;
-
-@Nonnull
 
 public class OpponentDefeated implements Objective {
     private PlayerPlaceholder opponent;
@@ -19,16 +17,12 @@ public class OpponentDefeated implements Objective {
 
     @Override
     public boolean isCompleted(PlayerPlaceholder player) throws NullPointerException{
-        try {
+        
             if (player.getName() == null) {
-                throw new NullPointerException();
-            }
-        } catch (NullPointerException e) {
-            System.out.println("Player non esiste");
             return false;
-        }
+            }
         // TODO: implementare metodo isDefeatedBy(PlayerPlaceholder player)
-        return false;
+        return true;
     }
 
     public PlayerPlaceholder getOpponent() {

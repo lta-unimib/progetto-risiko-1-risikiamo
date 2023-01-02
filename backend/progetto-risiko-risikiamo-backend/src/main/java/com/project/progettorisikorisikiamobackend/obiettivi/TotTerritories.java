@@ -5,11 +5,11 @@ import com.project.progettorisikorisikiamobackend.map.PlayerPlaceholder;
 
 
 
-public class NumTerritories implements Objective {
+public class TotTerritories implements Objective {
     private int numberTerritories;
     private Map map;
 
-    public NumTerritories(int numTerritories, Map map) {
+    public TotTerritories(int numTerritories, Map map) {
         this.numberTerritories = numTerritories;
         this.map = map;
   
@@ -17,7 +17,7 @@ public class NumTerritories implements Objective {
 
     @Override
     public String getObjDescription() {
-        return "Ottieni " + numberTerritories + " territori";
+        return "Conquista " + numberTerritories + " territori";
     }
 
     @Override
@@ -30,11 +30,11 @@ public class NumTerritories implements Objective {
     }
     
 
-    public int getNumTerritories() {
+    public int getTotTerritories() {
         return numberTerritories;
     }
 
-    public void setNumTerritories(int numTerritories) {
+    public void setTotTerritories(int numTerritories) {
         this.numberTerritories = numTerritories;
     }
     
