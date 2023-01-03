@@ -7,7 +7,6 @@ export default {
     data() {
         return {
             hoverValue: name,
-
         }
     },
 
@@ -34,14 +33,12 @@ function changeHoverValue(value) {
         let title = value.target.attributes.title;
         if (title != null) {
             name.value = title.value;
+            //console.log(name);
         }
     }
     else {
         name.value = "place your mouse over a country";
     }
-    console.log(value.target);
-    console.log(value);
-    console.log(name);
 }
 
 
