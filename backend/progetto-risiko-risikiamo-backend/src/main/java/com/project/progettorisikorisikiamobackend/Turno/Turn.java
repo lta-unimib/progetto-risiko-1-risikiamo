@@ -233,42 +233,7 @@ public class Turn {
                 
             
     }
-    /**
-     * gestisce le fasi del turno di ogni giocatore
-     * @param playerListInGame lista dei giocatori in gioco
-     * @param phase numero della fase
-     */
-    public void phases (List<PlayerPlaceHolder> playerListInGame, int phase){
-        while (phase < 4){
-        switch (phase){
-            case 0:
-            Scanner sc = new Scanner(System.in);
-            System.out.println("Inserisci il numero di armate da posizionare");
-            int n = sc.nextInt(); // da sostituire con il numero di armate da posizionare  calcolate in base al numero di territori posseduti e carte possedute
-                System.out.println("Piazza i tuoi rinforzi");
-                currentPlayer.placeReinforcements(n);
-                sc.close();
-                break;
-            case 1:
-                System.out.println("Attacca");
-                currentPlayer.attack();
-                break;
-            case 2:
-                System.out.println("Sposta le tue armate");
-                currentPlayer.moveArmies();
-                break;
-            case 3:
-                System.out.println("Fine del turno");
-                goHeadTurn();
-                setCurrentPlayer(nextPlayer);
-
-            default:
-            System.out.println("not a valid phase");
-        }
-        phase += 1;// questa può essere rimossa se in frontend si può richiamare il metodo con numero di fase incrementato,
-            
-    }
-    }
+   
 }
 
 
