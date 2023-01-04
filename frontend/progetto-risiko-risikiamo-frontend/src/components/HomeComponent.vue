@@ -24,15 +24,15 @@ export default {
         changeHoverValue: changeHoverValue,
         setSelectedPath: setSelectedPath,
         zoomIn() {
-            if (this.zoom < 4) {
+            if (this.zoom < 2.5) {
                 this.zoom += 0.5;
                 this.height = this.height * this.zoom;
                 this.width = this.width * this.zoom;
             }
             else {
-                this.zoom = 4;
+                this.zoom = 2.5;
                 window.zoom = this.zoom;
-                console.log("zoom in impossibile sei già a 4");
+                console.log("zoom in impossibile sei già a 2.5");
             }
 
         },
@@ -46,7 +46,7 @@ export default {
             else {
                 this.zoom = 0.5;
                 window.zoom = this.zoom;
-                console.log("zoom out impossibile sei già a 1");
+                console.log("zoom out impossibile sei già a 0.5");
             }
 
         },
@@ -76,6 +76,11 @@ export default {
                 diffy2 = diffy2 + this.diffy;
                 this.x = diffx2;
                 this.y = diffy2;
+
+                if (diffx2 < 0)
+                    diffx2 = 0;
+                if (diffy2 < 0)
+                    diffy2 = 0;
 
                 svg.style.transform = `translate(${diffx2}px, ${diffy2}px)`;
 
