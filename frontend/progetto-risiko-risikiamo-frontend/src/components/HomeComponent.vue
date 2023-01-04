@@ -7,13 +7,80 @@ export default {
     data() {
         return {
             hoverValue: name,
+            zoom: 1,
+            isDragging: false,
+            initialPosition: { xi: 0, yi: 0 },
+            currentPosition: { xc: 0, yc: 0 },
+            height: 900,
+            width: 1660,
+            x: 0,
+            y: 0,
+            diffx: 0,
+            diffy: 0
         }
     },
 
     methods: {
         changeHoverValue: changeHoverValue,
-        setSelectedPath: setSelectedPath
+        setSelectedPath: setSelectedPath,
+        zoomIn() {
+            if (this.zoom < 4) {
+                this.zoom += 0.5;
+                this.height = this.height * this.zoom;
+                this.width = this.width * this.zoom;
+            }
+            else {
+                this.zoom = 4;
+                window.zoom = this.zoom;
+                console.log("zoom in impossibile sei già a 4");
+            }
 
+        },
+        zoomOut() {
+
+            if (this.zoom >= 1) {
+                this.zoom -= 0.5;
+                this.height = this.height * this.zoom;
+                this.width = this.width * this.zoom;
+            }
+            else {
+                this.zoom = 0.5;
+                window.zoom = this.zoom;
+                console.log("zoom out impossibile sei già a 1");
+            }
+
+        },
+        onMouseDown(event) {
+            this.isDragging = true;
+            this.initialPosition = {
+                xi: event.clientX,
+                yi: event.clientY
+            };
+        },
+        onMouseUp() {
+            this.isDragging = false;
+            this.diffx = this.x;
+            this.diffy = this.y;
+        },
+        onMouseMove(event) {
+            let svg = this.$refs.svg;
+            if (this.isDragging) {
+                this.currentPosition = {
+                    xc: event.clientX,
+                    yc: event.clientY
+                };
+
+                let diffx2 = this.currentPosition.xc - this.initialPosition.xi;
+                let diffy2 = this.currentPosition.yc - this.initialPosition.yi;
+                diffx2 = diffx2 + this.diffx;
+                diffy2 = diffy2 + this.diffy;
+                this.x = diffx2;
+                this.y = diffy2;
+
+                svg.style.transform = `translate(${diffx2}px, ${diffy2}px)`;
+
+            }
+        }
     },
 
     mounted() {
@@ -54,8 +121,9 @@ function setSelectedPath(value) {
             console.log(value.target.attributes.title, value.target.classList);
         }
     }
-
 }
+
+
 </script>
 
 
@@ -74,10 +142,19 @@ function setSelectedPath(value) {
 
     </div>
 
+    <div>
+        <button @click="zoomIn">Zoom In</button>
+    </div>
+
+    <div>
+        <button @click="zoomOut">Zoom Out</button>
+    </div>
+
     <div class="map">
 
-        <svg height="900" viewbox="0 0 1660 900" width="1660" stroke="white" baseprofile="tiny" fill="#ececec">
-            <g>
+        <svg v-bind:height="height" v-bind:width="width" x="100" y="0" ref="svg" stroke="white" baseprofile="tiny"
+            fill="#ececec" @mousedown="onMouseDown" @mouseup="onMouseUp" @mousemove="onMouseMove">
+            <g v-bind:transform="`scale(${zoom})`">
                 <path id="AD" title="Andorra" class="land"
                     d="M480.487,331.376L480.41,331.401L480.152,331.556L480.005,331.61L479.871,331.637L479.766,331.626L479.708,331.535L479.714,331.396L479.69,331.272L479.67,331.205L479.708,331.024L479.794,330.927L479.913,330.847L480.101,330.876L480.499,330.992L480.582,331.101L480.583,331.173L480.51,331.292z">
                 </path>
@@ -840,6 +917,7 @@ function setSelectedPath(value) {
     </div>
 
 
+
 </template>
 
 
@@ -883,4 +961,3 @@ path:hover {
     fill: black;
 }
 </style>
- 
