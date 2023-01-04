@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 /**
- * Continet class
+ * Continent class
  * 
  * @author - Mauro Zorzin
  * @version 1.0
@@ -80,7 +80,7 @@ public class Continent {
      * @return true if the territory is in the continent, false otherwise
      * 
      */
-    public boolean isTerritoryInContinet(Territory territory) {
+    public boolean isTerritoryInContinent(Territory territory) {
         if (territory == null)
             return false;
         return territories.containsValue(territory);
@@ -94,7 +94,7 @@ public class Continent {
      * @return true if the territory is in the continent, false otherwise
      * 
      */
-    public boolean isTerritoryInContinet(String territoryId) {
+    public boolean isTerritoryInContinent(String territoryId) {
         if (territoryId == null || territoryId.isEmpty() || territoryId.isBlank())
             return false;
         return territories.containsKey(territoryId);
