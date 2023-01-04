@@ -1,9 +1,9 @@
-package main.java.com.project.progettorisikorisikiamobackend.gameState;
-
+package com.project.progettorisikorisikiamobackend.gameState;
+import com.project.progettorisikorisikiamobackend.Turno.*;
 public class MoveState  extends GameState{
     
-        public MoveState(GameStatus gameStatus, Turn turno) {
-            super(gameStatus, turno);
+        public MoveState(String name, Turn turno) {
+            super( name, turno);
             // TODO Auto-generated constructor stub
         }
     
@@ -16,16 +16,45 @@ public class MoveState  extends GameState{
         @Override
         public void attacca() {
             // TODO Auto-generated method stub
-            Logger logger = new Logger();
-            logger.config("non è possibile effettuare attacchi in questo stato");
+            
+            System.out.print("non è possibile effettuare attacchi in questo stato");
         }
     
         @Override
         public void rinforza() {
             // TODO Auto-generated method stub
-            Logger logger = new Logger();
-            logger.config("non è possibile effettuare rinforzi in questo stato");
+            System.out.print("non è possibile effettuare rinforzi in questo stato");
         }
+    @Override
+    public String getNameState() {
+      return super.getNameState();
+    }
+    @Override
+    public void setGameStatus(GameStatus gameStatus) {
+        this.setGameStatus(gameStatus);
+    }
+    @Override
+    public GameStatus getGameStatus() {
+        return this.getGameStatus();
+    }
+    @Override
+    public PlayerPlaceHolder getPlayerPlaceHolder() {
+        return super.getPlayerPlaceHolder();
+    }
+    @Override
+    public void setPlayerPlaceHolder(PlayerPlaceHolder playerPlaceHolder) {
+        super.setPlayerPlaceHolder(playerPlaceHolder);
+    }
+
+    @Override
+    public void setNameState(String nameState) {
+       super.setNameState(nameState);
+        
+    }
+
+
+   
+    
 }
 
 
