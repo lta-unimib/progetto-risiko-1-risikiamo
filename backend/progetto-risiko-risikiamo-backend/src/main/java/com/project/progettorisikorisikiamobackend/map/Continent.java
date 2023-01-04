@@ -1,4 +1,5 @@
 package com.project.progettorisikorisikiamobackend.map;
+import com.project.progettorisikorisikiamobackend.player.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -34,11 +35,11 @@ public class Continent {
      * @aurhor Mauro Zozin
      * @return the owner of the continent, null if the continent is not owned
      */
-    public PlayerPlaceholder getOwner() {
+    public Player getOwner() {
         if (territories.isEmpty()) {
             return null;
         }
-        PlayerPlaceholder owner = territories.values().iterator().next().getOwner();
+        Player owner = territories.values().iterator().next().getOwner();
         if (owner == null) {
             return null;
         }
@@ -58,7 +59,7 @@ public class Continent {
      * @return true if the continent is owned by the player, false otherwise
      * 
      */
-    public boolean isOwnedBy(PlayerPlaceholder player) {
+    public boolean isOwnedBy(Player player) {
         return getOwner() == player;
     }
 
@@ -206,7 +207,7 @@ public class Continent {
      * @return the number of territories owned by the player
      * 
      */
-    public int getNumberOfTerritories(PlayerPlaceholder player) {
+    public int getNumberOfTerritories(Player player) {
         if (player == null) {
             return 0;
         }
@@ -221,7 +222,7 @@ public class Continent {
      * @return the territories owned by the player
      * 
      */
-    public Collection<Territory> getTerritories(PlayerPlaceholder player) {
+    public Collection<Territory> getTerritories(Player player) {
         if (player == null) {
             return new ArrayList<>();
         }
@@ -244,7 +245,7 @@ public class Continent {
      * @throws IllegalArgumentException if the territory is already owned by someone
      * 
      */
-    public void setOwner(PlayerPlaceholder owner) throws IllegalArgumentException {
+    public void setOwner(Player owner) throws IllegalArgumentException {
         for (Territory territory : territories.values()) {
             territory.setOwner(owner);
         }

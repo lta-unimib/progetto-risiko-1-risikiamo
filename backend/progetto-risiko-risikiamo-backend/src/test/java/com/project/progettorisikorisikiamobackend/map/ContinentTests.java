@@ -1,4 +1,7 @@
 package com.project.progettorisikorisikiamobackend.map;
+import com.project.progettorisikorisikiamobackend.obiettivi.ConquestContinent;
+import com.project.progettorisikorisikiamobackend.obiettivi.Objective;
+import com.project.progettorisikorisikiamobackend.player.*;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
@@ -21,8 +24,9 @@ class ContinentTests {
     // test: getOwner()
     @Test
     void testGetOwner() {
-        PlayerPlaceholder player1 = new PlayerPlaceholder("Player1");
         Continent continet = new Continent("Continent", 1);
+        Objective objective = new ConquestContinent(continet);
+        Player player1 = new Player("Player1", "red",objective, 1);
         assertEquals(null, continet.getOwner());
         Territory territory1 = new Territory("Territory1");
         Territory territory2 = new Territory("Territory2");
@@ -31,14 +35,14 @@ class ContinentTests {
         continet.addTerritory(territory1, "id1");
         continet.addTerritory(territory2, "id2");
         assertEquals("Player1", continet.getOwner().getName());
-        territory2.setOwner(new PlayerPlaceholder("Player2"));
+        territory2.setOwner(new Player("Player2", null, objective, 0));
         assertEquals(null, continet.getOwner());
     }
 
     // test: isOwnedBy()
     @Test
     void testIsOwnedBy() {
-        PlayerPlaceholder player1 = new PlayerPlaceholder("Player1");
+        Player player1 = new Player("Player1", null, null, 0);
         Continent continet = new Continent("Continent", 1);
         assertEquals(false, continet.isOwnedBy(player1));
         Territory territory1 = new Territory("Territory1");
@@ -48,14 +52,14 @@ class ContinentTests {
         continet.addTerritory(territory1, "id1");
         continet.addTerritory(territory2, "id2");
         assertEquals(true, continet.isOwnedBy(player1));
-        territory2.setOwner(new PlayerPlaceholder("Player2"));
+        territory2.setOwner(new Player("Player2", null, null, 0));
         assertEquals(false, continet.isOwnedBy(player1));
     }
 
     // test: isOwned()
     @Test
     void testIsOwned() {
-        PlayerPlaceholder player1 = new PlayerPlaceholder("Player1");
+        Player player1 = new Player("Player1", null, null, 0);
         Continent continet = new Continent("Continent", 1);
         assertEquals(false, continet.isOwned());
         Territory territory1 = new Territory("Territory1");
@@ -66,7 +70,7 @@ class ContinentTests {
         continet.addTerritory(territory2, "id2");
         assertEquals(true, continet.isOwned());
         assertThrows(IllegalArgumentException.class, () -> territory2.setOwner(null));
-        territory2.setOwner(new PlayerPlaceholder("Player2"));
+        territory2.setOwner(new Player("Player2", null, null, 0));
         assertEquals(false, continet.isOwned());
     }
 
@@ -201,7 +205,7 @@ class ContinentTests {
         assertEquals(2, continet.getNumberOfTerritories());
     }
 
-    // test: getNumberOfTerritories(PlayerPlaceholder player)
+    // test: getNumberOfTerritories(Player player)
     @Test
     void testGetNumberOfTerritories2() {
         Continent continet = new Continent("Continent", 1);
@@ -209,7 +213,7 @@ class ContinentTests {
         Territory territory2 = new Territory("Territory2");
         Territory territory3 = new Territory("Territory3");
 
-        PlayerPlaceholder player1 = new PlayerPlaceholder("Player1");
+        Player player1 = new Player("Player1", null, null, 0);
 
         continet.addTerritory(territory1, "id1");
         continet.addTerritory(territory2, "id2");
@@ -223,7 +227,7 @@ class ContinentTests {
 
     }
 
-    // test: getTerritories(PlayerPlaceholder player)
+    // test: getTerritories(Player player)
     @Test
     void testGetTerritories() {
         Continent continet = new Continent("Continent", 1);
@@ -231,7 +235,7 @@ class ContinentTests {
         Territory territory2 = new Territory("Territory2");
         Territory territory3 = new Territory("Territory3");
 
-        PlayerPlaceholder player1 = new PlayerPlaceholder("Player1");
+        Player player1 = new Player("Player1", null, null, 0);
 
         continet.addTerritory(territory1, "id1");
         continet.addTerritory(territory2, "id2");
@@ -267,14 +271,14 @@ class ContinentTests {
 
         assertEquals(Continent, continet2);
 
-        PlayerPlaceholder player1 = new PlayerPlaceholder("Player1");
+        Player player1 = new Player("Player1", null, null, 0);
 
         territory1.setOwner(player1);
         territory2.setOwner(player1);
 
         assertEquals(Continent, continet2);
 
-        territory1.setOwner(new PlayerPlaceholder("Player2"));
+        territory1.setOwner(new Player("Player2", null, null, 0));
 
         assertEquals(Continent, continet2);
 
@@ -299,20 +303,20 @@ class ContinentTests {
 
         assertEquals(Continent.hashCode(), continet2.hashCode());
 
-        PlayerPlaceholder player1 = new PlayerPlaceholder("Player1");
+        Player player1 = new Player("Player1", null, null, 0);
 
         territory1.setOwner(player1);
         territory2.setOwner(player1);
 
         assertEquals(Continent.hashCode(), continet2.hashCode());
 
-        territory1.setOwner(new PlayerPlaceholder("Player2"));
+        territory1.setOwner(new Player("Player2", null, null, 0));
 
         assertEquals(Continent.hashCode(), continet2.hashCode());
 
     }
 
-    // test: setOwner(PlayerPlaceholder player)
+    // test: setOwner(Player player)
     @Test
     void testSetOwner() {
         Continent continet = new Continent("Continent", 1);
@@ -320,7 +324,7 @@ class ContinentTests {
         Territory territory2 = new Territory("Territory2");
         Territory territory3 = new Territory("Territory3");
 
-        PlayerPlaceholder player1 = new PlayerPlaceholder("Player1");
+        Player player1 = new Player("Player1", null, null, 0);
 
         continet.addTerritory(territory1, "id1");
         continet.addTerritory(territory2, "id2");

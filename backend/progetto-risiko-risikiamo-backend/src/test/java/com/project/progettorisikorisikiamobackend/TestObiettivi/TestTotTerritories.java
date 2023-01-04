@@ -1,5 +1,6 @@
 package com.project.progettorisikorisikiamobackend.TestObiettivi;
 import com.project.progettorisikorisikiamobackend.obiettivi.*;
+import com.project.progettorisikorisikiamobackend.player.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import com.project.progettorisikorisikiamobackend.map.*;
@@ -17,14 +18,14 @@ public class TestTotTerritories {
             continent.addTerritory(territory);
         }
         map.addContinet(continent, "America");
-        PlayerPlaceholder player = new PlayerPlaceholder("player1");
+        Player player = new Player("player1", null, null, 0);
         for (Territory territory : continent.getTerritories().values()) {   
             territory.setOwner(player);
         }
         Objective obiettivo = new TotTerritories(30, map);
         assertTrue(obiettivo.isCompleted(player));
         assertEquals("Conquista 30 territori", obiettivo.getObjDescription());
-        PlayerPlaceholder player2 = new PlayerPlaceholder("player2");
+        Player player2 = new Player("player2", null, obiettivo, 0);
         assertTrue (!obiettivo.isCompleted(player2));
     }
 }

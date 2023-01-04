@@ -1,4 +1,5 @@
 package com.project.progettorisikorisikiamobackend.map;
+import com.project.progettorisikorisikiamobackend.player.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -166,7 +167,7 @@ public class Map {
      * @return the number of continents owned by the player
      * @author Mauro Zorzin
      */
-    public int getNumberOfContinent(PlayerPlaceholder player) {
+    public int getNumberOfContinent(Player player) {
         if (player == null)
             return 0;
         int ownedContinets = 0;
@@ -185,7 +186,7 @@ public class Map {
      * @return the number of territories owned by the player
      * @author Mauro Zorzin
      */
-    public int getNumberOfTerritories(PlayerPlaceholder player) {
+    public int getNumberOfTerritories(Player player) {
         if (player == null)
             return 0;
         int ownedTerritories = 0;
@@ -202,7 +203,7 @@ public class Map {
      * @return the territories owned by the player
      * @author Mauro Zorzin
      */
-    public Collection<Territory> getTerritories(PlayerPlaceholder player) {
+    public Collection<Territory> getTerritories(Player player) {
         if (player == null)
             return new ArrayList<>();
 
@@ -221,7 +222,7 @@ public class Map {
      * @throws IllegalArgumentException if the player is null
      * @author Mauro Zorzin
      */
-    public Collection<Continent> getContinents(PlayerPlaceholder player) throws IllegalArgumentException {
+    public Collection<Continent> getContinents(Player player) throws IllegalArgumentException {
         Collection<Continent> continents = new ArrayList<>();
         if (player == null)
             throw new IllegalArgumentException("Player can't be null");
