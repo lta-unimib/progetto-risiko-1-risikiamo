@@ -1,5 +1,6 @@
 <script>
 import { ref } from 'vue'
+import { coordinatesAdjacencyList } from '../assets/coordinatesAdjacencyList.js'
 
 export default {
 
@@ -94,6 +95,8 @@ export default {
             paths[i].addEventListener("mouseover", this.changeHoverValue);
             paths[i].addEventListener("click", this.setSelectedPath);
         }
+
+
     }
 
 }
@@ -115,16 +118,44 @@ function changeHoverValue(value) {
 
 
 
-function setSelectedPath(value) {
+async function setSelectedPath(value) {
     if (value != null && value.target != null && value.target.attributes.title != null) {
         if (value.target.classList.contains("SelectedPath")) {
             value.target.classList.remove("SelectedPath");
             console.log(value.target.attributes.title, value.target.classList);
+            getAdjacentCountries(value);
         }
         else {
             value.target.classList.add("SelectedPath");
             console.log(value.target.attributes.title, value.target.classList);
+            getAdjacentCountries(value);
         }
+    }
+}
+
+function getAdjacentCountries(value) {
+    if (value != null && value.target != null && value.target.attributes.title != null) {
+        let country = value.target.attributes.title.value;
+        let adjacentCountries = coordinatesAdjacencyList[country];
+        let countryNames = [];
+        for (let i = 0; i < adjacentCountries.length; i++) {
+            countryNames.push(adjacentCountries[i]);
+        }
+        let paths = document.querySelectorAll("path");
+        for (let i = 0; i < paths.length; i++) {
+
+            if (countryNames.includes(paths[i].attributes.title.value) && paths[i].classList.contains("AdjacentPath") && !paths[i].classList.contains("SelectedPath")) {
+                paths[i].classList.remove("AdjacentPath");
+                console.log("1");
+            }
+            else if (countryNames.includes(paths[i].attributes.title.value) && !paths[i].classList.contains("AdjacentPath")) {
+                paths[i].classList.add("AdjacentPath");
+                console.log("2");
+            }
+
+
+        }
+        console.log(countryNames);
     }
 }
 
@@ -956,6 +987,10 @@ path[class="land Oceania"] {
 
 .SelectedPath {
     fill: grey;
+}
+
+.adjacentPath {
+    fill: #d10154;
 }
 
 path {
