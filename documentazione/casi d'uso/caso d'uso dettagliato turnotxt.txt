@@ -1,0 +1,38 @@
+CASO D'USO : TURNO
+Portata: DRisk
+
+LIVELLO: Obiettivo Utente
+
+Parti interessate ed interessi: 
+- Sistema e giocatore, il giocatore vuole giocare il suo turno, 
+il sistema fa eseguire il turno    
+
+Attore primario:
+giocatore
+
+Pre-condizioni: 
+il giocatore di turno precedente ha concluso il suo turno, o se è l'inizio della partita
+tutti i giocatori hanno posizinato le loro armate,
+
+Post-condizioni:
+il giocatore ha concluso il suo turno e il sistema ha passato il turno al giocatore successivo
+    Scenario Principale di successo: 
+    1. il sistema fa iniziare il turno a chi tocca secondo l'ordine e permette al giocatore di turno di svolgere le seguenti azioni,
+        1.a chiamata e posizionamento dei rinforzi,
+        1.b attacco, 
+        1.c conquista,
+        1.d pescata carta territorio,
+        1.e spostamento,
+        1.f fine turno.
+
+Estensioni:
+    1.a il giocatore non può richiamare e posizionare rinforzi per carenza di territori,
+    1.b il giocatore non può attaccare per carenza di carriarmati, 
+        1.b.2 il giocatore conclude il turno;
+    1.c il giocatore non riesca a conquistare nessun territorio,
+        1.c.2 il sistema controlla che il giocatore possa fare degli spostamenti se fallisce 
+        termina il turno
+    1.e il giocatore non può spostare carriarmati, il sistema termina il suo turno;
+   
+Frequenza di ripetizione:
+    ogni turno, fino a fine partita.

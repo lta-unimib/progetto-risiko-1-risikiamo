@@ -1,0 +1,48 @@
+CASO D'USO : Inizializazione Partita
+Portata: DRisk
+
+LIVELLO: Obiettivo Sistema
+
+Parti interessate ed interessi: 
+- Sistema e giocatore, il giocatore vuole posizionare le sue armate, 
+- il sistema permette l'inizio della partita.  
+
+Attore primario:
+Sistema
+
+Pre-condizioni: 
+il giocatore ha aperto il gioco.
+
+Post-condizioni:
+il sistema fa iniziare la partita, il giocatore ha posizionato le sue armate, dal primo giocatore di turno.
+
+Scenario Principale di successo: 
+    1. Il giocatore sceglie dal menù di gioco la modalità di gioco, 
+    2. il giocatore sceglie dal menù di gioco il numero di giocatori (da 2 a 6),
+    3. il giocatore inserisce i nomi dei giocatori,
+    4. il sistema inizializza la partita,
+    5. il sistema assegna* le carte territorio ai giocatori,
+    6. il sistema assegna* l'obiettivo ai giocatori,
+    7. i giocatori fanno un giro di turno per posizionare un carroarmato in ogni territorio,
+    8. i giocatori posizionano le armate rimanenti secondo le regole del gioco,
+    9. il sistema fa iniziare il primo turno.
+
+Estensioni:
+    2.a il giocatore selezona un numero di giocatori superiori al massimo consentito,
+        2.a.1 il sistema segnala l'errore e richiede di inserire nuovamente il numero di giocatori;
+    2.b il giocatore selezona un numero di giocatori inferiori al minimo consentito,
+        2.b.1 il sistema segnala l'errore e richiede di inserire nuovamente il numero di giocatori; 
+    3.a il giocatore non inserisce il nome di un giocatore,
+        3.a.1 il sistema segnala l'errore e richiede di inserire nuovamente il nome del giocatore;
+    3.b il giocatore inserisce un nome già utilizzato,
+        3.b.1 il sistema segnala l'errore e richiede di inserire nuovamente il nome del giocatore;
+    6.a.1 l'obiettivo non è raggiungibile,
+        6.a.2 il sistema assegna un nuovo obiettivo al giocatore;
+    
+   
+Frequenza di ripetizione:
+    solo una volta all'inizio della partita.
+
+    *assegnare: assegnare significa assegnare casualmente, 
+    in modo che ogni giocatore abbia un obiettivo diverso
+     e ogni obiettivo sia assegnato ad un solo giocatore.
