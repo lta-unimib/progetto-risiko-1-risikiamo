@@ -1,12 +1,20 @@
 package com.project.progettorisikorisikiamobackend.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.progettorisikorisikiamobackend.controllers.requests.PlayerDto;
+import com.project.progettorisikorisikiamobackend.domain.Player;
 import com.project.progettorisikorisikiamobackend.services.IPlayerService;
+
+import jakarta.validation.Valid;
 
 @RestController("/api/v1/game/{gameId}/play/{playerId}")
 public class PlayController {
@@ -15,6 +23,16 @@ public class PlayController {
 
     @Autowired
     private IPlayerService playerService;
+
+    @ResponseBody
+    @PostMapping("/{gameId}/addPlayer")
+    public ResponseEntity<Object> postAddPlayer(@Valid @RequestBody PlayerDto playerDto,
+            @PathVariable String gameId) {
+
+        playerService.postAddPlayer(playerDto, gameId);
+        return new ResponseEntity<>(playerDto.toPlayer(), HttpStatus.CREATED);
+
+    }
 
     @PutMapping("/turn")
     public ResponseEntity<String> putTurn(@PathVariable String gameId, @PathVariable String playerId) {
@@ -50,6 +68,12 @@ public class PlayController {
     public ResponseEntity<String> putPlace(@PathVariable String gameId, @PathVariable String playerId) {
         playerService.putPlace(playerId, gameId);
         return ResponseEntity.ok("Piazza rinforzi");
+    }
+
+    @PutMapping("/renforce")
+    public ResponseEntity<String> putRenforce(@PathVariable String gameId, @PathVariable String playerId) {
+        playerService.putRenforce(playerId, gameId);
+        return ResponseEntity.ok("riscatta rinforzi");
     }
 
 }
