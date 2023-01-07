@@ -3,13 +3,17 @@ package com.project.progettorisikorisikiamobackend.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.project.progettorisikorisikiamobackend.controllers.requests.PlayerDto;
+import com.project.progettorisikorisikiamobackend.services.mapper.IPlayerMapper;
+import com.project.progettorisikorisikiamobackend.services.mapper.dto.PlayerDto;
 
 @Service
 public class PlayService implements IPlayerService {
 
     @Autowired
-    private IGameService gameService;
+    private GameService gameService;
+
+    @Autowired(required = false)
+    private IPlayerMapper playerMapper;
 
     @Override
     public void postAddPlayer(PlayerDto playerDto, String gameId) {

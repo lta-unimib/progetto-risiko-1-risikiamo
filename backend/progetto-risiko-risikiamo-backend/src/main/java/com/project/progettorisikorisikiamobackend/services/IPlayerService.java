@@ -1,6 +1,6 @@
 package com.project.progettorisikorisikiamobackend.services;
 
-import com.project.progettorisikorisikiamobackend.controllers.requests.PlayerDto;
+import com.project.progettorisikorisikiamobackend.services.mapper.dto.PlayerDto;
 
 public interface IPlayerService {
 

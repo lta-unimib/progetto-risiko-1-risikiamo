@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.project.progettorisikorisikiamobackend.controllers.requests.GameDto;
 import com.project.progettorisikorisikiamobackend.services.IGameService;
+import com.project.progettorisikorisikiamobackend.services.mapper.dto.GameDto;
 
 import jakarta.validation.Valid;
 

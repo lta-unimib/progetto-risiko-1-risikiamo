@@ -1,8 +1,7 @@
 package com.project.progettorisikorisikiamobackend.services;
 
-import com.project.progettorisikorisikiamobackend.controllers.requests.GameDto;
-import com.project.progettorisikorisikiamobackend.controllers.requests.PlayerDto;
 import com.project.progettorisikorisikiamobackend.domain.Game;
+import com.project.progettorisikorisikiamobackend.services.mapper.dto.GameDto;
 
 public interface IGameService {
 

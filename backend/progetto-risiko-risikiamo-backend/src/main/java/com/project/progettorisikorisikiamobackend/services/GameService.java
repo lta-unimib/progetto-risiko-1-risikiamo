@@ -1,24 +1,27 @@
 package com.project.progettorisikorisikiamobackend.services;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.project.progettorisikorisikiamobackend.Turno.Dice;
-import com.project.progettorisikorisikiamobackend.controllers.requests.GameDto;
-import com.project.progettorisikorisikiamobackend.controllers.requests.PlayerDto;
-import com.project.progettorisikorisikiamobackend.domain.Game;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import io.github.uinnn.spigot.annotations.Service;
+import com.project.progettorisikorisikiamobackend.Turno.Dice;
+import com.project.progettorisikorisikiamobackend.domain.Game;
+import com.project.progettorisikorisikiamobackend.services.mapper.IGameMapper;
+import com.project.progettorisikorisikiamobackend.services.mapper.dto.GameDto;
 
 @Service
 public class GameService implements IGameService {
 
-    private HashMap<String, Game> games = new HashMap<String, Game>();
+    @Autowired(required = false)
+    private IGameMapper gameMapper;
+
+    private HashMap<String, Game> games = new HashMap<>();
 
     @Override
     public void postCreate(GameDto gameDto) {
-        gameDto.toGame();
-        games.put(generateGameId(), gameDto.toGame());
+
+        games.put(generateGameId(), gameMapper.fromDto(gameDto));
 
     }
 

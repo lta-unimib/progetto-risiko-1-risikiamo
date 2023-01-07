@@ -10,9 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.project.progettorisikorisikiamobackend.controllers.requests.PlayerDto;
-import com.project.progettorisikorisikiamobackend.domain.Player;
 import com.project.progettorisikorisikiamobackend.services.IPlayerService;
+import com.project.progettorisikorisikiamobackend.services.mapper.dto.PlayerDto;
 
 import jakarta.validation.Valid;
 
@@ -30,7 +29,7 @@ public class PlayController {
             @PathVariable String gameId) {
 
         playerService.postAddPlayer(playerDto, gameId);
-        return new ResponseEntity<>(playerDto.toPlayer(), HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
 
     }
 
