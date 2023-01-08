@@ -1,4 +1,4 @@
-export const coordinatesAdjacencyList = {
+export const coordinatesAdjacencyListHard = {
     "Italy": ["France", "Switzerland", "Austria", "Slovenia", "Tunisia"],
     "France": ["Spain", "Italy", "Switzerland", "Germany", "Belgium", "Luxembourg", "United Kingdom", "Ireland"],
     "Spain": ["France", "Portugal", "Ireland"],
@@ -153,5 +153,9 @@ export const coordinatesAdjacencyList = {
     "Togo": ["Benin", "Burkina Faso", "Ghana"],
     "Tajikistan": ["Kyrgyzstan", "Uzbekistan", "Afghanistan", "China"],
     "Timor-Leste": ["Indonesia"],
-    "Turkmenistan": ["Uzbekistan", "Afghanistan", "Iran", "Kazakhstan"]
+    "Turkmenistan": ["Uzbekistan", "Afghanistan", "Iran", "Kazakhstan"],
+    "Albania": ["Greece", "Macedonia", "Kosovo", "Montenegro", "Serbia"],
+    "Montenegro": ["Albania", "Croatia", "Bosnia and Herzegovina", "Serbia"],
+    "Kosovo": ["Albania", "Macedonia", "Serbia"],
+    "North Macedonia": ["Albania", "Kosovo", "Serbia", "Bulgaria", "Greece"],
 };

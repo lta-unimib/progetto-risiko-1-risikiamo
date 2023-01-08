@@ -1,0 +1,808 @@
+{
+    "dataContinents": {
+        "Italy": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Albania": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Greece": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Bulgaria": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Turkey": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Ukraine": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Belarus": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Poland": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Germany": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Denmark": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Sweden": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Norway": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Finland": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Russia": {
+            "Armies": 10,
+            "Owner": null
+        },
+        "Spain": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Portugal": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "France": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "England": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Wales": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Scotland": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Ireland": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Netherlands": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Belgium": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Luxembourg": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Switzerland": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Austria": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Czech Republic": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Slovakia": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Hungary": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Romania": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Bosnia": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Serbia": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Croatia": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Slovenia": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Macedonia": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "United Arab Emirates": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Saudi Arabia": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Qatar": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Oman": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Yemen": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Jordan": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Syria": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Montenegro": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Kosovo": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Algeria": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Morocco": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Tunisia": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "North Macedonia": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Egypt": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Libya": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Sudan": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Eritrea": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Ethiopia": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Somalia": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Kenya": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Uganda": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Tanzania": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Zambia": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Zimbabwe": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Mozambique": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Malawi": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Madagascar": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "South Africa": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Botswana": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Namibia": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Angola": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Democratic Republic of the Congo": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Republic of the Congo": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Cameroon": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Chad": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Niger": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Mali": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Burkina Faso": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Ghana": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Togo": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Benin": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Nigeria": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Guinea": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Sierra Leone": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Liberia": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Guinea-Bissau": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Senegal": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Mauritania": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Afghanistan": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Pakistan": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "India": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Nepal": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Bhutan": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Bangladesh": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Myanmar": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Thailand": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Laos": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Cambodia": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Vietnam": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "China": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Mongolia": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Kazakhstan": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Kyrgyzstan": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Tajikistan": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Turkmenistan": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Uzbekistan": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Iran": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Iraq": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Armenia": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Azerbaijan": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Georgia": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Argentina": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Bolivia": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Brazil": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Chile": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Colombia": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Ecuador": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Guyana": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Paraguay": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Peru": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Suriname": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Uruguay": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Venezuela": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Fiji": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "New Zealand": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Australia": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Indonesia": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Papua New Guinea": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Vanuatu": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "New Caledonia": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "French Polynesia": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Guam": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "American Samoa": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Kiribati": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Micronesia": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Palau": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Nauru": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Tuvalu": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Samoa": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Tonga": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Wallis and Futuna": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Niue": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Tokelau": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Saint Helena": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Tristan da Cunha": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Seychelles": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Mauritius": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Reunion": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Bosnia and Herzegovina": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Canada": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Greenland": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Mexico": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "United States": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Cuba": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Haiti": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Dominican Republic": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Jamaica": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Bahamas": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Curaçao": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Aruba": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Bonaire": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Sint Eustatius": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Saba": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Sint Maarten": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Anguilla": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Antigua and Barbuda": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Barbados": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Bermuda": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Côte d'Ivoire": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Czechia": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Estonia": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Japan": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Latvia": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Lithuania": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Moldova": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "North Korea": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "South Korea": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "United Kingdom": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Iceland": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Liechtenstein": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Burundi": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Comoros": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Djibouti": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Democratic Republic of Congo": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Central African Republic": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Republic of Congo": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Equatorial Guinea": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Costa Rica": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "El Salvador": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Guatemala": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Honduras": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Western Sahara": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Falkland Islands": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Gabon": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Grenada": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Lao People's Democratic Republic": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Sri Lanka": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Malaysia": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Nicaragua": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Panama": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Philippines": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Rwanda": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Svalbard and Jan Mayen": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "South Sudan": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Timor-Leste": {
+            "Armies": 0,
+            "Owner": null
+        },
+        "Taiwan": {
+            "Armies": 0,
+            "Owner": null
+        }
+    }
+}
