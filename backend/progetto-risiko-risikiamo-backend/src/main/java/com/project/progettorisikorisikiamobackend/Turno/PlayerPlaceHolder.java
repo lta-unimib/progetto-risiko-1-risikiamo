@@ -33,11 +33,12 @@ public class PlayerPlaceHolder implements iPlayerPlaceHolder {
     
     }
 public boolean defeated(){
+    boolean defeated = false;
     if(armies == 0){
-        return true;
+        defeated = true;
     }
     
-    return false;
+    return defeated;
     
 }
 }

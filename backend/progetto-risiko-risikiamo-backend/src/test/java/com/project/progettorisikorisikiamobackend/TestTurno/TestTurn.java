@@ -147,6 +147,18 @@ class TestTurn {
         assertEquals(25, p.getArmies());
        
     }
+    @Test
+    //controllo playerPlaceHolder2
+    void testPlayerPlaceHolder2(){
+        PlayerPlaceHolder p = new PlayerPlaceHolder();
+        
+        assertEquals("", p.getPlayerName());
+        assertEquals("", p.getColor());
+        assertEquals(0, p.getObiettivo());
+        assertEquals(0, p.getStatoObiettivo());
+        assertEquals(0, p.getPlayerId());
+        assertEquals(25, p.getArmies());
+    }
 
     
 
