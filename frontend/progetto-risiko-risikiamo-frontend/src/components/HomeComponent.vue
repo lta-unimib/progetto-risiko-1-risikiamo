@@ -213,7 +213,6 @@ export default {
 const name = ref("place your mouse over a country");
 
 
-
 function impossibleTrade() {
     const instructions = "you can't move troops from the first country you click to the second one you click.";
     const errorWindow = window.open('', 'Trade Instructions', 'height=300,width=600');
@@ -259,11 +258,19 @@ function trade(value, path1, path2) {
     let from = countries[path1.attributes.title.value];
     let to = countries[path2.attributes.title.value];
     if (from != null && from.Armies > value && to != null && value <= 3 && value >= 1 && from.Armies > 1) {
+
+        //to do after with backend
+
         from.Armies -= value;
         to.Armies += value;
+        console.log("trade successful");
+        countries[path1.attributes.title.value].Armies = from.Armies;
+        countries[path2.attributes.title.value].Armies = to.Armies;
+
     }
     else {
         console.log("trade failed");
+
     }
 }
 
