@@ -1,14 +1,17 @@
+
 package com.project.progettorisikorisikiamobackend.Turno;
 import java.util.*;
+import lombok.Getter;
 
 
 
 public class Turn {
-   private List <PlayerPlaceHolder> playerList;
-    private PlayerPlaceHolder currentPlayer;
-    private PlayerPlaceHolder nextPlayer;
-    private int turnNumber;
-     private Dice d = new Dice(6);
+  @Getter private List <PlayerPlaceHolder> playerList;
+  @Getter private PlayerPlaceHolder currentPlayer;
+  @Getter private PlayerPlaceHolder nextPlayer;
+  @Getter private int turnNumber;
+  @Getter  private Dice d = new Dice(6);
+     
     
     //costruttore
     public Turn(List <PlayerPlaceHolder> playerList, Dice d,  int turnNumber){
@@ -54,28 +57,8 @@ public class Turn {
      return playerList;
     }
     
-    /**
-     * ritorna il dado
-     * @return d
-     */
-     
-    public Dice getDice(){
-        return this.d;
-    }
-    //get Dice sides
-    /**
-     * ritorna il numero di facce del dado
-     * @return d.getSides()
-     */
-    public int getDiceSides(){
-        return this.d.getSides();
-    }
-    public void setPlayerList(List <PlayerPlaceHolder> playerList){
-        this.playerList = playerList;
-    }
-    public List <PlayerPlaceHolder> getPlayerList(){
-        return this.playerList;
-    }
+  
+   
     
    
     /**
@@ -83,56 +66,18 @@ public class Turn {
      * @param playerList lista dei giocatori
      * @return lista dei giocatori in gioco
      */
-    public List <PlayerPlaceHolder> playersInGame(List<PlayerPlaceHolder>playerList){
+    public void playersInGame(List<PlayerPlaceHolder>playerList){
        List<PlayerPlaceHolder> playerListInGame = new ArrayList<>();
         for(PlayerPlaceHolder p : playerList){
-            if(p.getIsIngame()){
+            if(!(p.defeated )){
                 playerListInGame.add(p);
             }
+            
         }
-        return playerListInGame;
+        this.playerList = playerListInGame;
     }
-    //ritorna il giocatore corrente
-    /**
-     * 
-     * @return currentPlayer
-     */
-    public PlayerPlaceHolder getCurrentPlayer(){
-        return this.currentPlayer;
-    }
-    //ritorna il giocatore successivo
-    /**
-     * 
-     * @return nextPlayer
-     */
-    public PlayerPlaceHolder getNextPlayer(){
-        return this.nextPlayer;
-    }
-    //ritorna il numero del turno
-    /**
-     * 
-     * @return turnNumber
-     */
-    public int getTurnNumber(){
-        return this.turnNumber;
-    }
-    //setta il numero del turno
-    /**
-     * 
-     * @param turnNumber numero del turno
-     */
-    public void setTurnNumber(int turnNumber){
-        this.turnNumber = turnNumber;
-    }
-    //setta il dado
-    /**
-     * 
-     * @param d dado
-     */
-    public void setDice(int sides){
-        Dice d = new Dice(sides);
-        this.d = d;
-    }
+    
+    
 
     //setta il giocatore corrente
     /**
@@ -189,14 +134,8 @@ public class Turn {
         
         
     }
-    //set Dice
-    /**
-     * 
-     * @param d dado
-     */
-    public void setDice(Dice d){
-        this.d = d;
-    }
+
+   
     //ritorna il vincitore
     /**
      * 
@@ -204,7 +143,7 @@ public class Turn {
      * @return vincitore
      */
     public PlayerPlaceHolder winner(List<PlayerPlaceHolder> playerListInGame){
-        if(playerListInGame.size() == 1)
+        if(playerList.size() == 1)
             return playerList.get(0);
         else
             return null;
@@ -219,8 +158,8 @@ public class Turn {
         for(PlayerPlaceHolder p : playerList){
         
             if(p.getObiettivo() == p.getStatoObiettivo()){
-                if(p1 != p)
-                    p1.setIsIngame(false);
+                    if(p1 != p && playerList.contains(p1))
+                        playerList.remove(p1);
             } 
             
                 

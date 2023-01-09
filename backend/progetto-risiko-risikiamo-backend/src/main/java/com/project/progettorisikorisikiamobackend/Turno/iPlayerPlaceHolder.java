@@ -7,4 +7,6 @@ public interface iPlayerPlaceHolder {
     public String getColor();
     public void setPlayerId(int id);
     public int getPlayerId();
+    public boolean defeated();
+    
 }
