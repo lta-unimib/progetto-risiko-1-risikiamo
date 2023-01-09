@@ -69,9 +69,10 @@ public class Turn {
     public void playersInGame(List<PlayerPlaceHolder>playerList){
        List<PlayerPlaceHolder> playerListInGame = new ArrayList<>();
         for(PlayerPlaceHolder p : playerList){
-            if(!(p.defeated() )){
+            if((p.defeated() == false )){
                 playerListInGame.add(p);
             }
+        
             
         }
         this.playerList = playerListInGame;
@@ -159,8 +160,9 @@ public class Turn {
         
             if(p.getObiettivo() == p.getStatoObiettivo()){
                     if(p1 != p && playerList.contains(p1))
-                        playerList.remove(p1);
+                        p1.defeated();
             } 
+            playersInGame(playerList);
             
                 
             

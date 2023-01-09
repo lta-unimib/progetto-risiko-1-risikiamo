@@ -11,7 +11,7 @@ public class PlayerPlaceHolder implements iPlayerPlaceHolder {
     
     @Getter private int statoObiettivo;
 //costruttore
-    public PlayerPlaceHolder(String playerName, String color, int Obiettivo, int statoObiettivo, int playerId) {
+    public PlayerPlaceHolder(String playerName, String color, int Obiettivo, int statoObiettivo, int playerId, int armies) {
         this.playerName = playerName;
         this.color = color;
         this.Obiettivo = Obiettivo;
@@ -33,13 +33,11 @@ public class PlayerPlaceHolder implements iPlayerPlaceHolder {
     
     }
 public boolean defeated(){
-    if(this.armies == 1){
+    if(armies == 0){
         return true;
     }
-    else{
-        return false;
-    }
-
+    
+    return false;
     
 }
 }
