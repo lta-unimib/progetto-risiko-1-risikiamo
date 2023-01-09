@@ -24,8 +24,9 @@ public class RenforceState extends GameState{
         int rinforzi = input.nextInt();
         // TODO Auto-generated method stub
         super.getTurno().getCurrentPlayer().placeReinforcements(rinforzi);
-        
+    input.close();    
     }
+
     @Override
     public String getNameState() {
       return super.getNameState();

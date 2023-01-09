@@ -4,7 +4,7 @@ import java.util.List;
 import com.project.progettorisikorisikiamobackend.Turno.*;
 import com.project.progettorisikorisikiamobackend.map.*;
 
-import io.github.uinnn.spigot.placeholder.Placeholder;
+
 
 public class StartState extends GameState {
 Map map;

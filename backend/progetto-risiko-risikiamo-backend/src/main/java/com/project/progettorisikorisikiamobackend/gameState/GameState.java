@@ -1,5 +1,5 @@
 package com.project.progettorisikorisikiamobackend.gameState;
-import com.project.progettorisikorisikiamobackend.Turno.PlayerPlaceHolder;
+
 import com.project.progettorisikorisikiamobackend.Turno.Turn;
 
 public abstract class GameState {
@@ -7,7 +7,7 @@ private String nameState;
 private Turn turno;
 
 
-public GameState(String nameState, Turn turno) {
+ GameState(String nameState, Turn turno) {
     this.nameState = nameState;
     this.turno = turno;
 }
