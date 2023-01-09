@@ -8,7 +8,7 @@ public class PlayerPlaceHolder implements iPlayerPlaceHolder {
     private boolean isIngame;
     private int Obiettivo;
     private int statoObiettivo;
-    private List <Territorio> territori;
+
     private Dice d;
 //costruttore
     public PlayerPlaceHolder(String playerName, String color,  boolean isIngame, int Obiettivo, int statoObiettivo, int playerId, Dice d) {
@@ -30,7 +30,7 @@ public class PlayerPlaceHolder implements iPlayerPlaceHolder {
         setIsIngame(false);
         setObiettivo(0);
         setStatoObiettivo(0);
-        this.territori = new ArrayList<Territorio>();
+       
         this.d = new Dice(6);
     }
 

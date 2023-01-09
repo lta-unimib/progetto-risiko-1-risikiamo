@@ -28,18 +28,7 @@ public void rinforza() {
 public String getNameState() {
   return super.getNameState();
 }
-@Override
-public void setGameStatus(GameStatus gameStatus) {
-    this.setGameStatus(gameStatus);
-}
-@Override
-public GameStatus getGameStatus() {
-    return this.getGameStatus();
-}
-@Override
-public PlayerPlaceHolder getPlayerPlaceHolder() {
-    return super.getPlayerPlaceHolder();
-}
+
 
 
     

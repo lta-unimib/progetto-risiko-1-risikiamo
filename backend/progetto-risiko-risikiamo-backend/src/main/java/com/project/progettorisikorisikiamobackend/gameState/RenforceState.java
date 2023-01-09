@@ -30,27 +30,16 @@ public class RenforceState extends GameState{
     public String getNameState() {
       return super.getNameState();
     }
-    @Override
-    public void setGameStatus(GameStatus gameStatus) {
-        this.setGameStatus(gameStatus);
-    }
-    @Override
-    public GameStatus getGameStatus() {
-        return this.getGameStatus();
-    }
-    @Override
-    public PlayerPlaceHolder getPlayerPlaceHolder() {
-        return super.getPlayerPlaceHolder();
-    }
-    @Override
-    public void setPlayerPlaceHolder(PlayerPlaceHolder playerPlaceHolder) {
-        super.setPlayerPlaceHolder(playerPlaceHolder);
-    }
+  
+   
+    
     @Override
     public void setNameState(String nameState) {
        super.setNameState(nameState);
         
     }
+
+  
     
     
 }

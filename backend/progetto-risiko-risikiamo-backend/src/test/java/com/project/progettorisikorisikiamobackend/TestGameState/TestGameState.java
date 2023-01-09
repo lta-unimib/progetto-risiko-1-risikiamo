@@ -9,105 +9,76 @@ import com.project.progettorisikorisikiamobackend.map.Map;
 
 
 import static org.junit.Assert.assertEquals;
-import java.beans.Transient;
+import static org.junit.Assert.assertTrue;
 import java.util.*;
 
 class TestGameState {
+    //test gameStateManager
     @Test
-    void test() {
+    void testGameStateManager() {
         List <PlayerPlaceHolder> players = new ArrayList<>();
-        PlayerPlaceHolder p1 = new PlayerPlaceHolder();
-        PlayerPlaceHolder p2 = new PlayerPlaceHolder();
-        PlayerPlaceHolder p3 = new PlayerPlaceHolder();
-        PlayerPlaceHolder p4 = new PlayerPlaceHolder();
-        players.add(p1);
-        players.add(p2);
-        players.add(p3);
-        players.add(p4);
-        GameStatus gameStatus = new GameStatus(players);
-        assertEquals("StartState", gameStatus.getGameState().getNameState());
-        gameStatus.setMoveState("MoveState");
-        assertEquals("MoveState", gameStatus.getGameState().getNameState());
-        gameStatus.setAttackState("AttackState");
-        assertEquals("AttackState", gameStatus.getGameState().getNameState());
-        gameStatus.setReinforceState("RenforceState");
-        assertEquals("RenforceState", gameStatus.getGameState().getNameState());
+        players.add(new PlayerPlaceHolder("pippo", "rosso", true, 0, 0,0, new Dice(6)));
+        players.add(new PlayerPlaceHolder("pluto", "verde", true, 0, 0,0, new Dice(6)));
+        GameStateManager gameStateManager = new GameStateManager(players);
+        assertEquals("StartState", gameStateManager.getGameState().getNameState());
+        assertEquals(players, gameStateManager.getGameState().getTurno().getPlayerList());
+
     }
-    /**
-     * 
-     */
+    //test startState
     @Test
-    //start state   
     void testStartState() {
         List <PlayerPlaceHolder> players = new ArrayList<>();
-        PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0,new Dice(6));
-        PlayerPlaceHolder p2 = new PlayerPlaceHolder("p2", "blue", true, 0, 0, 0,new Dice(6));
-        PlayerPlaceHolder p3 = new PlayerPlaceHolder("p3", "green", true, 0, 0, 0,new Dice(6));
-        PlayerPlaceHolder p4 = new PlayerPlaceHolder("p4", "yellow", true, 0, 0, 0,new Dice(6));
-        players.add(p1);
-        players.add(p2);
-        players.add(p3);
-        players.add(p4);
-        Turn turno = new Turn(players);
-        Map map = new Map("mappa");
-        GameState startState = new StartState("StartState", turno, map);
-        assertEquals("StartState", startState.getNameState());
-        startState.sposta();
-        startState.attacca();
-        startState.rinforza();
+        players.add(new PlayerPlaceHolder("pippo", "rosso", true, 0, 0,0, new Dice(6)));
+        players.add(new PlayerPlaceHolder("pluto", "verde", true, 0, 0,0, new Dice(6)));
+        GameStateManager gameStateManager = new GameStateManager(players);
+        gameStateManager.getGameState().rinforza();
+        assertEquals("StartState", gameStateManager.getGameState().getNameState());
+        assertEquals(players, gameStateManager.getGameState().getTurno().getPlayerList());
     }
+    //test moveState
     @Test
-    //move state
     void testMoveState() {
         List <PlayerPlaceHolder> players = new ArrayList<>();
-        PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0,new Dice(6));
-        PlayerPlaceHolder p2 = new PlayerPlaceHolder("p2", "blue", true, 0, 0, 0,new Dice(6));
-        PlayerPlaceHolder p3 = new PlayerPlaceHolder("p3", "green", true, 0, 0, 0,new Dice(6));
-        PlayerPlaceHolder p4 = new PlayerPlaceHolder("p4", "yellow", true, 0, 0, 0,new Dice(6));
-        players.add(p1);
-        players.add(p2);
-        players.add(p3);
-        players.add(p4);
-        GameState moveState = new MoveState("MoveState", new Turn(players));
-        assertEquals("MoveState", moveState.getNameState());
-        moveState.sposta();
-        moveState.attacca();
-        moveState.rinforza();
+        players.add(new PlayerPlaceHolder("pippo", "rosso", true, 0, 0,0, new Dice(6)));
+        players.add(new PlayerPlaceHolder("pluto", "verde", true, 0, 0,0, new Dice(6)));
+       GameStateManager gameStateManager = new GameStateManager(players);
+       try{
+        gameStateManager.changeState("sposta");
+       } catch (Exception e) {
+           System.out.println("errore");
+         }
+        assertEquals("sposta", gameStateManager.getGameState().getNameState());
+        assertEquals(players, gameStateManager.getGameState().getTurno().getPlayerList());
     }
+    //test attackState
     @Test
-    //attack state
     void testAttackState() {
         List <PlayerPlaceHolder> players = new ArrayList<>();
-        PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0,new Dice(6));
-        PlayerPlaceHolder p2 = new PlayerPlaceHolder("p2", "blue", true, 0, 0, 0,new Dice(6));
-        PlayerPlaceHolder p3 = new PlayerPlaceHolder("p3", "green", true, 0, 0, 0,new Dice(6));
-        PlayerPlaceHolder p4 = new PlayerPlaceHolder("p4", "yellow", true, 0, 0, 0,new Dice(6));
-        players.add(p1);
-        players.add(p2);
-        players.add(p3);
-        players.add(p4);
-        GameState attackState = new AttackState("AttackState", new Turn(players));
-        assertEquals("AttackState", attackState.getNameState());
-        attackState.sposta();
-        attackState.attacca();
-        attackState.rinforza();
+        players.add(new PlayerPlaceHolder("pippo", "rosso", true, 0, 0,0, new Dice(6)));
+        players.add(new PlayerPlaceHolder("pluto", "verde", true, 0, 0,0, new Dice(6)));
+       GameStateManager gameStateManager = new GameStateManager(players);
+       try{
+        gameStateManager.changeState("attacca");
+       } catch (Exception e) {
+           System.out.println("errore");
+         }
+        assertEquals("attacca", gameStateManager.getGameState().getNameState());
+        assertEquals(players, gameStateManager.getGameState().getTurno().getPlayerList());
     }
+    //test renforceState
     @Test
-    //reinforce state
-    void testReinforceState() {
+    void testRenforceState() {
         List <PlayerPlaceHolder> players = new ArrayList<>();
-        PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0,new Dice(6));
-        PlayerPlaceHolder p2 = new PlayerPlaceHolder("p2", "blue", true, 0, 0, 0,new Dice(6));
-        PlayerPlaceHolder p3 = new PlayerPlaceHolder("p3", "green", true, 0, 0, 0,new Dice(6));
-        PlayerPlaceHolder p4 = new PlayerPlaceHolder("p4", "yellow", true, 0, 0, 0,new Dice(6));
-        players.add(p1);
-        players.add(p2);
-        players.add(p3);
-        players.add(p4);
-        GameState renforceState = new RenforceState("RenforceState", new Turn(players));
-        assertEquals("RenforceState", renforceState.getNameState());
-        renforceState.sposta();
-        renforceState.attacca();
-        renforceState.rinforza();
+        players.add(new PlayerPlaceHolder("pippo", "rosso", true, 0, 0,0, new Dice(6)));
+        players.add(new PlayerPlaceHolder("pluto", "verde", true, 0, 0,0, new Dice(6)));
+       GameStateManager gameStateManager = new GameStateManager(players);
+       try{
+        gameStateManager.changeState("rinforza");
+       } catch (Exception e) {
+           System.out.println("errore");
+         }
+        assertEquals("rinforza", gameStateManager.getGameState().getNameState());
+        assertEquals(players, gameStateManager.getGameState().getTurno().getPlayerList());
     }
+
 }

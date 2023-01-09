@@ -9,25 +9,32 @@ import com.project.progettorisikorisikiamobackend.Turno.PlayerPlaceHolder;
 import com.project.progettorisikorisikiamobackend.Turno.Turn;
 import com.project.progettorisikorisikiamobackend.map.Map;
 
-import com.project.progettorisikorisikiamobackend.gameState.MoveState;
 
-public class GameStatus {
+
+public class GameStateManager {
     private GameState gameState;
     private List<PlayerPlaceHolder> players;
     
-    public GameStatus(List <PlayerPlaceHolder> players) {
+    public GameStateManager(List <PlayerPlaceHolder> players) {
        this.players = players;
         this.gameState = new StartState("StartState", new Turn(players), new Map("mappa"));
     }
-    public GameStatus() {
-        this.players = new ArrayList<>();
-        this.gameState = new StartState("StartState", new Turn(players), new Map("mappa"));
+    public GameStateManager(String nameState, List <PlayerPlaceHolder> players) {
+        this.players = players;
+         try {
+            this.gameState = changeState(nameState); 
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
     }
+    
     /**
      * @throws IOException
      * 
      */
-    public void changeState() throws IOException {
+    public GameState changeState() throws IOException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Inserisci azione: ");
         String command = scanner.nextLine();
@@ -45,6 +52,27 @@ public class GameStatus {
             System.out.println("comando non valido");
             break;
         }
+        scanner.close();
+        return this.gameState;
+    }
+        public GameState changeState(String command) throws IOException {
+           
+            switch (command) {
+            case "sposta":
+                setMoveState(command);
+                break;
+            case "attacca":
+                setAttackState(command);
+                break;
+            case "rinforza":
+                setReinforceState(command);
+                break;
+            default:
+                System.out.println("comando non valido");
+                break;
+            }
+            return this.gameState;
+        
         
         
 
