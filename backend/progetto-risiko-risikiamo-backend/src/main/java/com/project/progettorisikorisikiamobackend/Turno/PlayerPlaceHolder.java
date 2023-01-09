@@ -6,6 +6,7 @@ public class PlayerPlaceHolder implements iPlayerPlaceHolder {
    @Getter @Setter private String playerName;
     @Getter private String color;
     @Getter @Setter private int playerId;
+    @Getter  private int armies;
     @Getter private int Obiettivo;
     
     @Getter private int statoObiettivo;

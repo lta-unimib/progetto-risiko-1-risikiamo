@@ -16,7 +16,7 @@ public class Turn {
     //costruttore
     public Turn(List <PlayerPlaceHolder> playerList, Dice d,  int turnNumber){
         this.d = d;
-        setPlayerList(playerList);
+        this.playerList = playerList;
         this.turnNumber = turnNumber;
         this.currentPlayer = playerList.get(turnNumber);
         this.nextPlayer = playerList.get(turnNumber + 1);
@@ -69,7 +69,7 @@ public class Turn {
     public void playersInGame(List<PlayerPlaceHolder>playerList){
        List<PlayerPlaceHolder> playerListInGame = new ArrayList<>();
         for(PlayerPlaceHolder p : playerList){
-            if(!(p.defeated )){
+            if(!(p.defeated() )){
                 playerListInGame.add(p);
             }
             
@@ -85,7 +85,7 @@ public class Turn {
      * @param currentPlayer giocatore corrente
      */
     public void setCurrentPlayer(PlayerPlaceHolder currentPlayer){
-     if(currentPlayer.getIsIngame())
+     if(playerList.contains(currentPlayer))
             this.currentPlayer = currentPlayer;
         else if(nextPlayer != null)
             this.currentPlayer = playerList.get(getTurnNumber() + 1);
@@ -112,11 +112,11 @@ public class Turn {
      */
     public void goHeadTurn(){
         if(getTurnNumber() < playerList.size() - 1 ){
-            if(getCurrentPlayer().getIsIngame())
+            if(playerList.contains(currentPlayer))
                 setCurrentPlayer(playerList.get(turnNumber));
                 else
                     setCurrentPlayer(playerList.get(turnNumber + 1));
-                if(getNextPlayer().getIsIngame())          
+                if(playerList.contains(nextPlayer))        
                         setNextPlayer(playerList);  
                 
     }         

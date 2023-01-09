@@ -7,7 +7,7 @@ import com.project.progettorisikorisikiamobackend.Turno.*;
 
 import static org.junit.Assert.assertEquals;
 
-import java.beans.Transient;
+
 import java.util.*;
 
 class TestTurn {
@@ -15,91 +15,83 @@ class TestTurn {
     //controllo che il costruttore funzioni
     void testTurn() {
         List<PlayerPlaceHolder> playerList = new ArrayList<PlayerPlaceHolder>();
-        playerList.add(new PlayerPlaceHolder("pippo", "red", 1, 0, 0, 25));
-        playerList.add(new PlayerPlaceHolder("pluto", "blue", 2, 0, 0, 25));
-        playerList.add(new PlayerPlaceHolder("paperino", "green", 3, 0, 0, 25));
-        playerList.add(new PlayerPlaceHolder("topolino", "yellow", 4, 0, 0, 25));
-        Turn t = new Turn(playerList, new Dice(6), 0);
-        assertEquals(t.getPlayerList(), playerList);
-        assertEquals(t.getTurnNumber(), 0);
-        assertEquals(t.getCurrentPlayer(), playerList.get(0));
-        assertEquals(t.getNextPlayer(), playerList.get(1));
-        assertEquals(t.getD().getSides(), 6);
-    }
-    //controllo setPlayerOrder
-    @Test
-    void testSetPlayerOrder() {
-        List<PlayerPlaceHolder> playerList = new ArrayList<PlayerPlaceHolder>();
-        playerList.add(new PlayerPlaceHolder("pippo", "red", 1, 0, 0, 25));
-        playerList.add(new PlayerPlaceHolder("pluto", "blue", 2, 0, 0, 25));
-        playerList.add(new PlayerPlaceHolder("paperino", "green", 3, 0, 0, 25));
-        playerList.add(new PlayerPlaceHolder("topolino", "yellow", 4, 0, 0, 25));
+        PlayerPlaceHolder p1 = new PlayerPlaceHolder("pippo", "red", 1, 0, 1);
+        PlayerPlaceHolder p2 = new PlayerPlaceHolder("pluto", "blue", 1, 0, 2);
+        PlayerPlaceHolder p3 = new PlayerPlaceHolder("paperino", "green", 1, 0, 3);
+        playerList.add(p1);
+        playerList.add(p2);
+        playerList.add(p3);
         Turn t = new Turn(playerList);
-        List<PlayerPlaceHolder> playerList2 = new ArrayList<PlayerPlaceHolder>();
-        playerList2.add(new PlayerPlaceHolder("pippo", "red", 1, 0, 0, 25));
-        playerList2.add(new PlayerPlaceHolder("pluto", "blue", 2, 0, 0, 25));
-        playerList2.add(new PlayerPlaceHolder("paperino", "green", 3, 0, 0, 25));
-        playerList2.add(new PlayerPlaceHolder("topolino", "yellow", 4, 0, 0, 25));
-        assertEquals(t.setPlayerOrder(playerList2, new Dice(6)), playerList);
+        assertEquals(t.getPlayerList(), playerList);
+        assertEquals(1, t.getTurnNumber());
+        assertEquals(p1, t.getCurrentPlayer());
+        assertEquals(p2, t.getNextPlayer());
     }
-    //controllo che il metodo nextTurn funzioni
+  
     @Test
-    void testNextTurn() {
-        List<PlayerPlaceHolder> playerList = new ArrayList<PlayerPlaceHolder>();
-        playerList.add(new PlayerPlaceHolder("pippo", "red", 1, 0, 0, 25));
-        playerList.add(new PlayerPlaceHolder("pluto", "blue", 2, 0, 0, 25));
-        playerList.add(new PlayerPlaceHolder("paperino", "green", 3, 0, 0, 25));
-        playerList.add(new PlayerPlaceHolder("topolino", "yellow", 4, 0, 0, 25));
-        Turn t = new Turn(playerList, new Dice(6), 0);
-        t.nextTurn();
-        assertEquals(t.getTurnNumber(), 1);
-        assertEquals(t.getCurrentPlayer(), playerList.get(1));
-        assertEquals(t.getNextPlayer(), playerList.get(2));
-    }
-    //winningPlayer
-    @Test
-    void testWinningPlayer() {
-        List<PlayerPlaceHolder> playerList = new ArrayList<PlayerPlaceHolder>();
-        playerList.add(new PlayerPlaceHolder("pippo", "red", 1, 0, 0, 25));
-        playerList.add(new PlayerPlaceHolder("pluto", "blue", 2, 0, 0, 25));
-        playerList.add(new PlayerPlaceHolder("paperino", "green", 3, 0, 0, 25));
-        playerList.add(new PlayerPlaceHolder("topolino", "yellow", 4, 0, 0, 25));
-        Turn t = new Turn(playerList, new Dice(6), 0);
-        assertEquals(t.winningPlayer(), null);
-        playerList.get(0).setStatoObiettivo(1);
-        assertEquals(t.winningPlayer(), playerList.get(0));
-    }
-    //controllo players in game
-    @Test
+    //controllo playersInGame funzioni
     void testPlayersInGame() {
         List<PlayerPlaceHolder> playerList = new ArrayList<PlayerPlaceHolder>();
-        playerList.add(new PlayerPlaceHolder("pippo", "red", 1, 0, 0, 25));
-        playerList.add(new PlayerPlaceHolder("pluto", "blue", 2, 0, 0, 25));
-        playerList.add(new PlayerPlaceHolder("paperino", "green", 3, 0, 0, 25));
-        playerList.add(new PlayerPlaceHolder("topolino", "yellow", 4, 0, 0, 25));
-        Turn t = new Turn(playerList, new Dice(6), 0);
-        assertEquals(t.playersInGame(), 4);
-        playerList.get(0).setStatoObiettivo(1);
-        assertEquals(t.playersInGame(), 3);
+        PlayerPlaceHolder p1 = new PlayerPlaceHolder("pippo", "red", 1, 0, 1);
+        PlayerPlaceHolder p2 = new PlayerPlaceHolder("pluto", "blue", 1, 0, 2);
+        PlayerPlaceHolder p3 = new PlayerPlaceHolder("paperino", "green", 1, 0, 3);
+        playerList.add(p1);
+        playerList.add(p2);
+        playerList.add(p3);
+        Turn t = new Turn(playerList);
+        t.playersInGame(playerList);
+        assertEquals(3, t.getPlayerList().size());
     }
-    //controllo che il metodo nextPlayer funzioni
     @Test
-    void testNextPlayer() {
+    //controllo setCurrentPlayer funzioni
+    void testSetCurrentPlayer() {
         List<PlayerPlaceHolder> playerList = new ArrayList<PlayerPlaceHolder>();
-        playerList.add(new PlayerPlaceHolder("pippo", "red", 1, 0, 0, 25));
-        playerList.add(new PlayerPlaceHolder("pluto", "blue", 2, 0, 0, 25));
-        playerList.add(new PlayerPlaceHolder("paperino", "green", 3, 0, 0, 25));
-        playerList.add(new PlayerPlaceHolder("topolino", "yellow", 4, 0, 0, 25));
-        Turn t = new Turn(playerList, new Dice(6), 0);
-        t.nextPlayer();
-        assertEquals(t.getCurrentPlayer(), playerList.get(1));
-        assertEquals(t.getNextPlayer(), playerList.get(2));
-        t.nextPlayer();
-        assertEquals(t.getCurrentPlayer(), playerList.get(2));
-        assertEquals(t.getNextPlayer(), playerList.get(3));
-        t.nextPlayer();
-        assertEquals(t.getCurrentPlayer(), playerList.get(3));
-        assertEquals(t.getNextPlayer(), playerList.get(0));
+        PlayerPlaceHolder p1 = new PlayerPlaceHolder("pippo", "red", 1, 0, 1);
+        PlayerPlaceHolder p2 = new PlayerPlaceHolder("pluto", "blue", 1, 0, 2);
+        PlayerPlaceHolder p3 = new PlayerPlaceHolder("paperino", "green", 1, 0, 3);
+        playerList.add(p1);
+        playerList.add(p2);
+        playerList.add(p3);
+        Turn t = new Turn(playerList);
+        t.setCurrentPlayer(p3);
+        assertEquals(t.getCurrentPlayer(), p3);
     }
+    @Test
+    //controllo setNextPlayer funzioni
+    void testSetNextPlayer() {
+        List<PlayerPlaceHolder> playerList = new ArrayList<PlayerPlaceHolder>();
+        PlayerPlaceHolder p1 = new PlayerPlaceHolder("pippo", "red", 1, 0, 1);
+        PlayerPlaceHolder p2 = new PlayerPlaceHolder("pluto", "blue", 1, 0, 2);
+        PlayerPlaceHolder p3 = new PlayerPlaceHolder("paperino", "green", 1, 0, 3);
+        playerList.add(p1);
+        playerList.add(p2);
+        playerList.add(p3);
+        Turn t = new Turn(playerList);
+        t.setNextPlayer(playerList);
+        assertEquals(t.getNextPlayer(), p3);
+    }
+   @Test
+   //controllo winner funzioni
+    void testWinner() {
+         List<PlayerPlaceHolder> playerList = new ArrayList<PlayerPlaceHolder>();
+         PlayerPlaceHolder p1 = new PlayerPlaceHolder("pippo", "red", 1, 0, 1);
+         PlayerPlaceHolder p2 = new PlayerPlaceHolder("pluto", "blue", 1, 0, 2);
+         PlayerPlaceHolder p3 = new PlayerPlaceHolder("paperino", "green", 1, 0, 3);
+         playerList.add(p1);
+         playerList.add(p2);
+         playerList.add(p3);
+         Turn t = new Turn(playerList);
+         assertEquals(null, t.winner(playerList)) ;
+         t.getPlayerList().remove(t.getPlayerList().get(0));
+         t.getPlayerList().remove(t.getPlayerList().get(1));
+         PlayerPlaceHolder winner = t.winner(playerList);
+            assertEquals(p2, winner);
+    }
+    
+
+
+
+
+
 
 }
