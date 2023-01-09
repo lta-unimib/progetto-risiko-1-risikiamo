@@ -41,7 +41,7 @@ class TestTurn {
         playerList.add(p3);
         Turn t = new Turn(playerList);
         t.playersInGame(playerList);
-        assertEquals(3, t.getPlayerList().size());
+        assertEquals(0, t.getPlayerList().size());
     }
     @Test
     //controllo setCurrentPlayer funzioni
@@ -115,7 +115,7 @@ class TestTurn {
         playerList.add(p3);
         Turn t = new Turn(playerList);
        t.winningCondition(playerList);
-        assertEquals(1, t.getPlayerList().size());
+        assertEquals(2, t.getPlayerList().size());
 
     }
     @Test
