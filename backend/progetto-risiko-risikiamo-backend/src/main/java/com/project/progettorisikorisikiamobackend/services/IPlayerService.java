@@ -1,12 +1,8 @@
 package com.project.progettorisikorisikiamobackend.services;
 
-import com.project.progettorisikorisikiamobackend.services.mapper.dto.PlayerDto;
-
 public interface IPlayerService {
 
     // * put Indica il tipo di risposta (get, post, put, delete)
-
-    public void postAddPlayer(PlayerDto playerDto, String gameId);
 
     public void putTurn(String gameId, String playerId);
 

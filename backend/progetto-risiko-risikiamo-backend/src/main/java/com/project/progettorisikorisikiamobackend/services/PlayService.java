@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.progettorisikorisikiamobackend.services.mapper.IPlayerMapper;
-import com.project.progettorisikorisikiamobackend.services.mapper.dto.PlayerDto;
 
 @Service
 public class PlayService implements IPlayerService {
@@ -14,13 +13,6 @@ public class PlayService implements IPlayerService {
 
     @Autowired(required = false)
     private IPlayerMapper playerMapper;
-
-    @Override
-    public void postAddPlayer(PlayerDto playerDto, String gameId) {
-        gameService.getGame(gameId);
-        // TODO Add a player to a game
-
-    }
 
     @Override
     public void putTurn(String gameId, String playerId) {

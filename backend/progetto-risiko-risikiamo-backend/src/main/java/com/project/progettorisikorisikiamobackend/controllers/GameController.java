@@ -1,6 +1,7 @@
 package com.project.progettorisikorisikiamobackend.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.progettorisikorisikiamobackend.services.IGameService;
 import com.project.progettorisikorisikiamobackend.services.mapper.dto.GameDto;
+import com.project.progettorisikorisikiamobackend.services.mapper.dto.PlayerDto;
 
 import jakarta.validation.Valid;
 
@@ -25,10 +27,20 @@ public class GameController {
 
     @ResponseBody
     @GetMapping("/{gameId}/watch")
-    public ResponseEntity<String> getWatch(@PathVariable String id) {
+    public ResponseEntity<String> getWatch(@PathVariable String gameId) {
 
-        gameService.getWatch(id);
+        gameService.getWatch(gameId);
         return ResponseEntity.ok("Watching game");
+
+    }
+
+    @ResponseBody
+    @PostMapping("/{gameId}/addPlayer")
+    public ResponseEntity<Object> postAddPlayer(@Valid @RequestBody PlayerDto playerDto,
+            @PathVariable String gameId) {
+
+        gameService.postAddPlayer(playerDto, gameId);
+        return new ResponseEntity<>(HttpStatus.CREATED);
 
     }
 
