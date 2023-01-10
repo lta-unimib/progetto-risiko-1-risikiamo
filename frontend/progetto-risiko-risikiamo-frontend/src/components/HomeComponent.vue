@@ -193,7 +193,6 @@ export default {
                 this.selectedPaths[1].classList.add("AdjacentPath");
                 if (this.compareAdjacent(this.selectedPaths[0], this.selectedPaths[1])) {
                     this.openTradeWindow(this.selectedPaths[0], this.selectedPaths[1]);
-
                 } else {
                     this.impossibleTrade();
                     this.selectedPaths[0].classList.remove("pathFrom");
