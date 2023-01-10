@@ -71,5 +71,7 @@ public class PlayerPlaceHolder implements iPlayerPlaceHolder {
         return this.statoObiettivo;
     }
 
-    
+    public void attack(){}
+    public void moveArmies(){}
+    public void placeReinforcements(int armies){}
 }

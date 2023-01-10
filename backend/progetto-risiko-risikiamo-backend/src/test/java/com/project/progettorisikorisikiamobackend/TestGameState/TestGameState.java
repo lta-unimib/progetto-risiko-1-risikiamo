@@ -39,8 +39,8 @@ class TestGameState {
     @Test
     void testMoveState() {
         List <PlayerPlaceHolder> players = new ArrayList<>();
-        players.add(new PlayerPlaceHolder("pippo", "rosso", true, 0, 0,0, new Dice(6)));
-        players.add(new PlayerPlaceHolder("pluto", "verde", true, 0, 0,0, new Dice(6)));
+        players.add(new PlayerPlaceHolder("pippo", "rosso", true, 0, 0,0));
+        players.add(new PlayerPlaceHolder("pluto", "verde", true, 0, 0,0));
        GameStateManager gameStateManager = new GameStateManager(players);
        try{
         gameStateManager.changeState("sposta");
@@ -54,8 +54,8 @@ class TestGameState {
     @Test
     void testAttackState() {
         List <PlayerPlaceHolder> players = new ArrayList<>();
-        players.add(new PlayerPlaceHolder("pippo", "rosso", true, 0, 0,0, new Dice(6)));
-        players.add(new PlayerPlaceHolder("pluto", "verde", true, 0, 0,0, new Dice(6)));
+        players.add(new PlayerPlaceHolder("pippo", "rosso", true, 0, 0,0));
+        players.add(new PlayerPlaceHolder("pluto", "verde", true, 0, 0,0));
        GameStateManager gameStateManager = new GameStateManager(players);
        try{
         gameStateManager.changeState("attacca");
@@ -69,8 +69,8 @@ class TestGameState {
     @Test
     void testRenforceState() {
         List <PlayerPlaceHolder> players = new ArrayList<>();
-        players.add(new PlayerPlaceHolder("pippo", "rosso", true, 0, 0,0, new Dice(6)));
-        players.add(new PlayerPlaceHolder("pluto", "verde", true, 0, 0,0, new Dice(6)));
+        players.add(new PlayerPlaceHolder("pippo", "rosso", true, 0, 0,0));
+        players.add(new PlayerPlaceHolder("pluto", "verde", true, 0, 0,0));
        GameStateManager gameStateManager = new GameStateManager(players);
        try{
         gameStateManager.changeState("rinforza");
