@@ -16,10 +16,10 @@ class TestTurn {
     // test Constructor
     public void testConstructor() {
         List<PlayerPlaceHolder> playerList = new ArrayList<PlayerPlaceHolder>();
-        PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0,new Dice(6));
-        PlayerPlaceHolder p2 = new PlayerPlaceHolder("p2", "blue", true, 0, 0, 0,new Dice(6));
-        PlayerPlaceHolder p3 = new PlayerPlaceHolder("p3", "green", true, 0, 0, 0,new Dice(6));
-        PlayerPlaceHolder p4 = new PlayerPlaceHolder("p4", "yellow", true, 0, 0, 0,new Dice(6));
+        PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0);
+        PlayerPlaceHolder p2 = new PlayerPlaceHolder("p2", "blue", true, 0, 0, 0);
+        PlayerPlaceHolder p3 = new PlayerPlaceHolder("p3", "green", true, 0, 0, 0);
+        PlayerPlaceHolder p4 = new PlayerPlaceHolder("p4", "yellow", true, 0, 0, 0);
         playerList.add(p1);
         playerList.add(p2);
         playerList.add(p3);
@@ -34,10 +34,10 @@ class TestTurn {
     @Test
     public void testSetTurnNumber() {
         List<PlayerPlaceHolder> playerList = new ArrayList<PlayerPlaceHolder>();
-        PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0,new Dice(6));
-        PlayerPlaceHolder p2 = new PlayerPlaceHolder("p2", "blue", true, 0, 0, 0,new Dice(6));
-        PlayerPlaceHolder p3 = new PlayerPlaceHolder("p3", "green", true, 0, 0, 0,new Dice(6));
-        PlayerPlaceHolder p4 = new PlayerPlaceHolder("p4", "yellow", true, 0, 0, 0,new Dice(6));
+        PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0);
+        PlayerPlaceHolder p2 = new PlayerPlaceHolder("p2", "blue", true, 0, 0, 0);
+        PlayerPlaceHolder p3 = new PlayerPlaceHolder("p3", "green", true, 0, 0, 0);
+        PlayerPlaceHolder p4 = new PlayerPlaceHolder("p4", "yellow", true, 0, 0, 0);
         playerList.add(p1);
         playerList.add(p2);
         playerList.add(p3);
@@ -85,10 +85,10 @@ class TestTurn {
     @Test
     public void testSetDice() {
         List<PlayerPlaceHolder> playerList = new ArrayList<PlayerPlaceHolder>();
-        PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0,new Dice(6));
-        PlayerPlaceHolder p2 = new PlayerPlaceHolder("p2", "blue", true, 0, 0, 0,new Dice(6));
-        PlayerPlaceHolder p3 = new PlayerPlaceHolder("p3", "green", true, 0, 0, 0,new Dice(6));
-        PlayerPlaceHolder p4 = new PlayerPlaceHolder("p4", "yellow", true, 0, 0, 0,new Dice(6));
+        PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0);
+        PlayerPlaceHolder p2 = new PlayerPlaceHolder("p2", "blue", true, 0, 0, 0);
+        PlayerPlaceHolder p3 = new PlayerPlaceHolder("p3", "green", true, 0, 0, 0);
+        PlayerPlaceHolder p4 = new PlayerPlaceHolder("p4", "yellow", true, 0, 0, 0);
         playerList.add(p1);
         playerList.add(p2);
         playerList.add(p3);
@@ -112,20 +112,20 @@ class TestTurn {
     @Test
     public void testSetPlayerList() {
         List<PlayerPlaceHolder> playerList = new ArrayList<PlayerPlaceHolder>();
-        PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0,new Dice(6));
-        PlayerPlaceHolder p2 = new PlayerPlaceHolder("p2", "blue", true, 0, 0, 0,new Dice(6));
-        PlayerPlaceHolder p3 = new PlayerPlaceHolder("p3", "green", true, 0, 0, 0,new Dice(6));
-        PlayerPlaceHolder p4 = new PlayerPlaceHolder("p4", "yellow", true, 0, 0, 0,new Dice(6));
+        PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0);
+        PlayerPlaceHolder p2 = new PlayerPlaceHolder("p2", "blue", true, 0, 0, 0);
+        PlayerPlaceHolder p3 = new PlayerPlaceHolder("p3", "green", true, 0, 0, 0);
+        PlayerPlaceHolder p4 = new PlayerPlaceHolder("p4", "yellow", true, 0, 0, 0);
         playerList.add(p1);
         playerList.add(p2);
         playerList.add(p3);
         playerList.add(p4);
         Turn t = new Turn(playerList);
         List<PlayerPlaceHolder> playerList2 = new ArrayList<PlayerPlaceHolder>();
-        PlayerPlaceHolder p5 = new PlayerPlaceHolder("p5", "red", true, 0, 0, 0,new Dice(6));
-        PlayerPlaceHolder p6 = new PlayerPlaceHolder("p6", "blue", true, 0, 0, 0,new Dice(6));
-        PlayerPlaceHolder p7 = new PlayerPlaceHolder("p7", "green", true, 0, 0, 0,new Dice(6));
-        PlayerPlaceHolder p8 = new PlayerPlaceHolder("p8", "yellow", true, 0, 0, 0,new Dice(6));
+        PlayerPlaceHolder p5 = new PlayerPlaceHolder("p5", "red", true, 0, 0, 0);
+        PlayerPlaceHolder p6 = new PlayerPlaceHolder("p6", "blue", true, 0, 0, 0);
+        PlayerPlaceHolder p7 = new PlayerPlaceHolder("p7", "green", true, 0, 0, 0);
+        PlayerPlaceHolder p8 = new PlayerPlaceHolder("p8", "yellow", true, 0, 0, 0);
         playerList2.add(p5);
         playerList2.add(p6);
         playerList2.add(p7);
@@ -138,10 +138,10 @@ class TestTurn {
     @Test
     public void testSetCurrentPlayer() {
         List<PlayerPlaceHolder> playerList = new ArrayList<PlayerPlaceHolder>();
-        PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0,new Dice(6));
-        PlayerPlaceHolder p2 = new PlayerPlaceHolder("p2", "blue", true, 0, 0, 0,new Dice(6));
-        PlayerPlaceHolder p3 = new PlayerPlaceHolder("p3", "green", true, 0, 0, 0,new Dice(6));
-        PlayerPlaceHolder p4 = new PlayerPlaceHolder("p4", "yellow", true, 0, 0, 0,new Dice(6));
+        PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0);
+        PlayerPlaceHolder p2 = new PlayerPlaceHolder("p2", "blue", true, 0, 0, 0);
+        PlayerPlaceHolder p3 = new PlayerPlaceHolder("p3", "green", true, 0, 0, 0);
+        PlayerPlaceHolder p4 = new PlayerPlaceHolder("p4", "yellow", true, 0, 0, 0);
         playerList.add(p1);
         playerList.add(p2);
         playerList.add(p3);
@@ -161,10 +161,10 @@ class TestTurn {
     @Test
     public void testSetPlayerOrder() {
         List<PlayerPlaceHolder> playerList = new ArrayList<PlayerPlaceHolder>();
-        PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0,new Dice(6));
-        PlayerPlaceHolder p2 = new PlayerPlaceHolder("p2", "blue", true, 0, 0, 0,new Dice(6));
-        PlayerPlaceHolder p3 = new PlayerPlaceHolder("p3", "green", true, 0, 0, 0,new Dice(6));
-        PlayerPlaceHolder p4 = new PlayerPlaceHolder("p4", "yellow", true, 0, 0, 0,new Dice(6));
+        PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0);
+        PlayerPlaceHolder p2 = new PlayerPlaceHolder("p2", "blue", true, 0, 0, 0);
+        PlayerPlaceHolder p3 = new PlayerPlaceHolder("p3", "green", true, 0, 0, 0);
+        PlayerPlaceHolder p4 = new PlayerPlaceHolder("p4", "yellow", true, 0, 0, 0);
         playerList.add(p1);
         playerList.add(p2);
         playerList.add(p3);
@@ -179,10 +179,10 @@ class TestTurn {
     @Test
     public void testGetDice() {
         List<PlayerPlaceHolder> playerList = new ArrayList<PlayerPlaceHolder>();
-        PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0,new Dice(6));
-        PlayerPlaceHolder p2 = new PlayerPlaceHolder("p2", "blue", true, 0, 0, 0,new Dice(6));
-        PlayerPlaceHolder p3 = new PlayerPlaceHolder("p3", "green", true, 0, 0, 0,new Dice(6));
-        PlayerPlaceHolder p4 = new PlayerPlaceHolder("p4", "yellow", true, 0, 0, 0,new Dice(6));
+        PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0);
+        PlayerPlaceHolder p2 = new PlayerPlaceHolder("p2", "blue", true, 0, 0, 0);
+        PlayerPlaceHolder p3 = new PlayerPlaceHolder("p3", "green", true, 0, 0, 0);
+        PlayerPlaceHolder p4 = new PlayerPlaceHolder("p4", "yellow", true, 0, 0, 0);
         playerList.add(p1);
         playerList.add(p2);
         playerList.add(p3);
@@ -197,10 +197,10 @@ class TestTurn {
     @Test
     public void testPlayersInGame() {
         List<PlayerPlaceHolder> playerList = new ArrayList<PlayerPlaceHolder>();
-        PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0,new Dice(6));
-        PlayerPlaceHolder p2 = new PlayerPlaceHolder("p2", "blue", true, 0, 0, 0,new Dice(6));
-        PlayerPlaceHolder p3 = new PlayerPlaceHolder("p3", "green", true, 0, 0, 0,new Dice(6));
-        PlayerPlaceHolder p4 = new PlayerPlaceHolder("p4", "yellow", true, 0, 0, 0,new Dice(6));
+        PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0);
+        PlayerPlaceHolder p2 = new PlayerPlaceHolder("p2", "blue", true, 0, 0, 0);
+        PlayerPlaceHolder p3 = new PlayerPlaceHolder("p3", "green", true, 0, 0, 0);
+        PlayerPlaceHolder p4 = new PlayerPlaceHolder("p4", "yellow", true, 0, 0, 0);
         playerList.add(p1);
         playerList.add(p2);
         playerList.add(p3);
@@ -227,11 +227,10 @@ class TestTurn {
     public void testWinningPlayer() {
 
         List<PlayerPlaceHolder> playerList = new ArrayList<PlayerPlaceHolder>();
-        PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0,new Dice(6));
-        PlayerPlaceHolder p2 = new PlayerPlaceHolder("p2", "blue", true, 0, 0, 0,new Dice(6));
-        PlayerPlaceHolder p3 = new PlayerPlaceHolder("p3", "green", true, 0, 0, 0,new Dice(6));
-        PlayerPlaceHolder p4 = new PlayerPlaceHolder("p4", "yellow", true, 0, 0, 0,new Dice(6));
-        playerList.add(p1);
+        PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0);
+        PlayerPlaceHolder p2 = new PlayerPlaceHolder("p2", "blue", true, 0, 0, 0);
+        PlayerPlaceHolder p3 = new PlayerPlaceHolder("p3", "green", true, 0, 0, 0);
+        PlayerPlaceHolder p4 = new PlayerPlaceHolder("p4", "yellow", true, 0, 0, 0);
         playerList.add(p1);
         playerList.add(p2);
         playerList.add(p3);
@@ -255,11 +254,10 @@ class TestTurn {
     @Test
     public void testNextPlayer() {
         List<PlayerPlaceHolder> playerList = new ArrayList<PlayerPlaceHolder>();
-        PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0,new Dice(6));
-        PlayerPlaceHolder p2 = new PlayerPlaceHolder("p2", "blue", true, 0, 0, 0,new Dice(6));
-        PlayerPlaceHolder p3 = new PlayerPlaceHolder("p3", "green", true, 0, 0, 0,new Dice(6));
-        PlayerPlaceHolder p4 = new PlayerPlaceHolder("p4", "yellow", true, 0, 0, 0,new Dice(6));
-        playerList.add(p1);
+        PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0);
+        PlayerPlaceHolder p2 = new PlayerPlaceHolder("p2", "blue", true, 0, 0, 0);
+        PlayerPlaceHolder p3 = new PlayerPlaceHolder("p3", "green", true, 0, 0, 0);
+        PlayerPlaceHolder p4 = new PlayerPlaceHolder("p4", "yellow", true, 0, 0, 0);
         playerList.add(p1);
         playerList.add(p2);
         playerList.add(p3);
@@ -280,10 +278,10 @@ class TestTurn {
     @Test
     public void testGoHeadTurn() {
         List<PlayerPlaceHolder> playerList = new ArrayList<PlayerPlaceHolder>();
-        PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0,new Dice(6));
-        PlayerPlaceHolder p2 = new PlayerPlaceHolder("p2", "blue", true, 0, 0, 0,new Dice(6));
-        PlayerPlaceHolder p3 = new PlayerPlaceHolder("p3", "green", true, 0, 0, 0,new Dice(6));
-        PlayerPlaceHolder p4 = new PlayerPlaceHolder("p4", "yellow", true, 0, 0, 0,new Dice(6));
+        PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0);
+        PlayerPlaceHolder p2 = new PlayerPlaceHolder("p2", "blue", true, 0, 0, 0);
+        PlayerPlaceHolder p3 = new PlayerPlaceHolder("p3", "green", true, 0, 0, 0);
+        PlayerPlaceHolder p4 = new PlayerPlaceHolder("p4", "yellow", true, 0, 0, 0);
         playerList.add(p1);
         playerList.add(p2);
         playerList.add(p3);
@@ -303,7 +301,7 @@ class TestTurn {
     // constructor PlayerPlaceHolder
     @Test
     public void testConstructor1() {
-        PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0,new Dice(6));
+        PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0);
         assertEquals("p1", p1.getPlayerName());
         assertEquals("red", p1.getColor());
         assertEquals(true, p1.getIsIngame());
@@ -326,10 +324,10 @@ class TestTurn {
     @Test
     public void testConstructor2() {
         List<PlayerPlaceHolder> playerList = new ArrayList<PlayerPlaceHolder>();
-        PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0,new Dice(6));
-        PlayerPlaceHolder p2 = new PlayerPlaceHolder("p2", "blue", true, 0, 0, 0,new Dice(6));
-        PlayerPlaceHolder p3 = new PlayerPlaceHolder("p3", "green", true, 0, 0, 0,new Dice(6));
-        PlayerPlaceHolder p4 = new PlayerPlaceHolder("p4", "yellow", true, 0, 0, 0,new Dice(6));
+        PlayerPlaceHolder p1 = new PlayerPlaceHolder("p1", "red", true, 0, 0, 0);
+        PlayerPlaceHolder p2 = new PlayerPlaceHolder("p2", "blue", true, 0, 0, 0);
+        PlayerPlaceHolder p3 = new PlayerPlaceHolder("p3", "green", true, 0, 0, 0);
+        PlayerPlaceHolder p4 = new PlayerPlaceHolder("p4", "yellow", true, 0, 0, 0);
         playerList.add(p1);
         playerList.add(p2);
         playerList.add(p3);

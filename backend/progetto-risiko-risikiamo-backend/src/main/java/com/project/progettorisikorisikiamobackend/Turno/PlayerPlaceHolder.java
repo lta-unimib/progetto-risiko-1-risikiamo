@@ -1,5 +1,4 @@
 package com.project.progettorisikorisikiamobackend.Turno;
-import java.util.*;
 
 public class PlayerPlaceHolder implements iPlayerPlaceHolder {
     private String playerName;
@@ -8,17 +7,14 @@ public class PlayerPlaceHolder implements iPlayerPlaceHolder {
     private boolean isIngame;
     private int Obiettivo;
     private int statoObiettivo;
-
-    private Dice d;
 //costruttore
-    public PlayerPlaceHolder(String playerName, String color,  boolean isIngame, int Obiettivo, int statoObiettivo, int playerId, Dice d) {
+    public PlayerPlaceHolder(String playerName, String color,  boolean isIngame, int Obiettivo, int statoObiettivo, int playerId) {
         setColor(color);
         setPlayerName(playerName);
        setPlayerId(playerId);
         setIsIngame(isIngame);
         setObiettivo(Obiettivo);
         setStatoObiettivo(statoObiettivo);
-        setD(d);
         
 
     }
@@ -30,10 +26,7 @@ public class PlayerPlaceHolder implements iPlayerPlaceHolder {
         setIsIngame(false);
         setObiettivo(0);
         setStatoObiettivo(0);
-       
-        this.d = new Dice(6);
     }
-
 
 //getters e setters
     public void setPlayerName(String name) {
@@ -77,33 +70,6 @@ public class PlayerPlaceHolder implements iPlayerPlaceHolder {
     public int getStatoObiettivo() {
         return this.statoObiettivo;
     }
-    public Dice getD() {
-        return this.d;
-    }
-    public void setD(Dice d) {
-        this.d = d;
-    }
-    /**
-     * gestisce il posizionamento delle truppe iniziali
-     * @param armies numero di truppe da posizionare
-     */
-    public void placeReinforcements(int armies) {
-       
-    
-    }
-    /**
-     * gestisce l'attacco tra due territori
-     * non so ancora come gestire l'altro territorio
-     */
-    public void attack() {
-     
-        
-    }
-    
-    public void moveArmies() {
-        
-    }
-    //getters e setters per la lista di territori
-   
+
     
 }
