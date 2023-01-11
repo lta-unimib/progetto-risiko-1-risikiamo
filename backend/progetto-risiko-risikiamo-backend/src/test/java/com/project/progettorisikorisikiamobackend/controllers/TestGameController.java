@@ -11,7 +11,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.progettorisikorisikiamobackend.services.IGameService;
-import com.project.progettorisikorisikiamobackend.services.mapper.IPlayerMapper;
 import com.project.progettorisikorisikiamobackend.services.mapper.dto.PlayerDto;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -40,17 +39,10 @@ public class TestGameController {
         verify(gameService, times(1)).getWatch(gameId);
     }
 
-    /*
-     * @Test
-     * public void testPostAddPlayer() throws Exception {
-     * String gameId = "12345";
-     * IPlayerMapper playerMapper = new PlayerDto();
-     * mockMvc.perform(post("/api/v1/game/" + gameId + "/addPlayer")
-     * .contentType(MediaType.APPLICATION_JSON)
-     * .content(new ObjectMapper().writeValueAsString(playerDto)))
-     * .andExpect(status().isCreated());
-     * verify(gameService, times(1)).postAddPlayer(playerDto, gameId);
-     * }
-     */
+    @Test
+    public void testPostAddPlayer() throws Exception {
+        String gameId = "12345";
+
+    }
 
 }

@@ -23,6 +23,7 @@ public class Map {
 
     @NonNull
     private final String mapId;
+
     private HashMap<String, Continent> continets;
 
     public Map(String mapId) {
