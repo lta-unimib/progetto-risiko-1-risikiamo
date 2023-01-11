@@ -1,22 +1,19 @@
-
 package com.project.progettorisikorisikiamobackend.Turno;
 import java.util.*;
-import lombok.Getter;
-
+import lombok.*;
 
 
 public class Turn {
-  @Getter private List <PlayerPlaceHolder> playerList;
-  @Getter private PlayerPlaceHolder currentPlayer;
-  @Getter private PlayerPlaceHolder nextPlayer;
-  @Getter private int turnNumber;
-  @Getter  private Dice d = new Dice(6);
-     
+    private @Getter @Setter List <Player> playerList;
+   private  @Getter Player currentPlayer;
+   private @Getter  Player nextPlayer;
+   private @Getter @Setter int turnNumber;
+    private @Getter Dice d;
     
     //costruttore
-    public Turn(List <PlayerPlaceHolder> playerList, Dice d,  int turnNumber){
-        this.d = d;
-        this.playerList = playerList;
+    public Turn(List <Player> playerList,  int turnNumber){
+        this.d = new Dice(6);
+        setPlayerList(playerList);
         this.turnNumber = turnNumber;
         this.currentPlayer = playerList.get(turnNumber);
         this.nextPlayer = playerList.get(turnNumber + 1);
@@ -24,7 +21,7 @@ public class Turn {
         
         
     }
-    public Turn(List <PlayerPlaceHolder> playerList){
+    public Turn(List <Player> playerList){
         this.playerList = playerList;
         this.d = new Dice(6);
         this.currentPlayer = playerList.get(0); 
@@ -39,7 +36,7 @@ public class Turn {
      * @param d dado
      * @return lista dei giocatori ordinata in base al lancio del dado
      */
-    public List<PlayerPlaceHolder> setPlayerOrder(List<PlayerPlaceHolder> playerList, Dice d){
+    public List<Player> setPlayerOrder(List<Player> playerList, Dice d){
         int rollMax = 0;
        
      for(int i = 0; i < playerList.size(); i++){
@@ -53,31 +50,25 @@ public class Turn {
      }
      
         
-     playerList.sort(Comparator.comparing(PlayerPlaceHolder::getPlayerId).reversed());
+     playerList.sort(Comparator.comparing(Player::getPlayerId).reversed());
      return playerList;
     }
     
   
    
+  
     
-   
-    /**
-     * ritorna la lista dei giocatori in gioco
-     * @param playerList lista dei giocatori
-     * @return lista dei giocatori in gioco
-     */
-    public void playersInGame(List<PlayerPlaceHolder>playerList){
-       List<PlayerPlaceHolder> playerListInGame = new ArrayList<>();
-        for(PlayerPlaceHolder p : playerList){
-            if((p.defeated())){
-                playerListInGame.add(p);
-            }
-        
-            
-        }
-        this.playerList = playerListInGame;
+   /**
+    * rimouve giocatori dal gioco se si sono arresi,
+    * @param defeatedPlayer
+    */
+ public void setdefeatedPlayer(Player defeatedPlayer){
+        this.playerList.remove(defeatedPlayer);
     }
-    
+  
+   
+  
+ 
     
 
     //setta il giocatore corrente
@@ -85,7 +76,7 @@ public class Turn {
      * 
      * @param currentPlayer giocatore corrente
      */
-    public void setCurrentPlayer(PlayerPlaceHolder currentPlayer){
+    public void setCurrentPlayer(Player currentPlayer){
      if(playerList.contains(currentPlayer))
             this.currentPlayer = currentPlayer;
         else if(nextPlayer != null)
@@ -98,7 +89,7 @@ public class Turn {
      * 
      * @param playerList lista dei giocatori
      */
-    public void setNextPlayer(List <PlayerPlaceHolder> playerList){
+    public void setNextPlayer(List <Player> playerList){
         if(getTurnNumber() > playerList.size() - 1)
             this.nextPlayer = playerList.get(0);
         else if(getTurnNumber() < playerList.size() - 1)
@@ -117,7 +108,7 @@ public class Turn {
                 setCurrentPlayer(playerList.get(turnNumber));
                 else
                     setCurrentPlayer(playerList.get(turnNumber + 1));
-                if(playerList.contains(nextPlayer))        
+                if(playerList.contains(nextPlayer))    
                         setNextPlayer(playerList);  
                 
     }         
@@ -135,7 +126,6 @@ public class Turn {
         
         
     }
-
    
     //ritorna il vincitore
     /**
@@ -143,8 +133,8 @@ public class Turn {
      * @param playerListInGame lista dei giocatori in gioco
      * @return vincitore
      */
-    public PlayerPlaceHolder winner(List<PlayerPlaceHolder> playerListInGame){
-        if(playerList.size() == 1)
+    public Player winner(List<Player> playerListInGame){
+        if(playerListInGame.size() == 1)
             return playerList.get(0);
         else
             return null;
@@ -154,15 +144,15 @@ public class Turn {
      * 
      * @param playerList lista dei giocatori
      */
-    public void winningCondition(List<PlayerPlaceHolder> playerList){
-    PlayerPlaceHolder p1 = nextPlayer;
-        for(PlayerPlaceHolder p : playerList){
+    public void winningCondition(List<Player> playerList){
+    Player p1 = nextPlayer;
+        for(Player p : playerList){
         
-            
-                    if(p.getObiettivo() == p.getStatoObiettivo() &&p1 != p && playerList.contains(p1))
-                        p1.defeated();
-        
-            playersInGame(playerList);
+            if(p.getObiettivo() == p.getStatoObiettivo()
+                && p1 != p){
+                
+                    setdefeatedPlayer(p1);
+            } 
             
                 
             
