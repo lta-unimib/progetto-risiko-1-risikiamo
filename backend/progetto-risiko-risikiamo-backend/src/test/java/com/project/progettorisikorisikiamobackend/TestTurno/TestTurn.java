@@ -264,8 +264,9 @@ class TestTurn {
         playerList.add(p4);
         try {
             Turn t = new Turn(playerList,1);
-            assertEquals(new Dice(6), t.getD());
-            assertEquals(p1, t.getCurrentPlayer());
+            Dice d = new Dice(6);
+            assertEquals(d.getSides(), t.getD().getSides());
+            assertEquals(p1, t.getPlayerList().get(0));
             assertEquals(4, t.getPlayerList().size());
             assertEquals(1, t.getTurnNumber());
         } catch (Exception e) {

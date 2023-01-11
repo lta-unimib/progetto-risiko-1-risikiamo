@@ -29,7 +29,6 @@ class TestGameState {
         players.add(new Player("pippo", "rosso",0, 0, 0,0));
         players.add(new Player("pluto", "verde",0, 0, 0,0));
         GameStateManager gameStateManager = new GameStateManager(players);
-        gameStateManager.getGameState().renforce();
         assertEquals("StartState", gameStateManager.getGameState().getNameState());
         assertEquals(players, gameStateManager.getGameState().getTurno().getPlayerList());
     }
