@@ -7,7 +7,7 @@ public  abstract class Deck {
     Deck(Map< ? , String> cards){
         this.cards = cards;
     }
-    public abstract void description(Object obj);
+    
     public abstract Object draw();
    
 }
