@@ -1,7 +1,6 @@
 package com.project.progettorisikorisikiamobackend.obiettivi;
 
-import com.project.progettorisikorisikiamobackend.map.*;
-import com.project.progettorisikorisikiamobackend.player.Player;
+import com.project.progettorisikorisikiamobackend.map.PlayerPlaceholder;
 
 import lombok.Getter;
 
@@ -21,7 +20,7 @@ public class ConquestContinent implements Objective {
     }
 
     @Override
-    public boolean isCompleted(Player player) {
+    public boolean isCompleted(PlayerPlaceholder player) {
         
             if (player == null || continent.getOwner() == null) {
                 return false;

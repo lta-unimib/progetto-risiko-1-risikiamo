@@ -1,11 +1,10 @@
 package com.project.progettorisikorisikiamobackend.obiettivi;
 
-
-import com.project.progettorisikorisikiamobackend.player.Player;
+import com.project.progettorisikorisikiamobackend.map.PlayerPlaceholder;
 
 public interface Objective {
     public String getObjDescription();
-    public boolean isCompleted(Player player);
+    public boolean isCompleted(PlayerPlaceholder player);
 
     
 }

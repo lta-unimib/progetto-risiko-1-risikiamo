@@ -1,13 +1,13 @@
 package com.project.progettorisikorisikiamobackend.TestObiettivi;
+
 import com.project.progettorisikorisikiamobackend.obiettivi.*;
-import com.project.progettorisikorisikiamobackend.player.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import com.project.progettorisikorisikiamobackend.map.*;
 import org.junit.jupiter.api.Test;
 
 public class TestConquestContinent {
-    //Test obiettivo conquestContinent
+    // Test obiettivo conquestContinent
     @Test
     public void testConquestContinent() {
         Map map = new Map("map1");
@@ -16,16 +16,16 @@ public class TestConquestContinent {
             Territory territory = new Territory("territory" + i);
             continent.addTerritory(territory);
         }
-        map.addContinet(continent, "America");
-        Player player = new Player("player1", null, null, 0);
-        for (Territory territory : continent.getTerritories().values()) {   
+        map.addContinent(continent, "America");
+        PlayerPlaceholder player = new PlayerPlaceholder("player1");
+        for (Territory territory : continent.getTerritories().values()) {
             territory.setOwner(player);
         }
         Objective obiettivo = new ConquestContinent(continent);
         assertTrue(obiettivo.isCompleted(player));
         assertEquals("Conquista il continente continent1", obiettivo.getObjDescription());
-        Player player2 = new Player("player2", null, obiettivo, 0);
+        PlayerPlaceholder player2 = new PlayerPlaceholder("player2");
         continent.getTerritories().get("territory1").setOwner(player2);
-        assertTrue (!obiettivo.isCompleted(player));
+        assertTrue(!obiettivo.isCompleted(player));
     }
 }

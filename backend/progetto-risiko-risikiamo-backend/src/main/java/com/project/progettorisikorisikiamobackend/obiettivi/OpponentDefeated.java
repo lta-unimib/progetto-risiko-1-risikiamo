@@ -1,13 +1,13 @@
 package com.project.progettorisikorisikiamobackend.obiettivi;
-import com.project.progettorisikorisikiamobackend.player.Player;
+import com.project.progettorisikorisikiamobackend.map.PlayerPlaceholder;
 
 import lombok.Getter;
 
 @Getter
 public class OpponentDefeated implements Objective {
-    private Player opponent;
+    private PlayerPlaceholder opponent;
 
-    public OpponentDefeated(Player opponent) {
+    public OpponentDefeated(PlayerPlaceholder opponent) {
         this.opponent = opponent;
 
     }
@@ -18,12 +18,12 @@ public class OpponentDefeated implements Objective {
     }
 
     @Override
-    public boolean isCompleted(Player player) throws NullPointerException{
+    public boolean isCompleted(PlayerPlaceholder player) throws NullPointerException{
         
         if (player == null) {
             return false;
         }
-        // TODO: implementare metodo isDefeatedBy(Player player)
+        // TODO: implementare metodo isDefeatedBy(PlayerPlaceholder player)
         return true;
     }
     

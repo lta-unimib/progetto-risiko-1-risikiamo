@@ -1,5 +1,4 @@
 package com.project.progettorisikorisikiamobackend.map;
-import com.project.progettorisikorisikiamobackend.player.*;
 
 import java.util.ArrayList;
 
@@ -21,9 +20,9 @@ public class Territory {
     private final String name;
     private int army;
     private ArrayList<Territory> neighbors;
-    private Player owner;
+    private PlayerPlaceholder owner;
 
-    private Territory(String name, int army, ArrayList<Territory> neighbors, Player owner) {
+    private Territory(String name, int army, ArrayList<Territory> neighbors, PlayerPlaceholder owner) {
 
         this.name = name;
         this.army = army;
@@ -43,7 +42,7 @@ public class Territory {
      * @throws IllegalArgumentException if owner is null
      * @throws IllegalArgumentException if territory have an owner and army > 0
      */
-    public void setOwner(Player owner) throws IllegalArgumentException {
+    public void setOwner(PlayerPlaceholder owner) throws IllegalArgumentException {
         if (owner == null) {
             throw new IllegalArgumentException("Owner can't be null");
         }

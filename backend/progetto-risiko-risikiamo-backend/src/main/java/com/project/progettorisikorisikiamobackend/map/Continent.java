@@ -1,5 +1,4 @@
 package com.project.progettorisikorisikiamobackend.map;
-import com.project.progettorisikorisikiamobackend.player.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -9,7 +8,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 /**
- * Continet class
+ * Continent class
  * 
  * @author - Mauro Zorzin
  * @version 1.0
@@ -35,11 +34,11 @@ public class Continent {
      * @aurhor Mauro Zozin
      * @return the owner of the continent, null if the continent is not owned
      */
-    public Player getOwner() {
+    public PlayerPlaceholder getOwner() {
         if (territories.isEmpty()) {
             return null;
         }
-        Player owner = territories.values().iterator().next().getOwner();
+        PlayerPlaceholder owner = territories.values().iterator().next().getOwner();
         if (owner == null) {
             return null;
         }
@@ -59,7 +58,7 @@ public class Continent {
      * @return true if the continent is owned by the player, false otherwise
      * 
      */
-    public boolean isOwnedBy(Player player) {
+    public boolean isOwnedBy(PlayerPlaceholder player) {
         return getOwner() == player;
     }
 
@@ -81,7 +80,7 @@ public class Continent {
      * @return true if the territory is in the continent, false otherwise
      * 
      */
-    public boolean isTerritoryInContinet(Territory territory) {
+    public boolean isTerritoryInContinent(Territory territory) {
         if (territory == null)
             return false;
         return territories.containsValue(territory);
@@ -95,7 +94,7 @@ public class Continent {
      * @return true if the territory is in the continent, false otherwise
      * 
      */
-    public boolean isTerritoryInContinet(String territoryId) {
+    public boolean isTerritoryInContinent(String territoryId) {
         if (territoryId == null || territoryId.isEmpty() || territoryId.isBlank())
             return false;
         return territories.containsKey(territoryId);
@@ -207,7 +206,7 @@ public class Continent {
      * @return the number of territories owned by the player
      * 
      */
-    public int getNumberOfTerritories(Player player) {
+    public int getNumberOfTerritories(PlayerPlaceholder player) {
         if (player == null) {
             return 0;
         }
@@ -222,7 +221,7 @@ public class Continent {
      * @return the territories owned by the player
      * 
      */
-    public Collection<Territory> getTerritories(Player player) {
+    public Collection<Territory> getTerritories(PlayerPlaceholder player) {
         if (player == null) {
             return new ArrayList<>();
         }
@@ -245,7 +244,7 @@ public class Continent {
      * @throws IllegalArgumentException if the territory is already owned by someone
      * 
      */
-    public void setOwner(Player owner) throws IllegalArgumentException {
+    public void setOwner(PlayerPlaceholder owner) throws IllegalArgumentException {
         for (Territory territory : territories.values()) {
             territory.setOwner(owner);
         }
