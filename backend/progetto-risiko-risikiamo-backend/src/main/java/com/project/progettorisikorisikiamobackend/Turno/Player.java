@@ -2,16 +2,16 @@ package com.project.progettorisikorisikiamobackend.Turno;
 import lombok.Getter;
 import lombok.Setter;
 
-public class PlayerPlaceHolder implements iPlayerPlaceHolder {
+public class Player  {
    @Getter @Setter private String playerName;
     @Getter private String color;
     @Getter @Setter private int playerId;
-    @Getter  private int armies;
+    @Getter  @Setter private int armies;
     @Getter private int Obiettivo;
     
     @Getter private int statoObiettivo;
 //costruttore
-    public PlayerPlaceHolder(String playerName, String color, int Obiettivo, int statoObiettivo, int playerId, int armies) {
+    public Player(String playerName, String color, int Obiettivo, int statoObiettivo, int playerId, int armies) {
         this.playerName = playerName;
         this.color = color;
         this.Obiettivo = Obiettivo;
@@ -23,7 +23,7 @@ public class PlayerPlaceHolder implements iPlayerPlaceHolder {
 
     }
     //costruttore vuoto
-    public PlayerPlaceHolder() {
+    public Player() {
         this.playerName = "";
         this.color = "";
         this.Obiettivo = 0;
@@ -32,13 +32,10 @@ public class PlayerPlaceHolder implements iPlayerPlaceHolder {
         this.playerId = 0;
     
     }
-public boolean defeated(){
-    boolean defeated = false;
-    if(armies == 0){
-        defeated = true;
-    }
-    
-    return defeated;
-    
-}
+
+/**utility methods */
+    public void attack(){}
+    public void moveArmies(){}
+    public void placeReinforcements(int armies){}
+    public void drawCard(){}
 }
