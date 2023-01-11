@@ -1,24 +1,22 @@
 //package
 package com.project.progettorisikorisikiamobackend.TestGameState;
-import org.junit.jupiter.api.Test;
-import com.project.progettorisikorisikiamobackend.Turno.*;
-import com.project.progettorisikorisikiamobackend.gameState.*;
-import com.project.progettorisikorisikiamobackend.map.Map;
-
-
-
-
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+
+import com.project.progettorisikorisikiamobackend.Turno.Player;
+import com.project.progettorisikorisikiamobackend.gameState.GameStateManager;
 
 class TestGameState {
     //test gameStateManager
     @Test
     void testGameStateManager() {
-        List <PlayerPlaceHolder> players = new ArrayList<>();
-        players.add(new PlayerPlaceHolder("pippo", "rosso", true, 0, 0,0, new Dice(6)));
-        players.add(new PlayerPlaceHolder("pluto", "verde", true, 0, 0,0, new Dice(6)));
+        List <Player> players = new ArrayList<>();
+        players.add(new Player("pippo", "rosso",0, 0, 0,0));
+        players.add(new Player("pluto", "verde",0, 0, 0,0));
         GameStateManager gameStateManager = new GameStateManager(players);
         assertEquals("StartState", gameStateManager.getGameState().getNameState());
         assertEquals(players, gameStateManager.getGameState().getTurno().getPlayerList());
@@ -27,20 +25,20 @@ class TestGameState {
     //test startState
     @Test
     void testStartState() {
-        List <PlayerPlaceHolder> players = new ArrayList<>();
-        players.add(new PlayerPlaceHolder("pippo", "rosso", true, 0, 0,0, new Dice(6)));
-        players.add(new PlayerPlaceHolder("pluto", "verde", true, 0, 0,0, new Dice(6)));
+        List <Player> players = new ArrayList<>();
+        players.add(new Player("pippo", "rosso",0, 0, 0,0));
+        players.add(new Player("pluto", "verde",0, 0, 0,0));
         GameStateManager gameStateManager = new GameStateManager(players);
-        gameStateManager.getGameState().rinforza();
+        gameStateManager.getGameState().renforce();
         assertEquals("StartState", gameStateManager.getGameState().getNameState());
         assertEquals(players, gameStateManager.getGameState().getTurno().getPlayerList());
     }
     //test moveState
     @Test
-    void testMoveState() {
-        List <PlayerPlaceHolder> players = new ArrayList<>();
-        players.add(new PlayerPlaceHolder("pippo", "rosso", true, 0, 0,0));
-        players.add(new PlayerPlaceHolder("pluto", "verde", true, 0, 0,0));
+    void testchangeState() {
+        List <Player> players = new ArrayList<>();
+        players.add(new Player("pippo", "rosso",0, 0, 0,0));
+        players.add(new Player("pluto", "verde",0, 0, 0,0));
        GameStateManager gameStateManager = new GameStateManager(players);
        try{
         gameStateManager.changeState("sposta");
@@ -49,36 +47,35 @@ class TestGameState {
          }
         assertEquals("sposta", gameStateManager.getGameState().getNameState());
         assertEquals(players, gameStateManager.getGameState().getTurno().getPlayerList());
-    }
-    //test attackState
-    @Test
-    void testAttackState() {
-        List <PlayerPlaceHolder> players = new ArrayList<>();
-        players.add(new PlayerPlaceHolder("pippo", "rosso", true, 0, 0,0));
-        players.add(new PlayerPlaceHolder("pluto", "verde", true, 0, 0,0));
-       GameStateManager gameStateManager = new GameStateManager(players);
-       try{
-        gameStateManager.changeState("attacca");
-       } catch (Exception e) {
-           System.out.println("errore");
-         }
-        assertEquals("attacca", gameStateManager.getGameState().getNameState());
-        assertEquals(players, gameStateManager.getGameState().getTurno().getPlayerList());
-    }
-    //test renforceState
-    @Test
-    void testRenforceState() {
-        List <PlayerPlaceHolder> players = new ArrayList<>();
-        players.add(new PlayerPlaceHolder("pippo", "rosso", true, 0, 0,0));
-        players.add(new PlayerPlaceHolder("pluto", "verde", true, 0, 0,0));
-       GameStateManager gameStateManager = new GameStateManager(players);
-       try{
-        gameStateManager.changeState("rinforza");
-       } catch (Exception e) {
-           System.out.println("errore");
-         }
-        assertEquals("rinforza", gameStateManager.getGameState().getNameState());
-        assertEquals(players, gameStateManager.getGameState().getTurno().getPlayerList());
+        try{
+            gameStateManager.changeState("rinforza");
+           } catch (Exception e) {
+               System.out.println("errore");
+             }
+            assertEquals("rinforza", gameStateManager.getGameState().getNameState());
+            assertEquals(players, gameStateManager.getGameState().getTurno().getPlayerList());
+            try{
+                gameStateManager.changeState("attacca");
+               } catch (Exception e) {
+                   System.out.println("errore");
+                 }
+                assertEquals("attacca", gameStateManager.getGameState().getNameState());
+                assertEquals(players, gameStateManager.getGameState().getTurno().getPlayerList());
+                try{
+                    gameStateManager.changeState("fineTurno");
+                   } catch (Exception e) {
+                       System.out.println("errore");
+                     }
+                    assertEquals("fineTurno", gameStateManager.getGameState().getNameState());
+                    assertEquals(players, gameStateManager.getGameState().getTurno().getPlayerList());
+                    try{
+                        gameStateManager.changeState("ciao");
+                       } catch (Exception e) {
+                           System.out.println("errore");
+                         }
+                        assertEquals("fineTurno", gameStateManager.getGameState().getNameState());
+                        assertEquals(players, gameStateManager.getGameState().getTurno().getPlayerList());
     }
 
+    
 }

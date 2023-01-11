@@ -8,33 +8,34 @@ import com.project.progettorisikorisikiamobackend.map.*;
 
 public class StartState extends GameState {
 Map map;
-    public StartState(String name, Turn turno, Map map) {
-        super(name, turno);
+    public StartState(GameStateManager gameStateManager,String name, Turn turno, Map map) {
+        super(gameStateManager,name, turno);
         this.map = map;
         
     }
-public void sposta() {
+public void move() {
     // TODO Auto-generated method stub
     System.out.println("non è possibile effettuare spostamenti in questo stato");
 }
-public void attacca() {
+public void attack() {
     // TODO Auto-generated method stub
     System.out.println("non è possibile effettuare attacchi in questo stato");
 }
-public void rinforza() {
-    List <PlayerPlaceholder> players = new ArrayList<>();
-    for (PlayerPlaceholder p : players){
-    map.getTerritories(p);
+public void renforce() {
+   
+    List <Player> players = super.getTurno().getPlayerList();
+    for (Player p : players){
+        while (p.getArmies() > 0){
+            p.placeReinforcements(3);
+            p.setArmies(p.getArmies() - 3);
+        }
+   
+    
     }
-}
-@Override
-public String getNameState() {
-  return super.getNameState();
-}
+    super.getGameStateManager().changeState("attacca");
 
- @Override
-public void setNameState(String nameState) {
-    super.setNameState(nameState);
 }
-
+public void endTurn() {
+   super.getGameStateManager().changeState("fineTurno");
+}
 }

@@ -4,30 +4,31 @@ import com.project.progettorisikorisikiamobackend.Turno.*;
 
 public class AttackState extends GameState{
 
-    public AttackState(String name, Turn turno) {
-        super(name, turno);
+    public AttackState(GameStateManager ganGameStateManager, String name, Turn turno) {
+        super(ganGameStateManager,  name, turno);
         
     }
-public void sposta() {
-    
-    System.out.println("non è possibile effettuare spostamenti in questo stato");
+public void move() {
+   super.getGameStateManager().changeState("sposta");
     
 
 }
-public void attacca() {
+public void attack() {
     // TODO Auto-generated method stub
    super.getTurno().getCurrentPlayer().attack();
 
 }
-public void rinforza() {
+public void renforce() {
     // TODO Auto-generated method stub
     System.out.println("non è possibile effettuare rinforzi in questo stato");
    
 }
-@Override
-public String getNameState() {
-  return super.getNameState();
+public void endTurn() {
+  super.getGameStateManager().changeState("fineTurno");
+   
 }
+
+
 
 
 

@@ -5,7 +5,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
-import com.project.progettorisikorisikiamobackend.Turno.PlayerPlaceHolder;
+import com.project.progettorisikorisikiamobackend.Turno.Player;
+import com.project.progettorisikorisikiamobackend.Turno.Player;
 import com.project.progettorisikorisikiamobackend.Turno.Turn;
 import com.project.progettorisikorisikiamobackend.map.Map;
 
@@ -13,20 +14,16 @@ import com.project.progettorisikorisikiamobackend.map.Map;
 
 public class GameStateManager {
     private GameState gameState;
-    private List<PlayerPlaceHolder> players;
+    private List<Player> players;
     
-    public GameStateManager(List <PlayerPlaceHolder> players) {
+    public GameStateManager(List <Player> players) {
        this.players = players;
-        this.gameState = new StartState("StartState", new Turn(players), new Map("mappa"));
+        this.gameState = new StartState(this, "StartState", new Turn(players), new Map("mappa"));
     }
-    public GameStateManager(String nameState, List <PlayerPlaceHolder> players) {
+    public GameStateManager(String nameState, List <Player> players) {
         this.players = players;
-         try {
             this.gameState = changeState(nameState); 
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        
 
     }
     
@@ -34,28 +31,8 @@ public class GameStateManager {
      * @throws IOException
      * 
      */
-    public GameState changeState() throws IOException {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Inserisci azione: ");
-        String command = scanner.nextLine();
-        switch (command) {
-        case "sposta":
-            setMoveState(command);
-            break;
-        case "attacca":
-            setAttackState(command);
-            break;
-        case "rinforza":
-            setReinforceState(command);
-            break;
-        default:
-            System.out.println("comando non valido");
-            break;
-        }
-        scanner.close();
-        return this.gameState;
-    }
-        public GameState changeState(String command) throws IOException {
+    
+        public GameState changeState(String command) {
            
             switch (command) {
             case "sposta":
@@ -66,6 +43,9 @@ public class GameStateManager {
                 break;
             case "rinforza":
                 setReinforceState(command);
+                break;
+            case "fineTurno":
+                setEndTurnState(command);
                 break;
             default:
                 System.out.println("comando non valido");
@@ -87,13 +67,16 @@ public class GameStateManager {
         this.gameState = gameState;
     }
     public void setMoveState(String nameState) {
-        this.gameState = new MoveState(nameState, getGameState().getTurno());
+        this.gameState = new MoveState(this, nameState, getGameState().getTurno());
     }
     public void setAttackState(String nameState) {
-        this.gameState = new AttackState(nameState, getGameState().getTurno());
+        this.gameState = new AttackState(this, nameState, getGameState().getTurno());
     }
     public void setReinforceState(String nameState) {
-        this.gameState = new RenforceState(nameState, getGameState().getTurno());
+        this.gameState = new RenforceState(this, nameState, getGameState().getTurno());
+    }
+    public void setEndTurnState(String nameState) {
+        this.gameState = new EndTurnState(this, nameState, getGameState().getTurno());
     }
     
 }

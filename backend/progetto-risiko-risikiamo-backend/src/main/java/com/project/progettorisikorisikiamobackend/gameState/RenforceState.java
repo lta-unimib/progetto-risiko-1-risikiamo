@@ -4,41 +4,39 @@ import com.project.progettorisikorisikiamobackend.Turno.*;
 import java.util.Scanner;
 
 public class RenforceState extends GameState{
-   public RenforceState(String name, Turn turno) {
-        super(name, turno);
+   public RenforceState(GameStateManager gameStateManager, String name, Turn turno) {
+        super(gameStateManager, name, turno);
         // TODO Auto-generated constructor stub
     }
      
-    public void sposta() {
+    public void move() {
     
-    System.out.println("non è possibile effettuare spostamenti in questo stato");
+    super.getGameStateManager().changeState("sposta");
         
     }
-    public void attacca() {
+    public void attack() {
         // TODO Auto-generated method stub
-        System.out.println("non è possibile effettuare attacchi in questo stato");
+        super.getGameStateManager().changeState("attacca");
     }
-    public void rinforza() {
+    public void renforce() {
         Scanner input = new Scanner(System.in);
         System.out.println("Quanti rinforzi vuoi posizionare?");
         int rinforzi = input.nextInt();
+        
+       
         // TODO Auto-generated method stub
         super.getTurno().getCurrentPlayer().placeReinforcements(rinforzi);
     input.close();    
     }
-
-    @Override
-    public String getNameState() {
-      return super.getNameState();
+    public void endTurn() {
+        super.getGameStateManager().changeState("fineTurno");
     }
+
+    
   
    
     
-    @Override
-    public void setNameState(String nameState) {
-       super.setNameState(nameState);
-        
-    }
+   
 
   
     

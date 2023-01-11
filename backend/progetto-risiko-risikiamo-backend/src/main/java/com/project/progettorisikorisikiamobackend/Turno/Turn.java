@@ -1,18 +1,18 @@
 package com.project.progettorisikorisikiamobackend.Turno;
 import java.util.*;
-
+import lombok.*;
 
 
 public class Turn {
-   private List <PlayerPlaceHolder> playerList;
-    private PlayerPlaceHolder currentPlayer;
-    private PlayerPlaceHolder nextPlayer;
-    private int turnNumber;
-     private Dice d = new Dice(6);
+    private @Getter @Setter List <Player> playerList;
+   private  @Getter Player currentPlayer;
+   private @Getter  Player nextPlayer;
+   private @Getter @Setter int turnNumber;
+    private @Getter Dice d;
     
     //costruttore
-    public Turn(List <PlayerPlaceHolder> playerList, Dice d,  int turnNumber){
-        this.d = d;
+    public Turn(List <Player> playerList,  int turnNumber){
+        this.d = new Dice(6);
         setPlayerList(playerList);
         this.turnNumber = turnNumber;
         this.currentPlayer = playerList.get(turnNumber);
@@ -21,7 +21,7 @@ public class Turn {
         
         
     }
-    public Turn(List <PlayerPlaceHolder> playerList){
+    public Turn(List <Player> playerList){
         this.playerList = playerList;
         this.d = new Dice(6);
         this.currentPlayer = playerList.get(0); 
@@ -36,7 +36,7 @@ public class Turn {
      * @param d dado
      * @return lista dei giocatori ordinata in base al lancio del dado
      */
-    public List<PlayerPlaceHolder> setPlayerOrder(List<PlayerPlaceHolder> playerList, Dice d){
+    public List<Player> setPlayerOrder(List<Player> playerList, Dice d){
         int rollMax = 0;
        
      for(int i = 0; i < playerList.size(); i++){
@@ -50,97 +50,34 @@ public class Turn {
      }
      
         
-     playerList.sort(Comparator.comparing(PlayerPlaceHolder::getPlayerId).reversed());
+     playerList.sort(Comparator.comparing(Player::getPlayerId).reversed());
      return playerList;
     }
     
-    /**
-     * ritorna il dado
-     * @return d
-     */
-     
-    public Dice getDice(){
-        return this.d;
-    }
-    //get Dice sides
-    /**
-     * ritorna il numero di facce del dado
-     * @return d.getSides()
-     */
-    public int getDiceSides(){
-        return this.d.getSides();
-    }
-    public void setPlayerList(List <PlayerPlaceHolder> playerList){
-        this.playerList = playerList;
-    }
-    public List <PlayerPlaceHolder> getPlayerList(){
-        return this.playerList;
-    }
-    
+  
    
-    /**
-     * ritorna la lista dei giocatori in gioco
-     * @param playerList lista dei giocatori
-     * @return lista dei giocatori in gioco
-     */
-    public List <PlayerPlaceHolder> playersInGame(List<PlayerPlaceHolder>playerList){
-       List<PlayerPlaceHolder> playerListInGame = new ArrayList<>();
-        for(PlayerPlaceHolder p : playerList){
-            if(p.getIsIngame()){
-                playerListInGame.add(p);
-            }
-        }
-        return playerListInGame;
+  
+    
+   /**
+    * rimouve giocatori dal gioco se si sono arresi,
+    * @param defeatedPlayer
+    */
+ public void setdefeatedPlayer(Player defeatedPlayer){
+        this.playerList.remove(defeatedPlayer);
     }
-    //ritorna il giocatore corrente
-    /**
-     * 
-     * @return currentPlayer
-     */
-    public PlayerPlaceHolder getCurrentPlayer(){
-        return this.currentPlayer;
-    }
-    //ritorna il giocatore successivo
-    /**
-     * 
-     * @return nextPlayer
-     */
-    public PlayerPlaceHolder getNextPlayer(){
-        return this.nextPlayer;
-    }
-    //ritorna il numero del turno
-    /**
-     * 
-     * @return turnNumber
-     */
-    public int getTurnNumber(){
-        return this.turnNumber;
-    }
-    //setta il numero del turno
-    /**
-     * 
-     * @param turnNumber numero del turno
-     */
-    public void setTurnNumber(int turnNumber){
-        this.turnNumber = turnNumber;
-    }
-    //setta il dado
-    /**
-     * 
-     * @param d dado
-     */
-    public void setDice(int sides){
-        Dice d = new Dice(sides);
-        this.d = d;
-    }
+  
+   
+  
+ 
+    
 
     //setta il giocatore corrente
     /**
      * 
      * @param currentPlayer giocatore corrente
      */
-    public void setCurrentPlayer(PlayerPlaceHolder currentPlayer){
-     if(currentPlayer.getIsIngame())
+    public void setCurrentPlayer(Player currentPlayer){
+     if(playerList.contains(currentPlayer))
             this.currentPlayer = currentPlayer;
         else if(nextPlayer != null)
             this.currentPlayer = playerList.get(getTurnNumber() + 1);
@@ -152,7 +89,7 @@ public class Turn {
      * 
      * @param playerList lista dei giocatori
      */
-    public void setNextPlayer(List <PlayerPlaceHolder> playerList){
+    public void setNextPlayer(List <Player> playerList){
         if(getTurnNumber() > playerList.size() - 1)
             this.nextPlayer = playerList.get(0);
         else if(getTurnNumber() < playerList.size() - 1)
@@ -167,11 +104,11 @@ public class Turn {
      */
     public void goHeadTurn(){
         if(getTurnNumber() < playerList.size() - 1 ){
-            if(getCurrentPlayer().getIsIngame())
+            if(playerList.contains(currentPlayer))
                 setCurrentPlayer(playerList.get(turnNumber));
                 else
                     setCurrentPlayer(playerList.get(turnNumber + 1));
-                if(getNextPlayer().getIsIngame())          
+                if(playerList.contains(nextPlayer))    
                         setNextPlayer(playerList);  
                 
     }         
@@ -189,21 +126,14 @@ public class Turn {
         
         
     }
-    //set Dice
-    /**
-     * 
-     * @param d dado
-     */
-    public void setDice(Dice d){
-        this.d = d;
-    }
+   
     //ritorna il vincitore
     /**
      * 
      * @param playerListInGame lista dei giocatori in gioco
      * @return vincitore
      */
-    public PlayerPlaceHolder winner(List<PlayerPlaceHolder> playerListInGame){
+    public Player winner(List<Player> playerListInGame){
         if(playerListInGame.size() == 1)
             return playerList.get(0);
         else
@@ -214,13 +144,14 @@ public class Turn {
      * 
      * @param playerList lista dei giocatori
      */
-    public void winningCondition(List<PlayerPlaceHolder> playerList){
-    PlayerPlaceHolder p1 = nextPlayer;
-        for(PlayerPlaceHolder p : playerList){
+    public void winningCondition(List<Player> playerList){
+    Player p1 = nextPlayer;
+        for(Player p : playerList){
         
-            if(p.getObiettivo() == p.getStatoObiettivo()){
-                if(p1 != p)
-                    p1.setIsIngame(false);
+            if(p.getObiettivo() == p.getStatoObiettivo()
+                && p1 != p){
+                
+                    setdefeatedPlayer(p1);
             } 
             
                 
