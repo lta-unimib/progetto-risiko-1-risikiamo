@@ -24,25 +24,15 @@ public class ContinentDto {
 
     @NotBlank
     @NonNull
-    private List<List<String>> territory;
+    private List<String> territory;
 
     public Continent toContinent() {
 
         Continent continent = new Continent(name, bonus);
 
-        HashMap<Territory, List<String>> t = new HashMap<>();
-
         for (int i = 0; i < this.territory.size(); i++) {
-            t.put(new Territory(this.territory.get(i).get(0)), this.territory.get(i));
-        }
-        for (Territory territoryResult : t.keySet()) {
-            List<String> list = t.get(territoryResult);
-            int i;
-            for (i = 1; i < list.size(); i++) {
-                t.keySet().stream().filter(territory1 -> territory1.getName().equals(list.get(i)))
-                        .forEach(territory1 -> territoryResult.addNeighbor(territory1));
-            }
-            continent.addTerritory(territoryResult);
+            Territory territoryResult = new Territory(this.territory.get(i));
+            continent.addTerritory(territoryResult, territoryResult.getName());
         }
 
         return continent;

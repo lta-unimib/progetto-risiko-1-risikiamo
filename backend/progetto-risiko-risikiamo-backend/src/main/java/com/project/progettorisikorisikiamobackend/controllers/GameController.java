@@ -53,7 +53,14 @@ public class GameController {
     @ResponseStatus(HttpStatus.CREATED)
     public Game postCreate(@RequestBody GameDto gameDto) {
 
-        return gameService.postCreate(gameDto);
+        try {
+            return gameService.postCreate(gameDto);
+        } catch (Exception e) {
+
+            // Handler Error required
+            return null;
+        }
+
     }
 
     @PutMapping("/{gameId}/start")

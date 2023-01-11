@@ -38,11 +38,4 @@ public class TestGameController {
                 .andExpect(content().string("Watching game"));
         verify(gameService, times(1)).getWatch(gameId);
     }
-
-    @Test
-    public void testPostAddPlayer() throws Exception {
-        String gameId = "12345";
-
-    }
-
 }
