@@ -23,64 +23,63 @@ public class Map {
 
     @NonNull
     private final String mapId;
-
-    private HashMap<String, Continent> continets;
+    private HashMap<String, Continent> continents;
 
     public Map(String mapId) {
         this.mapId = mapId;
-        continets = new HashMap<>();
+        continents = new HashMap<>();
     }
 
     /**
-     * Add a continet to the map
+     * Add a continent to the map
      * 
-     * @param continet   the continet to add
-     * @param continetId the id of the continet
-     * @throws IllegalArgumentException if the continet is already in the map
-     * @throws IllegalArgumentException if the continet id is already in the map
-     * @throws IllegalArgumentException if the continet is null
-     * @throws IllegalArgumentException if the continet id is null
+     * @param continent   the continent to add
+     * @param continentId the id of the continent
+     * @throws IllegalArgumentException if the continent is already in the map
+     * @throws IllegalArgumentException if the continent id is already in the map
+     * @throws IllegalArgumentException if the continent is null
+     * @throws IllegalArgumentException if the continent id is null
      * @author Mauro Zorzin
      */
-    public void addContinet(Continent continet, String continetId) throws IllegalArgumentException {
-        if (isContinetInMap(continetId)) {
-            throw new IllegalArgumentException("Continet already in the map");
+    public void addContinent(Continent continent, String continentId) throws IllegalArgumentException {
+        if (isContinentInMap(continentId)) {
+            throw new IllegalArgumentException("Continent already in the map");
         }
-        if (isContinetInMap(continet)) {
-            throw new IllegalArgumentException("Continet already in the map");
-        }
-
-        if (continet == null) {
-            throw new IllegalArgumentException("Continet id can't be null");
+        if (isContinentInMap(continent)) {
+            throw new IllegalArgumentException("Continent already in the map");
         }
 
-        if (continetId.isEmpty() || continetId.isBlank()) {
-            throw new IllegalArgumentException("Continet id can't be null");
+        if (continent == null) {
+            throw new IllegalArgumentException("Continent id can't be null");
         }
 
-        continets.put(continetId, continet);
+        if (continentId.isEmpty() || continentId.isBlank()) {
+            throw new IllegalArgumentException("Continent id can't be null");
+        }
+
+        continents.put(continentId, continent);
     }
 
     /**
-     * Check if the continet is in the map
+     * Check if the continent is in the map
      * 
-     * @param continet the continet to check
-     * @return true if the continet is in the map, false otherwise
+     * @param continent the continent to check
+     * @return true if the continent is in the map, false otherwise
      * @author Mauro Zorzin
      */
-    public boolean isContinetInMap(Continent continet) {
-        return continets.containsValue(continet);
+    public boolean isContinentInMap(Continent continent) {
+        return continents.containsValue(continent);
     }
 
     /**
-     * Check if the continet is in the map
+     * Check if the continent is in the map
      * 
-     * @param continetId the id of the continet to check
-     * @return true if the continet is in the map, false otherwise
+     * @param continentId the id of the continent to check
+     * @return true if the continent is in the map, false otherwise
      * @author Mauro Zorzin
      */
-    public boolean isContinetInMap(String continetId) {
-        return continets.containsKey(continetId);
+    public boolean isContinentInMap(String continentId) {
+        return continents.containsKey(continentId);
     }
 
     /**
@@ -91,8 +90,8 @@ public class Map {
      * @author Mauro Zorzin
      */
     public boolean isTerritoryInMap(Territory territory) {
-        for (Continent continet : continets.values()) {
-            if (continet.isTerritoryInContinet(territory)) {
+        for (Continent continent : continents.values()) {
+            if (continent.isTerritoryInContinent(territory)) {
                 return true;
             }
         }
@@ -107,8 +106,8 @@ public class Map {
      * @author Mauro Zorzin
      */
     public boolean isTerritoryInMap(String territoryId) {
-        for (Continent continet : continets.values()) {
-            if (continet.isTerritoryInContinet(territoryId)) {
+        for (Continent continent : continents.values()) {
+            if (continent.isTerritoryInContinent(territoryId)) {
                 return true;
             }
         }
@@ -116,14 +115,14 @@ public class Map {
     }
 
     /**
-     * Get the continet from the map
+     * Get the continent from the map
      * 
-     * @param continetId the id of the continet to get
-     * @return the continet, null if the continet is not in the map
+     * @param continentId the id of the continent to get
+     * @return the continent, null if the continent is not in the map
      * @author Mauro Zorzin
      */
-    public Continent getContinet(String continetId) {
-        return continets.get(continetId);
+    public Continent getContinent(String continentId) {
+        return continents.get(continentId);
     }
 
     /**
@@ -134,30 +133,30 @@ public class Map {
      * @author Mauro Zorzin
      */
     public Territory getTerritory(String territoryId) {
-        for (Continent continet : continets.values()) {
-            if (continet.isTerritoryInContinet(territoryId)) {
-                return continet.getTerritory(territoryId);
+        for (Continent continent : continents.values()) {
+            if (continent.isTerritoryInContinent(territoryId)) {
+                return continent.getTerritory(territoryId);
             }
         }
         return null;
     }
 
     /**
-     * Remove the continet from the map
+     * Remove the continent from the map
      * 
-     * @param continetId the id of the continet to remove
+     * @param continentId the id of the continent to remove
      */
-    public void removeContinet(String continetId) {
-        continets.remove(continetId);
+    public void removeContinent(String continentId) {
+        continents.remove(continentId);
     }
 
     /**
-     * Remove the continet from the map
+     * Remove the continent from the map
      * 
-     * @param continet the continet to remove
+     * @param continent the continent to remove
      */
-    public void removeContinet(Continent continet) {
-        continets.values().remove(continet);
+    public void removeContinent(Continent continent) {
+        continents.values().remove(continent);
     }
 
     /**
@@ -170,13 +169,13 @@ public class Map {
     public int getNumberOfContinent(PlayerPlaceholder player) {
         if (player == null)
             return 0;
-        int ownedContinets = 0;
-        for (Continent continet : continets.values()) {
-            if (continet.isOwnedBy(player)) {
-                ownedContinets++;
+        int ownedContinents = 0;
+        for (Continent continent : continents.values()) {
+            if (continent.isOwnedBy(player)) {
+                ownedContinents++;
             }
         }
-        return ownedContinets;
+        return ownedContinents;
     }
 
     /**
@@ -190,8 +189,8 @@ public class Map {
         if (player == null)
             return 0;
         int ownedTerritories = 0;
-        for (Continent continet : continets.values()) {
-            ownedTerritories += continet.getNumberOfTerritories(player);
+        for (Continent continent : continents.values()) {
+            ownedTerritories += continent.getNumberOfTerritories(player);
         }
         return ownedTerritories;
     }
@@ -208,8 +207,8 @@ public class Map {
             return new ArrayList<>();
 
         Collection<Territory> territories = new ArrayList<>();
-        for (Continent continet : continets.values()) {
-            territories.addAll(continet.getTerritories(player));
+        for (Continent continent : continents.values()) {
+            territories.addAll(continent.getTerritories(player));
         }
         return territories;
     }
@@ -223,16 +222,16 @@ public class Map {
      * @author Mauro Zorzin
      */
     public Collection<Continent> getContinents(PlayerPlaceholder player) throws IllegalArgumentException {
-        Collection<Continent> continents = new ArrayList<>();
+        Collection<Continent> continentsTemp = new ArrayList<>();
         if (player == null)
             throw new IllegalArgumentException("Player can't be null");
 
-        for (Continent continet : continets.values()) {
-            if (continet.isOwnedBy(player)) {
-                continents.add(continet);
+        for (Continent continent : this.continents.values()) {
+            if (continent.isOwnedBy(player)) {
+                continentsTemp.add(continent);
             }
         }
-        return continents;
+        return continentsTemp;
     }
 
     /**
@@ -243,7 +242,7 @@ public class Map {
      * @author Mauro Zorzin
      */
     public Collection<Continent> getContinents() {
-        return continets.values();
+        return continents.values();
     }
 
 }
