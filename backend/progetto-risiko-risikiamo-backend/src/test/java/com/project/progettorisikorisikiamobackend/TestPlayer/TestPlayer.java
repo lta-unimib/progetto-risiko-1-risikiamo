@@ -1,8 +1,8 @@
 package com.project.progettorisikorisikiamobackend.TestPlayer;
-import com.project.progettorisikorisikiamobackend.obiettivi.*;
 import com.project.progettorisikorisikiamobackend.player.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,8 +39,12 @@ public class TestPlayer {
         t.get(2).addNeighbor(t.get(1));
         t.get(3).addNeighbor(t.get(4));
         t.get(4).addNeighbor(t.get(3));
-        p1.attack(t.get(0), t.get(3), 2);
-        assertTrue(t.get(0).getArmy()<=5 || t.get(3).getArmy()<=3);
+        p1.attack(t.get(0), t.get(1), 2);
+        assertTrue(t.get(0).getArmy()<=5 || t.get(1).getArmy()<=3);
+        assertThrowsExactly(IllegalArgumentException.class, () -> p1.attack(t.get(0), t.get(1), 6));
+        assertThrowsExactly(IllegalArgumentException.class, () -> p1.attack(t.get(0), t.get(3), 2));
+        assertThrowsExactly(IllegalArgumentException.class, () -> p1.attack(t.get(0), t.get(2), 2));
+        assertThrowsExactly(IllegalArgumentException.class, () -> p1.attack(t.get(0), t.get(1), 0));
     }
     //Test: move() metodo sposta eserciti da un territorio ad un altro
     @Test
@@ -72,6 +76,8 @@ public class TestPlayer {
         t.get(4).addNeighbor(t.get(3));
         p1.move(t.get(0), t.get(2), 2);
         assertTrue(t.get(0).getArmy()==3 || t.get(2).getArmy()==4);
+        assertThrowsExactly(IllegalArgumentException.class, () -> p1.move(t.get(0), t.get(3), 2));
+        assertThrowsExactly(IllegalArgumentException.class, () -> p1.move(t.get(0), t.get(1), 0));
     }
     //Test: reinforce() metodo rafforza un territorio
     @Test
@@ -105,6 +111,8 @@ public class TestPlayer {
         assertEquals(7, t.get(0).getArmy());
         p2.reinforce(t.get(1), 2);
         assertEquals(6, t.get(1).getArmy());
+        assertThrowsExactly(IllegalArgumentException.class, () -> p1.reinforce(t.get(1), 5));
+        assertThrowsExactly(IllegalArgumentException.class, () -> p1.reinforce(t.get(0), 0));
     }
     
         

@@ -14,20 +14,19 @@ public class Player {
     private String color;
     private int id;
     private boolean isInGame;
-    private Objective Obj;
+    private Objective obiettivo;
     private boolean statoObiettivo;
     
     //costruttore
-    public Player(String name, String color, Objective Obj, int id) {
+    public Player(String name, String color, Objective obiettivo, int id) {
         this.color=color;
         this.name=name;
         this.id=id;
         isInGame=true;
-        this.Obj=Obj;
+        this.obiettivo=obiettivo;
         this.statoObiettivo=false;
     }
-    public void attack(Territory owner, Territory neighbor, int army) {
-      try{
+    public void attack(Territory owner, Territory neighbor, int army) throws IllegalArgumentException {
         if(owner.getOwner().equals(neighbor.getOwner())) {
             throw new IllegalArgumentException("Territori appartenenti allo stesso giocatore");
         }
@@ -67,13 +66,8 @@ public class Player {
             }
         }
       }
-        catch(Exception e) {
-            System.out.println("Errore fase Attack");
-        }
-    }
 
-    public void move(Territory owner, Territory neighbor, int army) {
-        try {
+    public void move(Territory owner, Territory neighbor, int army) throws IllegalArgumentException{
             if(!owner.isNeighbor(neighbor)) {
                 throw new IllegalArgumentException("Territori non confinanti");
             }
@@ -86,12 +80,7 @@ public class Player {
             owner.addArmy(-army);
             neighbor.addArmy(army);
         }
-        catch(Exception e) {
-            System.out.println("Errore fase Move");
-        }
-    }
     public void reinforce(Territory owner, int army) {
-        try {
             if(owner.getOwner()!=this) {
                 throw new IllegalArgumentException("Territorio non appartenente al giocatore");
             }
@@ -100,11 +89,7 @@ public class Player {
             }
             owner.addArmy(army);
         }
-        catch(Exception e) {
-            System.out.println("Errore fase Reinforce");
-        }
-    }
-    public Player defeat(Player player) {
+    public Player defeat() {
         //TODO: questa deve essere fatta dopo il refactoring di Turn
         return null;
     }
