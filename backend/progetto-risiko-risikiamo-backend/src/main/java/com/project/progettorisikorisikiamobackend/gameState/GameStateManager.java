@@ -3,9 +3,8 @@ package com.project.progettorisikorisikiamobackend.gameState;
 import java.io.IOException;
 
 import java.util.List;
-import java.util.Scanner;
 
-import com.project.progettorisikorisikiamobackend.Turno.Player;
+
 import com.project.progettorisikorisikiamobackend.Turno.Player;
 import com.project.progettorisikorisikiamobackend.Turno.Turn;
 import com.project.progettorisikorisikiamobackend.map.Map;
