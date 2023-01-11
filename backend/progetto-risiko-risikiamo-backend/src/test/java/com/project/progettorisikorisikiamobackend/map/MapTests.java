@@ -1,12 +1,13 @@
 package com.project.progettorisikorisikiamobackend.map;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertThrows;
 
 import java.util.Collection;
 
 import org.junit.jupiter.api.Test;
+
+import com.project.progettorisikorisikiamobackend.player.Player;
 
 class MapTests {
 
@@ -213,11 +214,11 @@ class MapTests {
         assertEquals(0, map.getContinents().size());
     }
 
-    // Test : int getNumberOfContinent(PlayerPlaceholder player)
+    // Test : int getNumberOfContinent(Player player)
     @Test
     void getNumberOfContinent() {
-        PlayerPlaceholder player1 = new PlayerPlaceholder("Player1");
-        PlayerPlaceholder player2 = new PlayerPlaceholder("Player2");
+        Player player1 = new Player("Player1", null, null, 0);
+        Player player2 = new Player("Player2", null, null, 0);
         Map map = new Map("Map1");
         assertEquals("Map1", map.getMapId());
         assertEquals(0, map.getContinents(player1).size());
@@ -254,11 +255,11 @@ class MapTests {
 
     }
 
-    // test : int getNumberOfTerritories(PlayerPlaceholder player)
+    // test : int getNumberOfTerritories(Player player)
     @Test
     void getNumberOfTerritories() {
-        PlayerPlaceholder player1 = new PlayerPlaceholder("Player1");
-        PlayerPlaceholder player2 = new PlayerPlaceholder("Player2");
+        Player player1 = new Player("Player1", null, null, 0);
+        Player player2 = new Player("Player2", null, null, 0);
         Map map = new Map("Map1");
         assertEquals("Map1", map.getMapId());
         assertEquals(0, map.getContinents(player1).size());
@@ -293,12 +294,12 @@ class MapTests {
 
     }
 
-    // Test : getContinents(PlayerPlaceholder player) throws
+    // Test : getContinents(Player player) throws
     // IllegalArgumentException
     @Test
     void getContinents() {
-        PlayerPlaceholder player1 = new PlayerPlaceholder("Player1");
-        PlayerPlaceholder player2 = new PlayerPlaceholder("Player2");
+        Player player1 = new Player("Player1", null, null, 0);
+        Player player2 = new Player("Player2", null, null, 0);
         Map map = new Map("Map1");
         assertEquals("Map1", map.getMapId());
         assertEquals(0, map.getContinents(player1).size());
