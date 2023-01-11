@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.project.progettorisikorisikiamobackend.Turno.Dice;
 import com.project.progettorisikorisikiamobackend.domain.Game;
-import com.project.progettorisikorisikiamobackend.services.mapper.IGameMapper;
 import com.project.progettorisikorisikiamobackend.services.mapper.dto.GameDto;
 import com.project.progettorisikorisikiamobackend.services.mapper.dto.PlayerDto;
 
@@ -17,16 +16,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class GameService implements IGameService {
 
-    @Autowired(required = false)
-    private IGameMapper gameMapper;
-
     /* List of all active game */
     private HashMap<String, Game> games = new HashMap<>();
 
     @Override
     public void postCreate(GameDto gameDto) {
 
-        games.put(generateGameId(), gameMapper.fromDto(gameDto));
+        games.put(generateGameId(), new Game());
 
     }
 

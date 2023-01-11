@@ -1,5 +1,10 @@
 package com.project.progettorisikorisikiamobackend.domain;
 
-public interface Game {
+import lombok.Data;
+
+@Data
+public class Game {
+
+    private String id;
 
 }

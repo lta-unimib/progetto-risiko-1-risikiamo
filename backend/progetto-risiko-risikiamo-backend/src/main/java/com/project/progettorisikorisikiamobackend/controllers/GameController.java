@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.progettorisikorisikiamobackend.services.IGameService;
@@ -27,6 +28,7 @@ public class GameController {
 
     @ResponseBody
     @GetMapping("/{gameId}/watch")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<String> getWatch(@PathVariable String gameId) {
 
         gameService.getWatch(gameId);
@@ -36,6 +38,7 @@ public class GameController {
 
     @ResponseBody
     @PostMapping("/{gameId}/addPlayer")
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Object> postAddPlayer(@Valid @RequestBody PlayerDto playerDto,
             @PathVariable String gameId) {
 
@@ -46,6 +49,7 @@ public class GameController {
 
     @ResponseBody
     @PostMapping("/create")
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<String> postCreate(@Valid @RequestBody GameDto gameDto) {
 
         gameService.postCreate(gameDto);
@@ -54,6 +58,7 @@ public class GameController {
 
     @PutMapping("/{gameId}/start")
     @ResponseBody
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<String> putStart(@PathVariable String id) {
 
         gameService.putStart(id);
@@ -63,6 +68,7 @@ public class GameController {
 
     @PutMapping("/{gameId}/end")
     @ResponseBody
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<String> putEnd(@PathVariable String id) {
 
         gameService.putEnd(id);
