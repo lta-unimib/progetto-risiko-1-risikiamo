@@ -20,9 +20,11 @@ public class GameService implements IGameService {
     private HashMap<String, Game> games = new HashMap<>();
 
     @Override
-    public void postCreate(GameDto gameDto) {
+    public Game postCreate(GameDto gameDto) {
 
-        games.put(generateGameId(), new Game());
+        Game game = gameDto.toGame(generateGameId());
+        games.put(generateGameId(), game);
+        return game;
 
     }
 

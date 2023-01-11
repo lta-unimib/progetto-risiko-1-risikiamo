@@ -19,21 +19,18 @@ public class MapDto {
 
     @NonNull
     @NotBlank
-    private List<String> continent;
+    private List<ContinentDto> continent;
 
-    public MapDto(String name, List<String> map) {
-        this.name = name;
-        this.continent = map;
-    }
-
-    public Map MapTo() {
+    public Map toMap() {
 
         Map map = new Map(name);
 
-        
         for (int i = 0; i < this.continent.size(); i++) {
-            map.addContinent(new Continent(this.continent.get(i),0), this.continent.get(i));
-            
+            Continent continentResult = this.continent.get(i).toContinent();
+            map.addContinent(continentResult, continentResult.getName());
         }
 
+        return map;
+
+    }
 }

@@ -16,7 +16,7 @@ import com.project.progettorisikorisikiamobackend.services.mapper.dto.PlayerDto;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 

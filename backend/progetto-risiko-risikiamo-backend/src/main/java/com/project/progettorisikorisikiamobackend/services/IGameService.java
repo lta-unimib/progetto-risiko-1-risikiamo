@@ -6,7 +6,7 @@ import com.project.progettorisikorisikiamobackend.services.mapper.dto.PlayerDto;
 
 public interface IGameService {
 
-    public void postCreate(GameDto gameDto);
+    public Game postCreate(GameDto gameDto);
 
     public Game getGame(String gameId);
 

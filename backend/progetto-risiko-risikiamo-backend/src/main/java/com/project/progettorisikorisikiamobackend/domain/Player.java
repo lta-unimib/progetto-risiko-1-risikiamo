@@ -7,4 +7,8 @@ public class Player {
 
     private String id;
 
+    public Player toPlayer() {
+        return null;
+    }
+
 }

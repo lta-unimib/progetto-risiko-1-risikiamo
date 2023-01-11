@@ -1,11 +1,11 @@
 package com.project.progettorisikorisikiamobackend.services.mapper.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.project.progettorisikorisikiamobackend.domain.Game;
-import com.project.progettorisikorisikiamobackend.map.Continent;
+import com.project.progettorisikorisikiamobackend.domain.Player;
 import com.project.progettorisikorisikiamobackend.map.Map;
-import com.project.progettorisikorisikiamobackend.map.Territory;
 
 import io.micrometer.common.lang.NonNull;
 import jakarta.validation.constraints.NotBlank;
@@ -16,18 +16,23 @@ public class GameDto {
 
     @NonNull
     @NotBlank
-    private List<String> players;
+    private List<PlayerDto> players;
 
     @NonNull
     @NotBlank
-    private String mapName;
+    private MapDto map;
 
-    @NonNull
-    @NotBlank
-    private List<List<String>> map;
+    public Game toGame(String id) {
 
-    public Game toGame() {
-        Map map = new Map(mapName);
+        Map mapReturn = this.map.toMap();
+
+        ArrayList<Player> playersReturn = new ArrayList<>();
+
+        for (PlayerDto player : this.players) {
+            playersReturn.add(player.toPlayer());
+        }
+
+        return new Game(playersReturn, mapReturn, id);
 
     }
 
