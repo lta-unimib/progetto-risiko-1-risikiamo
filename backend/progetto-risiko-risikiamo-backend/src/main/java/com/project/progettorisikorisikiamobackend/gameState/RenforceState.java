@@ -11,16 +11,18 @@ public class RenforceState extends GameState {
 
     public void move() {
 
-        super.getGameStateManager().changeState("sposta");
+        // super.getGameStateManager().changeState("sposta");
 
     }
 
     public void attack() {
 
-        super.getGameStateManager().changeState("attacca");
+        // super.getGameStateManager().changeState("attacca");
     }
 
     public void renforce() {
+
+        // ! Scanner ????????????????????????????
         Scanner input = new Scanner(System.in);
         System.out.println("Quanti rinforzi vuoi posizionare?");
         int rinforzi = input.nextInt();
