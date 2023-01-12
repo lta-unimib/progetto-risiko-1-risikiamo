@@ -7,6 +7,7 @@ import com.project.progettorisikorisikiamobackend.map.*;
 import com.project.progettorisikorisikiamobackend.player.Player;
 
 public class StartState extends GameState {
+    // ? Mappa ???????????????????
     Map map;
 
     public StartState(GameStateManager gameStateManager, String name, Turn turno, Map map) {
@@ -26,20 +27,13 @@ public class StartState extends GameState {
     }
 
     public void renforce() {
+        // ! Niente logica, lo state serve solo a orzare operazioni in un ordine preciso
 
-        List<Player> players = super.getTurno().getPlayerList();
-        for (Player p : players) {
-            while (p.getReinforce() > 0) {
-                p.placeReinforcements(3);
-                p.setReinforce(p.getReinforce() - 3);
-            }
-
-        }
-        super.getGameStateManager().changeState("attacca");
+        // super.getGameStateManager().changeState("attacca");
 
     }
 
     public void endTurn() {
-        super.getGameStateManager().changeState("fineTurno");
+        // super.getGameStateManager().changeState("fineTurno");
     }
 }

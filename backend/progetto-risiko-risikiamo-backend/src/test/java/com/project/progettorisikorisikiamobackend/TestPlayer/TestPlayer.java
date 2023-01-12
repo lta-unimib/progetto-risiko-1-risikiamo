@@ -83,4 +83,15 @@ public class TestPlayer {
         assertThrows(IllegalArgumentException.class, () -> player.setReinforce(-1));
     }
 
+    @Test
+    public void unemplementedMethor() {
+        Player player = new Player("Player1", "Red", null, "1");
+
+        player.defeat();
+        player.passTurn();
+        player.drawCard();
+        player.placeReinforcements(0);
+        player.surrend();
+
+    }
 }

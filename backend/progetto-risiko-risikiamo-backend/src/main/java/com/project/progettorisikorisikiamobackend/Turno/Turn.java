@@ -138,16 +138,19 @@ public class Turn {
      * 
      * @param playerList lista dei giocatori
      */
-    public void winningCondition(List<Player> playerList) {
-        Player p1 = nextPlayer;
-        for (Player p : playerList) {
-
-            if (p.getObiettivo().isCompleted(p) && p1 != p) {
-
-                setdefeatedPlayer(p1);
-            }
-
-        }
-
-    }
+    // ? perche vuole una lista di giocatori? Refactoring needed
+    /*
+     * public void winningCondition(List<Player> playerList) {
+     * Player p1 = nextPlayer;
+     * for (Player p : playerList) {
+     * 
+     * if (p.getObiettivo().isCompleted(p) && p1 != p) {
+     * 
+     * setdefeatedPlayer(p1);
+     * }
+     * 
+     * }
+     * 
+     * }
+     */
 }

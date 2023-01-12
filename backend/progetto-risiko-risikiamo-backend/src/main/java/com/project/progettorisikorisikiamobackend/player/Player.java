@@ -98,16 +98,16 @@ public class Player {
     }
 
     public Player defeat() {
-        // TODO: questa deve essere fatta dopo il refactoring di Turn
+
         return null;
     }
 
     public void passTurn() {
-        // TODO: questa deve essere fatta dopo il refactoring di Turn
+
     }
 
     public void surrend() {
-        // TODO: questa deve essere fatta dopo il refactoring di Turn
+
     }
 
     public void drawCard() {

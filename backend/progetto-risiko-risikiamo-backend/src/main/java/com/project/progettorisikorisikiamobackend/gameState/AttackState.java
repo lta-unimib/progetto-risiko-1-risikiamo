@@ -10,15 +10,15 @@ public class AttackState extends GameState {
     }
 
     public void move() {
-        // ? SUPER ???????????? non funziona così
+        // ? SUPER ???????????? non funziona così Refactoring needed
 
-        super.getGameStateManager().changeState("sposta");
+        // super.getGameStateManager().changeState("sposta");
 
     }
 
     public void attack() {
 
-        super.getGameStateManager().changeState("attaca");
+        // super.getGameStateManager().changeState("attaca");
 
     }
 
@@ -29,7 +29,7 @@ public class AttackState extends GameState {
     }
 
     public void endTurn() {
-        super.getGameStateManager().changeState("fineTurno");
+        // super.getGameStateManager().changeState("fineTurno");
 
     }
 

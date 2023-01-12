@@ -12,6 +12,8 @@ public class MoveState extends GameState {
     @Override
     public void move() {
 
+        // Perchè qui non c'è il chenge state?
+        // super.getTurno().getCurrentPlayer().moveArmies();
     }
 
     @Override
@@ -27,7 +29,7 @@ public class MoveState extends GameState {
     }
 
     public void endTurn() {
-        super.getGameStateManager().changeState("fineTurno");
+        // super.getGameStateManager().changeState("fineTurno");
     }
 
 }

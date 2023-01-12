@@ -10,6 +10,8 @@ import com.project.progettorisikorisikiamobackend.player.Player;
 
 public class GameStateManager {
     private GameState gameState;
+    // ? perchè una lista di player ?? Anche se è una classe provisoria Turn esiste
+    // già
     private List<Player> players;
 
     public GameStateManager(List<Player> players) {
