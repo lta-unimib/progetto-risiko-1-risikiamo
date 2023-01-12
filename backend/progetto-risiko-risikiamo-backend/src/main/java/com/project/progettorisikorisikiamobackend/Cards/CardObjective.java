@@ -1,17 +1,21 @@
 package com.project.progettorisikorisikiamobackend.Cards;
+
 import com.project.progettorisikorisikiamobackend.obiettivi.Objective;
 import lombok.*;
-public class CardObjective  {
+public class CardObjective extends Card {
 
     private @Getter @Setter Objective objective;
-    private @Getter @Setter String description;
+    
 
-    public CardObjective(Objective objective) {
+    public CardObjective(Objective objective, String name, String image) {
+        super(name,objective.getObjDescription(), image);
         this.objective = objective;
-        this.description =  objective.getObjDescription();
+       
+       
+        
     }
-    @Override
-    public String toString() {
-        return "Objective: "  + this.description;
-    }
+
+
+   
+    
 }

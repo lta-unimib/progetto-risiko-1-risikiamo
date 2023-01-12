@@ -1,4 +1,6 @@
 package com.project.progettorisikorisikiamobackend.Turno;
+import java.util.*;
+import com.project.progettorisikorisikiamobackend.Cards.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,6 +10,8 @@ public class Player  {
     @Getter @Setter private int playerId;
     @Getter  @Setter private int armies;
     @Getter private int Obiettivo;
+    @Getter @Setter private List <CardTerritory> cardsOnHand;
+    @Getter @Setter private List <CardObjective> CardObjective;
     
     @Getter private int statoObiettivo;
 //costruttore
@@ -18,6 +22,8 @@ public class Player  {
         this.statoObiettivo = statoObiettivo;
         this.armies = armies;
         this.playerId = playerId;
+        this.cardsOnHand = new ArrayList<>();
+        this.CardObjective = new ArrayList<>();
 
         
 
@@ -38,4 +44,13 @@ public class Player  {
     public void moveArmies(){}
     public void placeReinforcements(int armies){}
     public void drawCard(){}
+    public int discardCard(List <CardTerritory> cardTerritories){
+        int renforce = 0;
+        for (CardTerritory cardTerritory : cardTerritories) {
+            renforce += Integer.parseInt(cardTerritory.getValue());
+            this.cardsOnHand.remove(cardTerritory);
+            
+        }
+        return renforce;
+    }
 }
