@@ -3,6 +3,8 @@ package com.project.progettorisikorisikiamobackend.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.project.progettorisikorisikiamobackend.domain.Game;
+
 @Service
 public class PlayService implements IPlayerService {
 
@@ -11,15 +13,21 @@ public class PlayService implements IPlayerService {
 
     @Override
     public void putTurn(String gameId, String playerId) {
-        gameService.getGame(gameId);
-        // TODO cominciare il turno del giocaore con id playerId nel gioco con id gameId
+        Game game = gameService.getGame(gameId);
+
+        if (game != null && this.isPlayerTurn(playerId)) {
+            // Comincia turno
+        }
 
     }
 
     @Override
     public void putSkip(String gameId, String playerId) {
-        gameService.getGame(gameId);
-        // TODO saltare il turno del giocaore con id playerId nel gioco con id gameId
+        Game game = gameService.getGame(gameId);
+
+        if (game != null && this.isPlayerTurn(playerId)) {
+            // Finisce turno
+        }
 
     }
 
@@ -61,6 +69,11 @@ public class PlayService implements IPlayerService {
     public void putPlay(String gameId, String playerId) {
         // TODO comincia la partita
 
+    }
+
+    private boolean isPlayerTurn(String playerId) {
+        // TODO controlla se il giocatore è il turno corrente
+        return true;
     }
 
 }

@@ -10,12 +10,12 @@ public interface IGameService {
 
     public Game getGame(String gameId);
 
-    public void getWatch(String id);
+    public Game getWatch(String id);
 
     public void putStart(String id);
 
     public void putEnd(String id);
 
-    public void postAddPlayer(PlayerDto playerDto, String gameId);
+    public String postAddPlayer(PlayerDto playerDto, String gameId);
 
 }

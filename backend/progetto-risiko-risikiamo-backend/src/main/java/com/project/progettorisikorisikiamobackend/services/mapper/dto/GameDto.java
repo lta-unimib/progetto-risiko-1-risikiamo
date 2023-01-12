@@ -16,7 +16,7 @@ public class GameDto {
 
     @NonNull
     @NotBlank
-    private List<PlayerDto> players;
+    private String name;
 
     @NonNull
     @NotBlank
@@ -26,13 +26,7 @@ public class GameDto {
 
         Map mapReturn = this.map.toMap();
 
-        ArrayList<Player> playersReturn = new ArrayList<>();
-
-        for (PlayerDto player : this.players) {
-            playersReturn.add(player.toPlayer());
-        }
-
-        return new Game(playersReturn, mapReturn, id);
+        return new Game(name, mapReturn, id);
 
     }
 

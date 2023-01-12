@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.progettorisikorisikiamobackend.Turno.Dice;
+import com.project.progettorisikorisikiamobackend.Turno.Player;
 import com.project.progettorisikorisikiamobackend.domain.Game;
 import com.project.progettorisikorisikiamobackend.services.mapper.dto.GameDto;
 import com.project.progettorisikorisikiamobackend.services.mapper.dto.PlayerDto;
@@ -29,8 +30,11 @@ public class GameService implements IGameService {
     }
 
     @Override
-    public void postAddPlayer(PlayerDto playerDto, String gameId) {
-        // TODO Add a player to a game
+    public String postAddPlayer(PlayerDto playerDto, String gameId) {
+        com.project.progettorisikorisikiamobackend.domain.Player player = playerDto.toPlayer();
+        games.get(gameId).addPlayer(player);
+
+        return player.getId();
 
     }
 
@@ -41,20 +45,24 @@ public class GameService implements IGameService {
     }
 
     @Override
-    public void getWatch(String gameId) {
-        // TODO ritorna stato del gioco
+    public Game getWatch(String gameId) {
+
+        // Dovrebbe ritornare le modifiche in base alla data
+        return games.get(gameId);
 
     }
 
     @Override
     public void putStart(String gameId) {
-        // TODO Start a game
+
+        games.get(gameId).startGame();
 
     }
 
     @Override
     public void putEnd(String gameId) {
-        // TODO conclude il gioco
+
+        games.get(gameId).endGame();
 
     }
 
