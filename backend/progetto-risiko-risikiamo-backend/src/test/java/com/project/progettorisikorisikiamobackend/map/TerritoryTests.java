@@ -26,13 +26,14 @@ class TerritoryTests {
     @Test
     void testSetOwner() {
         Territory territory = new Territory("Territory1");
-        territory.setOwner(new Player("Player1", null, null, 0));
+        territory.setOwner(new Player("Player1", null, null, "123"));
         assertEquals("Player1", territory.getOwner().getName());
         assertThrows(IllegalArgumentException.class, () -> territory.setOwner(null));
-        territory.setOwner(new Player("Player2", null, null, 0));
+        territory.setOwner(new Player("Player2", null, null, "123"));
         assertEquals("Player2", territory.getOwner().getName());
         territory.addArmy(+1);
-        assertThrowsExactly(IllegalArgumentException.class, () -> territory.setOwner(new Player("Player3", null, null, 0)));
+        assertThrowsExactly(IllegalArgumentException.class,
+                () -> territory.setOwner(new Player("Player3", null, null, "123")));
     }
 
     // test addArmy
@@ -47,7 +48,7 @@ class TerritoryTests {
         assertThrowsExactly(IllegalArgumentException.class, () -> territory.addArmy(-1));
         assertThrowsExactly(IllegalArgumentException.class, () -> territory.addArmy(+1));
 
-        territory.setOwner(new Player("Player1", null, null, 0));
+        territory.setOwner(new Player("Player1", null, null, "123"));
         assertDoesNotThrow(() -> territory.addArmy(+1));
         assertEquals(1, territory.getArmy());
         assertThrowsExactly(IllegalArgumentException.class, () -> territory.addArmy(-3));
@@ -55,7 +56,7 @@ class TerritoryTests {
         Territory territory2 = new Territory("Territory2");
         assertThrowsExactly(IllegalArgumentException.class, () -> territory2.addArmy(+1));
 
-        territory2.setOwner(new Player("Player2", null, null, 0));
+        territory2.setOwner(new Player("Player2", null, null, "123"));
         assertDoesNotThrow(() -> territory2.addArmy(+1));
         assertEquals(1, territory2.getArmy());
 
@@ -132,8 +133,8 @@ class TerritoryTests {
     // test getNotOwnedNeighbor
     @Test
     void testGetNotOwnedNeighbor() {
-        Player player1 = new Player("Player1", null, null, 0);
-        Player player2 = new Player("Player2", null, null, 0);
+        Player player1 = new Player("Player1", null, null, "123");
+        Player player2 = new Player("Player2", null, null, "123");
         Territory territory1 = new Territory("Territory1");
         Territory territory2 = new Territory("Territory2");
         Territory territory3 = new Territory("Territory3");
@@ -159,8 +160,8 @@ class TerritoryTests {
     // test getOwnedNeighbor
     @Test
     void testGetOwnedNeighbor() {
-        Player player1 = new Player("Player1", null, null, 0);
-        Player player2 = new Player("Player2", null, null, 0);
+        Player player1 = new Player("Player1", null, null, "123");
+        Player player2 = new Player("Player2", null, null, "123");
         Territory territory1 = new Territory("Territory1");
         Territory territory2 = new Territory("Territory2");
         Territory territory3 = new Territory("Territory3");

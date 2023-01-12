@@ -18,14 +18,14 @@ public class TestConquestContinent {
             continent.addTerritory(territory);
         }
         map.addContinent(continent, "America");
-        Player player = new Player("player1", null, null, 0);
+        Player player = new Player("player1", null, null, "0");
         for (Territory territory : continent.getTerritories().values()) {
             territory.setOwner(player);
         }
         Objective obiettivo = new ConquestContinent(continent);
         assertTrue(obiettivo.isCompleted(player));
         assertEquals("Conquista il continente continent1", obiettivo.getObjDescription());
-        Player player2 = new Player("player2", null, obiettivo, 0);
+        Player player2 = new Player("player2", null, obiettivo, "0");
         continent.getTerritories().get("territory1").setOwner(player2);
         assertTrue(!obiettivo.isCompleted(player));
     }
