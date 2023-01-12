@@ -6,151 +6,91 @@ import com.project.progettorisikorisikiamobackend.player.Player;
 
 import lombok.*;
 
+@Getter
 public class Turn {
-    private @Getter @Setter List<Player> playerList;
-    private @Getter Player currentPlayer;
-    private @Getter Player nextPlayer;
-    private @Getter @Setter int turnNumber;
-    private @Getter Dice d;
 
-    // costruttore
-    public Turn(List<Player> playerList, int turnNumber) {
-        this.d = new Dice(6);
-        setPlayerList(playerList);
-        this.turnNumber = turnNumber;
-        this.currentPlayer = playerList.get(turnNumber);
-        this.nextPlayer = playerList.get(turnNumber + 1);
-
-    }
+    private HashMap<Player, EnumTurn> playerList;
+    private Player currentPlayer;
+    private int turnNumber;
 
     public Turn(List<Player> playerList) {
-        this.playerList = playerList;
-        this.d = new Dice(6);
+        this.playerList = new HashMap<>();
+        for (Player player : playerList) {
+            this.playerList.put(player, EnumTurn.INGAME);
+        }
+        this.turnNumber = 0;
         this.currentPlayer = playerList.get(0);
-        this.turnNumber = 1;
-        this.nextPlayer = playerList.get(1);
+
+    }
+
+    public void setPlayerRandomOrder() {
+        List<Player> newPlayerList = new ArrayList<>(this.playerList.keySet());
+        Collections.shuffle(newPlayerList);
+        HashMap<Player, EnumTurn> newPlayerListMap = new HashMap<>();
+
+        for (Player player : newPlayerList) {
+            newPlayerListMap.put(player, this.playerList.get(player));
+        }
+
+        this.playerList = newPlayerListMap;
 
     }
 
     /**
-     * ordina i giocatori in base al lancio del dado
+     * Permette di moficare lo stato di un giocatore
      * 
-     * @param playerList lista dei giocatori
-     * @param d          dado
-     * @return lista dei giocatori ordinata in base al lancio del dado
+     * @param player player to modify
+     * @param status new status of player
      */
-    public List<Player> setPlayerOrder(List<Player> playerList, Dice d) {
-        int rollMax = 0;
+    public void setStatusPlayer(Player player, EnumTurn status) {
+        if (playerList.computeIfPresent(player, (k, v) -> status) == null) {
+            throw new IllegalArgumentException("Player not found");
+        }
 
-        for (int i = 0; i < playerList.size(); i++) {
-            d.roll();
-            if (d.getValue() > rollMax) {
-                rollMax = d.getValue();
+        if (status == EnumTurn.WIN) {
+            for (Player p : playerList.keySet()) {
+                if (p != player) {
+                    playerList.put(p, EnumTurn.LOST);
+                }
             }
-            // ? Perchè qui si cerca di cambiare l'id del player ??????????????????
-            // playerList.get(i).setPlayerId(d.getValue());
-
+            this.currentPlayer = player;
         }
 
-        // playerList.sort(Comparator.comparing(Player::getPlayerId).reversed());
-        return playerList;
     }
 
     /**
-     * rimouve giocatori dal gioco se si sono arresi,
+     * Permette di passare al turno successivo
      * 
-     * @param defeatedPlayer
-     */
-    public void setdefeatedPlayer(Player defeatedPlayer) {
-        this.playerList.remove(defeatedPlayer);
-    }
-
-    // setta il giocatore corrente
-    /**
      * 
-     * @param currentPlayer giocatore corrente
+     * @throws IllegalStateException se non ci sono giocatori in gioco
      */
-    public void setCurrentPlayer(Player currentPlayer) {
-        if (playerList.contains(currentPlayer))
-            this.currentPlayer = currentPlayer;
-        else if (nextPlayer != null)
-            this.currentPlayer = playerList.get(getTurnNumber() + 1);
-        else
-            this.currentPlayer = playerList.get(0);
-    }
+    public void nextTurn() {
+        if (existPlayerWithStatus(EnumTurn.WIN))
+            throw new IllegalStateException("Game is over");
 
-    // setta il giocatore successivo
-    /**
-     * 
-     * @param playerList lista dei giocatori
-     */
-    public void setNextPlayer(List<Player> playerList) {
-        if (getTurnNumber() > playerList.size() - 1)
-            this.nextPlayer = playerList.get(0);
-        else if (getTurnNumber() < playerList.size() - 1)
-            this.nextPlayer = playerList.get(getTurnNumber() + 1);
+        if (!existPlayerWithStatus(EnumTurn.INGAME))
+            throw new IllegalStateException("No player in game");
 
-    }
-
-    // setta il numero del turno
-    /**
-     * 
-     * @param turnNumber numero del turno
-     */
-    public void goHeadTurn() {
-        if (getTurnNumber() < playerList.size() - 1) {
-            if (playerList.contains(currentPlayer))
-                setCurrentPlayer(playerList.get(turnNumber));
-            else
-                setCurrentPlayer(playerList.get(turnNumber + 1));
-            if (playerList.contains(nextPlayer))
-                setNextPlayer(playerList);
-
-        } else if (getTurnNumber() == playerList.size() - 1) {
-            this.currentPlayer = playerList.get(playerList.size() - 1);
-            this.nextPlayer = playerList.get(0);
-            this.turnNumber = -1;
+        int currentPlayerIndex = new ArrayList<>(playerList.keySet()).indexOf(currentPlayer);
+        if (currentPlayerIndex == playerList.size() - 1) {
+            currentPlayerIndex = 0;
         } else {
-            setCurrentPlayer(playerList.get(turnNumber));
-            setNextPlayer(playerList);
+            currentPlayerIndex++;
         }
+        this.currentPlayer = new ArrayList<>(playerList.keySet()).get(currentPlayerIndex);
 
-        this.turnNumber = turnNumber + 1;
-
+        if (playerList.get(currentPlayer) != EnumTurn.INGAME) {
+            nextTurn();
+        }
+        this.turnNumber++;
     }
 
-    // ritorna il vincitore
-    /**
-     * 
-     * @param playerListInGame lista dei giocatori in gioco
-     * @return vincitore
-     */
-    public Player winner(List<Player> playerListInGame) {
-        if (playerListInGame.size() == 1)
-            return playerList.get(0);
-        else
-            return null;
+    public boolean isTurnOfPlayer(Player player) {
+        return player.equals(currentPlayer);
     }
 
-    // dice chi ha vinto se un giocatore raggiunge l'obiettivo e setta gli altri
-    // giocatori come fuori gioco
-    /**
-     * 
-     * @param playerList lista dei giocatori
-     */
-    // ? perche vuole una lista di giocatori? Refactoring needed
-    /*
-     * public void winningCondition(List<Player> playerList) {
-     * Player p1 = nextPlayer;
-     * for (Player p : playerList) {
-     * 
-     * if (p.getObiettivo().isCompleted(p) && p1 != p) {
-     * 
-     * setdefeatedPlayer(p1);
-     * }
-     * 
-     * }
-     * 
-     * }
-     */
+    public boolean existPlayerWithStatus(EnumTurn status) {
+        return playerList.values().stream().anyMatch(v -> v == status);
+    }
+
 }

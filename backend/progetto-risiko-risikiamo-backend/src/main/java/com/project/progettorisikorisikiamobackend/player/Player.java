@@ -34,6 +34,14 @@ public class Player {
 
     }
 
+    public Player(String name) {
+        this.name = name;
+        this.id = null;
+        this.color = null;
+        this.obiettivo = null;
+        this.reinforce = 0;
+    }
+
     public void attack(Territory owner, Territory neighbor, int army) throws IllegalArgumentException {
         if (owner.getOwner().equals(neighbor.getOwner())) {
             throw new IllegalArgumentException("Territori appartenenti allo stesso giocatore");

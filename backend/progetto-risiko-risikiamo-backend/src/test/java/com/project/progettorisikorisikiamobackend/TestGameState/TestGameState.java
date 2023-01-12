@@ -26,7 +26,6 @@ class TestGameState {
         players.add(new Player("pluto", "rosso", null, "123"));
         GameStateManager gameStateManager = new GameStateManager(players);
         assertEquals("StartState", gameStateManager.getGameState().getNameState());
-        assertEquals(players, gameStateManager.getGameState().getTurno().getPlayerList());
 
     }
 
@@ -38,7 +37,7 @@ class TestGameState {
         players.add(new Player("pluto", "verde", null, "123"));
         GameStateManager gameStateManager = new GameStateManager(players);
         assertEquals("StartState", gameStateManager.getGameState().getNameState());
-        assertEquals(players, gameStateManager.getGameState().getTurno().getPlayerList());
+
     }
 
     // test moveState
@@ -54,35 +53,35 @@ class TestGameState {
             System.out.println("errore");
         }
         assertEquals("sposta", gameStateManager.getGameState().getNameState());
-        assertEquals(players, gameStateManager.getGameState().getTurno().getPlayerList());
+
         try {
             gameStateManager.changeState("rinforza");
         } catch (Exception e) {
             System.out.println("errore");
         }
         assertEquals("rinforza", gameStateManager.getGameState().getNameState());
-        assertEquals(players, gameStateManager.getGameState().getTurno().getPlayerList());
+
         try {
             gameStateManager.changeState("attacca");
         } catch (Exception e) {
             System.out.println("errore");
         }
         assertEquals("attacca", gameStateManager.getGameState().getNameState());
-        assertEquals(players, gameStateManager.getGameState().getTurno().getPlayerList());
+
         try {
             gameStateManager.changeState("fineTurno");
         } catch (Exception e) {
             System.out.println("errore");
         }
         assertEquals("fineTurno", gameStateManager.getGameState().getNameState());
-        assertEquals(players, gameStateManager.getGameState().getTurno().getPlayerList());
+
         try {
             gameStateManager.changeState("ciao");
         } catch (Exception e) {
             System.out.println("errore");
         }
         assertEquals("fineTurno", gameStateManager.getGameState().getNameState());
-        assertEquals(players, gameStateManager.getGameState().getTurno().getPlayerList());
+
     }
 
     @Test
