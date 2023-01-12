@@ -217,8 +217,8 @@ class MapTests {
     // Test : int getNumberOfContinent(Player player)
     @Test
     void getNumberOfContinent() {
-        Player player1 = new Player("Player1", null, null, 0);
-        Player player2 = new Player("Player2", null, null, 0);
+        Player player1 = new Player("Player1", null, null, "123");
+        Player player2 = new Player("Player2", null, null, "123");
         Map map = new Map("Map1");
         assertEquals("Map1", map.getMapId());
         assertEquals(0, map.getContinents(player1).size());
@@ -258,8 +258,8 @@ class MapTests {
     // test : int getNumberOfTerritories(Player player)
     @Test
     void getNumberOfTerritories() {
-        Player player1 = new Player("Player1", null, null, 0);
-        Player player2 = new Player("Player2", null, null, 0);
+        Player player1 = new Player("Player1", null, null, "123");
+        Player player2 = new Player("Player2", null, null, "123");
         Map map = new Map("Map1");
         assertEquals("Map1", map.getMapId());
         assertEquals(0, map.getContinents(player1).size());
@@ -298,8 +298,8 @@ class MapTests {
     // IllegalArgumentException
     @Test
     void getContinents() {
-        Player player1 = new Player("Player1", null, null, 0);
-        Player player2 = new Player("Player2", null, null, 0);
+        Player player1 = new Player("Player1", null, null, "123");
+        Player player2 = new Player("Player2", null, null, "123");
         Map map = new Map("Map1");
         assertEquals("Map1", map.getMapId());
         assertEquals(0, map.getContinents(player1).size());

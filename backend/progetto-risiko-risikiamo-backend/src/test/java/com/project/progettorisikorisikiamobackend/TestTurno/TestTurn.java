@@ -4,6 +4,7 @@ package com.project.progettorisikorisikiamobackend.TestTurno;
 import org.junit.jupiter.api.Test;
 
 import com.project.progettorisikorisikiamobackend.Turno.*;
+import com.project.progettorisikorisikiamobackend.player.Player;
 
 import static org.junit.Assert.assertEquals;
 
@@ -14,10 +15,10 @@ class TestTurn {
     // test Constructor
     public void testConstructor() {
         List<Player> playerList = new ArrayList<Player>();
-        Player p1 = new Player("p1", "red", 0 ,0, 0, 0);
-        Player p2 = new Player("p2", "blue", 0, 0, 0, 0);
-        Player p3 = new Player("p3", "green", 0, 0, 0, 0);
-        Player p4 = new Player("p4", "yellow", 0, 0, 0, 0);
+        Player p1 = new Player("p1", "red", null, "S");
+        Player p2 = new Player("p2", "blue", null, "S");
+        Player p3 = new Player("p3", "green", null, "S");
+        Player p4 = new Player("p4", "yellow", null, "S");
         playerList.add(p1);
         playerList.add(p2);
         playerList.add(p3);
@@ -25,17 +26,17 @@ class TestTurn {
         Turn t = new Turn(playerList);
         assertEquals(4, t.getPlayerList().size());
         assertEquals(1, t.getTurnNumber());
-        
+
     }
 
     // test setTurnNumber
     @Test
     public void testSetTurnNumber() {
         List<Player> playerList = new ArrayList<Player>();
-        Player p1 = new Player("p1", "red", 0 ,0, 0, 0);
-        Player p2 = new Player("p2", "blue", 0, 0, 0, 0);
-        Player p3 = new Player("p3", "green", 0, 0, 0, 0);
-        Player p4 = new Player("p4", "yellow", 0, 0, 0, 0);
+        Player p1 = new Player("p1", "red", null, "S");
+        Player p2 = new Player("p2", "blue", null, "S");
+        Player p3 = new Player("p3", "green", null, "S");
+        Player p4 = new Player("p4", "yellow", null, "S");
         playerList.add(p1);
         playerList.add(p2);
         playerList.add(p3);
@@ -79,26 +80,24 @@ class TestTurn {
         assertEquals(18, t.getTurnNumber());
     }
 
-    
-
     // test setPlayerList
     @Test
     public void testSetPlayerList() {
         List<Player> playerList = new ArrayList<Player>();
-        Player p1 = new Player("p1", "red", 0 ,0, 0, 0);
-        Player p2 = new Player("p2", "blue", 0, 0, 0, 0);
-        Player p3 = new Player("p3", "green", 0, 0, 0, 0);
-        Player p4 = new Player("p4", "yellow", 0, 0, 0, 0);
+        Player p1 = new Player("p1", "red", null, "S");
+        Player p2 = new Player("p2", "blue", null, "S");
+        Player p3 = new Player("p3", "green", null, "S");
+        Player p4 = new Player("p4", "yellow", null, "S");
         playerList.add(p1);
         playerList.add(p2);
         playerList.add(p3);
         playerList.add(p4);
         Turn t = new Turn(playerList);
         List<Player> playerList2 = new ArrayList<Player>();
-        Player p5 = new Player("p5", "red", 0 ,0, 0, 0);
-        Player p6 = new Player("p6", "blue", 0, 0, 0, 0);
-        Player p7 = new Player("p7", "green", 0, 0, 0, 0);
-        Player p8 = new Player("p8", "yellow", 0, 0, 0, 0);
+        Player p5 = new Player("p5", "red", null, "S");
+        Player p6 = new Player("p6", "blue", null, "S");
+        Player p7 = new Player("p7", "green", null, "S");
+        Player p8 = new Player("p8", "yellow", null, "S");
         playerList2.add(p5);
         playerList2.add(p6);
         playerList2.add(p7);
@@ -111,10 +110,10 @@ class TestTurn {
     @Test
     public void testSetCurrentPlayer() {
         List<Player> playerList = new ArrayList<Player>();
-        Player p1 = new Player("p1", "red", 0 ,0, 0, 0);
-        Player p2 = new Player("p2", "blue", 0, 0, 0, 0);
-        Player p3 = new Player("p3", "green", 0, 0, 0, 0);
-        Player p4 = new Player("p4", "yellow", 0, 0, 0, 0);
+        Player p1 = new Player("p1", "red", null, "S");
+        Player p2 = new Player("p2", "blue", null, "S");
+        Player p3 = new Player("p3", "green", null, "S");
+        Player p4 = new Player("p4", "yellow", null, "S");
         playerList.add(p1);
         playerList.add(p2);
         playerList.add(p3);
@@ -134,10 +133,10 @@ class TestTurn {
     @Test
     public void testSetPlayerOrder() {
         List<Player> playerList = new ArrayList<Player>();
-        Player p1 = new Player("p1", "red", 0 ,0, 0, 0);
-        Player p2 = new Player("p2", "blue", 0, 0, 0, 0);
-        Player p3 = new Player("p3", "green", 0, 0, 0, 0);
-        Player p4 = new Player("p4", "yellow", 0, 0, 0, 0);
+        Player p1 = new Player("p1", "red", null, "S");
+        Player p2 = new Player("p2", "blue", null, "S");
+        Player p3 = new Player("p3", "green", null, "S");
+        Player p4 = new Player("p4", "yellow", null, "S");
         playerList.add(p1);
         playerList.add(p2);
         playerList.add(p3);
@@ -148,18 +147,15 @@ class TestTurn {
 
     }
 
-   
-    
-
     // winningPlayer
     @Test
     public void testWinningPlayer() {
 
         List<Player> playerList = new ArrayList<Player>();
-        Player p1 = new Player("p1", "red", 0 ,0, 0, 0);
-        Player p2 = new Player("p2", "blue", 0, 0, 0, 0);
-        Player p3 = new Player("p3", "green", 0, 0, 0, 0);
-        Player p4 = new Player("p4", "yellow", 0, 0, 0, 0);
+        Player p1 = new Player("p1", "red", null, "S");
+        Player p2 = new Player("p2", "blue", null, "S");
+        Player p3 = new Player("p3", "green", null, "S");
+        Player p4 = new Player("p4", "yellow", null, "S");
         playerList.add(p1);
         playerList.add(p2);
         playerList.add(p3);
@@ -170,17 +166,17 @@ class TestTurn {
         t.setdefeatedPlayer(p3);
         Player winningPlayer = t.winner(playerList);
         assertEquals(p4, winningPlayer);
-        
+
     }
 
     // nextPlayer
     @Test
     public void testNextPlayer() {
         List<Player> playerList = new ArrayList<Player>();
-        Player p1 = new Player("p1", "red", 0 ,0, 0, 0);
-        Player p2 = new Player("p2", "blue", 0, 0, 0, 0);
-        Player p3 = new Player("p3", "green", 0, 0, 0, 0);
-        Player p4 = new Player("p4", "yellow", 0, 0, 0, 0);
+        Player p1 = new Player("p1", "red", null, "S");
+        Player p2 = new Player("p2", "blue", null, "S");
+        Player p3 = new Player("p3", "green", null, "S");
+        Player p4 = new Player("p4", "yellow", null, "S");
         playerList.add(p1);
         playerList.add(p2);
         playerList.add(p3);
@@ -201,10 +197,10 @@ class TestTurn {
     @Test
     public void testGoHeadTurn() {
         List<Player> playerList = new ArrayList<Player>();
-        Player p1 = new Player("p1", "red", 0 ,0, 0, 0);
-        Player p2 = new Player("p2", "blue", 0, 0, 0, 0);
-        Player p3 = new Player("p3", "green", 0, 0, 0, 0);
-        Player p4 = new Player("p4", "yellow", 0, 0, 0, 0);
+        Player p1 = new Player("p1", "red", null, "S");
+        Player p2 = new Player("p2", "blue", null, "S");
+        Player p3 = new Player("p3", "green", null, "S");
+        Player p4 = new Player("p4", "yellow", null, "S");
         playerList.add(p1);
         playerList.add(p2);
         playerList.add(p3);
@@ -224,26 +220,11 @@ class TestTurn {
     // constructor Player
     @Test
     public void testConstructor1() {
-        Player p1 = new Player("p1", "red", 0, 0, 0, 25);
-        assertEquals("p1", p1.getPlayerName());
+        Player p1 = new Player("p1", "red", null, "S");
+        assertEquals("p1", p1.getName());
         assertEquals("red", p1.getColor());
-        assertEquals(25, p1.getArmies());
-        assertEquals(0, p1.getObiettivo());
-        assertEquals(0, p1.getStatoObiettivo());
-
-    }
-
-    // constructor Player default
-    @Test
-    public void testConstructor1Default() {
-        Player p1 = new Player();
-        assertEquals("", p1.getPlayerName());
-        assertEquals("", p1.getColor());
-        assertEquals(0, p1.getObiettivo());
-        assertEquals(0, p1.getStatoObiettivo());
-        assertEquals(25, p1.getArmies());
-        assertEquals(0, p1.getPlayerId());
-        
+        assertEquals(0, p1.getReinforce());
+        assertEquals(null, p1.getObiettivo());
 
     }
 
@@ -254,16 +235,16 @@ class TestTurn {
     @Test
     public void testConstructor2() {
         List<Player> playerList = new ArrayList<Player>();
-        Player p1 = new Player("p1", "red", 0 ,0, 0, 0);
-        Player p2 = new Player("p2", "blue", 0, 0, 0, 0);
-        Player p3 = new Player("p3", "green", 0, 0, 0, 0);
-        Player p4 = new Player("p4", "yellow", 0, 0, 0, 0);
+        Player p1 = new Player("p1", "red", null, "S");
+        Player p2 = new Player("p2", "blue", null, "S");
+        Player p3 = new Player("p3", "green", null, "S");
+        Player p4 = new Player("p4", "yellow", null, "S");
         playerList.add(p1);
         playerList.add(p2);
         playerList.add(p3);
         playerList.add(p4);
         try {
-            Turn t = new Turn(playerList,1);
+            Turn t = new Turn(playerList, 1);
             Dice d = new Dice(6);
             assertEquals(d.getSides(), t.getD().getSides());
             assertEquals(p1, t.getPlayerList().get(0));
@@ -271,9 +252,8 @@ class TestTurn {
             assertEquals(1, t.getTurnNumber());
         } catch (Exception e) {
             System.out.println("Exception");
-           
+
         }
-        
 
     }
 

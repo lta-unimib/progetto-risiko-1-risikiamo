@@ -20,14 +20,14 @@ public class TestTotTerritories {
             continent.addTerritory(territory);
         }
         map.addContinent(continent, "America");
-        Player player = new Player("player1", null, null, 0);
+        Player player = new Player("player1", null, null, "0");
         for (Territory territory : continent.getTerritories().values()) {
             territory.setOwner(player);
         }
         Objective obiettivo = new TotTerritories(30, map);
         assertTrue(obiettivo.isCompleted(player));
         assertEquals("Conquista 30 territori", obiettivo.getObjDescription());
-        Player player2 = new Player("player2", null, obiettivo, 0);
+        Player player2 = new Player("player2", null, obiettivo, "0");
         assertTrue(!obiettivo.isCompleted(player2));
     }
 }
