@@ -36,6 +36,10 @@ public class Territory {
         this(name, 0, new ArrayList<>(), null);
     }
 
+    public Territory(String name, Player owner) {
+        this(name, 0, new ArrayList<>(), owner);
+    }
+
     /**
      * Set the owner of the territory, if the army is = 0
      * 
