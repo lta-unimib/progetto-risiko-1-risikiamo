@@ -1,13 +1,18 @@
 package com.project.progettorisikorisikiamobackend.Cards;
 
-import java.util.Map;
+import java.util.*;
 import lombok.*;
+import com.project.progettorisikorisikiamobackend.Turno.*;
 public  abstract class Deck {
-    private @Getter Map<?, String> cards;
-    Deck(Map< ? , String> cards){
+    private @Getter @Setter List<Card> cards;
+    private @Getter @Setter Turn turno;
+
+    Deck(List<Card> cards, Turn turno) {
         this.cards = cards;
+        this.turno = turno;
     }
     
-    public abstract Object draw();
-   
+    public  abstract void draw();
+        
 }
+
