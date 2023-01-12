@@ -22,13 +22,7 @@ public class RenforceState extends GameState {
 
     public void renforce() {
 
-        // ! Scanner ????????????????????????????
-        Scanner input = new Scanner(System.in);
-        System.out.println("Quanti rinforzi vuoi posizionare?");
-        int rinforzi = input.nextInt();
-
-        super.getTurno().getCurrentPlayer().placeReinforcements(rinforzi);
-        input.close();
+        // super.getTurno().getCurrentPlayer().placeReinforcements(rinforzi);
     }
 
     public void endTurn() {
