@@ -8,6 +8,9 @@ import com.project.progettorisikorisikiamobackend.Turno.Turn;
 import com.project.progettorisikorisikiamobackend.map.Map;
 import com.project.progettorisikorisikiamobackend.player.Player;
 
+import lombok.Getter;
+
+@Getter
 public class GameStateManager {
     private GameState gameState;
     // ? perchè una lista di player ?? Anche se è una classe provisoria Turn esiste
@@ -51,10 +54,6 @@ public class GameStateManager {
         }
         return this.gameState;
 
-    }
-
-    public GameState getGameState() {
-        return gameState;
     }
 
     public void setGameState(GameState gameState) {

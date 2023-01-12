@@ -36,6 +36,12 @@ public class Turn {
 
     }
 
+    /**
+     * Permette di moficare lo stato di un giocatore
+     * 
+     * @param player player to modify
+     * @param status new status of player
+     */
     public void setStatusPlayer(Player player, EnumTurn status) {
         if (playerList.computeIfPresent(player, (k, v) -> status) == null) {
             throw new IllegalArgumentException("Player not found");
@@ -47,11 +53,21 @@ public class Turn {
                     playerList.put(p, EnumTurn.LOST);
                 }
             }
+            this.currentPlayer = player;
         }
 
     }
 
+    /**
+     * Permette di passare al turno successivo
+     * 
+     * 
+     * @throws IllegalStateException se non ci sono giocatori in gioco
+     */
     public void nextTurn() {
+        if (existPlayerWithStatus(EnumTurn.WIN))
+            throw new IllegalStateException("Game is over");
+
         if (!existPlayerWithStatus(EnumTurn.INGAME))
             throw new IllegalStateException("No player in game");
 
@@ -63,7 +79,7 @@ public class Turn {
         }
         this.currentPlayer = new ArrayList<>(playerList.keySet()).get(currentPlayerIndex);
 
-        if (playerList.get(currentPlayer) == EnumTurn.DEFETED) {
+        if (playerList.get(currentPlayer) != EnumTurn.INGAME) {
             nextTurn();
         }
         this.turnNumber++;

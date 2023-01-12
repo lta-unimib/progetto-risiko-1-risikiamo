@@ -69,4 +69,66 @@ class TestTurn {
         assertTrue(turn.isTurnOfPlayer(player2));
     }
 
+    @Test
+    void testSetPlayerRandomOrder() {
+        Player player1 = new Player("Player 1", "red", null, "1");
+        Player player2 = new Player("Player 2", "blue", null, "2");
+        Player player3 = new Player("Player 3", "green", null, "3");
+        List<Player> playerList = new ArrayList<>();
+        playerList.add(player1);
+        playerList.add(player2);
+        playerList.add(player3);
+        Turn turn = new Turn(playerList);
+
+        ArrayList<Player> expected = new ArrayList<>(turn.getPlayerList().keySet());
+        for (int i = 0; i < 100; i++) {
+            turn.setPlayerRandomOrder();
+            if (!expected.equals(new ArrayList<>(turn.getPlayerList().keySet())))
+                break;
+        }
+        assertEquals(expected, (new ArrayList<>(turn.getPlayerList().keySet())));
+
+    }
+
+    @Test
+    void testSetStatusPlayer2() {
+        Player player1 = new Player("Player 1", "red", null, "1");
+        Player player2 = new Player("Player 2", "blue", null, "2");
+        List<Player> playerList = new ArrayList<>();
+        playerList.add(player1);
+        playerList.add(player2);
+        Turn turn = new Turn(playerList);
+
+        turn.setStatusPlayer(player1, EnumTurn.DEFETED);
+        HashMap<Player, EnumTurn> expected = new HashMap<>();
+        expected.put(player1, EnumTurn.DEFETED);
+        expected.put(player2, EnumTurn.INGAME);
+        assertEquals(expected, turn.getPlayerList());
+
+        assertThrows(IllegalArgumentException.class,
+                () -> turn.setStatusPlayer(new Player("Player 3", "green", null, "3"), EnumTurn.DEFETED));
+    }
+
+    @Test
+    void testNextTurn2() {
+        Player player1 = new Player("Player 1", "red", null, "1");
+        Player player2 = new Player("Player 2", "blue", null, "2");
+        List<Player> playerList = new ArrayList<>();
+        playerList.add(player1);
+        playerList.add(player2);
+        Turn turn = new Turn(playerList);
+
+        turn.nextTurn();
+        assertEquals(player2, turn.getCurrentPlayer());
+        assertEquals(1, turn.getTurnNumber());
+
+        turn.setStatusPlayer(player2, EnumTurn.DEFETED);
+        turn.nextTurn();
+        assertEquals(player1, turn.getCurrentPlayer());
+        assertEquals(2, turn.getTurnNumber());
+
+        turn.setStatusPlayer(player1, EnumTurn.DEFETED);
+        assertThrows(IllegalStateException.class, turn::nextTurn);
+    }
+
 }
