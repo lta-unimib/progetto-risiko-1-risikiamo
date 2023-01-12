@@ -3,37 +3,56 @@ package com.project.progettorisikorisikiamobackend.gameState;
 import java.util.ArrayList;
 import java.util.List;
 import com.project.progettorisikorisikiamobackend.Turno.*;
+import com.project.progettorisikorisikiamobackend.gameState.interf.AGameState;
+import com.project.progettorisikorisikiamobackend.gameState.interf.IStateManager;
 import com.project.progettorisikorisikiamobackend.map.*;
 import com.project.progettorisikorisikiamobackend.player.Player;
 
-public class StartState extends GameState {
-    // ? Mappa ???????????????????
-    Map map;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-    public StartState(GameStateManager gameStateManager, String name, Turn turno, Map map) {
-        super(gameStateManager, name, turno);
-        this.map = map;
+public class StartState extends AGameState {
 
-    }
-
-    public void move() {
-
-        System.out.println("non è possibile effettuare spostamenti in questo stato");
-    }
-
-    public void attack() {
-
-        System.out.println("non è possibile effettuare attacchi in questo stato");
-    }
-
-    public void renforce() {
-        // ! Niente logica, lo state serve solo a orzare operazioni in un ordine preciso
-
-        // super.getGameStateManager().changeState("attacca");
+    public StartState(IStateManager gameStateManager, Player player) {
+        super(gameStateManager, player);
 
     }
 
-    public void endTurn() {
-        // super.getGameStateManager().changeState("fineTurno");
+    @Override
+    public void attack(Territory owner, Territory neighbor, int army) {
+        throw new UnsupportedOperationException("Can't attack in at this moment"); // To change body of generated
+                                                                                   // methods, choose Tools | Templates.
     }
+
+    @Override
+    public void move(Territory owner, Territory neighbor, int army) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void passTurn() {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void redeemReinforcementsCard() {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void placeReinforcements(Territory ownTerritory, int armies) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void init() {
+        // Ottiene i rinforzi
+        this.player.setReinforcements(player.getReinforcements() + player.getTerritories().size() / 3);
+
+    }
+
 }

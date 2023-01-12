@@ -1,8 +1,9 @@
 package com.project.progettorisikorisikiamobackend.gameState;
 
 import com.project.progettorisikorisikiamobackend.Turno.Turn;
+import com.project.progettorisikorisikiamobackend.gameState.interf.AGameState;
 
-public class EndTurnState extends GameState {
+public class EndTurnState extends AGameState {
 
     public EndTurnState(GameStateManager gameStateManager, String nameState, Turn turno) {
         super(gameStateManager, nameState, turno);

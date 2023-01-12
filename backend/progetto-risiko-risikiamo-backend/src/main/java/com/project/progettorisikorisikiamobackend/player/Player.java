@@ -11,7 +11,7 @@ import com.project.progettorisikorisikiamobackend.map.*;
 
 @Getter
 @EqualsAndHashCode
-public class Player {
+public class Player implements IPlayer {
 
     @NonNull
     private String name;
@@ -42,23 +42,23 @@ public class Player {
         this.reinforce = 0;
     }
 
-    public void attack(Territory owner, Territory neighbor, int army) throws IllegalArgumentException {
-        if (owner.getOwner().equals(neighbor.getOwner())) {
+    public void attack(Territory ownTerritory, Territory neighbor, int army) throws IllegalArgumentException {
+        if (ownTerritory.getOwner().equals(neighbor.getOwner())) {
             throw new IllegalArgumentException("Territori appartenenti allo stesso giocatore");
         }
-        if (owner.getArmy() <= army) {
+        if (ownTerritory.getArmy() <= army) {
             throw new IllegalArgumentException("Numero di truppe insufficienti");
         }
-        if (!owner.isNeighbor(neighbor)) {
+        if (!ownTerritory.isNeighbor(neighbor)) {
             throw new IllegalArgumentException("Territori non confinanti");
         }
         if (army < 1) {
             throw new IllegalArgumentException("Numero di truppe non valide");
         }
         if (neighbor.getArmy() == 0) {
-            neighbor.setOwner(owner.getOwner());
+            neighbor.setOwner(ownTerritory.getOwner());
             neighbor.addArmy(army);
-            owner.addArmy(-army);
+            ownTerritory.addArmy(-army);
         } else {
             int i = 0;
             Dice dado1 = new Dice(6);
@@ -69,40 +69,40 @@ public class Player {
                 if (dado1.getValue() > dado2.getValue()) {
                     neighbor.addArmy(-1);
                 } else {
-                    owner.addArmy(-1);
+                    ownTerritory.addArmy(-1);
                 }
                 i++;
             }
             if (neighbor.getArmy() == 0) {
-                neighbor.setOwner(owner.getOwner());
+                neighbor.setOwner(ownTerritory.getOwner());
                 neighbor.addArmy(army);
-                owner.addArmy(-army);
+                ownTerritory.addArmy(-army);
             }
         }
     }
 
-    public void move(Territory owner, Territory neighbor, int army) throws IllegalArgumentException {
-        if (!owner.isNeighbor(neighbor)) {
+    public void move(Territory ownTerritory, Territory neighbor, int army) throws IllegalArgumentException {
+        if (!ownTerritory.isNeighbor(neighbor)) {
             throw new IllegalArgumentException("Territori non confinanti");
         }
-        if (owner.getArmy() <= army) {
+        if (ownTerritory.getArmy() <= army) {
             throw new IllegalArgumentException("Numero di truppe insufficienti");
         }
         if (army < 1) {
             throw new IllegalArgumentException("Numero di truppe non valido");
         }
-        owner.addArmy(-army);
+        ownTerritory.addArmy(-army);
         neighbor.addArmy(army);
     }
 
-    public void reinforce(Territory owner, int army) {
-        if (owner.getOwner() != this) {
+    public void reinforce(Territory ownTerritory, int army) {
+        if (ownTerritory.getOwner() != this) {
             throw new IllegalArgumentException("Territorio non appartenente al giocatore");
         }
         if (army < 1) {
             throw new IllegalArgumentException("Numero di truppe non valido");
         }
-        owner.addArmy(army);
+        ownTerritory.addArmy(army);
     }
 
     public Player defeat() {
@@ -118,10 +118,10 @@ public class Player {
 
     }
 
-    public void drawCard() {
+    public void redeemReinforcementsCard() {
     }
 
-    public void placeReinforcements(int armies) {
+    public void placeReinforcements(Territory ownTerritory, int armies) {
     }
 
     public void setReinforce(int armies) throws IllegalArgumentException {
