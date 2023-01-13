@@ -1,9 +1,14 @@
 package com.project.progettorisikorisikiamobackend.gameState.interf;
 
+import com.project.progettorisikorisikiamobackend.Turno.Turn;
+import com.project.progettorisikorisikiamobackend.map.Map;
+
 public interface IContext {
 
-    public void setState(AGameState state);
+    public Turn getTurn();
 
-    public void getState();
+    public Map getMap();
+
+    public void setState(IState state);
 
 }
