@@ -1,54 +1,58 @@
 package com.project.progettorisikorisikiamobackend.TestCards;
 
 import com.project.progettorisikorisikiamobackend.Cards.*;
-import com.project.progettorisikorisikiamobackend.map.PlayerPlaceholder;
+import com.project.progettorisikorisikiamobackend.player.*;
 import com.project.progettorisikorisikiamobackend.map.Territory;
 import com.project.progettorisikorisikiamobackend.obiettivi.*;
 import com.project.progettorisikorisikiamobackend.Turno.*;
+import com.project.progettorisikorisikiamobackend.map.*;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.*;
+import java.util.List;
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
 public class TestCards {
-    @Test
-    void testDeckTerritories() {
-        List <Card> cards = new ArrayList<>();
-        CardTerritory card = new CardTerritory(new Territory("Italia"), "1", "Italia", "Territorio", "image");
-        cards.add(card);
-        Player player = new Player("p1", "red", 1, 0, 0, 0);
-        Player player2 = new Player("p2", "red", 1, 0, 0, 0);
+@Test
+public void testDeckObjectives() {
+    Map map = new Map("mappa");
+    List<Player> players = new ArrayList<>();
+    Player player1 = new Player("player1");
+    Player player2 = new Player("player2");
+    players.add(player1);
+    players.add(player2);
+    DeckObjectives deck = new DeckObjectives(map, players);
+    assertEquals(6, deck.getDeck().size());
+    assertEquals(OpponentDefeated.class, deck.getDeck().get(0).getClass() );
+    assertEquals(OpponentDefeated.class, deck.getDeck().get(1).getClass());
+    deck.draw(player2);
+    assertEquals(5, deck.getDeck().size());
 
-        List <Player> players = new ArrayList<>();
-        players.add(player);
-        players.add(player2);
-        Turn turno = new Turn(players);
-        DeckTerritories deck = new DeckTerritories(cards, turno);
-        deck.draw();
-        assertEquals(player, card.getOwner());
-        assertEquals("Territory: Italia Value: 1", card.toString());
-    }
-    
-    @Test
-    void testDeckObjectives() {
-      List<Card> cards = new ArrayList<>();
-        PlayerPlaceholder player = new PlayerPlaceholder("p1");
-        PlayerPlaceholder player2 = new PlayerPlaceholder("p2");
-        List <PlayerPlaceholder> players = new ArrayList<>();
-        players.add(player);
-        players.add(player2);
-        CardObjective card = new CardObjective(new OpponentDefeated( player2), "1", "image");
-        CardObjective card2 = new CardObjective(new OpponentDefeated( player), "1", "image");
-        cards.add(card);
-        cards.add(card2);
-        DeckObjectives deck = new DeckObjectives(cards, players);
-        deck.draw();
-        assertEquals(player, card.getOwner());
-        assertEquals("Objective: Sconfiggi il giocatore p2", card.toString());
-        assertEquals(player2, card2.getOwner());
-        assertEquals("Objective: Sconfiggi il giocatore p1", card2.toString());
-    }
-    
+}
+@Test
+public void testDeckTerritories() {
+    Map map = new Map("mappa");
+    List<Player> players = new ArrayList<>();
+    Player player1 = new Player("player1");
+    Player player2 = new Player("player2");
+    players.add(player1);
+    players.add(player2);
+    CardTerritory card1 = new CardTerritory("territorio1", EnumCard.CANNONE);
+    CardTerritory card2 = new CardTerritory("territorio2", EnumCard.CANNONE);
+    CardTerritory card3 = new CardTerritory("territorio3", EnumCard.CANNONE);
+    List<CardTerritory> deckTerritories = new ArrayList<>();
+    deckTerritories.add(card1);
+    deckTerritories.add(card2);    
+    deckTerritories.add(card3);
+    DeckTerritories deck = new DeckTerritories(deckTerritories, map, players );
+    assertEquals(3, deck.getDeck().size() );
+    assertEquals(CardTerritory.class, deck.getDeck().get(0).getClass() );
+    assertEquals(CardTerritory.class, deck.getDeck().get(1).getClass() );    
+    assertEquals(4, deck.reedemCards(deckTerritories, player2));
+}
+
+
+
 }
