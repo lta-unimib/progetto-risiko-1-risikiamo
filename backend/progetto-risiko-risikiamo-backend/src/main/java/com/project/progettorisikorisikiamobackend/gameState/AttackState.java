@@ -1,11 +1,11 @@
 package com.project.progettorisikorisikiamobackend.gameState;
 
-import com.project.progettorisikorisikiamobackend.Turno.*;
+
 
 public class AttackState extends GameState {
 
-    public AttackState(GameStateManager ganGameStateManager, String name, Turn turno) {
-        super(ganGameStateManager, name, turno);
+    public AttackState(GameStateManager ganGameStateManager, String name) {
+        super(ganGameStateManager, name);
 
     }
 

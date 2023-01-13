@@ -5,8 +5,8 @@ import com.project.progettorisikorisikiamobackend.Turno.*;
 import java.util.Scanner;
 
 public class RenforceState extends GameState {
-    public RenforceState(GameStateManager gameStateManager, String name, Turn turno) {
-        super(gameStateManager, name, turno);
+    public RenforceState(GameStateManager gameStateManager, String name) {
+        super(gameStateManager, name);
     }
 
     public void move() {
@@ -26,7 +26,7 @@ public class RenforceState extends GameState {
     }
 
     public void endTurn() {
-        super.getGameStateManager().changeState("fineTurno");
+        
     }
 
 }

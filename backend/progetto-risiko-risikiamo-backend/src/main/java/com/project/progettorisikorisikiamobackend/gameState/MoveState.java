@@ -4,8 +4,8 @@ import com.project.progettorisikorisikiamobackend.Turno.*;
 
 public class MoveState extends GameState {
 
-    public MoveState(GameStateManager gameStateManager, String name, Turn turno) {
-        super(gameStateManager, name, turno);
+    public MoveState(GameStateManager gameStateManager, String name) {
+        super(gameStateManager, name);
 
     }
 

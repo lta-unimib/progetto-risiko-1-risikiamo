@@ -4,8 +4,8 @@ import com.project.progettorisikorisikiamobackend.Turno.Turn;
 
 public class EndTurnState extends GameState {
 
-    public EndTurnState(GameStateManager gameStateManager, String nameState, Turn turno) {
-        super(gameStateManager, nameState, turno);
+    public EndTurnState(GameStateManager gameStateManager, String nameState) {
+        super(gameStateManager, nameState);
 
     }
 

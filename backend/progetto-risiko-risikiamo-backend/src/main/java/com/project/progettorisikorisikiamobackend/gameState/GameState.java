@@ -6,12 +6,11 @@ import lombok.*;
 public abstract class GameState {
     private @Getter @Setter String nameState;
     // ? Non ha senso qui turno ??? Così viene creato un turno a ogni stato ??
-    private @Getter @Setter Turn turno;
+    
     private @Getter GameStateManager gameStateManager;
 
-    GameState(GameStateManager gameStateManager, String nameState, Turn turno) {
+    GameState(GameStateManager gameStateManager, String nameState) {
         this.nameState = nameState;
-        this.turno = turno;
         this.gameStateManager = gameStateManager;
     }
 
