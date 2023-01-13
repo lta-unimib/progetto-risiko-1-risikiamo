@@ -1,6 +1,8 @@
 package com.project.progettorisikorisikiamobackend.gameState;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import com.project.progettorisikorisikiamobackend.Turno.*;
 import com.project.progettorisikorisikiamobackend.map.*;
@@ -10,8 +12,8 @@ public class StartState extends GameState {
     // ? Mappa ???????????????????
     Map map;
 
-    public StartState(GameStateManager gameStateManager, String name, Turn turno, Map map) {
-        super(gameStateManager, name, turno);
+    public StartState(GameStateManager gameStateManager, String name, Map map) {
+        super(gameStateManager, name);
         this.map = map;
 
     }
@@ -28,7 +30,14 @@ public class StartState extends GameState {
 
     public void renforce() {
         // ! Niente logica, lo state serve solo a orzare operazioni in un ordine preciso
-
+       
+       for (Continent c : map.getContinents()){
+        HashMap t = c.getTerritories();
+           for (Territory territory : (Collection<Territory>) t){
+               territory.setArmies(1);
+           }
+       }
+        
         // super.getGameStateManager().changeState("attacca");
 
     }
