@@ -2,9 +2,9 @@ package com.project.progettorisikorisikiamobackend.TestCards;
 
 import com.project.progettorisikorisikiamobackend.Cards.*;
 import com.project.progettorisikorisikiamobackend.player.*;
-import com.project.progettorisikorisikiamobackend.map.Territory;
+
 import com.project.progettorisikorisikiamobackend.obiettivi.*;
-import com.project.progettorisikorisikiamobackend.Turno.*;
+
 import com.project.progettorisikorisikiamobackend.map.*;
 
 import static org.junit.Assert.assertEquals;
