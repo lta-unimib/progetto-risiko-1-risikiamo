@@ -6,7 +6,7 @@ import com.project.progettorisikorisikiamobackend.player.Player;
 
 import lombok.*;
 
-@Getter
+
 public class Turn {
 
     private HashMap<Player, EnumTurn> playerList;
