@@ -1,4 +1,4 @@
-package com.project.progettorisikorisikiamobackend.cards;
+package com.project.progettorisikorisikiamobackend.Cards;
 import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;

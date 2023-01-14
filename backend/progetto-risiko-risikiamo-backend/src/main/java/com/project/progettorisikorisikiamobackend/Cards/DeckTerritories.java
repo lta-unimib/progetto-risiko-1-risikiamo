@@ -1,4 +1,4 @@
-package com.project.progettorisikorisikiamobackend.cards;
+package com.project.progettorisikorisikiamobackend.Cards;
 
 import java.util.List;
 import com.project.progettorisikorisikiamobackend.player.*;
