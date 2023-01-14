@@ -60,8 +60,13 @@ public class DeckTerritories  {
        
 
          }
+         
 
      }
+     for(CardTerritory card : cards) {
+        deck.add(card);
+        cards.remove(card);
+    }
      return combo;
     }
 }
