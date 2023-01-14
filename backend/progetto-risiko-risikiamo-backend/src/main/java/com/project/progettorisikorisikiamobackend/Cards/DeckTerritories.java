@@ -17,7 +17,7 @@ public class DeckTerritories  {
     private  List<CardTerritory> deck;
     private List <Player> players;
     private Map map;
-    public DeckTerritories( Map map, List<Player> players) throws Exception {
+    public DeckTerritories( Map map, List<Player> players)  {
         Dice d = new Dice(3);
         this.deck = new ArrayList<>();
         this.map = map;
@@ -33,8 +33,8 @@ public class DeckTerritories  {
                 case 3:
                     deck.add(new CardTerritory(t.getName(), EnumCard.CANNONE));
                     break;
-                default:
-                    throw new Exception("Errore nel lancio del dado");
+              default:
+                  break;
                     
                 }
                 

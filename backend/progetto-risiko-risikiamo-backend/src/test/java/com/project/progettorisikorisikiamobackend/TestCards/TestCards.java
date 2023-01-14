@@ -36,7 +36,8 @@ public void testDeckObjectives() {
     deck.draw(player2);
     assertTrue(OpponentDefeated.class == deck.draw(player1).getClass() || TotTerritories.class == deck.draw(player1).getClass()|| ConquestContinent.class == deck.draw(player1).getClass());
     
-    
+       
+
 
 }
 @Test
@@ -99,22 +100,22 @@ public void testDeckTerritories() {
     cards2.add(card4);
     cards2.add(card5);
     cards2.add(card6);
-    try{
+   
    daReedem.setDeck(cards2);
     assertEquals(10, daReedem.reedemCards(card4, card5, card6, player2));
     assertEquals(3, daReedem.getDeck().size());
-    }catch(IllegalArgumentException e) {
-        System.out.println(e.getMessage());
+    assertEquals(card4, daReedem.getDeck().get(0));
+    assertEquals(card5, daReedem.getDeck().get(1));
+    assertEquals(card6, daReedem.getDeck().get(2));
+  
 
     }catch(Exception e) {
         System.out.println(e.getMessage());
     }finally {
         System.out.println("test");
     }
-    }catch(Exception e) {
-        System.out.println(e.getMessage());
     }
-}
+   
 @Test
 public void testCardTerritory(){
     CardTerritory card = new CardTerritory("t1", EnumCard.CANNONE);

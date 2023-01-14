@@ -20,6 +20,8 @@ public class DeckObjectives  {
         this.deck = new ArrayList<>();
         for (Player player : players) {
             this.deck.add(new OpponentDefeated(player));
+            
+            
         }
         for (Continent c : map.getContinents()) {
             this.deck.add(new ConquestContinent(c));
@@ -36,7 +38,7 @@ public class DeckObjectives  {
         }
     }
     
-        
+  
     
     public Objective draw(Player drawerPlayer) {
         Collections.shuffle(deck);
@@ -49,4 +51,5 @@ public class DeckObjectives  {
          return pescata;
 
      }
-}
+    }
+
