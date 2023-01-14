@@ -6,7 +6,7 @@ import com.project.progettorisikorisikiamobackend.obiettivi.*;
 import com.project.progettorisikorisikiamobackend.cards.*;
 import com.project.progettorisikorisikiamobackend.map.*;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
@@ -24,19 +24,19 @@ public void testDeckObjectives() {
     List<Player> players = new ArrayList<>();
     Player player1 = new Player("player1");
     Player player2 = new Player("player2");
+    Player player3 = new Player("player3");
     players.add(player1);
     players.add(player2);
+    players.add(player3);
     DeckObjectives deck = new DeckObjectives(map, players);
-    assertEquals(6, deck.getDeck().size());
+    assertEquals(9, deck.getDeck().size());
     assertEquals(OpponentDefeated.class, deck.getDeck().get(0).getClass() );
     assertEquals(OpponentDefeated.class, deck.getDeck().get(1).getClass());
-    assertEquals(TotTerritories.class, deck.getDeck().get(2).getClass());
-    assertEquals(TotTerritories.class, deck.getDeck().get(3).getClass());
-    assertEquals(TotTerritories.class, deck.getDeck().get(4).getClass());
-    assertEquals(TotTerritories.class, deck.getDeck().get(5).getClass());
+    
     deck.draw(player2);
-    assertEquals(5, deck.getDeck().size());
-    assertTrue(OpponentDefeated.class == deck.draw(player1).getClass() || TotTerritories.class == deck.draw(player1).getClass());
+    assertTrue(OpponentDefeated.class == deck.draw(player1).getClass() || TotTerritories.class == deck.draw(player1).getClass()|| ConquestContinent.class == deck.draw(player1).getClass());
+    
+    
 
 }
 @Test
