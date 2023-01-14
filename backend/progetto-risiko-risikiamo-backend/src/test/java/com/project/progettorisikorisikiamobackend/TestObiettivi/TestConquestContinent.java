@@ -4,6 +4,7 @@ import com.project.progettorisikorisikiamobackend.obiettivi.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import com.project.progettorisikorisikiamobackend.map.*;
+import com.project.progettorisikorisikiamobackend.player.Player;
 import org.junit.jupiter.api.Test;
 
 public class TestConquestContinent {
@@ -17,14 +18,14 @@ public class TestConquestContinent {
             continent.addTerritory(territory);
         }
         map.addContinent(continent, "America");
-        PlayerPlaceholder player = new PlayerPlaceholder("player1");
+        Player player = new Player("player1", null, null, "0");
         for (Territory territory : continent.getTerritories().values()) {
             territory.setOwner(player);
         }
         Objective obiettivo = new ConquestContinent(continent);
         assertTrue(obiettivo.isCompleted(player));
         assertEquals("Conquista il continente continent1", obiettivo.getObjDescription());
-        PlayerPlaceholder player2 = new PlayerPlaceholder("player2");
+        Player player2 = new Player("player2", null, obiettivo, "0");
         continent.getTerritories().get("territory1").setOwner(player2);
         assertTrue(!obiettivo.isCompleted(player));
     }
