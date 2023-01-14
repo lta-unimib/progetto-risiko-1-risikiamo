@@ -99,9 +99,18 @@ public void testDeckTerritories() {
     cards2.add(card4);
     cards2.add(card5);
     cards2.add(card6);
+    try{
    daReedem.setDeck(cards2);
     assertEquals(10, daReedem.reedemCards(card4, card5, card6, player2));
+    assertEquals(3, daReedem.getDeck().size());
+    }catch(IllegalArgumentException e) {
+        System.out.println(e.getMessage());
 
+    }catch(Exception e) {
+        System.out.println(e.getMessage());
+    }finally {
+        System.out.println("test");
+    }
     }catch(Exception e) {
         System.out.println(e.getMessage());
     }
