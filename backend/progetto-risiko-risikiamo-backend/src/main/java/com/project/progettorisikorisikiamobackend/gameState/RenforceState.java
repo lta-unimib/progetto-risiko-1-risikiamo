@@ -1,32 +1,54 @@
 package com.project.progettorisikorisikiamobackend.gameState;
 
-//import
-import com.project.progettorisikorisikiamobackend.Turno.*;
-import java.util.Scanner;
+import com.project.progettorisikorisikiamobackend.gameState.interf.IContext;
+import com.project.progettorisikorisikiamobackend.gameState.interf.IState;
+import com.project.progettorisikorisikiamobackend.map.Territory;
+import com.project.progettorisikorisikiamobackend.player.Player;
 
-public class RenforceState extends GameState {
-    public RenforceState(GameStateManager gameStateManager, String name, Turn turno) {
-        super(gameStateManager, name, turno);
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
+public class RenforceState implements IState {
+
+    private IContext context;
+
+    @Override
+    public void attack(Territory owner, Territory neighbor, int army) {
+        throw new UnsupportedOperationException("Non puoi attaccare in questo stato");
+
     }
 
-    public void move() {
-
-        // super.getGameStateManager().changeState("sposta");
+    @Override
+    public void move(Territory owner, Territory neighbor, int army) {
+        throw new UnsupportedOperationException("Non puoi muovere in questo stato");
 
     }
 
-    public void attack() {
+    @Override
+    public void passTurn() {
 
-        // super.getGameStateManager().changeState("attacca");
+        context.setState(new NewTurnState(context));
+        context.getTurn().nextTurn();
+
     }
 
-    public void renforce() {
+    @Override
+    public void redeemReinforcementsCard() {
+        throw new UnsupportedOperationException("Non puoi muovere in questo stato");
 
-        // super.getTurno().getCurrentPlayer().placeReinforcements(rinforzi);
     }
 
-    public void endTurn() {
-        super.getGameStateManager().changeState("fineTurno");
+    @Override
+    public void placeReinforcements(Territory ownTerritory, int armies) {
+
+        Player player = context.getTurn().getCurrentPlayer();
+
+        player.placeReinforcements(ownTerritory, armies);
+
+        if (player.getReinforce() == 0) {
+            context.setState(new ActionState(context));
+        }
+
     }
 
 }

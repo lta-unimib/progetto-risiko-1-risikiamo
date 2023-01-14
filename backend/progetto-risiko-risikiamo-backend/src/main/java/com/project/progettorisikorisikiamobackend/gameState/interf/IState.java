@@ -4,4 +4,6 @@ import com.project.progettorisikorisikiamobackend.player.IPlayer;
 
 public interface IState extends IPlayer {
 
+    public void passTurn();
+
 }
