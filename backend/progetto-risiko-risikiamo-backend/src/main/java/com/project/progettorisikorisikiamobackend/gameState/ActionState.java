@@ -1,7 +1,5 @@
 package com.project.progettorisikorisikiamobackend.gameState;
 
-import javax.swing.Icon;
-
 import com.project.progettorisikorisikiamobackend.gameState.interf.IContext;
 import com.project.progettorisikorisikiamobackend.gameState.interf.IState;
 import com.project.progettorisikorisikiamobackend.map.Territory;

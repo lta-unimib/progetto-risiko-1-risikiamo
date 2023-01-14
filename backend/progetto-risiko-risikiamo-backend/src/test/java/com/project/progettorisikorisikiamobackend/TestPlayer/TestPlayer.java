@@ -89,8 +89,8 @@ public class TestPlayer {
 
         player.defeat();
         player.passTurn();
-        player.drawCard();
-        player.placeReinforcements(0);
+        player.redeemReinforcementsCard();
+        player.placeReinforcements(null, 0);
         player.surrend();
 
     }
