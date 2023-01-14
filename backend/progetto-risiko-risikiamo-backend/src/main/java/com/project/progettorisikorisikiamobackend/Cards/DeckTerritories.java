@@ -4,17 +4,42 @@ import java.util.List;
 import com.project.progettorisikorisikiamobackend.player.*;
 import java.util.Collections;
 import java.util.EnumMap;
-import lombok.Getter;
-import com.project.progettorisikorisikiamobackend.map.*;
+import lombok.*;
 
-@Getter
+
+import com.project.progettorisikorisikiamobackend.Turno.Dice;
+import com.project.progettorisikorisikiamobackend.map.*;
+import java.util.ArrayList;
+
+
+@Getter @Setter
 public class DeckTerritories  {
     private  List<CardTerritory> deck;
     private List <Player> players;
     private Map map;
-    public DeckTerritories(List<CardTerritory> deck, Map map, List<Player> players) {
-        this.deck = deck;
+    public DeckTerritories( Map map, List<Player> players) throws Exception {
+        Dice d = new Dice(3);
+        this.deck = new ArrayList<>();
         this.map = map;
+        for(Continent c : map.getContinents()){
+            for (Territory t : c.getTerritories().values()) {
+                switch (d.roll()) {
+                case 1:
+                    deck.add(new CardTerritory(t.getName(), EnumCard.FANTE));
+                    break;
+                case 2:
+                    deck.add(new CardTerritory(t.getName(), EnumCard.CAVALLO));
+                    break;
+                case 3:
+                    deck.add(new CardTerritory(t.getName(), EnumCard.CANNONE));
+                    break;
+                default:
+                    throw new Exception("Errore nel lancio del dado");
+                    
+                }
+                
+            }
+        }
         this.players = players;
     }
     public CardTerritory draw() {
@@ -39,37 +64,53 @@ public class DeckTerritories  {
         }
         return 0;
     }
-    
+
    
         
     
 
-     public int reedemCards(List <CardTerritory> cards, Player giocatoreDiTurno) {
-         int combo = calculateCombo(cards.get(0), cards.get(1), cards.get(2));
+     public int reedemCards(CardTerritory card1, CardTerritory card2, CardTerritory card3,  Player giocatoreDiTurno)throws IllegalArgumentException {
+         int combo = calculateCombo(card1, card2, card3);
          if(combo == 0) {
              return 0;
          }
+         List <Territory> control = new ArrayList<>(map.getTerritories(giocatoreDiTurno));
          
-         for(Continent c : map.getContinents()){
-            for (CardTerritory card : cards) {
-                Territory t = c.getTerritory(card.getName());
-                if(t.getOwner() == giocatoreDiTurno) {   
-                                 combo += 2;
-         }
+         if(map.isTerritoryInMap(card1.getName()) && map.isTerritoryInMap(card2.getName()) && map.isTerritoryInMap(card3.getName())){
+            if( !(this.getDeck().contains(card1) && this.getDeck().contains(card2) && this.getDeck().contains(card3))) {
+                if(control.contains(map.getTerritory(card1.getName())))
+                     combo += 2;
+                if(control.contains(map.getTerritory(card2.getName())))
+                     combo += 2;
+                if(control.contains(map.getTerritory(card3.getName())))
+                    combo += 2;
+                        
+             
+            }else{
+                throw new IllegalArgumentException("Carte duplicate");
+            }
+                
+        } else {
+        throw new IllegalArgumentException("I territori non esistono");
+        }
+            this.deck.add(card1);
+            this.deck.add(card2);
+            this.deck.add(card3);
+
+       
+       
+         
 
        
 
-         }
+         
          
 
-     }
-     for(CardTerritory card : cards) {
-        deck.add(card);
-        cards.remove(card);
-    }
+  
      return combo;
     }
 }
+
      
 
 
