@@ -30,8 +30,13 @@ public void testDeckObjectives() {
     assertEquals(6, deck.getDeck().size());
     assertEquals(OpponentDefeated.class, deck.getDeck().get(0).getClass() );
     assertEquals(OpponentDefeated.class, deck.getDeck().get(1).getClass());
+    assertEquals(TotTerritories.class, deck.getDeck().get(2).getClass());
+    assertEquals(TotTerritories.class, deck.getDeck().get(3).getClass());
+    assertEquals(TotTerritories.class, deck.getDeck().get(4).getClass());
+    assertEquals(TotTerritories.class, deck.getDeck().get(5).getClass());
     deck.draw(player2);
     assertEquals(5, deck.getDeck().size());
+    assertTrue(OpponentDefeated.class == deck.draw(player1).getClass() || TotTerritories.class == deck.draw(player1).getClass());
 
 }
 @Test
@@ -48,6 +53,9 @@ public void testDeckTerritories() {
     Player player2 = new Player("player2");
     players.add(player1);
     players.add(player2);
+    t1.setOwner(player2);
+    t2.setOwner(player2);
+    
     try{
     DeckTerritories deck = new DeckTerritories( map, players );
     assertEquals(2, deck.getDeck().size() );
@@ -65,17 +73,54 @@ public void testDeckTerritories() {
     CardTerritory card1 = new CardTerritory("c1", EnumCard.CANNONE);
     CardTerritory card2 = new CardTerritory("c2", EnumCard.CANNONE);
     CardTerritory card3 = new CardTerritory("c3", EnumCard.CANNONE);
+   
     List <CardTerritory> cards = new ArrayList<>();
     cards.add(card1);
     cards.add(card2);
     cards.add(card3);
     daReedem.setDeck(cards);
     assertEquals(4, daReedem.reedemCards(card1, card2, card3, player2));
+    assertEquals(0, daReedem.getDeck().size());
+    Territory t3 = new Territory("t3");
+    Territory t4 = new Territory("t4");
+    Territory t5 = new Territory("t5");
+    Continent c2 = new Continent("c2", 1);
+    c2.addTerritory(t3);
+    c2.addTerritory(t4);
+    c2.addTerritory(t5);
+    map.addContinent(c2, "c2");
+    t3.setOwner(player2);
+    t4.setOwner(player2);
+    t5.setOwner(player2);
+    CardTerritory card4 = new CardTerritory("t3", EnumCard.CANNONE);
+    CardTerritory card5 = new CardTerritory("t4", EnumCard.CANNONE);
+    CardTerritory card6 = new CardTerritory("t5", EnumCard.CANNONE);
+    List <CardTerritory> cards2 = new ArrayList<>();
+    cards2.add(card4);
+    cards2.add(card5);
+    cards2.add(card6);
+   daReedem.setDeck(cards2);
+    assertEquals(10, daReedem.reedemCards(card4, card5, card6, player2));
+
     }catch(Exception e) {
         System.out.println(e.getMessage());
     }
 }
+@Test
+public void testCardTerritory(){
+    CardTerritory card = new CardTerritory("t1", EnumCard.CANNONE);
+    assertEquals("t1", card.getName());
+    assertEquals(EnumCard.CANNONE, card.getType());
+    
 
 
 
+}
+@Test
+public void EnumCard(){
+    assertEquals("cannone", EnumCard.CANNONE.getType());
+    assertEquals("cavallo", EnumCard.CAVALLO.getType());
+    assertEquals("fante", EnumCard.FANTE.getType());
+    assertEquals("jolly", EnumCard.JOLLY.getType());
+}
 }
