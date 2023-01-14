@@ -4,7 +4,7 @@ package com.project.progettorisikorisikiamobackend.TestTurno;
 import org.junit.jupiter.api.Test;
 
 import com.project.progettorisikorisikiamobackend.Turno.*;
-
+import com.project.progettorisikorisikiamobackend.player.*;
 import static org.junit.Assert.assertEquals;
 
 import java.util.*;

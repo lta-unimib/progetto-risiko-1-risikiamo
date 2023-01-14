@@ -1,6 +1,6 @@
-package com.project.progettorisikorisikiamobackend.Cards;
+package com.project.progettorisikorisikiamobackend.cards;
 
-import com.project.progettorisikorisikiamobackend.Turno.*;
+import com.project.progettorisikorisikiamobackend.player.*;
 
 import lombok.*;
 public abstract class Card {

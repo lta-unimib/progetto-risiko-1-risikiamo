@@ -1,4 +1,4 @@
-package com.project.progettorisikorisikiamobackend.Cards;
+package com.project.progettorisikorisikiamobackend.cards;
 
 import com.project.progettorisikorisikiamobackend.obiettivi.Objective;
 import lombok.*;
