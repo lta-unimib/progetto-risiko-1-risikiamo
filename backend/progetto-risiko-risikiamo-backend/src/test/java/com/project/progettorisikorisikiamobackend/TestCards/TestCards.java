@@ -12,10 +12,8 @@ import com.project.progettorisikorisikiamobackend.map.Territory;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.List;
 import java.util.ArrayList;
-import com.project.progettorisikorisikiamobackend.Cards.CardTerritory;
-import com.project.progettorisikorisikiamobackend.Cards.DeckTerritories;
-import com.project.progettorisikorisikiamobackend.Cards.EnumCard;
-import com.project.progettorisikorisikiamobackend.Cards.DeckObjectives;
+import com.project.progettorisikorisikiamobackend.cards.*;
+import com.project.progettorisikorisikiamobackend.Cards.*;
 
 
 
@@ -39,7 +37,7 @@ void testDeckObjectives() {
     players.add(player2);
     players.add(player3);
     DeckObjectives deck = new DeckObjectives(map, players);
-    assertEquals(9, deck.getDeck().size());
+    assertEquals(10, deck.getDeck().size());
     assertEquals(OpponentDefeated.class, deck.getDeck().get(0).getClass() );
     assertEquals(OpponentDefeated.class, deck.getDeck().get(1).getClass());
     
@@ -66,8 +64,8 @@ void testDeckObjectives() {
     players.add(player2);
     t1.setOwner(player2);
     t2.setOwner(player2);
-    
-    try{
+     
+    try{   
     DeckTerritories deck = new DeckTerritories( map, players );
     assertEquals(2, deck.getDeck().size() );
     assertEquals(CardTerritory.class, deck.getDeck().get(0).getClass() );
