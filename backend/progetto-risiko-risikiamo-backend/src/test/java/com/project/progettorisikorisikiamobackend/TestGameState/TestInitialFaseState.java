@@ -13,7 +13,6 @@ import com.project.progettorisikorisikiamobackend.Turno.Turn;
 import com.project.progettorisikorisikiamobackend.gameState.InitialFaseState;
 import com.project.progettorisikorisikiamobackend.gameState.interf.IContext;
 import com.project.progettorisikorisikiamobackend.gameState.interf.IState;
-import com.project.progettorisikorisikiamobackend.map.Map;
 import com.project.progettorisikorisikiamobackend.map.Territory;
 import com.project.progettorisikorisikiamobackend.player.Player;
 

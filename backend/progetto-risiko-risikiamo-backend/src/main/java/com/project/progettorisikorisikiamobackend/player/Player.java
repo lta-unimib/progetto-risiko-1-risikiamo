@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.project.progettorisikorisikiamobackend.Cards.CardTerritory;
-import com.project.progettorisikorisikiamobackend.Cards.DeckTerritories;
 import com.project.progettorisikorisikiamobackend.Turno.*;
 import com.project.progettorisikorisikiamobackend.map.*;
 

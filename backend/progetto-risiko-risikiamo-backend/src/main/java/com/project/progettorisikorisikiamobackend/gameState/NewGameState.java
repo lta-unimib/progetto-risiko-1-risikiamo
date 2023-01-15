@@ -28,19 +28,19 @@ public class NewGameState implements IState {
 
     @Override
     public void endTurn() {
-        throw new UnsupportedOperationException("Non puoi muovere in questo stato");
+        throw new UnsupportedOperationException("Non puoi passare in questo stato");
 
     }
 
     @Override
     public void redeemReinforcementsCard(CardTerritory c1, CardTerritory c2, CardTerritory c3) {
-        throw new UnsupportedOperationException("Non puoi muovere in questo stato");
+        throw new UnsupportedOperationException("Non puoi riscattare in questo stato");
 
     }
 
     @Override
     public void placeReinforcements(Territory ownTerritory, int armies) {
-        throw new UnsupportedOperationException("Non puoi muovere in questo stato");
+        throw new UnsupportedOperationException("Non puoi piazzare rinforzi in questo stato");
 
     }
 

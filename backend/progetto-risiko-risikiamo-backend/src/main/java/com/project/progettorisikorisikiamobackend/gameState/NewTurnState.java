@@ -42,6 +42,10 @@ public class NewTurnState implements IState {
 
         p.setReinforce(r);
 
+        p.removeCard(c1);
+        p.removeCard(c2);
+        p.removeCard(c3);
+
     }
 
     @Override
