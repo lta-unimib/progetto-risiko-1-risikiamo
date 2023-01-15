@@ -1,10 +1,14 @@
 package com.project.progettorisikorisikiamobackend.gameState;
 
+import com.project.progettorisikorisikiamobackend.Cards.CardTerritory;
 import com.project.progettorisikorisikiamobackend.gameState.interf.IContext;
 import com.project.progettorisikorisikiamobackend.gameState.interf.IState;
 import com.project.progettorisikorisikiamobackend.map.Territory;
 import com.project.progettorisikorisikiamobackend.player.Player;
 
+import lombok.Getter;
+
+@Getter
 public class ActionState implements IState {
 
     private IContext context;
@@ -24,8 +28,6 @@ public class ActionState implements IState {
 
         if (neighbor.getOwner() == p) {
 
-            // TODO : Pesco la carta territorio, fa niente se sarebbe a fine turno
-
             this.haveConquest = true;
         }
 
@@ -38,12 +40,20 @@ public class ActionState implements IState {
 
         p.move(owner, neighbor, army);
 
-        context.setState(new NewTurnState(context));
+        this.endTurn();
 
     }
 
     @Override
-    public void passTurn() {
+    public void endTurn() {
+
+        if (this.haveConquest && !context.getDeckTerritories().getDeck().isEmpty()) {
+            Player p = context.getTurn().getCurrentPlayer();
+
+            CardTerritory t = context.getDeckTerritories().draw();
+
+            p.addCard(t);
+        }
 
         context.getTurn().nextTurn();
         context.setState(new NewTurnState(context));
@@ -51,7 +61,7 @@ public class ActionState implements IState {
     }
 
     @Override
-    public void redeemReinforcementsCard() {
+    public void redeemReinforcementsCard(CardTerritory c1, CardTerritory c2, CardTerritory c3) {
 
         throw new UnsupportedOperationException("Non puoi muovere in questo stato");
 

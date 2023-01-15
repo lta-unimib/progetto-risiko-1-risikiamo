@@ -49,7 +49,8 @@ public class TestInitialFaseState {
 
         turn = new Turn(players);
 
-        context = new mockClass(turn, null);
+        context = new MockContextClass(turn, null, null);
+        context.setState(new InitialFaseState(context));
 
     }
 
@@ -70,13 +71,14 @@ public class TestInitialFaseState {
     @Test
     void testPassTurn_shouldThrowUnsupportedOperationException() {
         IState initialFaseState = context.getState();
-        assertThrows(UnsupportedOperationException.class, () -> initialFaseState.passTurn());
+        assertThrows(UnsupportedOperationException.class, () -> initialFaseState.endTurn());
     }
 
     @Test
     void testRedeemReinforcementsCard_shouldThrowUnsupportedOperationException() {
         IState initialFaseState = context.getState();
-        assertThrows(UnsupportedOperationException.class, () -> initialFaseState.redeemReinforcementsCard());
+        assertThrows(UnsupportedOperationException.class, () -> initialFaseState.redeemReinforcementsCard(
+                null, null, null));
     }
 
     @Test
@@ -110,40 +112,4 @@ public class TestInitialFaseState {
 
     }
 
-    public class mockClass implements IContext {
-
-        Turn turn;
-
-        Map map;
-        IState state;
-
-        public mockClass(Turn turn, Map map) {
-            this.turn = turn;
-            this.map = map;
-
-            this.state = new InitialFaseState(this);
-        }
-
-        @Override
-        public Turn getTurn() {
-
-            return turn;
-        }
-
-        @Override
-        public Map getMap() {
-
-            return map;
-        }
-
-        @Override
-        public void setState(IState state) {
-            this.state = state;
-
-        }
-
-        public IState getState() {
-            return state;
-        }
-    }
 }

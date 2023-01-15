@@ -35,12 +35,12 @@ class TestNewGameState {
 
     @Test
     void testPassTurn_shouldThrowUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> this.state.passTurn());
+        assertThrows(UnsupportedOperationException.class, () -> this.state.endTurn());
     }
 
     @Test
     void testRedeemReinforcementsCard_shouldThrowUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> this.state.redeemReinforcementsCard());
+        assertThrows(UnsupportedOperationException.class, () -> this.state.redeemReinforcementsCard(null, null, null));
     }
 
     @Test

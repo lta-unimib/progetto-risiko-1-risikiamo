@@ -1,5 +1,7 @@
 package com.project.progettorisikorisikiamobackend.gameState;
 
+import com.project.progettorisikorisikiamobackend.Cards.CardTerritory;
+import com.project.progettorisikorisikiamobackend.Cards.DeckTerritories;
 import com.project.progettorisikorisikiamobackend.gameState.interf.IContext;
 import com.project.progettorisikorisikiamobackend.gameState.interf.IState;
 import com.project.progettorisikorisikiamobackend.map.*;
@@ -24,16 +26,21 @@ public class NewTurnState implements IState {
     }
 
     @Override
-    public void passTurn() {
+    public void endTurn() {
         context.getTurn().nextTurn();
         context.setState(new NewTurnState(context));
 
     }
 
     @Override
-    public void redeemReinforcementsCard() {
+    public void redeemReinforcementsCard(CardTerritory c1, CardTerritory c2, CardTerritory c3) {
 
         Player p = context.getTurn().getCurrentPlayer();
+
+        DeckTerritories deck = context.getDeckTerritories();
+        int r = deck.reedemCards(c1, c2, c3, p);
+
+        p.setReinforce(r);
 
     }
 

@@ -2,6 +2,7 @@ package com.project.progettorisikorisikiamobackend.gameState;
 
 import java.util.Set;
 
+import com.project.progettorisikorisikiamobackend.Cards.CardTerritory;
 import com.project.progettorisikorisikiamobackend.gameState.interf.IContext;
 import com.project.progettorisikorisikiamobackend.gameState.interf.IState;
 
@@ -33,12 +34,12 @@ public class InitialFaseState implements IState {
     }
 
     @Override
-    public void passTurn() {
+    public void endTurn() {
         throw new UnsupportedOperationException("Non puoi passare il turno in questo stato");
     }
 
     @Override
-    public void redeemReinforcementsCard() {
+    public void redeemReinforcementsCard(CardTerritory c1, CardTerritory c2, CardTerritory c3) {
         throw new UnsupportedOperationException("Non puoi redimere in questo stato");
 
     }

@@ -1,8 +1,7 @@
 package com.project.progettorisikorisikiamobackend.gameState;
 
+import com.project.progettorisikorisikiamobackend.Cards.CardTerritory;
 //import
-import com.project.progettorisikorisikiamobackend.Turno.*;
-import java.util.Scanner;
 import com.project.progettorisikorisikiamobackend.gameState.interf.IContext;
 import com.project.progettorisikorisikiamobackend.gameState.interf.IState;
 import com.project.progettorisikorisikiamobackend.map.Territory;
@@ -27,13 +26,13 @@ public class RenforceState implements IState {
     }
 
     @Override
-    public void passTurn() {
+    public void endTurn() {
         context.setState(new NewTurnState(context));
         context.getTurn().nextTurn();
     }
 
     @Override
-    public void redeemReinforcementsCard() {
+    public void redeemReinforcementsCard(CardTerritory c1, CardTerritory c2, CardTerritory c3) {
         throw new UnsupportedOperationException("Non puoi muovere in questo stato");
     }
 

@@ -71,9 +71,9 @@ class TestTurn {
 
     @Test
     void testSetPlayerRandomOrder() {
-        Player player1 = new Player("Player 1", "red", null, "1");
-        Player player2 = new Player("Player 2", "blue", null, "2");
-        Player player3 = new Player("Player 3", "green", null, "3");
+        Player player1 = new Player("Player 1", "red", null, null, "1");
+        Player player2 = new Player("Player 2", "blue", null, null, "2");
+        Player player3 = new Player("Player 3", "green", null, null, "3");
         List<Player> playerList = new ArrayList<>();
         playerList.add(player1);
         playerList.add(player2);
@@ -86,7 +86,9 @@ class TestTurn {
             if (!expected.equals(new ArrayList<>(turn.getPlayerList().keySet())))
                 break;
         }
-        assertEquals(expected, (new ArrayList<>(turn.getPlayerList().keySet())));
+        // ? qui è un pos strano se sorgono problemi sull'ordinamento dei plaire
+        // ? cosiderare qui
+        assertNotEquals(expected, new ArrayList<>(turn.getPlayerList().keySet()));
 
     }
 
