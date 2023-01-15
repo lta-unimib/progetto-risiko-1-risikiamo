@@ -12,7 +12,6 @@ import com.project.progettorisikorisikiamobackend.map.Territory;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.List;
 import java.util.ArrayList;
-import com.project.progettorisikorisikiamobackend.cards.*;
 import com.project.progettorisikorisikiamobackend.Cards.*;
 
 
