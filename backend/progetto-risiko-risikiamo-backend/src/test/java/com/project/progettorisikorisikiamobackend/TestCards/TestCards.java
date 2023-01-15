@@ -77,6 +77,23 @@ void testDeckObjectives() {
     }catch(Exception e) {
         System.out.println(e.getMessage());
     }
+}
+@Test
+void testReedemCards() {
+    Map map = new Map("mappa");
+    Continent c1 = new Continent("c1", 1);
+    Territory t1 = new Territory("t1");
+    Territory t2 = new Territory("t2");
+    c1.addTerritory(t2);
+    c1.addTerritory(t1);
+    map.addContinent(c1, "c1");
+    List<Player> players = new ArrayList<>();
+    Player player1 = new Player("player1");
+    Player player2 = new Player("player2");
+    players.add(player1);
+    players.add(player2);
+    t1.setOwner(player2);
+    t2.setOwner(player2);
     try{
     DeckTerritories daReedem = new DeckTerritories( map, players );
     CardTerritory card1 = new CardTerritory("c1", EnumCard.CANNONE);
