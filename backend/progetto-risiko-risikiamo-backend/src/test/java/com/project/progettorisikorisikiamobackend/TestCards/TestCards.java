@@ -19,7 +19,7 @@ import org.junit.jupiter.api.Test;
 
 public class TestCards {
 @Test
-public void testDeckObjectives() {
+ void testDeckObjectives() {
     Map map = new Map("mappa");
     List<Player> players = new ArrayList<>();
     Player player1 = new Player("player1");
@@ -41,7 +41,7 @@ public void testDeckObjectives() {
 
 }
 @Test
-public void testDeckTerritories() {
+ void testDeckTerritories() {
     Map map = new Map("mappa");
     Continent c1 = new Continent("c1", 1);
     Territory t1 = new Territory("t1");
@@ -117,7 +117,7 @@ public void testDeckTerritories() {
     }
    
 @Test
-public void testCardTerritory(){
+ void testCardTerritory(){
     CardTerritory card = new CardTerritory("t1", EnumCard.CANNONE);
     assertEquals("t1", card.getName());
     assertEquals(EnumCard.CANNONE, card.getType());
@@ -127,7 +127,7 @@ public void testCardTerritory(){
 
 }
 @Test
-public void EnumCard(){
+ void EnumCard(){
     assertEquals("cannone", EnumCard.CANNONE.getType());
     assertEquals("cavallo", EnumCard.CAVALLO.getType());
     assertEquals("fante", EnumCard.FANTE.getType());
