@@ -53,9 +53,11 @@ public class InitialFaseState implements IState {
         // Logica pizzare rinforzi
         if (reinforcementToPlace > 0 && armies <= reinforcementToPlace) {
 
-            player.reinforce(ownTerritory, armies);
+            player.placeReinforcements(ownTerritory, armies);
 
             reinforcementToPlace -= armies;
+        } else {
+            throw new IllegalArgumentException("Non puoi piazzare piu rinforzi di quelli che hai a disposizione");
         }
 
         for (Player p : playerList) {

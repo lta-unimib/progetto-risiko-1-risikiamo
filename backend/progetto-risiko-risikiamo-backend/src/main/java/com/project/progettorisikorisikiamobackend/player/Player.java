@@ -11,7 +11,7 @@ import com.project.progettorisikorisikiamobackend.map.*;
 
 @Getter
 @EqualsAndHashCode
-public class Player {
+public class Player implements IPlayer {
 
     @NonNull
     private String name;
@@ -95,33 +95,15 @@ public class Player {
         neighbor.addArmy(army);
     }
 
-    public void reinforce(Territory owner, int army) {
+    public void placeReinforcements(Territory owner, int army) {
         if (owner.getOwner() != this) {
             throw new IllegalArgumentException("Territorio non appartenente al giocatore");
         }
-        if (army < 1) {
+        if (army < 1 || army > this.reinforce) {
             throw new IllegalArgumentException("Numero di truppe non valido");
         }
         owner.addArmy(army);
-    }
-
-    public Player defeat() {
-
-        return null;
-    }
-
-    public void passTurn() {
-
-    }
-
-    public void surrend() {
-
-    }
-
-    public void drawCard() {
-    }
-
-    public void placeReinforcements(int armies) {
+        this.reinforce -= army;
     }
 
     public void setReinforce(int armies) throws IllegalArgumentException {
@@ -130,4 +112,5 @@ public class Player {
 
         this.reinforce = armies;
     }
+
 }

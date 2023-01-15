@@ -24,6 +24,7 @@ public class RenforceState implements IState {
     @Override
     public void move(Territory owner, Territory neighbor, int army) {
         throw new UnsupportedOperationException("Non puoi muovere in questo stato");
+    }
 
     @Override
     public void passTurn() {
@@ -47,5 +48,4 @@ public class RenforceState implements IState {
         }
     }
 
-    }
 }

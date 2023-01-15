@@ -8,8 +8,6 @@ public interface IPlayer {
 
     public void move(Territory owner, Territory neighbor, int army);
 
-    public void redeemReinforcementsCard();
-
     public void placeReinforcements(Territory ownTerritory, int armies);
 
 }

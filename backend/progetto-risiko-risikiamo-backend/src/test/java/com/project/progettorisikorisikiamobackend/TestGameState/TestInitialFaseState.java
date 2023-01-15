@@ -94,20 +94,19 @@ public class TestInitialFaseState {
     void testPlaceReinforcements_shouldChangeState() {
 
         InitialFaseState initialFaseState = (InitialFaseState) context.getState();
+        Player p1 = turn.getCurrentPlayer();
+        initialFaseState.placeReinforcements(ownTerritory, 3);
 
-        initialFaseState.placeReinforcements(ownTerritory, 4);
-        assertEquals(3, initialFaseState.getReinforcementToPlace());
-        assertEquals(4, turn.getCurrentPlayer().getReinforce());
+        assertNotEquals(p1, turn.getCurrentPlayer());
     }
 
     @Test
     void testPlaceReinforcements_shouldThrowIllegalArgumentException() {
 
         InitialFaseState initialFaseState = (InitialFaseState) context.getState();
-        Player p1 = turn.getCurrentPlayer();
-        initialFaseState.placeReinforcements(ownTerritory, 3);
 
-        assertNotEquals(p1, turn.getCurrentPlayer());
+        assertThrows(IllegalArgumentException.class, () -> initialFaseState.placeReinforcements(ownTerritory, 4));
+        ;
 
     }
 

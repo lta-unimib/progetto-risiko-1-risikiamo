@@ -6,4 +6,6 @@ public interface IState extends IPlayer {
 
     public void passTurn();
 
+    public void redeemReinforcementsCard();
+
 }

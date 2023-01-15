@@ -34,7 +34,6 @@ public class NewTurnState implements IState {
     public void redeemReinforcementsCard() {
 
         Player p = context.getTurn().getCurrentPlayer();
-        p.redeemReinforcementsCard();
 
     }
 
