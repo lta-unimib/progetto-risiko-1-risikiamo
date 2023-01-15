@@ -18,13 +18,14 @@ public class DeckObjectives  {
         this.map = map;
         this.players = players;
         this.deck = new ArrayList<>();
-        for (Player player : players) {
-            this.deck.add(new OpponentDefeated(player));
+        List <Objective> deckObj = new ArrayList<>();
+        for (Player p : players) {
+            deckObj.add(new OpponentDefeated(p));
             
             
         }
         for (Continent c : map.getContinents()) {
-            this.deck.add(new ConquestContinent(c));
+            deckObj.add(new ConquestContinent(c));
             
         }
        int numTerritories = 0;
@@ -33,9 +34,10 @@ public class DeckObjectives  {
         }
          numTerritories = numTerritories * (58 / 100);
         for(int i = 0; i < players.size(); i++) {
-            this.deck.add(new TotTerritories(numTerritories, map));
-         this.deck.add(new TotTerritories(numTerritories, map));
+            deckObj.add(new TotTerritories(numTerritories, map));
+            deckObj.add(new TotTerritories(numTerritories, map));
         }
+        deck.addAll(deckObj);
     }
     
   

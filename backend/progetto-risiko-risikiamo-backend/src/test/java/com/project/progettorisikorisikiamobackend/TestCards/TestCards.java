@@ -1,26 +1,36 @@
 package com.project.progettorisikorisikiamobackend.TestCards;
 
-import com.project.progettorisikorisikiamobackend.player.*;
-
-import com.project.progettorisikorisikiamobackend.obiettivi.*;
-import com.project.progettorisikorisikiamobackend.Cards.*;
-import com.project.progettorisikorisikiamobackend.map.*;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.List;
-
-
-
-import java.util.ArrayList;
-
+//jupiter
 import org.junit.jupiter.api.Test;
+import com.project.progettorisikorisikiamobackend.player.Player;
+import com.project.progettorisikorisikiamobackend.map.Map;
+import com.project.progettorisikorisikiamobackend.obiettivi.ConquestContinent;
+import com.project.progettorisikorisikiamobackend.obiettivi.OpponentDefeated;
+import com.project.progettorisikorisikiamobackend.obiettivi.TotTerritories;
+import com.project.progettorisikorisikiamobackend.map.Continent;
+import com.project.progettorisikorisikiamobackend.map.Territory;
+import static org.junit.jupiter.api.Assertions.*;
+import java.util.List;
+import java.util.ArrayList;
+import com.project.progettorisikorisikiamobackend.Cards.CardTerritory;
+import com.project.progettorisikorisikiamobackend.Cards.DeckTerritories;
+import com.project.progettorisikorisikiamobackend.Cards.EnumCard;
+import com.project.progettorisikorisikiamobackend.Cards.DeckObjectives;
+
+
 
 public class TestCards {
 @Test
- void testDeckObjectives() {
+void testDeckObjectives() {
     Map map = new Map("mappa");
+    Continent c1 = new Continent("c1", 1);
+    Territory t1 = new Territory("t1");
+    Territory t2 = new Territory("t2");
+    Territory t3 = new Territory("t3");
+    c1.addTerritory(t3);
+    c1.addTerritory(t2);
+    c1.addTerritory(t1);
+    map.addContinent(c1, "c1");
     List<Player> players = new ArrayList<>();
     Player player1 = new Player("player1");
     Player player2 = new Player("player2");
