@@ -16,6 +16,7 @@ import com.project.progettorisikorisikiamobackend.Cards.*;
 
 
 
+
 public class TestCards {
 @Test
 void testDeckObjectives() {
@@ -123,6 +124,7 @@ void testDeckObjectives() {
     cards3.add(card9);
     daReedem.setDeck(cards3);
     assertEquals(0, daReedem.reedemCards(card7, card8, card9, player2));
+    
 
     }catch(Exception e) {
         System.out.println(e.getMessage());
