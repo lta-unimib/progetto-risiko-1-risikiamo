@@ -99,9 +99,10 @@ public class Player implements IPlayer {
         if (ownTerritory.getOwner() != this) {
             throw new IllegalArgumentException("Territorio non appartenente al giocatore");
         }
-        if (army < 1) {
+        if (army < 1 || army > this.reinforce) {
             throw new IllegalArgumentException("Numero di truppe non valido");
         }
+        this.reinforce -= army;
         ownTerritory.addArmy(army);
     }
 

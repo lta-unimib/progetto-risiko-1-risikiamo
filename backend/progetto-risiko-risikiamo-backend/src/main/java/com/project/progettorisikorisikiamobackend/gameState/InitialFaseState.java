@@ -8,12 +8,15 @@ import com.project.progettorisikorisikiamobackend.gameState.interf.IState;
 import com.project.progettorisikorisikiamobackend.map.Territory;
 import com.project.progettorisikorisikiamobackend.player.Player;
 
-public class InitialFase implements IState {
+import lombok.Getter;
+
+public class InitialFaseState implements IState {
 
     IContext context;
+    @Getter
     int reinforcementToPlace;
 
-    public InitialFase(IContext context) {
+    public InitialFaseState(IContext context) {
         this.context = context;
         this.reinforcementToPlace = 3;
     }
@@ -67,7 +70,7 @@ public class InitialFase implements IState {
         }
 
         if (reinforcementToPlace == 0 || player.getReinforce() == 0) {
-            context.setState(new InitialFase(context));
+            context.setState(new InitialFaseState(context));
             context.getTurn().nextTurn();
         }
     }

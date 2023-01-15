@@ -58,6 +58,8 @@ public class TestPlayer {
         Player player = new Player("Player1", "Red", null, "1");
         Territory owner = new Territory("Territory1", player);
         owner.addArmy(5);
+        assertThrows(IllegalArgumentException.class, () -> player.reinforce(owner, 3));
+        player.setReinforce(3);
         player.reinforce(owner, 3);
         assertEquals(8, owner.getArmy());
     }

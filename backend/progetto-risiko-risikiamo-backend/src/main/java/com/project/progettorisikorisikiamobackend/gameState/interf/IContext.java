@@ -11,4 +11,6 @@ public interface IContext {
 
     public void setState(IState state);
 
+    public IState getState();
+
 }

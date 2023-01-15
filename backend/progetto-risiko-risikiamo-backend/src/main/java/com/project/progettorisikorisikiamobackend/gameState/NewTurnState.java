@@ -35,13 +35,15 @@ public class NewTurnState implements IState {
 
         Player p = context.getTurn().getCurrentPlayer();
         p.redeemReinforcementsCard();
-        context.setState(new RenforceState(context));
 
     }
 
     @Override
     public void placeReinforcements(Territory ownTerritory, int armies) {
 
+        Player p = context.getTurn().getCurrentPlayer();
+        p.placeReinforcements(ownTerritory, armies);
+        context.setState(new RenforceState(context));
     }
 
 }
