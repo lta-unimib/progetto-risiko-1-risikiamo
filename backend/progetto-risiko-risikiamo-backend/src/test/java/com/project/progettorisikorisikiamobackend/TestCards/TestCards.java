@@ -41,7 +41,7 @@ void testDeckObjectives() {
     assertEquals(OpponentDefeated.class, deck.getDeck().get(0).getClass() );
     assertEquals(OpponentDefeated.class, deck.getDeck().get(1).getClass());
     
-    deck.draw(player2);
+    
     assertTrue(OpponentDefeated.class == deck.draw(player1).getClass() || TotTerritories.class == deck.draw(player1).getClass()|| ConquestContinent.class == deck.draw(player1).getClass());
     
        
