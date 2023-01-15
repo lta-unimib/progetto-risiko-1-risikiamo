@@ -114,7 +114,15 @@ void testDeckObjectives() {
     assertEquals(card4, daReedem.getDeck().get(0));
     assertEquals(card5, daReedem.getDeck().get(1));
     assertEquals(card6, daReedem.getDeck().get(2));
-  
+    CardTerritory card7 = new CardTerritory("t3", EnumCard.FANTE);
+    CardTerritory card8 = new CardTerritory("t4", EnumCard.FANTE);
+    CardTerritory card9 = new CardTerritory("t5", EnumCard.CANNONE);
+    List <CardTerritory> cards3 = new ArrayList<>();
+    cards3.add(card7);
+    cards3.add(card8);
+    cards3.add(card9);
+    daReedem.setDeck(cards3);
+    assertEquals(0, daReedem.reedemCards(card7, card8, card9, player2));
 
     }catch(Exception e) {
         System.out.println(e.getMessage());
