@@ -19,7 +19,7 @@ public class TestTotTerritories {
             Territory territory = new Territory("territory" + i);
             continent.addTerritory(territory);
         }
-        map.addContinent(continent, "America");
+        map.addContinent(continent);
         Player player = new Player("player1", null, null, "0");
         for (Territory territory : continent.getTerritories().values()) {
             territory.setOwner(player);

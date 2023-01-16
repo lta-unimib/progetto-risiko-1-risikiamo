@@ -46,7 +46,7 @@ public class TestNewTurnState {
         c.addTerritory(new Territory("test2", p1));
 
         Map m = new Map("test");
-        m.addContinent(c, c.getName());
+        m.addContinent(c);
 
         context = new MockContextClass(turn, m, null, null, new DeckTerritories(m));
         context.setState(new NewTurnState(context));
