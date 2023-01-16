@@ -26,7 +26,7 @@ public class TestCards {
         c1.addTerritory(t3);
         c1.addTerritory(t2);
         c1.addTerritory(t1);
-        map.addContinent(c1, "c1");
+        map.addContinent(c1);
         List<Player> players = new ArrayList<>();
         Player player1 = new Player("player1");
         Player player2 = new Player("player2");
@@ -53,7 +53,7 @@ public class TestCards {
         Territory t2 = new Territory("t2");
         c1.addTerritory(t2);
         c1.addTerritory(t1);
-        map.addContinent(c1, "c1");
+        map.addContinent(c1);
         List<Player> players = new ArrayList<>();
         Player player1 = new Player("player1");
         Player player2 = new Player("player2");
@@ -86,7 +86,7 @@ public class TestCards {
         c1.addTerritory(t2);
         c1.addTerritory(t1);
         c1.addTerritory(t22);
-        map.addContinent(c1, "c1");
+        map.addContinent(c1);
         List<Player> players = new ArrayList<>();
         Player player1 = new Player("player1");
         Player player2 = new Player("player2");
@@ -115,7 +115,7 @@ public class TestCards {
         c2.addTerritory(t3);
         c2.addTerritory(t4);
         c2.addTerritory(t5);
-        map.addContinent(c2, "c2");
+        map.addContinent(c2);
         t3.setOwner(player2);
         t4.setOwner(player2);
         t5.setOwner(player2);

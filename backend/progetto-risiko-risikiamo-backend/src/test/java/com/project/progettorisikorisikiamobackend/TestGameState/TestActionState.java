@@ -48,7 +48,7 @@ public class TestActionState {
         ownTerritory.addNeighbor(neighbor);
         neighbor.addNeighbor(ownTerritory);
 
-        map.addContinent(c, c.getName());
+        map.addContinent(c);
 
         List<Player> players = new ArrayList<>();
         players.addAll(turn.getPlayerList().keySet());

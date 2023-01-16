@@ -119,31 +119,6 @@ public class Continent {
      * 
      * @aurhor Mauro Zozin
      * @param territory the territory to add
-     * @param id        the id of the territory
-     * 
-     */
-    public void addTerritory(Territory territory, String id) throws IllegalArgumentException {
-        if (territory == null || id == null) {
-            throw new IllegalArgumentException("Null argument not allowed");
-        }
-        if (id.isEmpty() || id.isBlank()) {
-            throw new IllegalArgumentException("The territory id is empty");
-        }
-        if (territories.containsKey(id)) {
-            throw new IllegalArgumentException("The territory id is already in the continent");
-        }
-        if (territories.containsValue(territory)) {
-            throw new IllegalArgumentException("The territory is already in the continent");
-        }
-
-        territories.put(id, territory);
-    }
-
-    /**
-     * Add a territory to the continent
-     * 
-     * @aurhor Mauro Zozin
-     * @param territory the territory to add
      * 
      */
     public void addTerritory(Territory territory) throws IllegalArgumentException {
