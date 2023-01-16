@@ -2,7 +2,6 @@ package com.project.progettorisikorisikiamobackend.gameState;
 
 import java.util.Set;
 
-import com.project.progettorisikorisikiamobackend.Cards.CardTerritory;
 import com.project.progettorisikorisikiamobackend.gameState.interf.IContext;
 import com.project.progettorisikorisikiamobackend.gameState.interf.IState;
 
@@ -20,28 +19,6 @@ public class InitialFaseState implements IState {
     public InitialFaseState(IContext context) {
         this.context = context;
         this.reinforcementToPlace = 3;
-    }
-
-    @Override
-    public void attack(Territory owner, Territory neighbor, int army) {
-        throw new UnsupportedOperationException("Non puoi attaccare in questo stato");
-
-    }
-
-    @Override
-    public void move(Territory owner, Territory neighbor, int army) {
-        throw new UnsupportedOperationException("Non puoi muovere in questo stato");
-    }
-
-    @Override
-    public void endTurn() {
-        throw new UnsupportedOperationException("Non puoi passare il turno in questo stato");
-    }
-
-    @Override
-    public void redeemReinforcementsCard(CardTerritory c1, CardTerritory c2, CardTerritory c3) {
-        throw new UnsupportedOperationException("Non puoi redimere in questo stato");
-
     }
 
     @Override

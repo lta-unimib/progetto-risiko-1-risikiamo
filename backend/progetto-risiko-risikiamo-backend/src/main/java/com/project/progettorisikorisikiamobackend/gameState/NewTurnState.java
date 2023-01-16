@@ -15,17 +15,6 @@ public class NewTurnState implements IState {
     private IContext context;
 
     @Override
-    public void attack(Territory owner, Territory neighbor, int army) {
-        throw new UnsupportedOperationException("Can't attack in at this moment");
-    }
-
-    @Override
-    public void move(Territory owner, Territory neighbor, int army) {
-        throw new UnsupportedOperationException("Can't move in at this moment");
-
-    }
-
-    @Override
     public void endTurn() {
         context.getTurn().nextTurn();
         context.setState(new NewTurnState(context));

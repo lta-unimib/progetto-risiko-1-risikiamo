@@ -59,19 +59,4 @@ public class ActionState implements IState {
         context.setState(new NewTurnState(context));
 
     }
-
-    @Override
-    public void redeemReinforcementsCard(CardTerritory c1, CardTerritory c2, CardTerritory c3) {
-
-        throw new UnsupportedOperationException("Non puoi muovere in questo stato");
-
-    }
-
-    @Override
-    public void placeReinforcements(Territory ownTerritory, int armies) {
-
-        throw new UnsupportedOperationException("Non puoi muovere in questo stato");
-
-    }
-
 }

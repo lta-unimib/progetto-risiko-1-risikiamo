@@ -15,17 +15,6 @@ public class RenforceState implements IState {
     private IContext context;
 
     @Override
-    public void attack(Territory owner, Territory neighbor, int army) {
-        throw new UnsupportedOperationException("Non puoi attaccare in questo stato");
-
-    }
-
-    @Override
-    public void move(Territory owner, Territory neighbor, int army) {
-        throw new UnsupportedOperationException("Non puoi muovere in questo stato");
-    }
-
-    @Override
     public void endTurn() {
         context.setState(new NewTurnState(context));
         context.getTurn().nextTurn();
