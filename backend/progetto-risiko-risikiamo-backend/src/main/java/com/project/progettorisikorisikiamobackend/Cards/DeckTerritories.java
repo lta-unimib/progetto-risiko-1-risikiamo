@@ -14,10 +14,9 @@ import java.util.ArrayList;
 @Setter
 public class DeckTerritories {
     private List<CardTerritory> deck;
-    private List<Player> players;
     private Map map;
 
-    public DeckTerritories(Map map, List<Player> players) {
+    public DeckTerritories(Map map) {
         Dice d = new Dice(3);
         this.deck = new ArrayList<>();
         this.map = map;
@@ -40,10 +39,11 @@ public class DeckTerritories {
 
             }
         }
-        this.players = players;
     }
 
     public CardTerritory draw() {
+        if (deck.isEmpty())
+            return null;
         Collections.shuffle(deck);
         CardTerritory pescata = deck.get(0);
         deck.remove(pescata);
@@ -68,6 +68,10 @@ public class DeckTerritories {
 
     public int reedemCards(CardTerritory card1, CardTerritory card2, CardTerritory card3, Player giocatoreDiTurno)
             throws IllegalArgumentException {
+
+        if (card1 == null || card2 == null || card3 == null) {
+            throw new IllegalArgumentException("Carte non valide");
+        }
         int combo = calculateCombo(card1, card2, card3);
         if (combo == 0) {
             return 0;

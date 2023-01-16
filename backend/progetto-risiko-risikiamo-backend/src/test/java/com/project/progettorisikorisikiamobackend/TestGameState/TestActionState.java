@@ -52,7 +52,7 @@ public class TestActionState {
 
         List<Player> players = new ArrayList<>();
         players.addAll(turn.getPlayerList().keySet());
-        context = new MockContextClass(turn, map, null, null, new DeckTerritories(map, players));
+        context = new MockContextClass(turn, map, null, null, new DeckTerritories(map));
         context.setState(new ActionState(context));
 
     }
