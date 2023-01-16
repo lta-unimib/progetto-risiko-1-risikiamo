@@ -4,8 +4,6 @@ import com.project.progettorisikorisikiamobackend.player.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import com.project.progettorisikorisikiamobackend.map.*;
 import org.junit.jupiter.api.Test;
 

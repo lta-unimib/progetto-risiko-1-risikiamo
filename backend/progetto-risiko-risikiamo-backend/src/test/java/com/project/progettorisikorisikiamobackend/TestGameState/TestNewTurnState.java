@@ -87,8 +87,8 @@ public class TestNewTurnState {
 
         newTurnState.redeemReinforcementsCard(c1, c2, c3);
 
-        assertEquals(p.getReinforce(), 10);
-        assertEquals(context.getDeckTerritories().getDeck().size(), 3);
+        assertEquals(10, p.getReinforce());
+        assertEquals(3, context.getDeckTerritories().getDeck().size());
 
     }
 
@@ -99,8 +99,8 @@ public class TestNewTurnState {
 
         p.setReinforce(1);
         newTurnState.placeReinforcements(ownTerritory, 1);
-        assertEquals(ownTerritory.getArmy(), 1);
-        assertEquals(p.getReinforce(), 0);
+        assertEquals(1, ownTerritory.getArmy());
+        assertEquals(0, p.getReinforce());
         assertEquals(context.getState().getClass(), RenforceState.class);
     }
 }
