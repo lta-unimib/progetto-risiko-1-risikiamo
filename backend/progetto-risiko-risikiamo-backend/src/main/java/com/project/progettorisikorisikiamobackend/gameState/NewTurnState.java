@@ -1,39 +1,48 @@
 package com.project.progettorisikorisikiamobackend.gameState;
 
 import com.project.progettorisikorisikiamobackend.Cards.CardTerritory;
-//import
+import com.project.progettorisikorisikiamobackend.Cards.DeckTerritories;
 import com.project.progettorisikorisikiamobackend.gameState.interf.IContext;
 import com.project.progettorisikorisikiamobackend.gameState.interf.IState;
-import com.project.progettorisikorisikiamobackend.map.Territory;
+import com.project.progettorisikorisikiamobackend.map.*;
 import com.project.progettorisikorisikiamobackend.player.Player;
 
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class RenforceState implements IState {
+public class NewTurnState implements IState {
 
     private IContext context;
 
     @Override
     public void endTurn() {
-        context.setState(new NewTurnState(context));
         context.getTurn().nextTurn();
+        context.setState(new NewTurnState(context));
+
     }
 
     @Override
     public void redeemReinforcementsCard(CardTerritory c1, CardTerritory c2, CardTerritory c3) {
-        throw new UnsupportedOperationException("Non puoi muovere in questo stato");
+
+        Player p = context.getTurn().getCurrentPlayer();
+
+        DeckTerritories deck = context.getDeckTerritories();
+        int r = deck.reedemCards(c1, c2, c3, p);
+
+        p.setReinforce(r);
+
+        p.removeCard(c1);
+        p.removeCard(c2);
+        p.removeCard(c3);
+
     }
 
     @Override
     public void placeReinforcements(Territory ownTerritory, int armies) {
 
-        Player player = context.getTurn().getCurrentPlayer();
-        player.placeReinforcements(ownTerritory, armies);
-
-        if (player.getReinforce() == 0) {
-            context.setState(new ActionState(context));
-        }
+        Player p = context.getTurn().getCurrentPlayer();
+        p.placeReinforcements(ownTerritory, armies);
+        context.setState(new RenforceState(context));
     }
 
 }

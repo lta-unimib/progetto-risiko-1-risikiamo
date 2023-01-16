@@ -2,16 +2,20 @@ package com.project.progettorisikorisikiamobackend.player;
 
 import com.project.progettorisikorisikiamobackend.obiettivi.*;
 
-import io.micrometer.common.lang.NonNull;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NonNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.project.progettorisikorisikiamobackend.Cards.CardTerritory;
 import com.project.progettorisikorisikiamobackend.Turno.*;
 import com.project.progettorisikorisikiamobackend.map.*;
 
 @Getter
 @EqualsAndHashCode
-public class Player {
+public class Player implements IPlayer {
 
     @NonNull
     private String name;
@@ -20,25 +24,39 @@ public class Player {
     private String id;
 
     private String color;
-    private Objective obiettivo;
+    private List<Objective> obiettivi;
+    private List<CardTerritory> carte;
     private int reinforce;
     // Carte
 
     // costruttore
-    public Player(String name, String color, Objective obiettivo, String id) {
+    public Player(String name, String color, String id) {
+        this(name, color, new ArrayList<>(), new ArrayList<>(), id);
+
+    }
+
+    public Player(String name, String color, Objective obj, String id) {
+        this(name, color, new ArrayList<>(), new ArrayList<>(), id);
+        this.obiettivi.add(obj);
+
+    }
+
+    public Player(String name, String color, List<Objective> obiettivi, List<CardTerritory> carte, String id) {
         this.color = color;
         this.name = name;
         this.id = id;
-        this.obiettivo = obiettivo;
+        this.obiettivi = obiettivi;
+        this.carte = carte;
         this.reinforce = 0;
 
     }
 
     public Player(String name) {
         this.name = name;
-        this.id = null;
+        this.id = name;
         this.color = null;
-        this.obiettivo = null;
+        this.obiettivi = new ArrayList<>();
+        this.carte = new ArrayList<>();
         this.reinforce = 0;
     }
 
@@ -55,30 +73,29 @@ public class Player {
         if (army < 1) {
             throw new IllegalArgumentException("Numero di truppe non valide");
         }
+
+        int i = army;
+        Dice dado1 = new Dice(6);
+        Dice dado2 = new Dice(6);
+        while (i > 0 && neighbor.getArmy() != 0) {
+            dado1.roll();
+            dado2.roll();
+            if (dado1.getValue() > dado2.getValue()) {
+                neighbor.addArmy(-1);
+            } else {
+                owner.addArmy(-1);
+                army--;
+
+            }
+            i--;
+        }
         if (neighbor.getArmy() == 0) {
             neighbor.setOwner(owner.getOwner());
-            neighbor.addArmy(army);
             owner.addArmy(-army);
-        } else {
-            int i = 0;
-            Dice dado1 = new Dice(6);
-            Dice dado2 = new Dice(6);
-            while (i < army) {
-                dado1.roll();
-                dado2.roll();
-                if (dado1.getValue() > dado2.getValue()) {
-                    neighbor.addArmy(-1);
-                } else {
-                    owner.addArmy(-1);
-                }
-                i++;
-            }
-            if (neighbor.getArmy() == 0) {
-                neighbor.setOwner(owner.getOwner());
-                neighbor.addArmy(army);
-                owner.addArmy(-army);
-            }
+            neighbor.addArmy(army);
+
         }
+
     }
 
     public void move(Territory owner, Territory neighbor, int army) throws IllegalArgumentException {
@@ -95,33 +112,15 @@ public class Player {
         neighbor.addArmy(army);
     }
 
-    public void reinforce(Territory owner, int army) {
+    public void placeReinforcements(Territory owner, int army) {
         if (owner.getOwner() != this) {
             throw new IllegalArgumentException("Territorio non appartenente al giocatore");
         }
-        if (army < 1) {
+        if (army < 1 || army > this.reinforce) {
             throw new IllegalArgumentException("Numero di truppe non valido");
         }
         owner.addArmy(army);
-    }
-
-    public Player defeat() {
-
-        return null;
-    }
-
-    public void passTurn() {
-
-    }
-
-    public void surrend() {
-
-    }
-
-    public void drawCard() {
-    }
-
-    public void placeReinforcements(int armies) {
+        this.reinforce -= army;
     }
 
     public void setReinforce(int armies) throws IllegalArgumentException {
@@ -129,5 +128,21 @@ public class Player {
             throw new IllegalArgumentException("Can not set reinforce below 0");
 
         this.reinforce = armies;
+    }
+
+    public void addObiettivo(Objective obiettivo) {
+        this.obiettivi.add(obiettivo);
+    }
+
+    public void removeObiettivo(Objective obiettivo) {
+        this.obiettivi.remove(obiettivo);
+    }
+
+    public void addCard(CardTerritory card) {
+        this.carte.add(card);
+    }
+
+    public void removeCard(CardTerritory card) {
+        this.carte.remove(card);
     }
 }

@@ -4,8 +4,6 @@ import com.project.progettorisikorisikiamobackend.player.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import com.project.progettorisikorisikiamobackend.map.*;
 import org.junit.jupiter.api.Test;
 
@@ -57,8 +55,12 @@ public class TestPlayer {
     public void testReinforce() {
         Player player = new Player("Player1", "Red", null, "1");
         Territory owner = new Territory("Territory1", player);
-        owner.addArmy(5);
-        player.reinforce(owner, 3);
+        owner.addArmy(6);
+        assertThrows(IllegalArgumentException.class, () -> player.placeReinforcements(owner, 3));
+
+        player.setReinforce(6);
+        player.placeReinforcements(owner, 2);
+
         assertEquals(8, owner.getArmy());
     }
 
@@ -67,7 +69,7 @@ public class TestPlayer {
         Player player = new Player("Player1", "Red", null, "1");
         Player otherPlayer = new Player("Player2", "Blue", null, "2");
         Territory owner = new Territory("Territory1", otherPlayer);
-        assertThrows(IllegalArgumentException.class, () -> player.reinforce(owner, 3));
+        assertThrows(IllegalArgumentException.class, () -> player.placeReinforcements(owner, 3));
     }
 
     @Test
@@ -83,15 +85,4 @@ public class TestPlayer {
         assertThrows(IllegalArgumentException.class, () -> player.setReinforce(-1));
     }
 
-    @Test
-    public void unemplementedMethor() {
-        Player player = new Player("Player1", "Red", null, "1");
-
-        player.defeat();
-        player.passTurn();
-        player.drawCard();
-        player.placeReinforcements(0);
-        player.surrend();
-
-    }
 }
