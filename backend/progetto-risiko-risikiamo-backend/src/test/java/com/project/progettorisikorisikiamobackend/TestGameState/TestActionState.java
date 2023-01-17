@@ -37,6 +37,7 @@ public class TestActionState {
         Player p2 = new Player("p2");
         Continent c = new Continent("c", 1);
         turn = new Turn(List.of(p1, p2));
+        turn.nextTurn();
 
         ownTerritory = new Territory("test", p1);
         neighbor = new Territory("neighbor", p1);
@@ -51,7 +52,7 @@ public class TestActionState {
         map.addContinent(c);
 
         List<Player> players = new ArrayList<>();
-        players.addAll(turn.getPlayerList().keySet());
+        players.addAll(turn.getInGamePlayerList());
         context = new MockContextClass(turn, map, null, null, new DeckTerritories(map));
         context.setState(new ActionState(context));
 

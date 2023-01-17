@@ -21,6 +21,8 @@ class TestTurn {
 
         Turn turn = new Turn(playerList);
 
+        turn.nextTurn();
+
         assertEquals(playerList.get(0), turn.getCurrentPlayer());
 
         turn.nextTurn();
@@ -33,23 +35,6 @@ class TestTurn {
     }
 
     @Test
-    void testSetStatusPlayer() {
-
-        List<Player> playerList = new ArrayList<>();
-        Player player1 = new Player("Player 1");
-        Player player2 = new Player("Player 2");
-        playerList.add(player1);
-        playerList.add(player2);
-
-        Turn turn = new Turn(playerList);
-        turn.setStatusPlayer(player1, EnumTurn.WIN);
-
-        assertEquals(EnumTurn.WIN, turn.getPlayerList().get(player1));
-
-        assertEquals(EnumTurn.LOST, turn.getPlayerList().get(player2));
-    }
-
-    @Test
     void testIsTurnOfPlayer() {
 
         List<Player> playerList = new ArrayList<>();
@@ -59,6 +44,7 @@ class TestTurn {
         playerList.add(player2);
 
         Turn turn = new Turn(playerList);
+        turn.nextTurn();
 
         assertTrue(turn.isTurnOfPlayer(player1));
 
@@ -80,15 +66,15 @@ class TestTurn {
         playerList.add(player3);
         Turn turn = new Turn(playerList);
 
-        ArrayList<Player> expected = new ArrayList<>(turn.getPlayerList().keySet());
+        ArrayList<Player> expected = new ArrayList<>(turn.getInGamePlayerList());
         for (int i = 0; i < 100; i++) {
             turn.setPlayerRandomOrder();
-            if (!expected.equals(new ArrayList<>(turn.getPlayerList().keySet())))
+            if (!expected.equals(new ArrayList<>(turn.getInGamePlayerList())))
                 break;
         }
         // ? qui è un pos strano se sorgono problemi sull'ordinamento dei plaire
         // ? cosiderare qui
-        assertNotEquals(expected, new ArrayList<>(turn.getPlayerList().keySet()));
+        assertNotEquals(expected, new ArrayList<>(turn.getInGamePlayerList()));
 
     }
 
@@ -101,14 +87,15 @@ class TestTurn {
         playerList.add(player2);
         Turn turn = new Turn(playerList);
 
-        turn.setStatusPlayer(player1, EnumTurn.DEFETED);
-        HashMap<Player, EnumTurn> expected = new HashMap<>();
-        expected.put(player1, EnumTurn.DEFETED);
-        expected.put(player2, EnumTurn.INGAME);
-        assertEquals(expected, turn.getPlayerList());
+        turn.defeatPlayer(player1, player2);
+        assertEquals(1, turn.getInGamePlayerList().size());
+        assertEquals(1, turn.getDefeatedPlayerList().size());
+        assertEquals(player2, turn.getDefeatedPlayerList().get(0).getLeft());
+        assertEquals(player1, turn.getDefeatedPlayerList().get(0).getRight());
 
-        assertThrows(IllegalArgumentException.class,
-                () -> turn.setStatusPlayer(new Player("Player 3", "green", null, "3"), EnumTurn.DEFETED));
+        turn.nextTurn();
+        assertThrows(IllegalArgumentException.class, () -> turn.defeatPlayer(player1, player2));
+        assertEquals(player1, turn.getWinner());
     }
 
     @Test
@@ -121,16 +108,96 @@ class TestTurn {
         Turn turn = new Turn(playerList);
 
         turn.nextTurn();
-        assertEquals(player2, turn.getCurrentPlayer());
+        assertEquals(player1, turn.getCurrentPlayer());
+        assertEquals(1, turn.getTurnNumberInGame());
         assertEquals(1, turn.getTurnNumber());
 
-        turn.setStatusPlayer(player2, EnumTurn.DEFETED);
+        turn.defeatPlayer(player2, player2);
         turn.nextTurn();
         assertEquals(player1, turn.getCurrentPlayer());
-        assertEquals(2, turn.getTurnNumber());
+        assertEquals(1, turn.getTurnNumber());
 
-        turn.setStatusPlayer(player1, EnumTurn.DEFETED);
-        assertThrows(IllegalStateException.class, turn::nextTurn);
+        assertThrows(IllegalArgumentException.class, () -> turn.defeatPlayer(player1, player2));
+
+        assertEquals(player2, turn.getDefeatedBy(player2));
+
+    }
+
+    @Test
+    void testAddPlayer() {
+        Player player1 = new Player("Player 1", "red", null, "1");
+        Player player2 = new Player("Player 2", "blue", null, "2");
+        Turn turn = new Turn();
+        turn.addPlayer(player1);
+        turn.addPlayer(player2);
+
+        turn.nextTurn();
+        assertThrows(IllegalArgumentException.class, () -> turn.addPlayer(player1));
+        assertEquals(player1, turn.getCurrentPlayer());
+        assertEquals(2, turn.getInGamePlayerList().size());
+
+    }
+
+    @Test
+    void setTurnNumberInGame() {
+        Player player1 = new Player("Player 1", "red", null, "1");
+        Player player2 = new Player("Player 2", "blue", null, "2");
+        Turn turn = new Turn();
+        turn.addPlayer(player1);
+        turn.addPlayer(player2);
+
+        turn.nextTurn();
+
+        turn.setTurnNumberInGame(4);
+        assertEquals(4, turn.getTurnNumberInGame());
+        assertEquals(6, turn.getTurnNumber());
+
+        turn.nextTurn();
+
+        assertEquals(4, turn.getTurnNumberInGame());
+        assertEquals(7, turn.getTurnNumber());
+
+    }
+
+    @Test
+    void setWinTest() {
+        Player player1 = new Player("Player 1", "red", null, "1");
+        Player player2 = new Player("Player 2", "blue", null, "2");
+        Turn turn = new Turn();
+        turn.addPlayer(player1);
+        turn.addPlayer(player2);
+
+        turn.nextTurn();
+
+        turn.setWin(player1);
+        assertEquals(player1, turn.getWinner());
+        assertEquals(1, turn.getTurnNumberInGame());
+        assertEquals(1, turn.getTurnNumber());
+
+        turn.nextTurn();
+
+        assertThrows(IllegalArgumentException.class, () -> turn.setWin(player2));
+        assertEquals(player1, turn.getWinner());
+        assertEquals(1, turn.getTurnNumberInGame());
+        assertEquals(1, turn.getTurnNumber());
+
+    }
+
+    @Test
+    void test() {
+        Player player1 = new Player("Player 1", "red", null, "1");
+
+        Turn turn = new Turn();
+
+        assertThrows(IllegalArgumentException.class, () -> turn.addPlayer(null));
+        assertThrows(IllegalArgumentException.class, () -> turn.defeatPlayer(null, null));
+        assertThrows(IllegalArgumentException.class, () -> turn.defeatPlayer(player1, null));
+        assertThrows(IllegalArgumentException.class, () -> turn.defeatPlayer(null, player1));
+        assertThrows(IllegalArgumentException.class, () -> turn.defeatPlayer(player1, player1));
+        assertThrows(IllegalArgumentException.class, () -> turn.setWin(null));
+        assertThrows(IllegalArgumentException.class, () -> turn.setTurnNumberInGame(-1));
+        assertThrows(IllegalArgumentException.class, () -> turn.setTurnNumberInGame(0));
+
     }
 
 }

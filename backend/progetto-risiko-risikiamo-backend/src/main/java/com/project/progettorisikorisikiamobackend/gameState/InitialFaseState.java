@@ -1,6 +1,6 @@
 package com.project.progettorisikorisikiamobackend.gameState;
 
-import java.util.Set;
+import java.util.List;
 
 import com.project.progettorisikorisikiamobackend.gameState.interf.IContext;
 import com.project.progettorisikorisikiamobackend.gameState.interf.IState;
@@ -25,7 +25,7 @@ public class InitialFaseState implements IState {
     public void placeReinforcements(Territory ownTerritory, int armies) {
 
         Player player = context.getTurn().getCurrentPlayer();
-        Set<Player> playerList = context.getTurn().getPlayerList().keySet();
+        List<Player> playerList = context.getTurn().getInGamePlayerList();
 
         boolean flag = false;
         // Logica pizzare rinforzi
