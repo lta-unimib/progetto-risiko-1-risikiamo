@@ -136,4 +136,9 @@ public class Turn {
 
         return null;
     }
+
+    public void surrender(Player player) {
+        this.defeatPlayer(player, player);
+
+    }
 }

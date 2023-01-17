@@ -2,12 +2,12 @@ package com.project.progettorisikorisikiamobackend.services;
 
 import java.util.HashMap;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.progettorisikorisikiamobackend.Turno.Dice;
-import com.project.progettorisikorisikiamobackend.Turno.Player;
+
 import com.project.progettorisikorisikiamobackend.domain.Game;
+import com.project.progettorisikorisikiamobackend.player.Player;
 import com.project.progettorisikorisikiamobackend.services.mapper.dto.GameDto;
 import com.project.progettorisikorisikiamobackend.services.mapper.dto.PlayerDto;
 
@@ -31,7 +31,7 @@ public class GameService implements IGameService {
 
     @Override
     public String postAddPlayer(PlayerDto playerDto, String gameId) {
-        com.project.progettorisikorisikiamobackend.domain.Player player = playerDto.toPlayer();
+        Player player = playerDto.toPlayer();
         games.get(gameId).addPlayer(player);
 
         return player.getId();

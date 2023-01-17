@@ -4,20 +4,20 @@ public interface IPlayerService {
 
     // * put Indica il tipo di risposta (get, post, put, delete)
 
-    public void putTurn(String gameId, String playerId);
+    public void turn(String gameId, String playerId);
 
-    public void putSkip(String gameId, String playerId);
+    public void play(String gameId, String playerId);
 
-    public void putSurrend(String gameId, String playerId);
+    public void surrend(String gameId, String playerId);
 
-    public void putAttack(String gameId, String playerId);
+    public void endTurn(String gameId, String playerId);
 
-    public void putMove(String gameId, String playerId);
+    public void redeemReinforcementsCard(String gameId, String playerId, String c1, String c2, String c3);
 
-    public void putPlace(String gameId, String playerId);
+    public void placeReinforcements(String gameId, String playerId, String ownTerritory, int armies);
 
-    public void putRenforce(String gameId, String playerId);
+    public void attack(String gameId, String playerId, String owner, String neighbor, int army);
 
-    public void putPlay(String gameId, String playerId);
+    public void move(String gameId, String playerId, String owner, String neighbor, int army);
 
 }

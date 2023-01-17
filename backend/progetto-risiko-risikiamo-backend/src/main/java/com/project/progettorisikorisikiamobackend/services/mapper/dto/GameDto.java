@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.project.progettorisikorisikiamobackend.domain.Game;
-import com.project.progettorisikorisikiamobackend.domain.Player;
+
 import com.project.progettorisikorisikiamobackend.map.Map;
 
 import io.micrometer.common.lang.NonNull;

@@ -34,7 +34,7 @@ public class TestCards {
         players.add(player1);
         players.add(player2);
         players.add(player3);
-        DeckObjectives deck = new DeckObjectives(map, players);
+        DeckObjectives deck = new DeckObjectives(map, null, players);
         assertEquals(10, deck.getDeck().size());
         assertEquals(OpponentDefeated.class, deck.getDeck().get(0).getClass());
         assertEquals(OpponentDefeated.class, deck.getDeck().get(1).getClass());

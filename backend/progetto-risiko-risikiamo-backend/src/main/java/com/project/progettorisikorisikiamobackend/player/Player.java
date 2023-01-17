@@ -27,7 +27,6 @@ public class Player implements IPlayer {
     private List<Objective> obiettivi;
     private List<CardTerritory> carte;
     private int reinforce;
-    // Carte
 
     // costruttore
     public Player(String name, String color, String id) {

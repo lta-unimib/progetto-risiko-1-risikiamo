@@ -1,6 +1,6 @@
 package com.project.progettorisikorisikiamobackend.services.mapper.dto;
 
-import com.project.progettorisikorisikiamobackend.domain.Player;
+import com.project.progettorisikorisikiamobackend.player.Player;
 
 import io.micrometer.common.lang.NonNull;
 import jakarta.validation.constraints.NotBlank;
@@ -14,6 +14,6 @@ public class PlayerDto {
     private String id;
 
     public Player toPlayer() {
-        return new Player();
+        return new Player(id);
     }
 }

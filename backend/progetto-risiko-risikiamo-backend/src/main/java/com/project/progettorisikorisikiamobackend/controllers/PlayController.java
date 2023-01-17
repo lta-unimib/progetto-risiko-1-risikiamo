@@ -25,7 +25,7 @@ public class PlayController {
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<String> putTurn(@PathVariable String gameId, @PathVariable String playerId) {
-        playerService.putTurn(playerId, gameId);
+        playerService.turn(playerId, gameId);
         return ResponseEntity.ok("Start Turn of player " + playerId);
     }
 
@@ -33,7 +33,7 @@ public class PlayController {
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<String> putSkip(@PathVariable String gameId, @PathVariable String playerId) {
-        playerService.putSkip(playerId, gameId);
+        playerService.endTurn(playerId, gameId);
         return ResponseEntity.ok("Turn Skipped");
     }
 
@@ -41,39 +41,43 @@ public class PlayController {
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<String> putSurrend(@PathVariable String gameId, @PathVariable String playerId) {
-        playerService.putSurrend(playerId, gameId);
+        playerService.surrend(playerId, gameId);
         return ResponseEntity.ok("Surrend");
     }
 
     @PutMapping("/attack")
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<String> putAttack(@PathVariable String gameId, @PathVariable String playerId) {
-        playerService.putAttack(playerId, gameId);
+    public ResponseEntity<String> putAttack(@PathVariable String gameId, @PathVariable String playerId, String owner,
+            String neighbor, int army) {
+        playerService.attack(playerId, gameId, owner, neighbor, army);
         return ResponseEntity.ok("Attack");
     }
 
     @PutMapping("/move")
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<String> putMove(@PathVariable String gameId, @PathVariable String playerId) {
-        playerService.putMove(playerId, gameId);
+    public ResponseEntity<String> putMove(@PathVariable String gameId, @PathVariable String playerId, String owner,
+            String neighbor, int army) {
+        playerService.move(playerId, gameId, owner, neighbor, army);
         return ResponseEntity.ok("Move");
     }
 
     @PutMapping("/place")
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<String> putPlace(@PathVariable String gameId, @PathVariable String playerId) {
-        playerService.putPlace(playerId, gameId);
+    public ResponseEntity<String> putPlace(@PathVariable String gameId, @PathVariable String playerId, String owner,
+            int armies) {
+        playerService.placeReinforcements(gameId, playerId, owner, armies);
         return ResponseEntity.ok("Piazza rinforzi");
     }
 
     @PutMapping("/renforce")
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<String> putRenforce(@PathVariable String gameId, @PathVariable String playerId) {
-        playerService.putRenforce(playerId, gameId);
+    public ResponseEntity<String> putRenforce(@PathVariable String gameId, @PathVariable String playerId, String c1,
+            String c2, String c3) {
+        playerService.redeemReinforcementsCard(gameId, playerId, c1, c2, c3);
         return ResponseEntity.ok("riscatta rinforzi");
     }
 

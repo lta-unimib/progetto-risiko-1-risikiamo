@@ -53,13 +53,7 @@ public class GameController {
     @ResponseStatus(HttpStatus.CREATED)
     public Game postCreate(@RequestBody GameDto gameDto) {
 
-        try {
-            return gameService.postCreate(gameDto);
-        } catch (Exception e) {
-
-            // Handler Error required
-            return null;
-        }
+        return gameService.postCreate(gameDto);
 
     }
 
