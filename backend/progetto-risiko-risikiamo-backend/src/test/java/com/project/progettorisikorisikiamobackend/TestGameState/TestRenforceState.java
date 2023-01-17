@@ -35,7 +35,7 @@ public class TestRenforceState {
 
         ownTerritory = new Territory("test", p1);
         neighbor = new Territory("neighbor", p1);
-
+        turn.nextTurn();
         context = new MockContextClass(turn, new Map("name"), null);
         context.setState(new RenforceState(context));
 

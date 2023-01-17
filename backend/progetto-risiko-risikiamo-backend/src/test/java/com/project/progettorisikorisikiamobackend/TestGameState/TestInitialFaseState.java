@@ -47,7 +47,7 @@ public class TestInitialFaseState {
         neighbor.setOwner(p1);
 
         turn = new Turn(players);
-
+        turn.nextTurn();
         context = new MockContextClass(turn, null, null);
         context.setState(new InitialFaseState(context));
 
