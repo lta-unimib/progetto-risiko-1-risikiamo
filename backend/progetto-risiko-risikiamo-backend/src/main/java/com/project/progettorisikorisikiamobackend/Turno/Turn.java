@@ -29,7 +29,7 @@ public class Turn {
     }
 
     public int getTurnNumberInGame() {
-        return (turnNumber / (inGamePlayerList.size() + defeatedPlayerList.size())) + 1;
+        return (turnNumber / (inGamePlayerList.size() + defeatedPlayerList.size()) + 1);
     }
 
     public void setTurnNumberInGame(int turnNumber) {
@@ -45,9 +45,14 @@ public class Turn {
         if (inGamePlayerList.contains(player))
             throw new IllegalArgumentException("Player is already in game");
 
-        inGamePlayerList.add(player);
-        if (inGamePlayerList.isEmpty() && currentPlayer == null)
+        if (this.turnNumber > 0)
+            throw new IllegalArgumentException("game already started");
+
+        if (inGamePlayerList.isEmpty() || currentPlayer == null)
             this.currentPlayer = player;
+
+        inGamePlayerList.add(player);
+        turnNumber = 0;
     }
 
     public void removePlayer(Player player) {
@@ -83,12 +88,12 @@ public class Turn {
         }
         if (currentPlayer == null) {
             this.currentPlayer = inGamePlayerList.get(0);
-            turnNumber = 0;
+            turnNumber = 1;
             return;
         }
 
-        turnNumber++;
         this.currentPlayer = inGamePlayerList.get(turnNumber % inGamePlayerList.size());
+        this.turnNumber += 1;
 
     }
 
@@ -108,12 +113,13 @@ public class Turn {
         if (!inGamePlayerList.contains(player))
             throw new IllegalArgumentException("Player is not in game");
 
-        for (Player p : inGamePlayerList) {
+        ArrayList<Player> temp = new ArrayList<>(inGamePlayerList);
+        inGamePlayerList.clear();
+        for (Player p : temp)
             if (!p.equals(player))
-                defeatedPlayerList.add(Pair.of(p, player));
-        }
+                this.defeatedPlayerList.add(Pair.of(player, p));
 
-        inGamePlayerList.add(player);
+        this.inGamePlayerList.add(player);
         currentPlayer = player;
     }
 

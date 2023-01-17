@@ -94,7 +94,7 @@ class TestTurn {
         assertEquals(player1, turn.getDefeatedPlayerList().get(0).getRight());
 
         turn.nextTurn();
-
+        assertThrows(IllegalArgumentException.class, () -> turn.defeatPlayer(player1, player2));
         assertEquals(player1, turn.getWinner());
     }
 
@@ -110,16 +110,76 @@ class TestTurn {
         turn.nextTurn();
         assertEquals(player1, turn.getCurrentPlayer());
         assertEquals(1, turn.getTurnNumberInGame());
-        assertEquals(0, turn.getTurnNumber());
+        assertEquals(1, turn.getTurnNumber());
 
         turn.defeatPlayer(player2, player2);
         turn.nextTurn();
         assertEquals(player1, turn.getCurrentPlayer());
-        assertEquals(0, turn.getTurnNumber());
+        assertEquals(1, turn.getTurnNumber());
 
         assertThrows(IllegalArgumentException.class, () -> turn.defeatPlayer(player1, player2));
 
         assertEquals(player2, turn.getDefeatedBy(player2));
+
+    }
+
+    @Test
+    void testAddPlayer() {
+        Player player1 = new Player("Player 1", "red", null, "1");
+        Player player2 = new Player("Player 2", "blue", null, "2");
+        Turn turn = new Turn();
+        turn.addPlayer(player1);
+        turn.addPlayer(player2);
+
+        turn.nextTurn();
+        assertThrows(IllegalArgumentException.class, () -> turn.addPlayer(player1));
+        assertEquals(player1, turn.getCurrentPlayer());
+        assertEquals(2, turn.getInGamePlayerList().size());
+
+    }
+
+    @Test
+    void setTurnNumberInGame() {
+        Player player1 = new Player("Player 1", "red", null, "1");
+        Player player2 = new Player("Player 2", "blue", null, "2");
+        Turn turn = new Turn();
+        turn.addPlayer(player1);
+        turn.addPlayer(player2);
+
+        turn.nextTurn();
+
+        turn.setTurnNumberInGame(4);
+        assertEquals(4, turn.getTurnNumberInGame());
+        assertEquals(6, turn.getTurnNumber());
+
+        turn.nextTurn();
+
+        assertEquals(4, turn.getTurnNumberInGame());
+        assertEquals(7, turn.getTurnNumber());
+
+    }
+
+    @Test
+    void setWinTest() {
+        Player player1 = new Player("Player 1", "red", null, "1");
+        Player player2 = new Player("Player 2", "blue", null, "2");
+        Turn turn = new Turn();
+        turn.addPlayer(player1);
+        turn.addPlayer(player2);
+
+        turn.nextTurn();
+
+        turn.setWin(player1);
+        assertEquals(player1, turn.getWinner());
+        assertEquals(1, turn.getTurnNumberInGame());
+        assertEquals(1, turn.getTurnNumber());
+
+        turn.nextTurn();
+
+        assertThrows(IllegalArgumentException.class, () -> turn.setWin(player2));
+        assertEquals(player1, turn.getWinner());
+        assertEquals(1, turn.getTurnNumberInGame());
+        assertEquals(1, turn.getTurnNumber());
 
     }
 
