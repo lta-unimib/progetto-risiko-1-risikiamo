@@ -183,4 +183,21 @@ class TestTurn {
 
     }
 
+    @Test
+    void test() {
+        Player player1 = new Player("Player 1", "red", null, "1");
+
+        Turn turn = new Turn();
+
+        assertThrows(IllegalArgumentException.class, () -> turn.addPlayer(null));
+        assertThrows(IllegalArgumentException.class, () -> turn.defeatPlayer(null, null));
+        assertThrows(IllegalArgumentException.class, () -> turn.defeatPlayer(player1, null));
+        assertThrows(IllegalArgumentException.class, () -> turn.defeatPlayer(null, player1));
+        assertThrows(IllegalArgumentException.class, () -> turn.defeatPlayer(player1, player1));
+        assertThrows(IllegalArgumentException.class, () -> turn.setWin(null));
+        assertThrows(IllegalArgumentException.class, () -> turn.setTurnNumberInGame(-1));
+        assertThrows(IllegalArgumentException.class, () -> turn.setTurnNumberInGame(0));
+
+    }
+
 }
