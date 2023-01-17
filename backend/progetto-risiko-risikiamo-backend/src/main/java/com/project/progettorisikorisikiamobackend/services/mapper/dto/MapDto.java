@@ -27,7 +27,7 @@ public class MapDto {
 
         for (int i = 0; i < this.continent.size(); i++) {
             Continent continentResult = this.continent.get(i).toContinent();
-            map.addContinent(continentResult, continentResult.getName());
+            map.addContinent(continentResult);
         }
 
         return map;

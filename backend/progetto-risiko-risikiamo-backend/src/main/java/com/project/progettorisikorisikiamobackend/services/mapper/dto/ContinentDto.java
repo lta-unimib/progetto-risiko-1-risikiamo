@@ -30,7 +30,7 @@ public class ContinentDto {
 
         for (int i = 0; i < this.territory.size(); i++) {
             Territory territoryResult = new Territory(this.territory.get(i));
-            continent.addTerritory(territoryResult, territoryResult.getName());
+            continent.addTerritory(territoryResult);
         }
 
         return continent;
