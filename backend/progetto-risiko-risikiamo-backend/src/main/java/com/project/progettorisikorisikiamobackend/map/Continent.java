@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
+import com.project.progettorisikorisikiamobackend.player.Player;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
@@ -34,11 +36,11 @@ public class Continent {
      * @aurhor Mauro Zozin
      * @return the owner of the continent, null if the continent is not owned
      */
-    public PlayerPlaceholder getOwner() {
+    public Player getOwner() {
         if (territories.isEmpty()) {
             return null;
         }
-        PlayerPlaceholder owner = territories.values().iterator().next().getOwner();
+        Player owner = territories.values().iterator().next().getOwner();
         if (owner == null) {
             return null;
         }
@@ -58,7 +60,7 @@ public class Continent {
      * @return true if the continent is owned by the player, false otherwise
      * 
      */
-    public boolean isOwnedBy(PlayerPlaceholder player) {
+    public boolean isOwnedBy(Player player) {
         return getOwner() == player;
     }
 
@@ -110,31 +112,6 @@ public class Continent {
      */
     public Territory getTerritory(String territoryId) {
         return territories.get(territoryId);
-    }
-
-    /**
-     * Add a territory to the continent
-     * 
-     * @aurhor Mauro Zozin
-     * @param territory the territory to add
-     * @param id        the id of the territory
-     * 
-     */
-    public void addTerritory(Territory territory, String id) throws IllegalArgumentException {
-        if (territory == null || id == null) {
-            throw new IllegalArgumentException("Null argument not allowed");
-        }
-        if (id.isEmpty() || id.isBlank()) {
-            throw new IllegalArgumentException("The territory id is empty");
-        }
-        if (territories.containsKey(id)) {
-            throw new IllegalArgumentException("The territory id is already in the continent");
-        }
-        if (territories.containsValue(territory)) {
-            throw new IllegalArgumentException("The territory is already in the continent");
-        }
-
-        territories.put(id, territory);
     }
 
     /**
@@ -206,7 +183,7 @@ public class Continent {
      * @return the number of territories owned by the player
      * 
      */
-    public int getNumberOfTerritories(PlayerPlaceholder player) {
+    public int getNumberOfTerritories(Player player) {
         if (player == null) {
             return 0;
         }
@@ -221,7 +198,7 @@ public class Continent {
      * @return the territories owned by the player
      * 
      */
-    public Collection<Territory> getTerritories(PlayerPlaceholder player) {
+    public Collection<Territory> getTerritories(Player player) {
         if (player == null) {
             return new ArrayList<>();
         }
@@ -244,7 +221,7 @@ public class Continent {
      * @throws IllegalArgumentException if the territory is already owned by someone
      * 
      */
-    public void setOwner(PlayerPlaceholder owner) throws IllegalArgumentException {
+    public void setOwner(Player owner) throws IllegalArgumentException {
         for (Territory territory : territories.values()) {
             territory.setOwner(owner);
         }

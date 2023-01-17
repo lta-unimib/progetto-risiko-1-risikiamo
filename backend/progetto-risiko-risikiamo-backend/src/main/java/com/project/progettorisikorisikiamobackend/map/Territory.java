@@ -2,6 +2,8 @@ package com.project.progettorisikorisikiamobackend.map;
 
 import java.util.ArrayList;
 
+import com.project.progettorisikorisikiamobackend.player.Player;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -20,9 +22,9 @@ public class Territory {
     private final String name;
     private int army;
     private ArrayList<Territory> neighbors;
-    private PlayerPlaceholder owner;
+    private Player owner;
 
-    private Territory(String name, int army, ArrayList<Territory> neighbors, PlayerPlaceholder owner) {
+    private Territory(String name, int army, ArrayList<Territory> neighbors, Player owner) {
 
         this.name = name;
         this.army = army;
@@ -34,6 +36,10 @@ public class Territory {
         this(name, 0, new ArrayList<>(), null);
     }
 
+    public Territory(String name, Player owner) {
+        this(name, 0, new ArrayList<>(), owner);
+    }
+
     /**
      * Set the owner of the territory, if the army is = 0
      * 
@@ -42,7 +48,7 @@ public class Territory {
      * @throws IllegalArgumentException if owner is null
      * @throws IllegalArgumentException if territory have an owner and army > 0
      */
-    public void setOwner(PlayerPlaceholder owner) throws IllegalArgumentException {
+    public void setOwner(Player owner) throws IllegalArgumentException {
         if (owner == null) {
             throw new IllegalArgumentException("Owner can't be null");
         }

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
+import com.project.progettorisikorisikiamobackend.player.Player;
+
 import io.micrometer.common.lang.NonNull;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -41,16 +43,19 @@ public class Map {
      * @throws IllegalArgumentException if the continent id is null
      * @author Mauro Zorzin
      */
-    public void addContinent(Continent continent, String continentId) throws IllegalArgumentException {
-        if (isContinentInMap(continentId)) {
-            throw new IllegalArgumentException("Continent already in the map");
-        }
+    public void addContinent(Continent continent) throws IllegalArgumentException {
+
         if (isContinentInMap(continent)) {
             throw new IllegalArgumentException("Continent already in the map");
         }
 
         if (continent == null) {
             throw new IllegalArgumentException("Continent id can't be null");
+        }
+        String continentId = continent.getName();
+
+        if (isContinentInMap(continentId)) {
+            throw new IllegalArgumentException("Continent already in the map");
         }
 
         if (continentId.isEmpty() || continentId.isBlank()) {
@@ -166,7 +171,7 @@ public class Map {
      * @return the number of continents owned by the player
      * @author Mauro Zorzin
      */
-    public int getNumberOfContinent(PlayerPlaceholder player) {
+    public int getNumberOfContinent(Player player) {
         if (player == null)
             return 0;
         int ownedContinents = 0;
@@ -185,7 +190,7 @@ public class Map {
      * @return the number of territories owned by the player
      * @author Mauro Zorzin
      */
-    public int getNumberOfTerritories(PlayerPlaceholder player) {
+    public int getNumberOfTerritories(Player player) {
         if (player == null)
             return 0;
         int ownedTerritories = 0;
@@ -202,7 +207,7 @@ public class Map {
      * @return the territories owned by the player
      * @author Mauro Zorzin
      */
-    public Collection<Territory> getTerritories(PlayerPlaceholder player) {
+    public Collection<Territory> getTerritories(Player player) {
         if (player == null)
             return new ArrayList<>();
 
@@ -221,7 +226,7 @@ public class Map {
      * @throws IllegalArgumentException if the player is null
      * @author Mauro Zorzin
      */
-    public Collection<Continent> getContinents(PlayerPlaceholder player) throws IllegalArgumentException {
+    public Collection<Continent> getContinents(Player player) throws IllegalArgumentException {
         Collection<Continent> continentsTemp = new ArrayList<>();
         if (player == null)
             throw new IllegalArgumentException("Player can't be null");

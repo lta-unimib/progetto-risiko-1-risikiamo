@@ -1,150 +1,139 @@
 package com.project.progettorisikorisikiamobackend.Turno;
 
 import java.util.*;
+
+import com.project.progettorisikorisikiamobackend.player.Player;
+import org.apache.commons.lang3.tuple.Pair;
 import lombok.*;
 
+@Getter
+@AllArgsConstructor
 public class Turn {
-    private @Getter @Setter List<Player> playerList;
-    private @Getter Player currentPlayer;
-    private @Getter Player nextPlayer;
-    private @Getter @Setter int turnNumber;
-    private @Getter Dice d;
 
-    // costruttore
-    public Turn(List<Player> playerList, int turnNumber) {
-        this.d = new Dice(6);
-        setPlayerList(playerList);
-        this.turnNumber = turnNumber;
-        this.currentPlayer = playerList.get(turnNumber);
-        this.nextPlayer = playerList.get(turnNumber + 1);
+    private List<Player> inGamePlayerList;
+    private List<Pair<Player, Player>> defeatedPlayerList;
+    private Player currentPlayer;
+    private int turnNumber;
 
+    public Turn() {
+        this(new ArrayList<>(), new ArrayList<>(), null, 0);
     }
 
-    public Turn(List<Player> playerList) {
-        this.playerList = playerList;
-        this.d = new Dice(6);
-        this.currentPlayer = playerList.get(0);
-        this.turnNumber = 1;
-        this.nextPlayer = playerList.get(1);
+    public Turn(List<Player> inGamePlayerList) {
+        this(inGamePlayerList, new ArrayList<>(), null, 0);
+    }
+
+    public void setPlayerRandomOrder() {
+        Collections.shuffle(inGamePlayerList);
+        this.currentPlayer = inGamePlayerList.get(0);
+    }
+
+    public int getTurnNumberInGame() {
+        return (turnNumber / (inGamePlayerList.size() + defeatedPlayerList.size()) + 1);
+    }
+
+    public void setTurnNumberInGame(int turnNumber) {
+        if (turnNumber < 1)
+            throw new IllegalArgumentException("Turn number can't be negative");
+        this.turnNumber = (turnNumber - 1) * (inGamePlayerList.size() + defeatedPlayerList.size());
+    }
+
+    public void addPlayer(Player player) {
+
+        if (player == null)
+            throw new IllegalArgumentException("Player  null");
+        if (inGamePlayerList.contains(player))
+            throw new IllegalArgumentException("Player is already in game");
+
+        if (this.turnNumber > 0)
+            throw new IllegalArgumentException("game already started");
+
+        if (inGamePlayerList.isEmpty() || currentPlayer == null)
+            this.currentPlayer = player;
+
+        inGamePlayerList.add(player);
+        turnNumber = 0;
+    }
+
+    public void removePlayer(Player player) {
+        inGamePlayerList.remove(player);
+    }
+
+    public void defeatPlayer(Player by, Player player) {
+        if (player == null || by == null)
+            throw new IllegalArgumentException("Player null");
+        if (!inGamePlayerList.contains(player))
+            throw new IllegalArgumentException("Player is not in game");
+        if (!inGamePlayerList.contains(by))
+            throw new IllegalArgumentException("Player can't defeat by a defeted player");
+
+        Pair<Player, Player> pair = Pair.of(player, by);
+        defeatedPlayerList.add(pair);
+        inGamePlayerList.remove(player);
 
     }
 
     /**
-     * ordina i giocatori in base al lancio del dado
+     * Permette di passare al turno successivo
      * 
-     * @param playerList lista dei giocatori
-     * @param d          dado
-     * @return lista dei giocatori ordinata in base al lancio del dado
+     * 
+     * @throws IllegalStateException se non ci sono giocatori in gioco
      */
-    public List<Player> setPlayerOrder(List<Player> playerList, Dice d) {
-        int rollMax = 0;
-
-        for (int i = 0; i < playerList.size(); i++) {
-            d.roll();
-            if (d.getValue() > rollMax) {
-                rollMax = d.getValue();
-            }
-            playerList.get(i).setPlayerId(d.getValue());
-
+    public void nextTurn() {
+        if (inGamePlayerList.isEmpty())
+            throw new IllegalStateException("No player in game");
+        if (inGamePlayerList.size() == 1) {
+            currentPlayer = inGamePlayerList.get(0);
+            return;
+        }
+        if (currentPlayer == null) {
+            this.currentPlayer = inGamePlayerList.get(0);
+            turnNumber = 1;
+            return;
         }
 
-        playerList.sort(Comparator.comparing(Player::getPlayerId).reversed());
-        return playerList;
-    }
-
-    /**
-     * rimouve giocatori dal gioco se si sono arresi,
-     * 
-     * @param defeatedPlayer
-     */
-    public void setdefeatedPlayer(Player defeatedPlayer) {
-        this.playerList.remove(defeatedPlayer);
-    }
-
-    // setta il giocatore corrente
-    /**
-     * 
-     * @param currentPlayer giocatore corrente
-     */
-    public void setCurrentPlayer(Player currentPlayer) {
-        if (playerList.contains(currentPlayer))
-            this.currentPlayer = currentPlayer;
-        else if (nextPlayer != null)
-            this.currentPlayer = playerList.get(getTurnNumber() + 1);
-        else
-            this.currentPlayer = playerList.get(0);
-    }
-
-    // setta il giocatore successivo
-    /**
-     * 
-     * @param playerList lista dei giocatori
-     */
-    public void setNextPlayer(List<Player> playerList) {
-        if (getTurnNumber() > playerList.size() - 1)
-            this.nextPlayer = playerList.get(0);
-        else if (getTurnNumber() < playerList.size() - 1)
-            this.nextPlayer = playerList.get(getTurnNumber() + 1);
+        this.currentPlayer = inGamePlayerList.get(turnNumber % inGamePlayerList.size());
+        this.turnNumber += 1;
 
     }
 
-    // setta il numero del turno
-    /**
-     * 
-     * @param turnNumber numero del turno
-     */
-    public void goHeadTurn() {
-        if (getTurnNumber() < playerList.size() - 1) {
-            if (playerList.contains(currentPlayer))
-                setCurrentPlayer(playerList.get(turnNumber));
-            else
-                setCurrentPlayer(playerList.get(turnNumber + 1));
-            if (playerList.contains(nextPlayer))
-                setNextPlayer(playerList);
-
-        } else if (getTurnNumber() == playerList.size() - 1) {
-            this.currentPlayer = playerList.get(playerList.size() - 1);
-            this.nextPlayer = playerList.get(0);
-            this.turnNumber = -1;
-        } else {
-            setCurrentPlayer(playerList.get(turnNumber));
-            setNextPlayer(playerList);
-        }
-
-        this.turnNumber = turnNumber + 1;
-
+    public boolean isTurnOfPlayer(Player player) {
+        return player.equals(currentPlayer);
     }
 
-    // ritorna il vincitore
-    /**
-     * 
-     * @param playerListInGame lista dei giocatori in gioco
-     * @return vincitore
-     */
-    public Player winner(List<Player> playerListInGame) {
-        if (playerListInGame.size() == 1)
-            return playerList.get(0);
-        else
+    public Player getWinner() {
+        if (inGamePlayerList.size() == 1)
+            return inGamePlayerList.get(0);
+        return null;
+    }
+
+    public void setWin(Player player) {
+        if (player == null)
+            throw new IllegalArgumentException("Player is null");
+        if (!inGamePlayerList.contains(player))
+            throw new IllegalArgumentException("Player is not in game");
+
+        ArrayList<Player> temp = new ArrayList<>(inGamePlayerList);
+        inGamePlayerList.clear();
+        for (Player p : temp)
+            if (!p.equals(player))
+                this.defeatedPlayerList.add(Pair.of(player, p));
+
+        this.inGamePlayerList.add(player);
+        currentPlayer = player;
+    }
+
+    public Player getDefeatedBy(Player player) {
+        if (player == null)
+            throw new IllegalArgumentException("Player is null");
+        if (defeatedPlayerList.isEmpty())
             return null;
-    }
 
-    // dice chi ha vinto se un giocatore raggiunge l'obiettivo e setta gli altri
-    // giocatori come fuori gioco
-    /**
-     * 
-     * @param playerList lista dei giocatori
-     */
-    public void winningCondition(List<Player> playerList) {
-        Player p1 = nextPlayer;
-        for (Player p : playerList) {
-
-            if (p.getObiettivo() == p.getStatoObiettivo()
-                    && p1 != p) {
-
-                setdefeatedPlayer(p1);
-            }
-
+        for (Pair<Player, Player> pair : defeatedPlayerList) {
+            if (pair.getLeft().equals(player))
+                return pair.getRight();
         }
 
+        return null;
     }
 }
