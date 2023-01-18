@@ -1,7 +1,5 @@
 <script>
 import { ref } from 'vue'
-import { coordinatesAdjacencyListHard } from '../assets/coordinatesAdjacencyListHard.js'
-import { dataContinents } from '../assets/dataStates.json'
 
 export default {
 
@@ -31,11 +29,11 @@ export default {
         closeTradeWindow: closeTradeWindow,
         trade: trade,
         compareAdjacent(path1, path2) {
-            const adjacencyList = coordinatesAdjacencyListHard;
+            const adjacencyList = require('../assets/dataStates.json').map.continents.territories;
             const country1 = path1.attributes.title.value;
             const country2 = path2.attributes.title.value;
-
-            if (adjacencyList[country1] && adjacencyList[country1].includes(country2)) {
+            console.log(adjacencyList[country1]);
+            if (adjacencyList[country1].neighbours && adjacencyList[country1].neighbours.includes(country2)) {
                 return true;
             } else {
                 return false;
@@ -105,72 +103,7 @@ export default {
                 svg.style.transform = `translate(${diffx2}px, ${diffy2}px)`;
 
             }
-        },
-
-        getDifferenceAdjacency() {
-            let paths = document.querySelectorAll("path");
-            let countries = coordinatesAdjacencyListHard;
-            let diff = [];
-            for (let i = 0; i < paths.length; i++) {
-                if (countries[paths[i].attributes.title.value] == null) {
-                    diff.push(paths[i].attributes.title.value);
-                }
-            }
-            console.log(diff);
-        },
-
-        getDifferenceAdjacencyReverse() {
-            let paths = document.querySelectorAll("path");
-            let countries = coordinatesAdjacencyListHard;
-            let diff = [];
-            let copy = [];
-            paths.forEach(path => {
-                if (countries[path.attributes.title.value] == null) {
-                    copy.push(path.attributes.title.value);
-                }
-
-                for (let i = 0; i < copy.length; i++) {
-                    if (countries.copy[i] == null) {
-                        diff.push(countries.copy[i]);
-                    }
-                }
-
-            });
-            console.log(diff);
-        },
-
-        getDifferenceData() {
-            let paths = document.querySelectorAll("path");
-            let countries = dataContinents;
-            let diff = [];
-            let copy = [];
-            paths.forEach(path => {
-                if (countries[path.attributes.title.value] == null) {
-                    copy.push(path.attributes.title.value);
-                }
-
-                for (let i = 0; i < copy.length; i++) {
-                    if (countries.copy[i] == null) {
-                        diff.push(countries.copy[i]);
-                    }
-                }
-
-            });
-            console.log(diff);
-        },
-
-        getDifferenceDataReverse() {
-            let paths = document.querySelectorAll("path");
-            let countries = dataContinents;
-            let diff = [];
-            for (let i = 0; i < paths.length; i++) {
-                if (countries[paths[i].attributes.title.value] == null) {
-                    diff.push(paths[i].attributes.title.value);
-                }
-            }
-            console.log(diff);
         }
-
     },
 
     mounted() {
@@ -191,13 +124,15 @@ export default {
                     paths[i].classList.remove("AdjacentPath");
                 }
                 this.selectedPaths[1].classList.add("AdjacentPath");
-                if (this.compareAdjacent(this.selectedPaths[0], this.selectedPaths[1])) {
+                if (this.compareAdjacent(this.selectedPaths[0], this.selectedPaths[1])) { //&& this.selectedPaths[0].Armies > 1 when modded map
                     this.openTradeWindow(this.selectedPaths[0], this.selectedPaths[1]);
+                    console.log("okè");
                 } else {
                     this.impossibleTrade();
                     this.selectedPaths[0].classList.remove("pathFrom");
                     this.selectedPaths[1].classList.remove("pathTo");
                     this.selectedPaths[1].classList.remove("AdjacentPath");
+                    console.log("not okè");
                 }
 
                 this.selectedPaths = [];
@@ -252,14 +187,13 @@ function closeTradeWindow(path1, path2, tradeWindow) {
 
 
 function trade(value, path1, path2) {
-    let countries = dataContinents;
-    console.log(countries[path1.attributes.title.value]);
+    let countries = require('../assets/dataStates.json').map.continents.territories;
     let from = countries[path1.attributes.title.value];
     let to = countries[path2.attributes.title.value];
     if (from != null && from.Armies > value && to != null && value <= 3 && value >= 1 && from.Armies > 1) {
-
         //to do after with backend
-
+        console.log(from, to);
+        console.log(from.Armies);
         from.Armies -= value;
         to.Armies += value;
         console.log("trade successful");
@@ -305,8 +239,8 @@ function setSelectedPath(value) {
 
 function getAdjacentCountries(value) {
     if (value != null && value.target != null && value.target.attributes.title != null) {
-        let country = value.target.attributes.title.value;
-        let adjacentCountries = coordinatesAdjacencyListHard[country];
+        const country = value.target.attributes.title.value;
+        let adjacentCountries = require('../assets/dataStates.json').map.continents.territories[country].neighbours;
         let countryNames = [];
         for (let i = 0; i < adjacentCountries.length; i++) {
             countryNames.push(adjacentCountries[i]);
@@ -355,21 +289,6 @@ function getAdjacentCountries(value) {
         <button @click="zoomOut">Zoom Out</button>
     </div>
 
-    <div>
-        <button @click="getDifferenceAdjacency">Get Difference js to map</button>
-    </div>
-
-    <div>
-        <button @click="getDifferenceData">Get Difference json to map</button>
-    </div>
-
-    <div>
-        <button @click="getDifferenceAdjacencyReverse">Get Difference map to js</button>
-    </div>
-
-    <div>
-        <button @click="getDifferenceDataReverse">Get Difference map to json</button>
-    </div>
 
 
     <div class="map">
