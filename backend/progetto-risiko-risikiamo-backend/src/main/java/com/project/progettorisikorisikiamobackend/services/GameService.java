@@ -2,14 +2,16 @@ package com.project.progettorisikorisikiamobackend.services;
 
 import java.util.HashMap;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.progettorisikorisikiamobackend.Turno.Dice;
 
 import com.project.progettorisikorisikiamobackend.domain.Game;
 import com.project.progettorisikorisikiamobackend.player.Player;
-import com.project.progettorisikorisikiamobackend.services.mapper.dto.GameDto;
-import com.project.progettorisikorisikiamobackend.services.mapper.dto.PlayerDto;
+import com.project.progettorisikorisikiamobackend.services.mapper.GameMapper;
+import com.project.progettorisikorisikiamobackend.services.responce.GameDto;
+import com.project.progettorisikorisikiamobackend.services.responce.PlayerDto;
 
 import lombok.NoArgsConstructor;
 
@@ -21,20 +23,21 @@ public class GameService implements IGameService {
     private HashMap<String, Game> games = new HashMap<>();
 
     @Override
-    public Game postCreate(GameDto gameDto) {
+    public GameDto postCreate(GameDto gameDto) {
 
-        Game game = gameDto.toGame(generateGameId());
+        Game game = GameMapper.gameDtoToGame(gameDto, generateGameId());
+
         games.put(generateGameId(), game);
-        return game;
+        return GameMapper.gameToGameDto(game);
 
     }
 
     @Override
     public String postAddPlayer(PlayerDto playerDto, String gameId) {
-        Player player = playerDto.toPlayer();
-        games.get(gameId).addPlayer(player);
+        // Player player = playerDto.toPlayer();
+        // games.get(gameId).addPlayer(player);
 
-        return player.getId();
+        return "player.getId();";
 
     }
 

@@ -26,12 +26,12 @@ public class DeckObjectives {
             deckObj.add(new OpponentDefeated(p, turn, map));
 
         }
-        for (Continent c : map.getContinents()) {
+        for (Continent c : map.getContinents().values()) {
             deckObj.add(new ConquestContinent(c));
 
         }
         int numTerritories = 0;
-        for (Continent c : map.getContinents()) {
+        for (Continent c : map.getContinents().values()) {
             numTerritories += c.getNumberOfTerritories();
         }
         numTerritories = numTerritories * (58 / 100);

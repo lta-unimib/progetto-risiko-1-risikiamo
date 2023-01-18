@@ -20,7 +20,7 @@ public class DeckTerritories {
         Dice d = new Dice(3);
         this.deck = new ArrayList<>();
         this.map = map;
-        for (Continent c : map.getContinents()) {
+        for (Continent c : map.getContinents().values()) {
             for (Territory t : c.getTerritories().values()) {
                 switch (d.roll()) {
                     case 1:

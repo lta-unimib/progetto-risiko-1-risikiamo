@@ -43,6 +43,7 @@
     <scope>test</scope>
 </dependency>
 
+
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -51,11 +52,7 @@
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct -->
-<dependency>
-    <groupId>org.mapstruct</groupId>
-    <artifactId>mapstruct</artifactId>
-    <version>1.5.3.Final</version>
-</dependency>
+
 
 
 		<dependency>
@@ -83,6 +80,7 @@
      <artifactId>spigot-common</artifactId>
      <version>1.0.2</version>
    </dependency>
+
  </dependencies>
 
 	<build>
@@ -110,7 +108,10 @@
    				         </goals>
    				     </execution>
    				 </executions>
-			</plugin>			
+			</plugin>	
+		
+
+
 		</plugins>
 	</build>
 

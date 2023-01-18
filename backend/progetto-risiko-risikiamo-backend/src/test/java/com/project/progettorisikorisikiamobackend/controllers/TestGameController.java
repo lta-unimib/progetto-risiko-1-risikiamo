@@ -11,7 +11,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.progettorisikorisikiamobackend.services.IGameService;
-import com.project.progettorisikorisikiamobackend.services.mapper.dto.PlayerDto;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;

@@ -13,8 +13,10 @@ import com.project.progettorisikorisikiamobackend.map.Territory;
 import com.project.progettorisikorisikiamobackend.player.Player;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class Game implements IContext, IState {
 
     private String name;

@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.progettorisikorisikiamobackend.domain.Game;
 import com.project.progettorisikorisikiamobackend.services.IGameService;
-import com.project.progettorisikorisikiamobackend.services.mapper.dto.GameDto;
-import com.project.progettorisikorisikiamobackend.services.mapper.dto.PlayerDto;
+import com.project.progettorisikorisikiamobackend.services.responce.GameDto;
+import com.project.progettorisikorisikiamobackend.services.responce.PlayerDto;
 
 import jakarta.validation.Valid;
 
@@ -51,7 +51,7 @@ public class GameController {
     @ResponseBody
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
-    public Game postCreate(@RequestBody GameDto gameDto) {
+    public GameDto postCreate(@RequestBody GameDto gameDto) {
 
         return gameService.postCreate(gameDto);
 

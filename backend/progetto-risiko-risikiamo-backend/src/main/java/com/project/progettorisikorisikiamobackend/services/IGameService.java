@@ -1,12 +1,12 @@
 package com.project.progettorisikorisikiamobackend.services;
 
 import com.project.progettorisikorisikiamobackend.domain.Game;
-import com.project.progettorisikorisikiamobackend.services.mapper.dto.GameDto;
-import com.project.progettorisikorisikiamobackend.services.mapper.dto.PlayerDto;
+import com.project.progettorisikorisikiamobackend.services.responce.GameDto;
+import com.project.progettorisikorisikiamobackend.services.responce.PlayerDto;
 
 public interface IGameService {
 
-    public Game postCreate(GameDto gameDto);
+    public GameDto postCreate(GameDto gameDto);
 
     public Game getGame(String gameId);
 

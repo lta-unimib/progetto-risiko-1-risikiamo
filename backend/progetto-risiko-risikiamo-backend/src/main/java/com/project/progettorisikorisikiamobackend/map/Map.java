@@ -239,15 +239,4 @@ public class Map {
         return continentsTemp;
     }
 
-    /**
-     * Return the continents owned by the player
-     * 
-     * @param player
-     * @return the continents owned by the player
-     * @author Mauro Zorzin
-     */
-    public Collection<Continent> getContinents() {
-        return continents.values();
-    }
-
 }
