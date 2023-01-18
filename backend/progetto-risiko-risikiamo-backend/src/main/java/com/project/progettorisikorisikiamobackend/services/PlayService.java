@@ -18,7 +18,18 @@ public class PlayService implements IPlayerService {
     private GameService gameService;
 
     @Override
-    public void turn(String gameId, String playerId) {
+    public Player getPlayer(String gameId, String playerId) {
+        Game game = this.getGame(gameId);
+        Turn turn = game.getTurn();
+        List<Player> player = turn.getInGamePlayerList();
+        Player ply = null;
+        for (Player p : player) {
+            if (p.getId().equals(playerId)) {
+                ply = p;
+            }
+        }
+
+        return ply;
 
     }
 
@@ -127,6 +138,13 @@ public class PlayService implements IPlayerService {
         if (!game.getTurn().getCurrentPlayer().getId().equals(playerId))
             throw new RuntimeException("Not your turn");
 
+    }
+
+    private Game getGame(String gameId) {
+        Game game = gameService.getGame(gameId);
+        if (game == null || game.getTurn() == null)
+            throw new RuntimeException("Game not found");
+        return game;
     }
 
 }

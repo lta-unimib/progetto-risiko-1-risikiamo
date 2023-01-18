@@ -2,6 +2,7 @@ package com.project.progettorisikorisikiamobackend.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,10 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.http.HttpStatus;
 
+import com.project.progettorisikorisikiamobackend.player.Player;
 import com.project.progettorisikorisikiamobackend.services.IPlayerService;
+import com.project.progettorisikorisikiamobackend.services.mapper.PlayerMapper;
+import com.project.progettorisikorisikiamobackend.services.responce.PlayerDto;
 
 @RestController
 @RequestMapping("/api/v1/game/{gameId}/play/{playerId}")
+
 public class PlayController {
 
     // ? Codice non 100% RESTlike, ma per ora va bene, più facile da leggere
@@ -21,12 +26,12 @@ public class PlayController {
     @Autowired
     private IPlayerService playerService;
 
-    @PutMapping("/turn")
+    @GetMapping("/")
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<String> putTurn(@PathVariable String gameId, @PathVariable String playerId) {
-        playerService.turn(playerId, gameId);
-        return ResponseEntity.ok("Start Turn of player " + playerId);
+    public PlayerDto getPlayer(@PathVariable String gameId, @PathVariable String playerId) {
+        Player player = playerService.getPlayer(gameId, playerId);
+        return PlayerMapper.toDto(player);
     }
 
     @PutMapping("/skip")

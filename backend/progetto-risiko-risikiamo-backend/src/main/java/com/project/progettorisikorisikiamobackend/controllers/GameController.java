@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.project.progettorisikorisikiamobackend.domain.Game;
 import com.project.progettorisikorisikiamobackend.services.IGameService;
 import com.project.progettorisikorisikiamobackend.services.responce.GameDto;
 import com.project.progettorisikorisikiamobackend.services.responce.PlayerDto;
@@ -30,28 +29,27 @@ public class GameController {
     @ResponseBody
     @GetMapping("/{gameId}/watch")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<String> getWatch(@PathVariable String gameId) {
+    public GameDto getWatch(@PathVariable String gameId) {
 
-        gameService.getWatch(gameId);
-        return ResponseEntity.ok("Watching game");
+        return gameService.getWatch(gameId);
 
     }
 
     @ResponseBody
     @PostMapping("/{gameId}/addPlayer")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Object> postAddPlayer(@Valid @RequestBody PlayerDto playerDto,
+    public ResponseEntity<String> postAddPlayer(@Valid @RequestBody PlayerDto playerDto,
             @PathVariable String gameId) {
 
-        gameService.postAddPlayer(playerDto, gameId);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        String id = gameService.postAddPlayer(playerDto, gameId);
+        return new ResponseEntity<>(id, HttpStatus.CREATED);
 
     }
 
     @ResponseBody
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
-    public GameDto postCreate(@RequestBody GameDto gameDto) {
+    public GameDto postCreate(@Valid @RequestBody GameDto gameDto) {
 
         return gameService.postCreate(gameDto);
 
@@ -60,9 +58,9 @@ public class GameController {
     @PutMapping("/{gameId}/start")
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<String> putStart(@PathVariable String id) {
+    public ResponseEntity<String> putStart(@Valid @PathVariable String gameId) {
 
-        gameService.putStart(id);
+        gameService.putStart(gameId);
         return ResponseEntity.ok("Game started");
 
     }
@@ -70,9 +68,9 @@ public class GameController {
     @PutMapping("/{gameId}/end")
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<String> putEnd(@PathVariable String id) {
+    public ResponseEntity<String> putEnd(@Valid @PathVariable String gameId) {
 
-        gameService.putEnd(id);
+        gameService.putEnd(gameId);
         return ResponseEntity.ok("Game ended");
 
     }

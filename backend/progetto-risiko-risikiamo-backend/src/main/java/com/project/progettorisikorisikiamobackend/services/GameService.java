@@ -1,6 +1,7 @@
 package com.project.progettorisikorisikiamobackend.services;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import com.project.progettorisikorisikiamobackend.Turno.Dice;
 import com.project.progettorisikorisikiamobackend.domain.Game;
 import com.project.progettorisikorisikiamobackend.player.Player;
 import com.project.progettorisikorisikiamobackend.services.mapper.GameMapper;
+import com.project.progettorisikorisikiamobackend.services.mapper.PlayerMapper;
 import com.project.progettorisikorisikiamobackend.services.responce.GameDto;
 import com.project.progettorisikorisikiamobackend.services.responce.PlayerDto;
 
@@ -20,38 +22,42 @@ import lombok.NoArgsConstructor;
 public class GameService implements IGameService {
 
     /* List of all active game */
-    private HashMap<String, Game> games = new HashMap<>();
+
+    public Map<String, Game> games = new HashMap<>();
+
+    public Game getGame(String gameId) {
+
+        return games.get(gameId);
+
+    }
 
     @Override
     public GameDto postCreate(GameDto gameDto) {
 
-        Game game = GameMapper.gameDtoToGame(gameDto, generateGameId());
+        String gameId = generateGameId();
 
-        games.put(generateGameId(), game);
-        return GameMapper.gameToGameDto(game);
+        Game game = GameMapper.toEntity(gameDto, gameId);
+
+        games.put(gameId, game);
+        return GameMapper.toDto(game);
 
     }
 
     @Override
     public String postAddPlayer(PlayerDto playerDto, String gameId) {
-        // Player player = playerDto.toPlayer();
-        // games.get(gameId).addPlayer(player);
+        Player player = PlayerMapper.toEntity(playerDto);
+        games.get(gameId).addPlayer(player);
 
-        return "player.getId();";
-
-    }
-
-    @Override
-    public Game getGame(String gameId) {
-        return games.get(gameId);
+        return player.getId();
 
     }
 
     @Override
-    public Game getWatch(String gameId) {
+    public GameDto getWatch(String gameId) {
 
         // Dovrebbe ritornare le modifiche in base alla data
-        return games.get(gameId);
+        Game game = games.get(gameId);
+        return GameMapper.toDto(game);
 
     }
 

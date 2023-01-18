@@ -1,5 +1,7 @@
 package com.project.progettorisikorisikiamobackend.services.responce;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -7,9 +9,9 @@ public class GameDto {
 
     private String name;
     private String id;
-    private boolean isGameEnded;
+    private String winner;
     private MapDto map;
-    private String turn;
-    private String state;
+    private List<String> players;
+    private String currentPlayer;
 
 }

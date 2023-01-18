@@ -1,15 +1,20 @@
 package com.project.progettorisikorisikiamobackend.domain;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import com.project.progettorisikorisikiamobackend.Cards.CardTerritory;
 import com.project.progettorisikorisikiamobackend.Cards.DeckObjectives;
 import com.project.progettorisikorisikiamobackend.Cards.DeckTerritories;
 import com.project.progettorisikorisikiamobackend.Turno.Turn;
 import com.project.progettorisikorisikiamobackend.gameState.InitialFaseState;
-import com.project.progettorisikorisikiamobackend.gameState.NewGameState;
 import com.project.progettorisikorisikiamobackend.gameState.interf.IContext;
 import com.project.progettorisikorisikiamobackend.gameState.interf.IState;
+import com.project.progettorisikorisikiamobackend.map.Continent;
 import com.project.progettorisikorisikiamobackend.map.Map;
 import com.project.progettorisikorisikiamobackend.map.Territory;
+import com.project.progettorisikorisikiamobackend.obiettivi.Objective;
 import com.project.progettorisikorisikiamobackend.player.Player;
 
 import lombok.Data;
@@ -49,6 +54,10 @@ public class Game implements IContext, IState {
     public void addPlayer(Player player) {
         if (turn != null)
             this.turn.addPlayer(player);
+        else {
+            this.turn = new Turn();
+            this.turn.addPlayer(player);
+        }
     }
 
     public void removePlayer(Player player) {
@@ -56,6 +65,37 @@ public class Game implements IContext, IState {
     }
 
     public void startGame() {
+
+        this.deckObjectives = new DeckObjectives(this.map, this.turn, this.turn.getInGamePlayerList());
+        this.deckTerritories = new DeckTerritories(this.map);
+        for (Player player : this.turn.getInGamePlayerList()) {
+            List<Objective> objectives = new ArrayList<>();
+            objectives.add(this.deckObjectives.draw(player));
+            player.setObiettivi(objectives);
+        }
+
+        // List of all territory
+        ArrayList<Territory> territories = new ArrayList<>();
+
+        for (Continent continent : this.map.getContinents().values()) {
+            territories.addAll(continent.getTerritories().values());
+        }
+
+        Collections.shuffle(territories);
+
+        int numberOfTerritories = territories.size() / this.turn.getInGamePlayerList().size();
+
+        for (Player player : this.turn.getInGamePlayerList()) {
+            for (int i = 0; i < numberOfTerritories && !territories.isEmpty(); i++) {
+                Territory territory = territories.get(0);
+                territory.setOwner(player);
+                territory.addArmy(1);
+                territories.remove(0);
+
+            }
+
+        }
+
         this.state = new InitialFaseState(this);
     }
 

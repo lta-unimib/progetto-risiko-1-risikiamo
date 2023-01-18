@@ -19,7 +19,7 @@ public class GameMapper {
     private GameMapper() {
     }
 
-    public static Game gameDtoToGame(GameDto gameDto, String id) {
+    public static Game toEntity(GameDto gameDto, String id) {
 
         if (gameDto == null || id.isEmpty()) {
             return null;
@@ -68,7 +68,7 @@ public class GameMapper {
         return game;
     }
 
-    public static GameDto gameToGameDto(Game game) {
+    public static GameDto toDto(Game game) {
 
         if (game == null) {
             return null;
@@ -76,7 +76,6 @@ public class GameMapper {
         GameDto gameDto = new GameDto();
         gameDto.setId(game.getId());
         gameDto.setName(game.getName());
-        gameDto.setGameEnded(game.isGameEnded());
         Map map = game.getMap();
         MapDto mapDto = new MapDto();
 
@@ -126,7 +125,37 @@ public class GameMapper {
 
         gameDto.setMap(mapDto);
 
+        if (GameMapper.checkGame(game)) {
+
+            Turn turn = game.getTurn();
+
+            List<String> players = new ArrayList<>();
+            for (int i = 0; i < turn.getInGamePlayerList().size(); i++) {
+                players.add(turn.getInGamePlayerList().get(i).getName());
+            }
+            gameDto.setPlayers(players);
+
+            if (turn.getWinner() != null) {
+                gameDto.setWinner(turn.getWinner().getName());
+            }
+
+            gameDto.setCurrentPlayer(game.getTurn().getCurrentPlayer().getName());
+
+        }
         return gameDto;
+    }
+
+    private static boolean checkGame(Game game) {
+        if (game == null) {
+            return false;
+        }
+        if (game.getMap() == null) {
+            return false;
+        }
+        if (game.getTurn() == null) {
+            return false;
+        }
+        return true;
     }
 
 }

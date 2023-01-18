@@ -1,10 +1,12 @@
 package com.project.progettorisikorisikiamobackend.services;
 
+import com.project.progettorisikorisikiamobackend.player.Player;
+
 public interface IPlayerService {
 
     // * put Indica il tipo di risposta (get, post, put, delete)
 
-    public void turn(String gameId, String playerId);
+    public Player getPlayer(String gameId, String playerId);
 
     public void play(String gameId, String playerId);
 
