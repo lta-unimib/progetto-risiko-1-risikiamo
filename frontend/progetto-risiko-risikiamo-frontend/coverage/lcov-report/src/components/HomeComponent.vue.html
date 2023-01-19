@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">71.98% </span>
+                <span class="strong">70.25% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>167/232</span>
+                <span class='fraction'>163/232</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">6.77% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>4/59</span>
+                <span class='fraction'>0/59</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">6.25% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/16</span>
+                <span class='fraction'>0/16</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">14.06% </span>
+                <span class="strong">7.81% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>9/64</span>
+                <span class='fraction'>5/64</span>
             </div>
         
             
@@ -872,11 +872,7 @@
 <a name='L807'></a><a href='#L807'>807</a>
 <a name='L808'></a><a href='#L808'>808</a>
 <a name='L809'></a><a href='#L809'>809</a>
-<a name='L810'></a><a href='#L810'>810</a>
-<a name='L811'></a><a href='#L811'>811</a>
-<a name='L812'></a><a href='#L812'>812</a>
-<a name='L813'></a><a href='#L813'>813</a>
-<a name='L814'></a><a href='#L814'>814</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L810'></a><a href='#L810'>810</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
@@ -884,13 +880,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1087,10 +1076,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -1129,6 +1118,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1691,8 +1683,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;script&gt;
 import { ref } from 'vue'
-import { onMounted } from 'vue'
-&nbsp;
 export default {
 &nbsp;
     name: "HomeComponent",
@@ -1802,39 +1792,37 @@ export default {
     },
 &nbsp;
     mounted() {
-        onMounted(() =&gt; {
-            let paths = document.querySelectorAll("path");
-            for (let i = 0; i &lt; paths.length; i++) {
-                paths[i].addEventListener("mouseover", this.changeHoverValue);
-            }
-            this.$refs.svg.addEventListener("click", this.setSelectedPath);
-            this.$refs.svg.addEventListener("click", (event) =&gt; {
-                const path = event.target;
-                this.selectedPaths.push(path);
-                if (this.selectedPaths.length === 2) {
-                    this.selectedPaths[0].classList.remove("SelectedPath");
-                    this.selectedPaths[0].classList.add("pathFrom");
-                    this.selectedPaths[1].classList.remove("SelectedPath");
-                    this.selectedPaths[1].classList.add("pathTo");
-                    for (let i = 0; i &lt; paths.length; i++) {
-                        paths[i].classList.remove("AdjacentPath");
-                    }
-                    this.selectedPaths[1].classList.add("AdjacentPath");
-                    if (this.compareAdjacent(this.selectedPaths[0], this.selectedPaths[1])) { //&amp;&amp; this.selectedPaths[0].Armies &gt; 1 when modded map
-                        this.openTradeWindow(this.selectedPaths[0], this.selectedPaths[1]);
-                        console.log("okè");
-                    } else {
-                        this.impossibleTrade();
-                        this.selectedPaths[0].classList.remove("pathFrom");
-                        this.selectedPaths[1].classList.remove("pathTo");
-                        this.selectedPaths[1].classList.remove("AdjacentPath");
-                        console.log("not okè");
-                    }
-&nbsp;
-                    this.selectedPaths = [];
+        let paths = document.querySelectorAll("path");
+        for (let i = 0; i &lt; paths.length; i++) {
+            paths[i].addEventListener("mouseover", this.changeHoverValue);
+        }
+        this.$refs.svg.addEventListener("click", this.setSelectedPath);
+        this.$refs.svg.addEventListener("click", (event) =&gt; {
+            const path = event.target;
+            this.selectedPaths.push(path);
+            if (this.selectedPaths.length === 2) {
+                this.selectedPaths[0].classList.remove("SelectedPath");
+                this.selectedPaths[0].classList.add("pathFrom");
+                this.selectedPaths[1].classList.remove("SelectedPath");
+                this.selectedPaths[1].classList.add("pathTo");
+                for (let i = 0; i &lt; paths.length; i++) {
+                    paths[i].classList.remove("AdjacentPath");
                 }
-            });
-        })
+                this.selectedPaths[1].classList.add("AdjacentPath");
+                if (this.compareAdjacent(this.selectedPaths[0], this.selectedPaths[1])) { //&amp;&amp; this.selectedPaths[0].Armies &gt; 1 when modded map
+                    this.openTradeWindow(this.selectedPaths[0], this.selectedPaths[1]);
+                    console.log("okè");
+                } else {
+                    this.impossibleTrade();
+                    this.selectedPaths[0].classList.remove("pathFrom");
+                    this.selectedPaths[1].classList.remove("pathTo");
+                    this.selectedPaths[1].classList.remove("AdjacentPath");
+                    console.log("not okè");
+                }
+&nbsp;
+                this.selectedPaths = [];
+            }
+        });
 &nbsp;
 &nbsp;
 &nbsp;
@@ -1847,101 +1835,101 @@ const name = ref("place your mouse over a country");
 &nbsp;
 function impossibleTrade() {
     const instructions = "you can't move troops from the first country you click to the second one you click.";
-    const errorWindow = window.open('', 'Trade Instructions', 'height=300,width=600');
-    errorWindow.document.write(instructions);
-    setTimeout(() =&gt; {
-        e<span class="fstat-no" title="function not covered" >rrorWindow.windo</span>w.close();
-        console.log("cl<span class="cstat-no" title="statement not covered" >osed");</span>
-    }, 5000);<span class="cstat-no" title="statement not covered" ></span>
+    const<span class="fstat-no" title="function not covered" > errorWindow = w</span>indow.open('', 'Trade Instructions', 'height=300,width=600');
+    errorWindow.documen<span class="cstat-no" title="statement not covered" >t.write(instructions);</span>
+    setTimeout(() =&gt; {<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >        errorWindow.window.close();</span>
+<span class="cstat-no" title="statement not covered" >        conso<span class="fstat-no" title="function not covered" >le</span>.log("closed");</span>
+<span class="cstat-no" title="statement not covered" >    }, 5000);</span>
 }<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
-func<span class="cstat-no" title="statement not covered" >tion openTradeWindow(path1, </span>path2) {
-<span class="cstat-no" title="statement not covered" >    const instructions = '&lt;</span>p&gt;you can move troops from the first country you click to the second one you click.&lt;/p&gt;&lt;p&gt;you can move up to 3 troops from the first country to the second one.&lt;/p&gt;&lt;input type="number" id="number" min="1" max="3"&gt;&lt;button id="button"&gt;trade&lt;/button&gt;&lt;button id="exit"&gt;close&lt;/button&gt;';
-    const tradeWindow = window.open('', 'Trade Instructions', 'height=300,width=600');
-    tradeWindow.document.write(instructions);
-    const<span class="fstat-no" title="function not covered" > tradeButton = t</span>radeWindow.document.getElementById('button');
-    if (tradeButton != <span class="cstat-no" title="statement not covered" >null) {</span>
-        tradeButton.ad<span class="cstat-no" title="statement not covered" >dEventListener('click', () =&gt; this.trade(tradeWindow.document.</span>getElementById('number').value, path1, path2));
-<span class="cstat-no" title="statement not covered" >    } else {</span>
-        console.log("t<span class="cstat-no" title="statement not covered" >rade button is null");</span>
+&nbsp;
+function openTradeWindow(path1, path2) {
+    const<span class="fstat-no" title="function not covered" > instructions = </span>'&lt;p&gt;you can move troops from the first country you click to the second one you click.&lt;/p&gt;&lt;p&gt;you can move up to 3 troops from the first country to the second one.&lt;/p&gt;&lt;input type="number" id="number" min="1" max="3"&gt;&lt;button id="button"&gt;trade&lt;/button&gt;&lt;button id="exit"&gt;close&lt;/button&gt;';
+    const tradeWindow =<span class="cstat-no" title="statement not covered" > window.open('', 'Trade Instructions', 'height=300,width=600');</span>
+    tradeWindow.docume<span class="cstat-no" title="statement not covered" >nt.write(instructions);</span>
+<span class="cstat-no" title="statement not covered" >    const tradeButton = tradeWindow.document</span>.getElementById('button');
+    if (tradeButton !=<span class="cstat-no" title="statement not covered" > null) {</span>
+<span class="cstat-no" title="statement not covered" >        tradeButton.addEventListener('click', () =&gt; this.trade(tradeWindow.document.getElementById('number').value, path1, path2));</span>
+<span class="cstat-no" title="statement not covered" >    } else {<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span>
+        console.log("trade button is null");
 <span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >    const exitButton = tradeWindow.documen<span class="fstat-no" title="function not covered" >t.</span>getE<span class="cstat-no" title="statement not covered" >lementById('exit');</span></span>
-    if (exitButton != null) {
-<span class="cstat-no" title="statement not covered" >        exitButton.addEventListener('clic</span>k', () =&gt; this.closeTradeWindow(path1, path2, tradeWindow));
+    const exitButton = tradeWindow.document.getElementById('exit');
+    if (exitButton !=<span class="cstat-no" title="statement not covered" > null) {</span>
+<span class="cstat-no" title="statement not covered" >        exitButton.addEventListener('click', () =&gt; this.closeTradeWindow(path1, path2, tradeWindow));</span>
+<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span>
+    } else {
+<span class="cstat-no" title="statement not covered" >        console.log("exit button is null</span>");
+    }
 &nbsp;
-    } else {<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        console.log("exit button is null");</span>
-<span class="cstat-no" title="statement not covered" >    }<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span>
-&nbsp;
-}<span class="cstat-no" title="statement not covered" ></span>
-&nbsp;
-function closeTradeWindow(path1, path2, tradeWindow) {
-    trade<span class="fstat-no" title="function not covered" >Window.window.clo</span>se();
-<span class="cstat-no" title="statement not covered" >    path1.classList.remove("pa</span>thFrom");
-<span class="cstat-no" title="statement not covered" >    path2.classList.remove("pathTo");</span>
-<span class="cstat-no" title="statement not covered" >    path2.classList.remove("Adjacent</span>Path");
-}<span class="cstat-no" title="statement not covered" ></span>
-&nbsp;
-<span class="fstat-no" title="function not covered" ></span>
+}<span class="fstat-no" title="function not covered" ></span>
 <span class="cstat-no" title="statement not covered" ></span>
-function trad<span class="cstat-no" title="statement not covered" >e(value, path1, path2) {</span>
-    let cou<span class="cstat-no" title="statement not covered" >ntries = require('../assets/dataStates.j</span>son').map.continents.territories;
-<span class="cstat-no" title="statement not covered" >    let from = countries[path1.attributes.title.value];</span>
-    let to = countries[path2.attributes.title.value];
-<span class="cstat-no" title="statement not covered" >    if (from != null &amp;&amp; fro</span>m.Armies &gt; value &amp;&amp; to != null &amp;&amp; value &lt;= 3 &amp;&amp; value &gt;= 1 &amp;&amp; from.Armies &gt; 1) {
-<span class="cstat-no" title="statement not covered" >        //to do after with bac</span>kend
-<span class="cstat-no" title="statement not covered" >        console.log(from, </span>to);
-<span class="cstat-no" title="statement not covered" >        console.log(from</span>.Armies);
-<span class="cstat-no" title="statement not covered" >        from.Armies -= value;</span>
+fu<span class="cstat-no" title="statement not covered" >nction closeTradeWindow(path1, path2</span>, tradeWindow) {
+<span class="cstat-no" title="statement not covered" >    tradeWindow.window.close();</span>
+<span class="cstat-no" title="statement not covered" >    path1.classList.remove("pathFrom");</span>
+    path2.classList.remove("pathTo");
+    path2<span class="fstat-no" title="function not covered" >.class</span>List.remove("AdjacentPath");
+}<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
+function trade(value, path1, path2) {
+<span class="cstat-no" title="statement not covered" >    let countries = require</span>('../assets/dataStates.json').map.continents.territories;
+<span class="cstat-no" title="statement not covered" >    let from = countries[path1</span>.attributes.title.value];
+<span class="cstat-no" title="statement not covered" >    let to = countries[pat</span>h2.attributes.title.value];
+<span class="cstat-no" title="statement not covered" >    if (from != null &amp;&amp; </span>from.Armies &gt; value &amp;&amp; to != null &amp;&amp; value &lt;= 3 &amp;&amp; value &gt;= 1 &amp;&amp; from.Armies &gt; 1) {
+<span class="cstat-no" title="statement not covered" >        //to do after with backend</span>
+<span class="cstat-no" title="statement not covered" >        console.log(from, to);</span>
+<span class="cstat-no" title="statement not covered" >        console.log(from.Armies);</span>
+        from.Armies -= value;
 <span class="cstat-no" title="statement not covered" >        to.Armies += value;</span>
-<span class="cstat-no" title="statement not covered" >        console.log("trade successful");</span>
+        console.log("trade successful");
         countries[path1.attributes.title.value].Armies = from.Armies;
-<span class="cstat-no" title="statement not covered" >        countries[path2.attribute</span>s.title.value].Armies = to.Armies;
+        c<span class="fstat-no" title="function not covered" >ountries[path2.at</span>tributes.title.value].Armies = to.Armies;
+<span class="cstat-no" title="statement not covered" ></span>
+    }<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    else {</span>
+<span class="cstat-no" title="statement not covered" >        console.log("trade faile</span>d");
 &nbsp;
     }
-    else {
-        console.log("trade failed");
+}<span class="cstat-no" title="statement not covered" ></span>
 &nbsp;
-    <span class="missing-if-branch" title="else path not taken" >E</span>}
-}
-&nbsp;
-function <span class="missing-if-branch" title="else path not taken" >E</span>changeHoverValue(value) {
-<span class="cstat-no" title="statement not covered" >    if (value != null &amp;&amp; value.target != null) {</span>
-        let title = value.target.attributes.title;
-        if (title != null) {
-<span class="fstat-no" title="function not covered" >            name.value = </span>title.value;
+function changeHoverValue(value) {
+    if (v<span class="fstat-no" title="function not covered" >alue != null &amp;&amp; </span>value.target != null) {
+<span class="cstat-no" title="statement not covered" >        let title = value.target.attributes.title;</span>
+<span class="cstat-no" title="statement not covered" >        if (title != null) {</span>
+<span class="cstat-no" title="statement not covered" >            name.value = title.value;</span>
 <span class="cstat-no" title="statement not covered" >        }</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-    el<span class="cstat-no" title="statement not covered" >se {</span>
-<span class="cstat-no" title="statement not covered" >        name.value = "place your mouse over a country";</span>
     }<span class="cstat-no" title="statement not covered" ></span>
-}
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" ></span>
-functi<span class="cstat-no" title="statement not covered" >on setSelectedPath(value) {</span>
-    if (value != null &amp;&amp; value.target != null &amp;&amp; value.target.attributes.title != null) {
-        if (value.target.classList.contains("SelectedPath")) {
-            value.target.classList.remove("SelectedPath");
-<span class="fstat-no" title="function not covered" >            console.log(value.</span>target.attributes.title, value.target.classList);
-<span class="cstat-no" title="statement not covered" >            getAdjacentCountries(value);</span>
-        }<span class="cstat-no" title="statement not covered" ></span>
-        else {<span class="cstat-no" title="statement not covered" ></span>
-            value.targe<span class="cstat-no" title="statement not covered" >t.c</span>lassList.add("SelectedPath");
-<span class="cstat-no" title="statement not covered" >            conso<span class="cstat-no" title="statement not covered" >le</span>.log(value.target.attributes.title, value.target.classList);</span>
-<span class="cstat-no" title="statement not covered" >            getAdjacentCountries(value);</span>
-        }
+    else {
+<span class="cstat-no" title="statement not covered" >        name.value = "place your mouse over a coun</span>try";
     }<span class="cstat-no" title="statement not covered" ></span>
-}<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
+}<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+&nbsp;
+function setSelectedPath(value) {
+    if (v<span class="fstat-no" title="function not covered" >alue != null &amp;&amp; value</span>.target != null &amp;&amp; value.target.attributes.title != null) {
+<span class="cstat-no" title="statement not covered" >        if (value.target.classList.contains("SelectedPath")) {</span>
+            value.ta<span class="cstat-no" title="statement not covered" >rget.classList.remove("SelectedPath"</span>);
+            console.log(valu<span class="cstat-no" title="statement not covered" >e.target.attributes.title, value.target.classList);</span>
+            getAdjacent<span class="cstat-no" title="statement not covered" >Cou</span>ntries(value);
+<span class="cstat-no" title="statement not covered" >        }<span class="cstat-no" title="statement not covered" ></span></span>
+<span class="cstat-no" title="statement not covered" >        else {</span>
+            value.target.classList.add("SelectedPath");
+            cons<span class="cstat-no" title="statement not covered" >ole.log(value.target.attributes.ti</span>tle, value.target.classList);
+<span class="cstat-no" title="statement not covered" >            getAd<span class="cstat-no" title="statement not covered" >ja</span>centCountries(value);</span>
+<span class="cstat-no" title="statement not covered" >        }</span>
+    }<span class="cstat-no" title="statement not covered" ></span>
+}<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" ></span>
-function<span class="cstat-no" title="statement not covered" > getAdjacentCountries(value) {</span>
+&nbsp;
+&nbsp;
+func<span class="cstat-no" title="statement not covered" >tion getAdjacentCountries(v</span>alue) {
     if (value != null &amp;&amp; value.target != null &amp;&amp; value.target.attributes.title != null) {
         const country = value.target.attributes.title.value;
-<span class="cstat-no" title="statement not covered" >        let adjacentCountries =</span> require('../assets/dataStates.json').map.continents.territories[country].neighbours;
+        let adjacentCountries = require('../assets/dataStates.json').map.continents.territories[country].neighbours;<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="fstat-no" title="function not covered" ><span class="fstat-no" title="function not covered" ><span class="fstat-no" title="function not covered" ><span class="fstat-no" title="function not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span></span></span></span></span></span></span></span></span>
         let countryNames = [];
         for (let i = 0; i &lt; adjacentCountries.length; i++) {
-            countryNames.push(adjacentCountries[i]);<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="fstat-no" title="function not covered" ><span class="fstat-no" title="function not covered" ><span class="fstat-no" title="function not covered" ><span class="fstat-no" title="function not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span></span></span></span></span></span></span></span></span>
+            countryNames.push(adjacentCountries[i]);
         }
         let paths = document.querySelectorAll("path");
         for (let i = 0; i &lt; paths.length; i++) {
@@ -2509,7 +2497,7 @@ path:hover {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-01-19T10:07:48.524Z
+                at 2023-01-19T15:12:15.398Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

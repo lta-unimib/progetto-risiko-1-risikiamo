@@ -1,10 +1,16 @@
-import { shallowMount } from '@vue/test-utils';
+import { shallowMount, mount } from '@vue/test-utils';
+import App from '../../src/App.vue';
 import HomeComponent from '../../src/components/HomeComponent.vue';
 
-describe('HomeComponent', () => {
+describe('App', () => {
 
   test('zoomIn method increases zoom by 0.5', () => {
+    const app = mount(App);
+    if (app) {
+      console.log('app is mounted');
+    };
     const wrapper = shallowMount(HomeComponent);
+    wrapper.vm.mounted();
     wrapper.vm.zoom = 1;
     wrapper.vm.zoomIn();
     expect(wrapper.vm.zoom).toBe(1.5);
