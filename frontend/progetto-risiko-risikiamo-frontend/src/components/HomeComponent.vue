@@ -109,12 +109,14 @@ export default {
     },
 
     mounted() {
-        let paths = document.querySelectorAll("path");
+        
+         
+        let paths =  document.querySelectorAll("path");
         for (let i = 0; i < paths.length; i++) {
             paths[i].addEventListener("mouseover", this.changeHoverValue);
         }
-        this.$refs.svg.addEventListener("click", this.setSelectedPath);
-        this.$refs.svg.addEventListener("click", (event) => {
+        window.addEventListener("click", this.setSelectedPath);
+        window.addEventListener("click", (event) => {
             const path = event.target;
             this.selectedPaths.push(path);
             if (this.selectedPaths.length === 2) {
@@ -141,11 +143,11 @@ export default {
             }
         });
 
+  
 
 
-    }
+}}
 
-}
 
 const name = ref("place your mouse over a country");
 
