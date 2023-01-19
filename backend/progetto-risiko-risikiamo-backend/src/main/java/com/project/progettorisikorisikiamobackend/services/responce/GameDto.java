@@ -8,6 +8,7 @@ import lombok.Data;
 public class GameDto {
 
     private String name;
+    private int startingArmies;
     private String id;
     private String winner;
     private MapDto map;

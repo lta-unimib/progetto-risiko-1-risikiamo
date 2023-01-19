@@ -26,6 +26,8 @@ public class Game implements IContext, IState {
 
     private String name;
 
+    private int startingArmies;
+
     private Map map;
 
     private String id;
@@ -52,9 +54,12 @@ public class Game implements IContext, IState {
     }
 
     public void addPlayer(Player player) {
-        if (turn != null)
+        if (turn != null) {
+            if (this.turn.getInGamePlayerList().size() >= 6)
+                throw new IllegalArgumentException("You can't add more than 6 players");
             this.turn.addPlayer(player);
-        else {
+        } else {
+
             this.turn = new Turn();
             this.turn.addPlayer(player);
         }
@@ -83,7 +88,7 @@ public class Game implements IContext, IState {
 
         Collections.shuffle(territories);
 
-        int numberOfTerritories = territories.size() / this.turn.getInGamePlayerList().size();
+        int numberOfTerritories = territories.size() / this.turn.getInGamePlayerList().size() + 1;
 
         for (Player player : this.turn.getInGamePlayerList()) {
             for (int i = 0; i < numberOfTerritories && !territories.isEmpty(); i++) {
@@ -93,6 +98,13 @@ public class Game implements IContext, IState {
                 territories.remove(0);
 
             }
+
+        }
+
+        List<Player> players = this.turn.getInGamePlayerList();
+
+        for (Player player : players) {
+            player.setReinforce(this.startingArmies);
 
         }
 

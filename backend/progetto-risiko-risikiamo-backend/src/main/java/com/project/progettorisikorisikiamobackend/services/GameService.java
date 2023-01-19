@@ -3,12 +3,12 @@ package com.project.progettorisikorisikiamobackend.services;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.project.progettorisikorisikiamobackend.Turno.Dice;
 
 import com.project.progettorisikorisikiamobackend.domain.Game;
+import com.project.progettorisikorisikiamobackend.exeptions.NotFoundExeption;
+import com.project.progettorisikorisikiamobackend.gameState.NewGameState;
 import com.project.progettorisikorisikiamobackend.player.Player;
 import com.project.progettorisikorisikiamobackend.services.mapper.GameMapper;
 import com.project.progettorisikorisikiamobackend.services.mapper.PlayerMapper;
@@ -23,10 +23,14 @@ public class GameService implements IGameService {
 
     /* List of all active game */
 
-    public Map<String, Game> games = new HashMap<>();
+    private Map<String, Game> games = new HashMap<>();
 
-    public Game getGame(String gameId) {
+    public Game getGame(String gameId) throws NotFoundExeption {
 
+        Game game = games.get(gameId);
+        if (game == null) {
+            throw new NotFoundExeption("Game not found");
+        }
         return games.get(gameId);
 
     }
@@ -44,34 +48,38 @@ public class GameService implements IGameService {
     }
 
     @Override
-    public String postAddPlayer(PlayerDto playerDto, String gameId) {
-        Player player = PlayerMapper.toEntity(playerDto);
-        games.get(gameId).addPlayer(player);
+    public String postAddPlayer(PlayerDto playerDto, String gameId) throws NotFoundExeption {
 
+        Player player = PlayerMapper.toEntity(playerDto);
+        this.getGame(gameId).addPlayer(player);
         return player.getId();
 
     }
 
     @Override
-    public GameDto getWatch(String gameId) {
+    public GameDto getWatch(String gameId) throws NotFoundExeption {
 
         // Dovrebbe ritornare le modifiche in base alla data
-        Game game = games.get(gameId);
+
+        Game game = this.getGame(gameId);
         return GameMapper.toDto(game);
 
     }
 
     @Override
-    public void putStart(String gameId) {
+    public void putStart(String gameId) throws NotFoundExeption {
 
-        games.get(gameId).startGame();
+        Game game = this.getGame(gameId);
+
+        isValidGame(game);
+        game.startGame();
 
     }
 
     @Override
-    public void putEnd(String gameId) {
+    public void putEnd(String gameId) throws NotFoundExeption {
 
-        games.get(gameId).endGame();
+        this.getGame(gameId).endGame();
 
     }
 
@@ -89,6 +97,24 @@ public class GameService implements IGameService {
         }
 
         return sb.toString();
+
+    }
+
+    private void isValidGame(Game game) {
+
+        if (game == null)
+            throw new IllegalArgumentException("Game not found");
+        if (game.getTurn() == null)
+            throw new IllegalArgumentException("no player in game");
+        if (game.getTurn().getInGamePlayerList().size() < 2)
+            throw new IllegalArgumentException("Not enough players");
+        if (game.getMap() == null)
+            throw new IllegalArgumentException("Map not initialized");
+        if (!(game.getState() instanceof NewGameState || game.getState() == null))
+            throw new IllegalArgumentException("Not enough players");
+
+        if (game.getTurn().getWinner() != null)
+            throw new IllegalArgumentException("Game already ended");
 
     }
 

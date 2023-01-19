@@ -22,32 +22,59 @@ public class GameMapper {
     public static Game toEntity(GameDto gameDto, String id) {
 
         if (gameDto == null || id.isEmpty()) {
-            return null;
+            throw new IllegalArgumentException("no null value allowed");
         }
 
         Game game = new Game();
         game.setId(id);
+
+        // cast form string to int
+
+        if (gameDto.getStartingArmies() < 1)
+            throw new IllegalArgumentException("startingArmies less then 1 ");
+        game.setStartingArmies(gameDto.getStartingArmies());
+
+        if (gameDto.getName() == null)
+            throw new IllegalArgumentException("name can't be null ");
         game.setName(gameDto.getName());
+
         game.setGameEnded(false);
         game.setTurn(null);
 
+        if (gameDto.getMap() == null)
+            throw new IllegalArgumentException("map name can't be null ");
         Map map = new Map(gameDto.getMap().getName());
 
         HashMap<String, Territory> territories = new HashMap<>();
         HashMap<String, List<String>> neigbors = new HashMap<>();
+
+        if (gameDto.getMap().getContinents() == null)
+            throw new IllegalArgumentException("continents can't be null ");
+
         for (int i = 0; i < gameDto.getMap().getContinents().size(); i++) {
+
+            if (gameDto.getMap().getContinents().get(i).getName() == null)
+                throw new IllegalArgumentException("continent name can't be null ");
 
             Continent continent = new Continent(gameDto.getMap().getContinents().get(i).getName(),
                     gameDto.getMap().getContinents().get(i).getBonus());
             map.addContinent(continent);
 
+            if (gameDto.getMap().getContinents().get(i).getTerritory() == null)
+                throw new IllegalArgumentException("territories can't be null ");
+
             for (int j = 0; j < gameDto.getMap().getContinents().get(i).getTerritory().size(); j++) {
+
+                if (gameDto.getMap().getContinents().get(i).getTerritory().get(j).getName() == null)
+                    throw new IllegalArgumentException("territory name can't be null ");
 
                 Territory territory = new Territory(
                         gameDto.getMap().getContinents().get(i).getTerritory().get(j).getName());
 
                 territories.put(territory.getName(), territory);
 
+                if (gameDto.getMap().getContinents().get(i).getTerritory().get(j).getNeighbors() == null)
+                    throw new IllegalArgumentException("territory neighbors can't be null ");
                 neigbors.put(territory.getName(), gameDto.getMap().getContinents().get(i).getTerritory().get(j)
                         .getNeighbors());
 
@@ -76,6 +103,7 @@ public class GameMapper {
         GameDto gameDto = new GameDto();
         gameDto.setId(game.getId());
         gameDto.setName(game.getName());
+        gameDto.setStartingArmies(game.getStartingArmies());
         Map map = game.getMap();
         MapDto mapDto = new MapDto();
 

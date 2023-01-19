@@ -2,15 +2,18 @@ package com.project.progettorisikorisikiamobackend.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.http.HttpStatus;
 
+import com.project.progettorisikorisikiamobackend.exeptions.NotFoundExeption;
 import com.project.progettorisikorisikiamobackend.player.Player;
 import com.project.progettorisikorisikiamobackend.services.IPlayerService;
 import com.project.progettorisikorisikiamobackend.services.mapper.PlayerMapper;
@@ -38,7 +41,7 @@ public class PlayController {
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<String> putSkip(@PathVariable String gameId, @PathVariable String playerId) {
-        playerService.endTurn(playerId, gameId);
+        playerService.endTurn(gameId, playerId);
         return ResponseEntity.ok("Turn Skipped");
     }
 
@@ -46,7 +49,7 @@ public class PlayController {
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<String> putSurrend(@PathVariable String gameId, @PathVariable String playerId) {
-        playerService.surrend(playerId, gameId);
+        playerService.surrend(gameId, playerId);
         return ResponseEntity.ok("Surrend");
     }
 
@@ -55,7 +58,7 @@ public class PlayController {
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<String> putAttack(@PathVariable String gameId, @PathVariable String playerId, String owner,
             String neighbor, int army) {
-        playerService.attack(playerId, gameId, owner, neighbor, army);
+        playerService.attack(gameId, playerId, owner, neighbor, army);
         return ResponseEntity.ok("Attack");
     }
 
@@ -64,7 +67,7 @@ public class PlayController {
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<String> putMove(@PathVariable String gameId, @PathVariable String playerId, String owner,
             String neighbor, int army) {
-        playerService.move(playerId, gameId, owner, neighbor, army);
+        playerService.move(gameId, playerId, owner, neighbor, army);
         return ResponseEntity.ok("Move");
     }
 
@@ -86,4 +89,14 @@ public class PlayController {
         return ResponseEntity.ok("riscatta rinforzi");
     }
 
+    @ExceptionHandler(value = { IllegalArgumentException.class, IllegalStateException.class })
+    public ResponseEntity<Object> handleException(Exception ex, WebRequest request) {
+        return ResponseEntity.badRequest().body(ex.getMessage());
+
+    }
+
+    @ExceptionHandler(value = { NotFoundExeption.class })
+    public ResponseEntity<Object> handleNotFound(Exception ex, WebRequest request) {
+        return ResponseEntity.notFound().build();
+    }
 }

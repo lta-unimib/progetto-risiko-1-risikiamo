@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.project.progettorisikorisikiamobackend.Cards.CardTerritory;
 import com.project.progettorisikorisikiamobackend.Turno.Turn;
 import com.project.progettorisikorisikiamobackend.domain.Game;
+import com.project.progettorisikorisikiamobackend.exeptions.NotFoundExeption;
 import com.project.progettorisikorisikiamobackend.map.Territory;
 import com.project.progettorisikorisikiamobackend.player.Player;
 
@@ -18,8 +19,8 @@ public class PlayService implements IPlayerService {
     private GameService gameService;
 
     @Override
-    public Player getPlayer(String gameId, String playerId) {
-        Game game = this.getGame(gameId);
+    public Player getPlayer(String gameId, String playerId) throws NotFoundExeption {
+        Game game = gameService.getGame(gameId);
         Turn turn = game.getTurn();
         List<Player> player = turn.getInGamePlayerList();
         Player ply = null;
@@ -34,7 +35,7 @@ public class PlayService implements IPlayerService {
     }
 
     @Override
-    public void endTurn(String gameId, String playerId) {
+    public void endTurn(String gameId, String playerId) throws NotFoundExeption {
 
         this.isPlayerTurn(gameId, playerId);
         gameService.getGame(gameId).endTurn();
@@ -42,7 +43,7 @@ public class PlayService implements IPlayerService {
     }
 
     @Override
-    public void surrend(String gameId, String playerId) {
+    public void surrend(String gameId, String playerId) throws NotFoundExeption {
 
         this.isPlayerTurn(gameId, playerId);
         List<Player> player = gameService.getGame(gameId).getTurn().getInGamePlayerList();
@@ -54,7 +55,7 @@ public class PlayService implements IPlayerService {
             }
         }
         if (ply == null) {
-            throw new RuntimeException("Player not found");
+            throw new IllegalArgumentException("Player not found");
         }
 
         turn.surrender(ply);
@@ -62,7 +63,8 @@ public class PlayService implements IPlayerService {
     }
 
     @Override
-    public void attack(String gameId, String playerId, String owner, String target, int army) {
+    public void attack(String gameId, String playerId, String owner, String target, int army)
+            throws NotFoundExeption {
 
         Territory tOwner = gameService.getGame(gameId).getMap().getTerritory(owner);
         Territory tTarget = gameService.getGame(gameId).getMap().getTerritory(target);
@@ -73,7 +75,8 @@ public class PlayService implements IPlayerService {
     }
 
     @Override
-    public void move(String gameId, String playerId, String owner, String target, int army) {
+    public void move(String gameId, String playerId, String owner, String target, int army)
+            throws NotFoundExeption {
         Territory tOwner = gameService.getGame(gameId).getMap().getTerritory(owner);
         Territory tTarget = gameService.getGame(gameId).getMap().getTerritory(target);
 
@@ -83,7 +86,8 @@ public class PlayService implements IPlayerService {
     }
 
     @Override
-    public void placeReinforcements(String gameId, String playerId, String target, int army) {
+    public void placeReinforcements(String gameId, String playerId, String target, int army)
+            throws NotFoundExeption {
 
         Territory tTarget = gameService.getGame(gameId).getMap().getTerritory(target);
 
@@ -93,7 +97,8 @@ public class PlayService implements IPlayerService {
     }
 
     @Override
-    public void redeemReinforcementsCard(String gameId, String playerId, String c1, String c2, String c3) {
+    public void redeemReinforcementsCard(String gameId, String playerId, String c1, String c2, String c3)
+            throws NotFoundExeption {
 
         this.isPlayerTurn(gameId, playerId);
         Player player = gameService.getGame(gameId).getTurn().getCurrentPlayer();
@@ -116,7 +121,7 @@ public class PlayService implements IPlayerService {
         }
 
         if (card1 == null || card2 == null || card3 == null) {
-            throw new RuntimeException("Carta non valida");
+            throw new IllegalArgumentException("Carta non valida");
         }
 
         gameService.getGame(gameId).redeemReinforcementsCard(card1, card2, card3);
@@ -129,22 +134,15 @@ public class PlayService implements IPlayerService {
 
     }
 
-    private void isPlayerTurn(String gameId, String playerId) {
+    private void isPlayerTurn(String gameId, String playerId) throws NotFoundExeption {
         Game game = gameService.getGame(gameId);
 
         if (game == null)
-            throw new RuntimeException("Game not found");
+            throw new IllegalArgumentException("Game not found");
 
         if (!game.getTurn().getCurrentPlayer().getId().equals(playerId))
-            throw new RuntimeException("Not your turn");
+            throw new IllegalArgumentException("Not your turn");
 
-    }
-
-    private Game getGame(String gameId) {
-        Game game = gameService.getGame(gameId);
-        if (game == null || game.getTurn() == null)
-            throw new RuntimeException("Game not found");
-        return game;
     }
 
 }

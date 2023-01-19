@@ -19,6 +19,7 @@ public class InitialFaseState implements IState {
     public InitialFaseState(IContext context) {
         this.context = context;
         this.reinforcementToPlace = 3;
+
     }
 
     @Override
