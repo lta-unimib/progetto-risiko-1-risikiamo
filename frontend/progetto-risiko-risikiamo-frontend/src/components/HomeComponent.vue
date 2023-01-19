@@ -1,5 +1,6 @@
 <script>
 import { ref } from 'vue'
+import { onMounted } from 'vue'
 
 export default {
 
@@ -81,63 +82,69 @@ export default {
             this.diffy = this.y;
         },
         onMouseMove(event) {
-            let svg = this.$refs.svg;
-            if (this.isDragging) {
-                this.currentPosition = {
-                    xc: event.clientX,
-                    yc: event.clientY
-                };
+            if (this.$refs.svg) {
+                let svg = this.$refs.svg;
+                if (this.isDragging) {
+                    this.currentPosition = {
+                        xc: event.clientX,
+                        yc: event.clientY
+                    };
 
-                let diffx2 = this.currentPosition.xc - this.initialPosition.xi;
-                let diffy2 = this.currentPosition.yc - this.initialPosition.yi;
-                diffx2 = diffx2 + this.diffx;
-                diffy2 = diffy2 + this.diffy;
-                this.x = diffx2;
-                this.y = diffy2;
+                    let diffx2 = this.currentPosition.xc - this.initialPosition.xi;
+                    let diffy2 = this.currentPosition.yc - this.initialPosition.yi;
+                    diffx2 = diffx2 + this.diffx;
+                    diffy2 = diffy2 + this.diffy;
+                    this.x = diffx2;
+                    this.y = diffy2;
 
-                if (diffx2 < -(this.width / 2))
-                    diffx2 = -(this.width / 2);
-                if (diffy2 < -(this.height / 2))
-                    diffy2 = -(this.height / 2);
+                    if (diffx2 < -(this.width / 2))
+                        diffx2 = -(this.width / 2);
+                    if (diffy2 < -(this.height / 2))
+                        diffy2 = -(this.height / 2);
 
-                svg.style.transform = `translate(${diffx2}px, ${diffy2}px)`;
+                    svg.style.transform = `translate(${diffx2}px, ${diffy2}px)`;
 
+                }
             }
+
         }
     },
 
     mounted() {
-        let paths = document.querySelectorAll("path");
-        for (let i = 0; i < paths.length; i++) {
-            paths[i].addEventListener("mouseover", this.changeHoverValue);
-        }
-        this.$refs.svg.addEventListener("click", this.setSelectedPath);
-        this.$refs.svg.addEventListener("click", (event) => {
-            const path = event.target;
-            this.selectedPaths.push(path);
-            if (this.selectedPaths.length === 2) {
-                this.selectedPaths[0].classList.remove("SelectedPath");
-                this.selectedPaths[0].classList.add("pathFrom");
-                this.selectedPaths[1].classList.remove("SelectedPath");
-                this.selectedPaths[1].classList.add("pathTo");
-                for (let i = 0; i < paths.length; i++) {
-                    paths[i].classList.remove("AdjacentPath");
-                }
-                this.selectedPaths[1].classList.add("AdjacentPath");
-                if (this.compareAdjacent(this.selectedPaths[0], this.selectedPaths[1])) { //&& this.selectedPaths[0].Armies > 1 when modded map
-                    this.openTradeWindow(this.selectedPaths[0], this.selectedPaths[1]);
-                    console.log("okè");
-                } else {
-                    this.impossibleTrade();
-                    this.selectedPaths[0].classList.remove("pathFrom");
-                    this.selectedPaths[1].classList.remove("pathTo");
-                    this.selectedPaths[1].classList.remove("AdjacentPath");
-                    console.log("not okè");
-                }
-
-                this.selectedPaths = [];
+        onMounted(() => {
+            let paths = document.querySelectorAll("path");
+            for (let i = 0; i < paths.length; i++) {
+                paths[i].addEventListener("mouseover", this.changeHoverValue);
             }
-        });
+            this.$refs.svg.addEventListener("click", this.setSelectedPath);
+            this.$refs.svg.addEventListener("click", (event) => {
+                const path = event.target;
+                this.selectedPaths.push(path);
+                if (this.selectedPaths.length === 2) {
+                    this.selectedPaths[0].classList.remove("SelectedPath");
+                    this.selectedPaths[0].classList.add("pathFrom");
+                    this.selectedPaths[1].classList.remove("SelectedPath");
+                    this.selectedPaths[1].classList.add("pathTo");
+                    for (let i = 0; i < paths.length; i++) {
+                        paths[i].classList.remove("AdjacentPath");
+                    }
+                    this.selectedPaths[1].classList.add("AdjacentPath");
+                    if (this.compareAdjacent(this.selectedPaths[0], this.selectedPaths[1])) { //&& this.selectedPaths[0].Armies > 1 when modded map
+                        this.openTradeWindow(this.selectedPaths[0], this.selectedPaths[1]);
+                        console.log("okè");
+                    } else {
+                        this.impossibleTrade();
+                        this.selectedPaths[0].classList.remove("pathFrom");
+                        this.selectedPaths[1].classList.remove("pathTo");
+                        this.selectedPaths[1].classList.remove("AdjacentPath");
+                        console.log("not okè");
+                    }
+
+                    this.selectedPaths = [];
+                }
+            });
+        })
+
 
 
     }
