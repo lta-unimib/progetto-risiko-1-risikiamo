@@ -134,7 +134,7 @@ public class PlayService implements IPlayerService {
 
     }
 
-    private void isPlayerTurn(String gameId, String playerId) throws NotFoundExeption {
+    private void isPlayerTurn(String gameId, String playerId) {
         Game game = gameService.getGame(gameId);
 
         if (game == null)

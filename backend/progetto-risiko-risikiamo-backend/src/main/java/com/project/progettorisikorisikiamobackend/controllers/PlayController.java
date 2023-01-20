@@ -2,6 +2,7 @@ package com.project.progettorisikorisikiamobackend.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +21,7 @@ import com.project.progettorisikorisikiamobackend.services.IPlayerService;
 import com.project.progettorisikorisikiamobackend.services.mapper.PlayerMapper;
 import com.project.progettorisikorisikiamobackend.services.responce.PlayerDto;
 
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/api/v1/game/{gameId}/play/{playerId}")
 
@@ -57,8 +59,10 @@ public class PlayController {
     @PutMapping("/attack")
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<String> putAttack(@PathVariable String gameId, @PathVariable String playerId, String owner,
-            String neighbor, int army) {
+    public ResponseEntity<String> putAttack(@PathVariable String gameId, @PathVariable String playerId,
+            @RequestParam String owner,
+            @RequestParam String neighbor,
+            @RequestParam int army) {
         playerService.attack(gameId, playerId, owner, neighbor, army);
         return ResponseEntity.ok("Attack");
     }
@@ -77,8 +81,8 @@ public class PlayController {
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<String> putPlace(@PathVariable String gameId, @PathVariable String playerId,
             @RequestParam String owner,
-            @RequestParam int armies) {
-        playerService.placeReinforcements(gameId, playerId, owner, armies);
+            @RequestParam int army) {
+        playerService.placeReinforcements(gameId, playerId, owner, army);
         return ResponseEntity.ok("Piazza rinforzi");
     }
 

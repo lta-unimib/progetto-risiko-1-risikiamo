@@ -7,12 +7,14 @@ import com.project.progettorisikorisikiamobackend.gameState.interf.IState;
 import com.project.progettorisikorisikiamobackend.map.*;
 import com.project.progettorisikorisikiamobackend.player.Player;
 
-import lombok.AllArgsConstructor;
-
-@AllArgsConstructor
 public class NewTurnState implements IState {
 
     private IContext context;
+
+    public NewTurnState(IContext context) {
+        this.context = context;
+
+    }
 
     @Override
     public void endTurn() {
@@ -41,6 +43,8 @@ public class NewTurnState implements IState {
     public void placeReinforcements(Territory ownTerritory, int armies) {
 
         Player p = context.getTurn().getCurrentPlayer();
+        if (p.getReinforce() <= 0)
+            context.setState(new ActionState(context));
         p.placeReinforcements(ownTerritory, armies);
         context.setState(new RenforceState(context));
     }
