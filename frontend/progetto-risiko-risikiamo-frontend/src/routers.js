@@ -1,12 +1,18 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeVue from './components/HomeComponent.vue'
 import NestedRoute from "./components/NestedRoute.vue"
+import MainVue from "./components/MainMenu.vue"
 
 const routes = [
     {
-        name: "home",
+        name: 'main menu',
+        component: MainVue,
+        path: '/'
+    },
+    {
+        name: "game",
         component: HomeVue,
-        path: "/"
+        path: "/game"
     },
     {
         name: "nested-route",
