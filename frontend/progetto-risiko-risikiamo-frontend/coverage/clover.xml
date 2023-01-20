@@ -1,49 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1672757284048" clover="3.2.0">
-  <project timestamp="1672757284048" name="All files">
-    <metrics statements="36" coveredstatements="29" conditionals="13" coveredconditionals="5" methods="5" coveredmethods="2" elements="54" coveredelements="36" complexity="0" loc="36" ncloc="36" packages="2" files="4" classes="4"/>
+<coverage generated="1674216917564" clover="3.2.0">
+  <project timestamp="1674216917564" name="All files">
+    <metrics statements="69" coveredstatements="36" conditionals="47" coveredconditionals="11" methods="18" coveredmethods="5" elements="134" coveredelements="52" complexity="0" loc="69" ncloc="69" packages="2" files="4" classes="4"/>
     <package name="src">
       <metrics statements="12" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-      <file name="App.vue" path="D:\ingegneria_del_software_esame\mappaFrontEnd\progetto-risiko-1-risikiamo\frontend\progetto-risiko-risikiamo-frontend\src\App.vue">
+      <file name="App.vue" path="D:\ingegneria_del_software_esame\spostamentoFrontend\progetto-risiko-1-risikiamo\frontend\progetto-risiko-risikiamo-frontend\src\App.vue">
         <metrics statements="10" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="4" count="1" type="stmt"/>
-        <line num="7" count="1" type="stmt"/>
-        <line num="8" count="1" type="stmt"/>
-        <line num="14" count="1" type="stmt"/>
-        <line num="16" count="1" type="stmt"/>
-        <line num="19" count="1" type="stmt"/>
-        <line num="20" count="1" type="stmt"/>
-        <line num="22" count="1" type="stmt"/>
-        <line num="23" count="1" type="stmt"/>
-        <line num="24" count="1" type="stmt"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="7" count="2" type="stmt"/>
+        <line num="8" count="2" type="stmt"/>
+        <line num="14" count="2" type="stmt"/>
+        <line num="16" count="2" type="stmt"/>
+        <line num="19" count="2" type="stmt"/>
+        <line num="20" count="2" type="stmt"/>
+        <line num="22" count="2" type="stmt"/>
+        <line num="23" count="2" type="stmt"/>
+        <line num="24" count="2" type="stmt"/>
       </file>
-      <file name="routers.js" path="D:\ingegneria_del_software_esame\mappaFrontEnd\progetto-risiko-1-risikiamo\frontend\progetto-risiko-risikiamo-frontend\src\routers.js">
+      <file name="routers.js" path="D:\ingegneria_del_software_esame\spostamentoFrontend\progetto-risiko-1-risikiamo\frontend\progetto-risiko-risikiamo-frontend\src\routers.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="5" count="1" type="stmt"/>
         <line num="18" count="1" type="stmt"/>
       </file>
     </package>
     <package name="src.components">
-      <metrics statements="24" coveredstatements="17" conditionals="13" coveredconditionals="5" methods="4" coveredmethods="1"/>
-      <file name="HomeComponent.vue" path="D:\ingegneria_del_software_esame\mappaFrontEnd\progetto-risiko-1-risikiamo\frontend\progetto-risiko-risikiamo-frontend\src\components\HomeComponent.vue">
-        <metrics statements="15" coveredstatements="9" conditionals="13" coveredconditionals="5" methods="3" coveredmethods="1"/>
+      <metrics statements="57" coveredstatements="24" conditionals="47" coveredconditionals="11" methods="17" coveredmethods="4"/>
+      <file name="HomeComponent.vue" path="D:\ingegneria_del_software_esame\spostamentoFrontend\progetto-risiko-1-risikiamo\frontend\progetto-risiko-risikiamo-frontend\src\components\HomeComponent.vue">
+        <metrics statements="48" coveredstatements="16" conditionals="47" coveredconditionals="11" methods="16" coveredmethods="4"/>
         <line num="4" count="2" type="stmt"/>
         <line num="7" count="2" type="stmt"/>
-        <line num="35" count="2" type="stmt"/>
-        <line num="41" count="2" type="cond" truecount="4" falsecount="0"/>
-        <line num="42" count="1" type="stmt"/>
-        <line num="43" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="44" count="1" type="stmt"/>
-        <line num="48" count="1" type="stmt"/>
-        <line num="52" count="0" type="cond" truecount="0" falsecount="5"/>
-        <line num="53" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="54" count="0" type="stmt"/>
-        <line num="55" count="0" type="stmt"/>
-        <line num="57" count="0" type="stmt"/>
-        <line num="58" count="0" type="stmt"/>
-        <line num="62" count="2" type="stmt"/>
+        <line num="8" count="2" type="stmt"/>
+        <line num="154" count="2" type="stmt"/>
+        <line num="160" count="0" type="stmt"/>
+        <line num="161" count="0" type="stmt"/>
+        <line num="162" count="0" type="stmt"/>
+        <line num="163" count="0" type="stmt"/>
+        <line num="164" count="0" type="stmt"/>
+        <line num="169" count="0" type="stmt"/>
+        <line num="170" count="0" type="stmt"/>
+        <line num="171" count="0" type="stmt"/>
+        <line num="172" count="0" type="stmt"/>
+        <line num="173" count="0" type="stmt"/>
+        <line num="174" count="0" type="stmt"/>
+        <line num="175" count="0" type="stmt"/>
+        <line num="178" count="0" type="stmt"/>
+        <line num="179" count="0" type="stmt"/>
+        <line num="180" count="0" type="stmt"/>
+        <line num="181" count="0" type="stmt"/>
+        <line num="184" count="3" type="stmt"/>
+        <line num="185" count="3" type="stmt"/>
+        <line num="186" count="3" type="stmt"/>
+        <line num="187" count="3" type="stmt"/>
+        <line num="207" count="3" type="cond" truecount="4" falsecount="0"/>
+        <line num="208" count="2" type="stmt"/>
+        <line num="209" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="210" count="2" type="stmt"/>
+        <line num="213" count="1" type="stmt"/>
+        <line num="217" count="2" type="cond" truecount="3" falsecount="2"/>
+        <line num="218" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="219" count="0" type="stmt"/>
+        <line num="221" count="0" type="stmt"/>
+        <line num="223" count="0" type="stmt"/>
+        <line num="225" count="0" type="stmt"/>
+        <line num="230" count="1" type="cond" truecount="3" falsecount="2"/>
+        <line num="231" count="0" type="stmt"/>
+        <line num="232" count="0" type="stmt"/>
+        <line num="233" count="0" type="stmt"/>
+        <line num="234" count="0" type="stmt"/>
+        <line num="235" count="0" type="stmt"/>
+        <line num="237" count="0" type="stmt"/>
+        <line num="238" count="0" type="stmt"/>
+        <line num="239" count="0" type="cond" truecount="0" falsecount="5"/>
+        <line num="240" count="0" type="stmt"/>
+        <line num="241" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="242" count="0" type="stmt"/>
+        <line num="248" count="2" type="cond" truecount="0" falsecount="20"/>
       </file>
-      <file name="NestedRoute.vue" path="D:\ingegneria_del_software_esame\mappaFrontEnd\progetto-risiko-1-risikiamo\frontend\progetto-risiko-risikiamo-frontend\src\components\NestedRoute.vue">
+      <file name="NestedRoute.vue" path="D:\ingegneria_del_software_esame\spostamentoFrontend\progetto-risiko-1-risikiamo\frontend\progetto-risiko-risikiamo-frontend\src\components\NestedRoute.vue">
         <metrics statements="9" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="4" count="1" type="stmt"/>
         <line num="7" count="1" type="stmt"/>
