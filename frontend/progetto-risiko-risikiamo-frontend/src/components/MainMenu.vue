@@ -72,25 +72,12 @@ export default {
 
         createGame() {
             const gameData = this.jsonFile;
-            const player = this.player;
+            //const player = this.player;
 
             console.log(gameData);
             axios.post('http://localhost:3000/api/v1/game/create', gameData)
                 .then(response => {
-                    axios.post('http://localhost:3000/api/v1/game/' + response.data.id + '/addPlayer', player)
-                        .then(response2 => {
-                            console.log(response2.data);
-                        })
-                        .catch(error2 => {
-                            console.log(error2);
-                        });
-                    axios.post('http://localhost:3000/api/v1/game/' + response.data.id + '/watch')
-                        .then(response3 => {
-                            console.log(response3.data);
-                        })
-                        .catch(error3 => {
-                            console.log(error3);
-                        });
+                    console.log(response);
                 })
                 .catch(error => {
                     console.log(error);
