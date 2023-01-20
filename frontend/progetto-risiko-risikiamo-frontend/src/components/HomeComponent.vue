@@ -21,6 +21,7 @@ export default {
     },
 
     methods: {
+        getAdjacentCountries: getAdjacentCountries,
         changeHoverValue: changeHoverValue,
         setSelectedPath: setSelectedPath,
         openTradeWindow: openTradeWindow,
@@ -31,7 +32,7 @@ export default {
             const adjacencyList = require('../assets/dataStates.json').map.continents.territories;
             const country1 = path1.attributes.title.value;
             const country2 = path2.attributes.title.value;
-            console.log(adjacencyList[country1]);
+            //console.log(adjacencyList[country1]);
             if (adjacencyList[country1].neighbours && adjacencyList[country1].neighbours.includes(country2)) {
                 return true;
             } else {
@@ -48,7 +49,7 @@ export default {
                 this.zoom = 2.5;
                 this.height = this.height * this.zoom;
                 this.width = this.width * this.zoom;
-                console.log("zoom in impossibile sei già a 2.5");
+                //console.log("zoom in impossibile sei già a 2.5");
             }
 
         },
@@ -63,7 +64,7 @@ export default {
                 this.zoom = 1;
                 this.height = this.height * this.zoom;
                 this.width = this.width * this.zoom;
-                console.log("zoom out impossibile sei già a 1");
+                ////console.log("zoom out impossibile sei già a 1");
             }
 
         },
@@ -109,9 +110,9 @@ export default {
     },
 
     mounted() {
-        
-         
-        let paths =  document.querySelectorAll("path");
+
+
+        let paths = document.querySelectorAll("path");
         for (let i = 0; i < paths.length; i++) {
             paths[i].addEventListener("mouseover", this.changeHoverValue);
         }
@@ -130,23 +131,24 @@ export default {
                 this.selectedPaths[1].classList.add("AdjacentPath");
                 if (this.compareAdjacent(this.selectedPaths[0], this.selectedPaths[1])) { //&& this.selectedPaths[0].Armies > 1 when modded map
                     this.openTradeWindow(this.selectedPaths[0], this.selectedPaths[1]);
-                    console.log("okè");
+                    ////console.log("okè");
                 } else {
                     this.impossibleTrade();
                     this.selectedPaths[0].classList.remove("pathFrom");
                     this.selectedPaths[1].classList.remove("pathTo");
                     this.selectedPaths[1].classList.remove("AdjacentPath");
-                    console.log("not okè");
+                    ////console.log("not okè");
                 }
 
                 this.selectedPaths = [];
             }
         });
 
-  
 
 
-}}
+
+    }
+}
 
 
 const name = ref("place your mouse over a country");
@@ -158,7 +160,7 @@ function impossibleTrade() {
     errorWindow.document.write(instructions);
     setTimeout(() => {
         errorWindow.window.close();
-        console.log("closed");
+        //console.log("closed");
     }, 5000);
 }
 
@@ -167,18 +169,9 @@ function openTradeWindow(path1, path2) {
     const tradeWindow = window.open('', 'Trade Instructions', 'height=300,width=600');
     tradeWindow.document.write(instructions);
     const tradeButton = tradeWindow.document.getElementById('button');
-    if (tradeButton != null) {
-        tradeButton.addEventListener('click', () => this.trade(tradeWindow.document.getElementById('number').value, path1, path2));
-    } else {
-        console.log("trade button is null");
-    }
+    tradeButton.addEventListener('click', () => this.trade(tradeWindow.document.getElementById('number').value, path1, path2));
     const exitButton = tradeWindow.document.getElementById('exit');
-    if (exitButton != null) {
-        exitButton.addEventListener('click', () => this.closeTradeWindow(path1, path2, tradeWindow));
-
-    } else {
-        console.log("exit button is null");
-    }
+    exitButton.addEventListener('click', () => this.closeTradeWindow(path1, path2, tradeWindow));
 
 }
 
@@ -195,21 +188,25 @@ function trade(value, path1, path2) {
     let countries = require('../assets/dataStates.json').map.continents.territories;
     let from = countries[path1.attributes.title.value];
     let to = countries[path2.attributes.title.value];
+    console.log(from, to, value);
+
+    /*
     if (from != null && from.Armies > value && to != null && value <= 3 && value >= 1 && from.Armies > 1) {
         //to do after with backend
-        console.log(from, to);
-        console.log(from.Armies);
+        //console.log(from, to);
+        //console.log(from.Armies);
         from.Armies -= value;
         to.Armies += value;
-        console.log("trade successful");
+        //console.log("trade successful");
         countries[path1.attributes.title.value].Armies = from.Armies;
         countries[path2.attributes.title.value].Armies = to.Armies;
 
     }
     else {
-        console.log("trade failed");
+        //console.log("trade failed");
 
     }
+    */
 }
 
 function changeHoverValue(value) {
@@ -229,12 +226,12 @@ function setSelectedPath(value) {
     if (value != null && value.target != null && value.target.attributes.title != null) {
         if (value.target.classList.contains("SelectedPath")) {
             value.target.classList.remove("SelectedPath");
-            console.log(value.target.attributes.title, value.target.classList);
+            //console.log(value.target.attributes.title, value.target.classList);
             getAdjacentCountries(value);
         }
         else {
             value.target.classList.add("SelectedPath");
-            console.log(value.target.attributes.title, value.target.classList);
+            //console.log(value.target.attributes.title, value.target.classList);
             getAdjacentCountries(value);
         }
     }
@@ -262,7 +259,7 @@ function getAdjacentCountries(value) {
 
 
         }
-        console.log(countryNames);
+        ////console.log(countryNames);
     }
 }
 
