@@ -2,6 +2,7 @@ package com.project.progettorisikorisikiamobackend.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +21,7 @@ import com.project.progettorisikorisikiamobackend.services.IPlayerService;
 import com.project.progettorisikorisikiamobackend.services.mapper.PlayerMapper;
 import com.project.progettorisikorisikiamobackend.services.responce.PlayerDto;
 
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/api/v1/game/{gameId}/play/{playerId}")
 

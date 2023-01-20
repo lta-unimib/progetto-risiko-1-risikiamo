@@ -1,0 +1,46 @@
+{
+    "name": "game",
+    "startingArmies": 5,
+    "map": {
+        "name": "World",
+        "continents": [
+            {
+                "name": "North America",
+                "bonus": 1,
+                "territory": [
+                    {
+                        "name": "Canada",
+                        "neighbors": [
+                            "Usa"
+                        ]
+                    },
+                    {
+                        "name": "Usa",
+                        "neighbors": [
+                            "Canada",
+                            "Messico"
+                        ]
+                    },
+                    {
+                        "name": "Messico",
+                        "neighbors": [
+                            "Usa"
+                        ]
+                    },
+                    {
+                        "name": "numero 2",
+                        "neighbors": [
+                            "Usa"
+                        ]
+                    },
+                    {
+                        "name": "numero 3",
+                        "neighbors": [
+                            "Usa"
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}
