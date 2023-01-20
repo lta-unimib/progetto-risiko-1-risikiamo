@@ -54,29 +54,29 @@ public class TestInitialFaseState {
     }
 
     @Test
-    void testAttack_shouldThrowUnsupportedOperationException() {
+    void testAttack_shouldThrowIllegalStateException() {
 
         IState initialFaseState = context.getState();
 
-        assertThrows(UnsupportedOperationException.class, () -> initialFaseState.attack(owner, neighbor, 1));
+        assertThrows(IllegalStateException.class, () -> initialFaseState.attack(owner, neighbor, 1));
     }
 
     @Test
-    void testMove_shouldThrowUnsupportedOperationException() {
+    void testMove_shouldThrowIllegalStateException() {
         IState initialFaseState = context.getState();
-        assertThrows(UnsupportedOperationException.class, () -> initialFaseState.move(owner, neighbor, 1));
+        assertThrows(IllegalStateException.class, () -> initialFaseState.move(owner, neighbor, 1));
     }
 
     @Test
-    void testPassTurn_shouldThrowUnsupportedOperationException() {
+    void testPassTurn_shouldThrowIllegalStateException() {
         IState initialFaseState = context.getState();
-        assertThrows(UnsupportedOperationException.class, () -> initialFaseState.endTurn());
+        assertThrows(IllegalStateException.class, () -> initialFaseState.endTurn());
     }
 
     @Test
-    void testRedeemReinforcementsCard_shouldThrowUnsupportedOperationException() {
+    void testRedeemReinforcementsCard_shouldThrowIllegalStateException() {
         IState initialFaseState = context.getState();
-        assertThrows(UnsupportedOperationException.class, () -> initialFaseState.redeemReinforcementsCard(
+        assertThrows(IllegalStateException.class, () -> initialFaseState.redeemReinforcementsCard(
                 null, null, null));
     }
 

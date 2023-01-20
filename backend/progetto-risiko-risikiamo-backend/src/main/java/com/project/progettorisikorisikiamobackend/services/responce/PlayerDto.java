@@ -17,6 +17,8 @@ public class PlayerDto {
     @NotNull
     private String color;
 
+    private List<String> objectives;
+
     private int renforcements;
 
     private List<CardDto> cards;

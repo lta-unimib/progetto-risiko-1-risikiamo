@@ -57,8 +57,8 @@ public class TestNewTurnState {
     public void testNewTurnState() {
 
         NewTurnState newTurnState = (NewTurnState) context.getState();
-        assertThrows(UnsupportedOperationException.class, () -> newTurnState.attack(ownTerritory, neighbor, 1));
-        assertThrows(UnsupportedOperationException.class, () -> newTurnState.move(ownTerritory, neighbor, 1));
+        assertThrows(IllegalStateException.class, () -> newTurnState.attack(ownTerritory, neighbor, 1));
+        assertThrows(IllegalStateException.class, () -> newTurnState.move(ownTerritory, neighbor, 1));
 
     }
 

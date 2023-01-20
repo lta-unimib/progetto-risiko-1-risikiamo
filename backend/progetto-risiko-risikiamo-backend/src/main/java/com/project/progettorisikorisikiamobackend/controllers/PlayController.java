@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
@@ -74,8 +75,9 @@ public class PlayController {
     @PutMapping("/place")
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<String> putPlace(@PathVariable String gameId, @PathVariable String playerId, String owner,
-            int armies) {
+    public ResponseEntity<String> putPlace(@PathVariable String gameId, @PathVariable String playerId,
+            @RequestParam String owner,
+            @RequestParam int armies) {
         playerService.placeReinforcements(gameId, playerId, owner, armies);
         return ResponseEntity.ok("Piazza rinforzi");
     }

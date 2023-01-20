@@ -59,12 +59,12 @@ public class TestActionState {
     }
 
     @Test
-    void test_shouldThrowUnsupportedOperationException() {
+    void test_shouldThrowIllegalStateException() {
 
         IState actionState = context.getState();
 
-        assertThrows(UnsupportedOperationException.class, () -> actionState.redeemReinforcementsCard(null, null, null));
-        assertThrows(UnsupportedOperationException.class, () -> actionState.placeReinforcements(ownTerritory, 0));
+        assertThrows(IllegalStateException.class, () -> actionState.redeemReinforcementsCard(null, null, null));
+        assertThrows(IllegalStateException.class, () -> actionState.placeReinforcements(ownTerritory, 0));
 
     }
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.project.progettorisikorisikiamobackend.Cards.CardTerritory;
+import com.project.progettorisikorisikiamobackend.obiettivi.Objective;
 import com.project.progettorisikorisikiamobackend.player.Player;
 import com.project.progettorisikorisikiamobackend.services.responce.CardDto;
 import com.project.progettorisikorisikiamobackend.services.responce.PlayerDto;
@@ -17,6 +18,12 @@ public class PlayerMapper {
         PlayerDto playerDto = new PlayerDto();
         playerDto.setName(player.getName());
         playerDto.setRenforcements(player.getReinforce());
+        playerDto.setColor(player.getColor());
+        List<String> obiettivi = new ArrayList<>();
+        for (Objective obiettivo : player.getObiettivi()) {
+            obiettivi.add(obiettivo.getObjDescription());
+        }
+        playerDto.setObjectives(obiettivi);
 
         List<CardTerritory> cards = player.getCarte();
         List<CardDto> cardsDto = new ArrayList<>();

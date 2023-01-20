@@ -30,11 +30,16 @@ public class InitialFaseState implements IState {
 
         boolean flag = false;
         // Logica pizzare rinforzi
-        if (reinforcementToPlace > 0 && armies <= reinforcementToPlace) {
+        if (reinforcementToPlace > 0 && armies <= reinforcementToPlace && player.getReinforce() >= armies) {
 
             player.placeReinforcements(ownTerritory, armies);
 
-            reinforcementToPlace -= armies;
+            reinforcementToPlace = reinforcementToPlace - armies;
+            if (reinforcementToPlace <= 0 || player.getReinforce() <= 0) {
+                context.getTurn().nextTurn();
+                context.setState(new InitialFaseState(context));
+                return;
+            }
         } else {
             throw new IllegalArgumentException("Non puoi piazzare piu rinforzi di quelli che hai a disposizione");
         }
@@ -50,10 +55,6 @@ public class InitialFaseState implements IState {
             context.getTurn().nextTurn();
         }
 
-        if (reinforcementToPlace == 0 || player.getReinforce() == 0) {
-            context.setState(new InitialFaseState(context));
-            context.getTurn().nextTurn();
-        }
     }
 
 }

@@ -42,23 +42,23 @@ public class TestRenforceState {
     }
 
     @Test
-    void testAttack_shouldThrowUnsupportedOperationException() {
+    void testAttack_shouldThrowIllegalStateException() {
 
         IState renforceState = context.getState();
 
-        assertThrows(UnsupportedOperationException.class, () -> renforceState.attack(ownTerritory, neighbor, 1));
+        assertThrows(IllegalStateException.class, () -> renforceState.attack(ownTerritory, neighbor, 1));
     }
 
     @Test
-    void testMove_shouldThrowUnsupportedOperationException() {
+    void testMove_shouldThrowIllegalStateException() {
 
         IState renforceState = context.getState();
 
-        assertThrows(UnsupportedOperationException.class, () -> renforceState.move(ownTerritory, neighbor, 1));
+        assertThrows(IllegalStateException.class, () -> renforceState.move(ownTerritory, neighbor, 1));
     }
 
     @Test
-    void testEndTurn_shouldThrowUnsupportedOperationException() {
+    void testEndTurn_shouldThrowIllegalStateException() {
 
         IState renforceState = context.getState();
 

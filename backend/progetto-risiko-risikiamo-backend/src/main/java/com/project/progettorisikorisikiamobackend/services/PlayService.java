@@ -140,6 +140,9 @@ public class PlayService implements IPlayerService {
         if (game == null)
             throw new IllegalArgumentException("Game not found");
 
+        if (game.getTurn().getCurrentPlayer() == null)
+            throw new IllegalArgumentException("Game not ready");
+
         if (!game.getTurn().getCurrentPlayer().getId().equals(playerId))
             throw new IllegalArgumentException("Not your turn");
 

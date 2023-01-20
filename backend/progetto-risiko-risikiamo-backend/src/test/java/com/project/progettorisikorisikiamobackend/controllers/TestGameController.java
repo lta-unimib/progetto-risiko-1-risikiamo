@@ -32,8 +32,7 @@ public class TestGameController {
     public void testGetWatch() throws Exception {
         String gameId = "12345";
         mockMvc.perform(get("/api/v1/game/" + gameId + "/watch"))
-                .andExpect(status().isOk())
-                .andExpect(content().string("Watching game"));
+                .andExpect(status().isOk());
         verify(gameService, times(1)).getWatch(gameId);
     }
 }

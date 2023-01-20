@@ -82,6 +82,9 @@ public class GameMapper {
             }
         }
 
+        if (territories.size() < 5)
+            throw new IllegalArgumentException("territories can't be less then 5 ");
+
         for (String key : neigbors.keySet()) {
             for (int i = 0; i < neigbors.get(key).size(); i++) {
                 territories.get(key).addNeighbor(territories.get(neigbors.get(key).get(i)));
