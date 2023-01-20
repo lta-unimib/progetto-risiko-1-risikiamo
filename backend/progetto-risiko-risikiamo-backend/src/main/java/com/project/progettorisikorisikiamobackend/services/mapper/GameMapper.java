@@ -34,14 +34,14 @@ public class GameMapper {
             throw new IllegalArgumentException("startingArmies less then 1 ");
         game.setStartingArmies(gameDto.getStartingArmies());
 
-        if (gameDto.getName() == null)
+        if (gameDto.getName() == null || gameDto.getName().isEmpty())
             throw new IllegalArgumentException("name can't be null ");
         game.setName(gameDto.getName());
 
         game.setGameEnded(false);
         game.setTurn(null);
 
-        if (gameDto.getMap() == null)
+        if (gameDto.getMap() == null || gameDto.getMap().getName() == null || gameDto.getMap().getName().isEmpty())
             throw new IllegalArgumentException("map name can't be null ");
         Map map = new Map(gameDto.getMap().getName());
 
