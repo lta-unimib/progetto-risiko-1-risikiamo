@@ -52,6 +52,11 @@ public class Turn {
         if (inGamePlayerList.isEmpty() || currentPlayer == null)
             this.currentPlayer = player;
 
+        for (Player p : inGamePlayerList) {
+            if (p.getColor().equals(player.getColor())) {
+                throw new IllegalArgumentException("Player color already used");
+            }
+        }
         inGamePlayerList.add(player);
         turnNumber = 0;
     }

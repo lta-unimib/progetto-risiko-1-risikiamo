@@ -55,22 +55,21 @@ public class NewTurnState implements IState {
     }
 
     @Override
-    public void attack(Territory owner, Territory neighbor, int army) {
-        throw new UnsupportedOperationException("new turn state");
-    }
-
-    @Override
     public void placeReinforcements(Territory ownTerritory, int armies) {
 
         Player p = context.getTurn().getCurrentPlayer();
-        if (p.getReinforce() <= 0)
+
+        if (context.getTurn().getCurrentPlayer().getReinforce() <= 0) {
             context.setState(new ActionState(context));
+        }
+
         p.placeReinforcements(ownTerritory, armies);
-
-        if (p.getReinforce() <= 0)
+        if (context.getTurn().getCurrentPlayer().getReinforce() <= 0) {
             context.setState(new ActionState(context));
+        } else {
+            context.setState(new RenforceState(context));
+        }
 
-        context.setState(new RenforceState(context));
     }
 
 }
