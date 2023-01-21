@@ -3,6 +3,7 @@ import HomeVue from './components/HomeComponent.vue'
 import NestedRoute from "./components/NestedRoute.vue"
 import MainVue from "./components/MainMenu.vue"
 import PlayersVue from "./components/PlayersComponent.vue"
+import CardsVue from "./components/CardComponent.vue"
 
 const routes = [
     {
@@ -26,6 +27,11 @@ const routes = [
         component: PlayersVue,
         path: "/players",
         props: true
+    },
+    {
+        name: "cards",
+        component: CardsVue,
+        path: "/cards",
     }
 ];
 

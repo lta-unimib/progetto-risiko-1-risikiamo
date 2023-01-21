@@ -1,0 +1,136 @@
+{
+    "players": [
+        {
+            "id": "1",
+            "color": "#DDA0DD",
+            "cards": [
+                {
+                    "name": "Italy",
+                    "type": "Cavalry"
+                },
+                {
+                    "name": "Albania",
+                    "type": "Artillery"
+                },
+                {
+                    "name": "Greece",
+                    "type": "Cavalry"
+                },
+                {
+                    "name": "Bulgaria",
+                    "type": "Infantry"
+                }
+            ]
+        },
+        {
+            "id": "2",
+            "color": "#32CD32",
+            "cards": [
+                {
+                    "name": "Canada",
+                    "type": null
+                },
+                {
+                    "name": "United States",
+                    "type": "Artillery"
+                },
+                {
+                    "name": "Mexico",
+                    "type": "Cavalry"
+                },
+                {
+                    "name": "Brazil",
+                    "type": "Infantry"
+                }
+            ]
+        },
+        {
+            "id": "3",
+            "color": "#1E90FF",
+            "cards": [
+                {
+                    "name": "France",
+                    "type": null
+                },
+                {
+                    "name": "Egypt",
+                    "type": "Artillery"
+                },
+                {
+                    "name": "Germany",
+                    "type": "Cavalry"
+                },
+                {
+                    "name": "Russia",
+                    "type": "Infantry"
+                }
+            ]
+        },
+        {
+            "id": "4",
+            "color": "#B22222",
+            "cards": [
+                {
+                    "name": "Thailand",
+                    "type": null
+                },
+                {
+                    "name": "China",
+                    "type": "Artillery"
+                },
+                {
+                    "name": "Japan",
+                    "type": "Cavalry"
+                },
+                {
+                    "name": "India",
+                    "type": "Infantry"
+                }
+            ]
+        },
+        {
+            "id": "5",
+            "color": "#ffffff",
+            "cards": [
+                {
+                    "name": "Belgium",
+                    "type": null
+                },
+                {
+                    "name": "Greece",
+                    "type": "Artillery"
+                },
+                {
+                    "name": "North Korea",
+                    "type": "Cavalry"
+                },
+                {
+                    "name": "South Korea",
+                    "type": "Infantry"
+                }
+            ]
+        },
+        {
+            "id": "6",
+            "color": "#808080",
+            "cards": [
+                {
+                    "name": "North Macedonia",
+                    "type": null
+                },
+                {
+                    "name": "Turkey",
+                    "type": "Artillery"
+                },
+                {
+                    "name": "Ukraine",
+                    "type": "Cavalry"
+                },
+                {
+                    "name": "Poland",
+                    "type": "Infantry"
+                }
+            ]
+        }
+    ]
+}

@@ -1,6 +1,7 @@
 <script>
 import axios from 'axios';
-import { ref } from 'vue'
+import { ref } from 'vue';
+//import UserComponent from './UserComponent.vue';
 export default {
 
     name: "HomeComponent",
@@ -9,10 +10,7 @@ export default {
         return {
             idMatch: this.$refs.idMatch,
             playerName: this.$refs.playerName,
-            player: {
-                name: this.playerName,
-                color: this.selectedColor
-            },
+            player: [],
             currentPlayer: null,
             players: [],
             hoverValue: name,
@@ -37,9 +35,23 @@ export default {
         openTradeWindow: openTradeWindow,
         impossibleTrade: impossibleTrade,
         closeTradeWindow: closeTradeWindow,
+        windowUser: windowUser,
         trade: trade,
-        recoverColor() {
-            console.log("recoverColor");
+        recoverPlayer() {
+            axios.get('http://localhost:3000/api/v1/game/' + this.idMatch + '/watch')
+                .then(response => {
+                    for (let i = 0; i < response.data.players.length; i++) {
+                        if (response.data.players[i].name == this.playerName) {
+                            this.player = response.data.players[i];
+                            console.log(this.player);
+                        } else {
+                            console.log("error");
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
+                });
         },
         startMatch() {
             axios.put('http://localhost:3000/api/v1/game/' + this.idMatch + '/start')
@@ -66,17 +78,6 @@ export default {
                 console.log("your turn");
             }
         },
-        printAllPlayers() {
-            axios.get('http://localhost:3000/api/v1/game/' + this.idMatch + '/watch')
-                .then(response => {
-                    console.log(response.data);
-                    this.players = response.data.players;
-                    console.log(this.players);
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-        },
         printid() {
             axios.get('http://localhost:3000/api/v1/game/' + this.idMatch + '/watch')
                 .then(response => {
@@ -85,7 +86,7 @@ export default {
                 .catch(error => {
                     console.log(error);
                 });
-
+            this.recoverPlayer();
         },
         compareAdjacent(path1, path2) {
             const adjacencyList = require('../assets/dataStates.json').map.continents.territories;
@@ -206,9 +207,6 @@ export default {
     },
 
     created() {
-        //if (this.player.length < 2) {
-
-        //}
         if (this.startMatch === false) {
             setInterval(() => {
                 console.log("waiting for match to start");
@@ -224,11 +222,7 @@ export default {
         setInterval(() => {
             this.setPOV();
         }, 5000);
-
     }
-
-
-
 }
 
 
@@ -344,6 +338,12 @@ function getAdjacentCountries(value) {
     }
 }
 
+function windowUser() {
+    const User = window.open('', 'User', 'height=300,width=600');
+    User.document.write(require('../components/UserComponent.vue'));
+
+}
+
 
 
 </script>
@@ -389,7 +389,7 @@ function getAdjacentCountries(value) {
     </div>
 
     <div>
-        <button @click="setPOV">di chi è il turno?</button>
+        <button @click="windowUser">Dati Utenza</button>
     </div>
 
 
