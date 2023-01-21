@@ -2,6 +2,7 @@ package com.project.progettorisikorisikiamobackend.gameState;
 
 import com.project.progettorisikorisikiamobackend.Cards.CardTerritory;
 import com.project.progettorisikorisikiamobackend.Cards.DeckTerritories;
+import com.project.progettorisikorisikiamobackend.Turno.Turn;
 import com.project.progettorisikorisikiamobackend.gameState.interf.IContext;
 import com.project.progettorisikorisikiamobackend.gameState.interf.IState;
 import com.project.progettorisikorisikiamobackend.map.*;
@@ -13,6 +14,11 @@ public class NewTurnState implements IState {
 
     public NewTurnState(IContext context) {
         this.context = context;
+
+        Player p = context.getTurn().getCurrentPlayer();
+        Map m = context.getMap();
+
+        p.setReinforce(p.getReinforce() + m.getNumberOfTerritories(p) / 3 + 1);
 
     }
 

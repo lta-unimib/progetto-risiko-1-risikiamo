@@ -128,12 +128,6 @@ public class PlayService implements IPlayerService {
 
     }
 
-    @Override
-    public void play(String gameId, String playerId) {
-        // TODO comincia la partita
-
-    }
-
     private void isPlayerTurn(String gameId, String playerId) {
         Game game = gameService.getGame(gameId);
 
@@ -143,9 +137,11 @@ public class PlayService implements IPlayerService {
         if (game.getTurn().getCurrentPlayer() == null)
             throw new IllegalArgumentException("Game not ready");
 
+        if (game.isGameEnded())
+            throw new IllegalArgumentException("Game ended, Win: " + game.getTurn().getWinner().getName());
+
         if (!game.getTurn().getCurrentPlayer().getId().equals(playerId))
             throw new IllegalArgumentException("Not your turn");
-
     }
 
 }

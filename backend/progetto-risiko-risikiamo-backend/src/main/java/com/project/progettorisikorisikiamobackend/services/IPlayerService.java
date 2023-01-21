@@ -8,8 +8,6 @@ public interface IPlayerService {
 
     public Player getPlayer(String gameId, String playerId);
 
-    public void play(String gameId, String playerId);
-
     public void surrend(String gameId, String playerId);
 
     public void endTurn(String gameId, String playerId);

@@ -36,27 +36,13 @@ public class InitialFaseState implements IState {
     }
 
     @Override
-    public void attack(Territory owner, Territory neighbor, int army) {
-        throw new UnsupportedOperationException("Non puoi attaccare in fase iniziale");
-    }
-
-    @Override
     public void placeReinforcements(Territory ownTerritory, int armies) {
 
         Player player = context.getTurn().getCurrentPlayer();
         List<Player> playerList = context.getTurn().getInGamePlayerList();
 
         boolean flag = false;
-        for (Player p : playerList) {
-            if (p.getReinforce() > 0) {
-                flag = true;
-            }
-        }
 
-        if (!flag) {
-            context.setState(new NewTurnState(context));
-            context.getTurn().nextTurn();
-        }
         // Logica pizzare rinforzi
         if (reinforcementToPlace > 0 && armies <= reinforcementToPlace && player.getReinforce() >= armies) {
 
@@ -66,6 +52,17 @@ public class InitialFaseState implements IState {
 
         } else {
             throw new IllegalArgumentException("Non puoi piazzare piu rinforzi di quelli che hai a disposizione");
+        }
+        for (Player p : playerList) {
+            if (p.getReinforce() > 0) {
+                flag = true;
+            }
+        }
+
+        if (!flag) {
+            context.getTurn().nextTurn();
+            context.setState(new NewTurnState(context));
+            return;
         }
 
         if (reinforcementToPlace <= 0 || player.getReinforce() <= 0) {

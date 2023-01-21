@@ -19,4 +19,6 @@ public interface IContext {
 
     public DeckTerritories getDeckTerritories();
 
+    public void setGameEnded(boolean gameEnded);
+
 }
