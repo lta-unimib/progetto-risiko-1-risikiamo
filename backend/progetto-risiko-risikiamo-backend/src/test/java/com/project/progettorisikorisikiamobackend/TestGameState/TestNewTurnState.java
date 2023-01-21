@@ -20,6 +20,7 @@ import com.project.progettorisikorisikiamobackend.gameState.interf.IContext;
 import com.project.progettorisikorisikiamobackend.map.Continent;
 import com.project.progettorisikorisikiamobackend.map.Map;
 import com.project.progettorisikorisikiamobackend.map.Territory;
+import com.project.progettorisikorisikiamobackend.obiettivi.TotTerritories;
 import com.project.progettorisikorisikiamobackend.player.Player;
 
 public class TestNewTurnState {
@@ -45,10 +46,13 @@ public class TestNewTurnState {
         c.addTerritory(ownTerritory);
         c.addTerritory(neighbor);
         c.addTerritory(new Territory("test2", p1));
+        p1.setReinforce(2);
 
         Map m = new Map("test");
         m.addContinent(c);
         turn.nextTurn();
+        p1.setObiettivi(new ArrayList<>(List.of(new TotTerritories(10, m))));
+        p2.setObiettivi(new ArrayList<>(List.of(new TotTerritories(10, m))));
         context = new MockContextClass(turn, m, null, null, new DeckTerritories(m));
         context.setState(new NewTurnState(context));
 
@@ -98,10 +102,10 @@ public class TestNewTurnState {
         NewTurnState newTurnState = (NewTurnState) context.getState();
         Player p = turn.getCurrentPlayer();
 
-        p.setReinforce(1);
+        p.setReinforce(2);
         newTurnState.placeReinforcements(ownTerritory, 1);
         assertEquals(1, ownTerritory.getArmy());
-        assertEquals(0, p.getReinforce());
+        assertEquals(1, p.getReinforce());
         assertEquals(context.getState().getClass(), RenforceState.class);
     }
 }
