@@ -26,8 +26,7 @@
         </select>
     </div>
     <br>
-    <button class="button-30" @click="readString(playerName, selectedColor)">clicca Per confermare il nome e il
-        colore</button>
+    
     <br>
     <br>
     <div>
@@ -87,13 +86,14 @@
     <br>
     <br>
     <div>
-        <h2 class="importantMessage">
-            Copia il tuo link partita per giocare e schiaccia sul tasto Gioca o inserisci un codice di una partita in
-            corso.
-        </h2>
-        <h2>
-            <router-link to="/game">Gioca</router-link>
-        </h2>
+       
+
+        <form action="/game">
+ 
+            <input type="text" id="name" name="name" v-model="playerName"  hidden />
+            <input type="text" id="id" name="id" v-model="id" hidden />
+            <input type="submit" value="LoadGame">
+        </form>
     </div>
 </template>
 
@@ -140,7 +140,7 @@ export default {
         createGame() {
             const gameData = this.jsonFile;
             //const player = this.player;
-
+            this.readString(this.playerName, this.selectedColor)
             console.log(gameData);
             axios.post('http://localhost:3000/api/v1/game/create', gameData)
                 .then(response => {

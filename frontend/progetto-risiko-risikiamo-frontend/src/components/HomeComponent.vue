@@ -5,11 +5,14 @@ import { ref } from 'vue';
 export default {
 
     name: "HomeComponent",
-
+    components: {
+        PlayerData: () => import('./PlayerData.vue'),
+    },
     data() {
         return {
-            idMatch: this.$refs.idMatch,
-            playerName: this.$refs.playerName,
+            idMatch: this.$route.query.id,
+            playerName: this.$route.query.name,
+    
             player: [],
             currentPlayer: null,
             players: [],
@@ -24,8 +27,11 @@ export default {
             y: 0,
             diffx: 0,
             diffy: 0,
-            selectedPaths: []
+            selectedPaths: [],
+        
+
         }
+        
     },
 
     methods: {
@@ -35,7 +41,7 @@ export default {
         openTradeWindow: openTradeWindow,
         impossibleTrade: impossibleTrade,
         closeTradeWindow: closeTradeWindow,
-        windowUser: windowUser,
+        
         trade: trade,
         recoverPlayer() {
             axios.get('http://localhost:3000/api/v1/game/' + this.idMatch + '/watch')
@@ -338,11 +344,7 @@ function getAdjacentCountries(value) {
     }
 }
 
-function windowUser() {
-    const User = window.open('', 'User', 'height=300,width=600');
-    User.document.write(require('../components/UserComponent.vue'));
 
-}
 
 
 
@@ -364,11 +366,9 @@ function windowUser() {
 
     </div>
 
-    <div>
-        <input type="text" v-model="idMatch" placeholder="inserisci il codice" />
-        <h1></h1>
-        <input type="text" v-model="playerName" placeholder="inserisci il tuo nome" />
-    </div>
+
+
+    
 
 
     <div>
@@ -389,8 +389,10 @@ function windowUser() {
     </div>
 
     <div>
-        <button @click="windowUser">Dati Utenza</button>
+        <PlayerData :PlayerData="yourJsonData" />
     </div>
+
+
 
 
     <div class="map">
