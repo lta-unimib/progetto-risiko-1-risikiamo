@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -34,7 +35,7 @@ public class TestNewTurnState {
         Player p1 = new Player("p1");
         Player p2 = new Player("p2");
 
-        turn = new Turn(List.of(p1, p2));
+        turn = new Turn(new ArrayList<>(List.of(p1, p2)));
 
         ownTerritory = new Territory("test", p1);
         neighbor = new Territory("neighbor", p1);
