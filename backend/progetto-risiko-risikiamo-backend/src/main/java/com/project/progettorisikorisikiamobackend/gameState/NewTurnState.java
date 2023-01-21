@@ -18,7 +18,16 @@ public class NewTurnState implements IState {
         Player p = context.getTurn().getCurrentPlayer();
         Map m = context.getMap();
 
-        p.setReinforce(p.getReinforce() + m.getNumberOfTerritories(p) / 3 + 1);
+        p.setReinforce(p.getReinforce() + (m.getNumberOfTerritories(p) / 3));
+
+        // claculate the ammount of bousus armies
+        int bonus = 0;
+        for (Continent c : m.getContinents().values()) {
+            if (c.isOwnedBy(p)) {
+                bonus += c.getBonus();
+            }
+        }
+        p.setReinforce(p.getReinforce() + bonus);
 
     }
 
@@ -46,12 +55,21 @@ public class NewTurnState implements IState {
     }
 
     @Override
+    public void attack(Territory owner, Territory neighbor, int army) {
+        throw new UnsupportedOperationException("new turn state");
+    }
+
+    @Override
     public void placeReinforcements(Territory ownTerritory, int armies) {
 
         Player p = context.getTurn().getCurrentPlayer();
         if (p.getReinforce() <= 0)
             context.setState(new ActionState(context));
         p.placeReinforcements(ownTerritory, armies);
+
+        if (p.getReinforce() <= 0)
+            context.setState(new ActionState(context));
+
         context.setState(new RenforceState(context));
     }
 
