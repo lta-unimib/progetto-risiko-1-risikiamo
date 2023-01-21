@@ -1,6 +1,6 @@
 package com.project.progettorisikorisikiamobackend.controllers;
 
-import java.net.http.HttpHeaders;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,17 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.HttpClientErrorException.NotFound;
 import org.springframework.web.context.request.WebRequest;
-
-import com.fasterxml.jackson.annotation.JacksonInject.Value;
 import com.project.progettorisikorisikiamobackend.exeptions.NotFoundExeption;
 import com.project.progettorisikorisikiamobackend.services.IGameService;
 import com.project.progettorisikorisikiamobackend.services.responce.GameDto;
 import com.project.progettorisikorisikiamobackend.services.responce.PlayerDto;
 
 import jakarta.validation.Valid;
-import lombok.val;
 
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController

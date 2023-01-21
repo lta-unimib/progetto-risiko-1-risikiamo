@@ -53,7 +53,7 @@ public class Turn {
             this.currentPlayer = player;
 
         for (Player p : inGamePlayerList) {
-            if (p.getColor() == player.getColor()) {
+            if (p.getColor().equals(player.getColor())) {
                 throw new IllegalArgumentException("Player color already used");
             }
         }
