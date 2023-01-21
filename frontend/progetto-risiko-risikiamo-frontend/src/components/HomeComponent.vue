@@ -8,6 +8,13 @@ export default {
     data() {
         return {
             idMatch: this.$refs.idMatch,
+            playerName: this.$refs.playerName,
+            player: {
+                name: this.playerName,
+                color: this.selectedColor
+            },
+            currentPlayer: null,
+            players: [],
             hoverValue: name,
             zoom: 1,
             isDragging: false,
@@ -31,6 +38,45 @@ export default {
         impossibleTrade: impossibleTrade,
         closeTradeWindow: closeTradeWindow,
         trade: trade,
+        recoverColor() {
+            console.log("recoverColor");
+        },
+        startMatch() {
+            axios.put('http://localhost:3000/api/v1/game/' + this.idMatch + '/start')
+                .then(response => {
+                    console.log(response.data);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        },
+        setPOV() {
+            axios.get('http://localhost:3000/api/v1/game/' + this.idMatch + '/watch')
+                .then(response => {
+                    console.log(response.data);
+                    this.currentPlayer = response.data.currentPlayer;
+                    console.log(this.currentPlayer);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+            if (this.playerName != this.currentPlayer) {
+                console.log("not your turn");
+            } else {
+                console.log("your turn");
+            }
+        },
+        printAllPlayers() {
+            axios.get('http://localhost:3000/api/v1/game/' + this.idMatch + '/watch')
+                .then(response => {
+                    console.log(response.data);
+                    this.players = response.data.players;
+                    console.log(this.players);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        },
         printid() {
             axios.get('http://localhost:3000/api/v1/game/' + this.idMatch + '/watch')
                 .then(response => {
@@ -124,7 +170,6 @@ export default {
 
     mounted() {
 
-
         let paths = document.querySelectorAll("path");
         for (let i = 0; i < paths.length; i++) {
             paths[i].addEventListener("mouseover", this.changeHoverValue);
@@ -158,9 +203,32 @@ export default {
         });
 
 
+    },
 
+    created() {
+        //if (this.player.length < 2) {
+
+        //}
+        if (this.startMatch === false) {
+            setInterval(() => {
+                console.log("waiting for match to start");
+            }, 5000);
+        }
+
+        if (this.startMatch === true) {
+            setInterval(() => {
+                console.log("match started");
+            }, 3000);
+        }
+
+        setInterval(() => {
+            this.setPOV();
+        }, 5000);
 
     }
+
+
+
 }
 
 
@@ -297,11 +365,18 @@ function getAdjacentCountries(value) {
     </div>
 
     <div>
-        <input type="text" v-model="idMatch" />
+        <input type="text" v-model="idMatch" placeholder="inserisci il codice" />
+        <h1></h1>
+        <input type="text" v-model="playerName" placeholder="inserisci il tuo nome" />
     </div>
+
 
     <div>
         <button @click="printid">Get Match</button>
+    </div>
+
+    <div>
+        <button @click="startMatch">Start Match</button>
     </div>
 
 
@@ -313,6 +388,9 @@ function getAdjacentCountries(value) {
         <button @click="zoomOut">Zoom Out</button>
     </div>
 
+    <div>
+        <button @click="setPOV">di chi è il turno?</button>
+    </div>
 
 
     <div class="map">

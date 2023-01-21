@@ -47,22 +47,24 @@
         <h2>
             Login
         </h2>
-        <input type="text" v-model="playerName" />
-        <h2>Scegli il tuo colore</h2>
-        <select v-model="selectedColor">
-            <option value=""></option>
-            <option value="#B22222">Rosso</option>
-            <option value="#DDA0DD">Viola</option>
-            <option value="#808080">Nero</option>
-            <option value="#32CD32">Verde</option>
-            <option value="#1E90FF">Blu</option>
-            <option value="#ffffff">Bianco</option>
-        </select>
+        <div><input type="text" v-model="playerName" /></div>
+        <div>
+            <h2>Scegli il tuo colore</h2>
+            <select v-model="selectedColor">
+                <option value=""></option>
+                <option value="#B22222">Rosso</option>
+                <option value="#DDA0DD">Viola</option>
+                <option value="#808080">Nero</option>
+                <option value="#32CD32">Verde</option>
+                <option value="#1E90FF">Blu</option>
+                <option value="#ffffff">Bianco</option>
+            </select>
+        </div>
         <h2>inserisci codice partita</h2>
         <input type="text" v-model="id" />
         <button class="button-30" @click="readString(playerName, selectedColor)">clicca Per confermare il nome e il
             colore</button>
-        <button class="button-30">login</button>
+        <button class="button-30" @click="login">login</button>
     </div>
     <br>
     <br>
