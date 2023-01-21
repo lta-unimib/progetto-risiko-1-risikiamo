@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.project.progettorisikorisikiamobackend.Turno.Turn;
 import com.project.progettorisikorisikiamobackend.domain.Game;
 import com.project.progettorisikorisikiamobackend.map.Continent;
@@ -160,10 +162,15 @@ public class GameMapper {
 
             Turn turn = game.getTurn();
 
-            List<String> players = new ArrayList<>();
+            List<Pair<String, String>> players = new ArrayList<>();
+
             for (int i = 0; i < turn.getInGamePlayerList().size(); i++) {
-                players.add(turn.getInGamePlayerList().get(i).getName());
+                Pair<String, String> pair = Pair.of(turn.getInGamePlayerList().get(i).getName(),
+                        turn.getInGamePlayerList().get(i).getColor());
+                players.add(pair);
+
             }
+
             gameDto.setPlayers(players);
 
             if (turn.getWinner() != null) {
@@ -174,6 +181,7 @@ public class GameMapper {
 
         }
         return gameDto;
+
     }
 
     private static boolean checkGame(Game game) {

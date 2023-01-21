@@ -2,6 +2,7 @@ package com.project.progettorisikorisikiamobackend.services;
 
 import java.util.List;
 
+import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,14 +23,24 @@ public class PlayService implements IPlayerService {
     public Player getPlayer(String gameId, String playerId) throws NotFoundExeption {
         Game game = gameService.getGame(gameId);
         Turn turn = game.getTurn();
-        List<Player> player = turn.getInGamePlayerList();
+        List<Player> playerInGame = turn.getInGamePlayerList();
+        List<Pair<Player, Player>> playerDefeted = turn.getDefeatedPlayerList();
         Player ply = null;
-        for (Player p : player) {
+        for (Player p : playerInGame) {
             if (p.getId().equals(playerId)) {
                 ply = p;
             }
         }
 
+        for (Pair<Player, Player> p : playerDefeted) {
+            if (p.getLeft().getId().equals(playerId)) {
+                ply = p.getLeft();
+            }
+        }
+
+        if (ply == null) {
+            throw new NotFoundExeption("Player not found");
+        }
         return ply;
 
     }
@@ -69,6 +80,10 @@ public class PlayService implements IPlayerService {
         Territory tOwner = gameService.getGame(gameId).getMap().getTerritory(owner);
         Territory tTarget = gameService.getGame(gameId).getMap().getTerritory(target);
 
+        if (tOwner == null || tTarget == null) {
+            throw new NotFoundExeption("Territory not found");
+        }
+
         this.isPlayerTurn(gameId, playerId);
         gameService.getGame(gameId).attack(tOwner, tTarget, army);
 
@@ -80,6 +95,10 @@ public class PlayService implements IPlayerService {
         Territory tOwner = gameService.getGame(gameId).getMap().getTerritory(owner);
         Territory tTarget = gameService.getGame(gameId).getMap().getTerritory(target);
 
+        if (tOwner == null || tTarget == null) {
+            throw new NotFoundExeption("Territory not found");
+        }
+
         this.isPlayerTurn(gameId, playerId);
         gameService.getGame(gameId).move(tOwner, tTarget, army);
 
@@ -90,6 +109,9 @@ public class PlayService implements IPlayerService {
             throws NotFoundExeption {
 
         Territory tTarget = gameService.getGame(gameId).getMap().getTerritory(target);
+        if (tTarget == null) {
+            throw new NotFoundExeption("Territory not found");
+        }
 
         this.isPlayerTurn(gameId, playerId);
         gameService.getGame(gameId).placeReinforcements(tTarget, army);
@@ -121,7 +143,7 @@ public class PlayService implements IPlayerService {
         }
 
         if (card1 == null || card2 == null || card3 == null) {
-            throw new IllegalArgumentException("Carta non valida");
+            throw new NotFoundExeption("Carta non valida");
         }
 
         gameService.getGame(gameId).redeemReinforcementsCard(card1, card2, card3);

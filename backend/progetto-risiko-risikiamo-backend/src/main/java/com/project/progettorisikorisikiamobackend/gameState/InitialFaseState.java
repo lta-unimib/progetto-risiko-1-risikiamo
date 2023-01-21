@@ -36,6 +36,11 @@ public class InitialFaseState implements IState {
     }
 
     @Override
+    public void attack(Territory owner, Territory neighbor, int army) {
+        throw new UnsupportedOperationException("initial  state");
+    }
+
+    @Override
     public void placeReinforcements(Territory ownTerritory, int armies) {
 
         Player player = context.getTurn().getCurrentPlayer();

@@ -21,8 +21,8 @@ public class RenforceState implements IState {
     }
 
     @Override
-    public void redeemReinforcementsCard(CardTerritory c1, CardTerritory c2, CardTerritory c3) {
-        throw new UnsupportedOperationException("Non puoi muovere in questo stato");
+    public void attack(Territory owner, Territory neighbor, int army) {
+        throw new UnsupportedOperationException("Renforce state");
     }
 
     @Override
@@ -31,7 +31,7 @@ public class RenforceState implements IState {
         Player player = context.getTurn().getCurrentPlayer();
         player.placeReinforcements(ownTerritory, armies);
 
-        if (player.getReinforce() == 0) {
+        if (player.getReinforce() <= 0) {
             context.setState(new ActionState(context));
         }
     }
