@@ -1,10 +1,13 @@
 <script>
+import axios from 'axios';
 import { ref } from 'vue'
 export default {
 
     name: "HomeComponent",
+
     data() {
         return {
+            idMatch: this.$refs.idMatch,
             hoverValue: name,
             zoom: 1,
             isDragging: false,
@@ -28,6 +31,16 @@ export default {
         impossibleTrade: impossibleTrade,
         closeTradeWindow: closeTradeWindow,
         trade: trade,
+        printid() {
+            axios.get('http://localhost:3000/api/v1/game/' + this.idMatch + '/watch')
+                .then(response => {
+                    console.log(response.data);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+
+        },
         compareAdjacent(path1, path2) {
             const adjacencyList = require('../assets/dataStates.json').map.continents.territories;
             const country1 = path1.attributes.title.value;
@@ -282,6 +295,15 @@ function getAdjacentCountries(value) {
         </h3>
 
     </div>
+
+    <div>
+        <input type="text" v-model="idMatch" />
+    </div>
+
+    <div>
+        <button @click="printid">Get Match</button>
+    </div>
+
 
     <div>
         <button @click="zoomIn">Zoom In</button>

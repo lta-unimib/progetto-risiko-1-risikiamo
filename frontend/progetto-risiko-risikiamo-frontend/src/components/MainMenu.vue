@@ -33,17 +33,60 @@
     <div>
         <button class="button-30" @click="createGame">Crea Partita</button>
     </div>
+    <br>
+    <br>
+    <div>
+        <h2>Partite in corso</h2>
+        <ul>
+            <li v-bind:id="this.id">{{ id }}</li>
+        </ul>
+    </div>
+    <br>
+    <br>
+    <div>
+        <h2>
+            Login
+        </h2>
+        <input type="text" v-model="playerName" />
+        <h2>Scegli il tuo colore</h2>
+        <select v-model="selectedColor">
+            <option value=""></option>
+            <option value="#B22222">Rosso</option>
+            <option value="#DDA0DD">Viola</option>
+            <option value="#808080">Nero</option>
+            <option value="#32CD32">Verde</option>
+            <option value="#1E90FF">Blu</option>
+            <option value="#ffffff">Bianco</option>
+        </select>
+        <h2>inserisci codice partita</h2>
+        <input type="text" v-model="id" />
+        <button class="button-30" @click="readString(playerName, selectedColor)">clicca Per confermare il nome e il
+            colore</button>
+        <button class="button-30">login</button>
+    </div>
+    <br>
+    <br>
+    <div>
+        <h2>
+            Copia il tuo link partita per giocare e schiaccia sul tasto gioca o inserisci un codice di una partita in
+            corso.
+        </h2>
+        <h2>
+            <router-link to="/game">Gioca</router-link>
+        </h2>
+    </div>
 </template>
 
 <script>
 import axios from "axios";
-import router from '../routers.js'
+//import router from '../routers.js'
 
 export default {
     name: "MainMenu",
+    props: ['idMatch'],
     data() {
         return {
-            idMatch: null,
+            id: null,
             player: null,
             playerName: "",
             selectedColor: "",
@@ -70,6 +113,10 @@ export default {
             reader.readAsText(file);
         },
 
+        getGame() {
+            return this.id;
+        },
+
         createGame() {
             const gameData = this.jsonFile;
             //const player = this.player;
@@ -77,13 +124,32 @@ export default {
             console.log(gameData);
             axios.post('http://localhost:3000/api/v1/game/create', gameData)
                 .then(response => {
+                    axios.post('http://localhost:3000/api/v1/game/' + response.data.id + '/addPlayer', this.player)
+                        .then(response2 => {
+                            console.log(response2);
+                        })
+                        .catch(error2 => {
+                            console.log(error2);
+                        });
+                    this.id = response.data.id;
+                    console.log(this.id);
                     console.log(response);
                 })
                 .catch(error => {
                     console.log(error);
                 });
 
-            router.push({ name: 'players' });
+
+        },
+
+        login() {
+            axios.post('http://localhost:3000/api/v1/game/' + this.id + '/addPlayer', this.player)
+                .then(response2 => {
+                    console.log(response2);
+                })
+                .catch(error2 => {
+                    console.log(error2);
+                });
         },
 
         readSvgFile() {

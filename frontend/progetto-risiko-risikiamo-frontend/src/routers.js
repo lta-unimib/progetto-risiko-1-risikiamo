@@ -8,7 +8,8 @@ const routes = [
     {
         name: 'main menu',
         component: MainVue,
-        path: '/'
+        path: '/',
+        props: true
     },
     {
         name: "game",
@@ -23,7 +24,8 @@ const routes = [
     {
         name: "players",
         component: PlayersVue,
-        path: "/players"
+        path: "/players",
+        props: true
     }
 ];
 
