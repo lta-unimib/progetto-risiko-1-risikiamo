@@ -13,8 +13,11 @@ import com.project.progettorisikorisikiamobackend.map.Map;
 import com.project.progettorisikorisikiamobackend.map.Territory;
 import com.project.progettorisikorisikiamobackend.services.responce.ContinentDto;
 import com.project.progettorisikorisikiamobackend.services.responce.GameDto;
+import com.project.progettorisikorisikiamobackend.services.responce.InternalPlayerDto;
 import com.project.progettorisikorisikiamobackend.services.responce.MapDto;
 import com.project.progettorisikorisikiamobackend.services.responce.TerritoryDto;
+
+import lombok.Data;
 
 public class GameMapper {
 
@@ -162,11 +165,13 @@ public class GameMapper {
 
             Turn turn = game.getTurn();
 
-            List<Pair<String, String>> players = new ArrayList<>();
+            List<InternalPlayerDto> players = new ArrayList<>();
 
             for (int i = 0; i < turn.getInGamePlayerList().size(); i++) {
-                Pair<String, String> pair = Pair.of(turn.getInGamePlayerList().get(i).getName(),
-                        turn.getInGamePlayerList().get(i).getColor());
+
+                InternalPlayerDto pair = new InternalPlayerDto();
+                pair.setName(turn.getInGamePlayerList().get(i).getName());
+                pair.setColor(turn.getInGamePlayerList().get(i).getColor());
                 players.add(pair);
 
             }
