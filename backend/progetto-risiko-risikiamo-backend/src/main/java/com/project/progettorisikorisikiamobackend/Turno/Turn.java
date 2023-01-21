@@ -2,6 +2,7 @@ package com.project.progettorisikorisikiamobackend.Turno;
 
 import java.util.*;
 
+import com.project.progettorisikorisikiamobackend.obiettivi.Objective;
 import com.project.progettorisikorisikiamobackend.player.Player;
 import org.apache.commons.lang3.tuple.Pair;
 import lombok.*;
@@ -91,10 +92,27 @@ public class Turn {
             turnNumber = 1;
             return;
         }
+        checkWinner();
 
         this.currentPlayer = inGamePlayerList.get(turnNumber % inGamePlayerList.size());
         this.turnNumber += 1;
 
+        // check is there is a winner
+
+    }
+
+    private void checkWinner() {
+
+        boolean isThereAWinner = true;
+        for (Objective o : currentPlayer.getObiettivi()) {
+            if (!o.isCompleted(currentPlayer)) {
+                isThereAWinner = false;
+                break;
+            }
+
+        }
+        if (isThereAWinner)
+            this.setWin(currentPlayer);
     }
 
     public boolean isTurnOfPlayer(Player player) {
@@ -139,6 +157,7 @@ public class Turn {
 
     public void surrender(Player player) {
         this.defeatPlayer(player, player);
+        checkWinner();
 
     }
 }

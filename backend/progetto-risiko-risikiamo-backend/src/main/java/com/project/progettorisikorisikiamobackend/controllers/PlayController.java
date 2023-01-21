@@ -59,8 +59,10 @@ public class PlayController {
     @PutMapping("/attack")
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<String> putAttack(@PathVariable String gameId, @PathVariable String playerId, String owner,
-            String neighbor, int army) {
+    public ResponseEntity<String> putAttack(@PathVariable String gameId, @PathVariable String playerId,
+            @RequestParam String owner,
+            @RequestParam String neighbor,
+            @RequestParam int army) {
         playerService.attack(gameId, playerId, owner, neighbor, army);
         return ResponseEntity.ok("Attack");
     }
@@ -79,8 +81,8 @@ public class PlayController {
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<String> putPlace(@PathVariable String gameId, @PathVariable String playerId,
             @RequestParam String owner,
-            @RequestParam int armies) {
-        playerService.placeReinforcements(gameId, playerId, owner, armies);
+            @RequestParam int army) {
+        playerService.placeReinforcements(gameId, playerId, owner, army);
         return ResponseEntity.ok("Piazza rinforzi");
     }
 

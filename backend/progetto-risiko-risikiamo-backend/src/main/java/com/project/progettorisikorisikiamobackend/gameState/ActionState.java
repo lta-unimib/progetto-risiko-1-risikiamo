@@ -24,11 +24,19 @@ public class ActionState implements IState {
 
         Player p = context.getTurn().getCurrentPlayer();
 
+        Player p2 = neighbor.getOwner();
+
         p.attack(owner, neighbor, army);
 
         if (neighbor.getOwner() == p) {
 
             this.haveConquest = true;
+        }
+
+        int nTer = context.getMap().getNumberOfTerritories(p2);
+
+        if (nTer == 0) {
+            context.getTurn().defeatPlayer(p, p2);
         }
 
     }

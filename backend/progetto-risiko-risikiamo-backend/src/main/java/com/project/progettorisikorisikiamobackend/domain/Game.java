@@ -109,6 +109,7 @@ public class Game implements IContext, IState {
         }
 
         this.state = new InitialFaseState(this);
+        this.turn.nextTurn();
     }
 
     public void endGame() {
