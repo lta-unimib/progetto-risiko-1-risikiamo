@@ -1,6 +1,5 @@
 package com.project.progettorisikorisikiamobackend.gameState;
 
-import com.project.progettorisikorisikiamobackend.Cards.CardTerritory;
 //import
 import com.project.progettorisikorisikiamobackend.gameState.interf.IContext;
 import com.project.progettorisikorisikiamobackend.gameState.interf.IState;
@@ -10,6 +9,7 @@ import com.project.progettorisikorisikiamobackend.player.Player;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
+
 public class RenforceState implements IState {
 
     private IContext context;
@@ -29,6 +29,9 @@ public class RenforceState implements IState {
     public void placeReinforcements(Territory ownTerritory, int armies) {
 
         Player player = context.getTurn().getCurrentPlayer();
+        if (player.getReinforce() <= 0) {
+            context.setState(new ActionState(context));
+        }
         player.placeReinforcements(ownTerritory, armies);
 
         if (player.getReinforce() <= 0) {

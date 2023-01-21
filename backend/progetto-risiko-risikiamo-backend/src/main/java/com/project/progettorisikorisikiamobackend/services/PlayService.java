@@ -56,9 +56,11 @@ public class PlayService implements IPlayerService {
     @Override
     public void surrend(String gameId, String playerId) throws NotFoundExeption {
 
-        this.isPlayerTurn(gameId, playerId);
+        this.isCorrectGame(gameId);
+
         List<Player> player = gameService.getGame(gameId).getTurn().getInGamePlayerList();
         Turn turn = gameService.getGame(gameId).getTurn();
+
         Player ply = null;
         for (Player p : player) {
             if (p.getId().equals(playerId)) {
@@ -153,6 +155,15 @@ public class PlayService implements IPlayerService {
     private void isPlayerTurn(String gameId, String playerId) {
         Game game = gameService.getGame(gameId);
 
+        isCorrectGame(gameId);
+
+        if (!game.getTurn().getCurrentPlayer().getId().equals(playerId))
+            throw new IllegalArgumentException("Not your turn");
+    }
+
+    private void isCorrectGame(String gameId) {
+        Game game = gameService.getGame(gameId);
+
         if (game == null)
             throw new IllegalArgumentException("Game not found");
 
@@ -161,9 +172,6 @@ public class PlayService implements IPlayerService {
 
         if (game.isGameEnded())
             throw new IllegalArgumentException("Game ended, Win: " + game.getTurn().getWinner().getName());
-
-        if (!game.getTurn().getCurrentPlayer().getId().equals(playerId))
-            throw new IllegalArgumentException("Not your turn");
     }
 
 }
