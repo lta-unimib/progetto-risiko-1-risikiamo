@@ -47,30 +47,48 @@
         <h2>
             Login
         </h2>
-        <div><input type="text" v-model="playerName" /></div>
-        <div>
-            <h2>Scegli il tuo colore</h2>
-            <select v-model="selectedColor">
-                <option value=""></option>
-                <option value="#B22222">Rosso</option>
-                <option value="#DDA0DD">Viola</option>
-                <option value="#808080">Nero</option>
-                <option value="#32CD32">Verde</option>
-                <option value="#1E90FF">Blu</option>
-                <option value="#ffffff">Bianco</option>
-            </select>
-        </div>
+    </div>
+    <br>
+    <br>
+    <div>
+        <input type="text" v-model="playerName" />
+    </div>
+    <br>
+    <br>
+    <div>
+        <h2>Scegli il tuo colore</h2>
+        <select v-model="selectedColor">
+            <option value=""></option>
+            <option value="#B22222">Rosso</option>
+            <option value="#DDA0DD">Viola</option>
+            <option value="#808080">Nero</option>
+            <option value="#32CD32">Verde</option>
+            <option value="#1E90FF">Blu</option>
+            <option value="#ffffff">Bianco</option>
+        </select>
+    </div>
+    <br>
+    <br>
+    <div>
         <h2>inserisci codice partita</h2>
         <input type="text" v-model="id" />
+    </div>
+    <br>
+    <br>
+    <div>
         <button class="button-30" @click="readString(playerName, selectedColor)">clicca Per confermare il nome e il
             colore</button>
+    </div>
+    <br>
+    <br>
+    <div>
         <button class="button-30" @click="login">login</button>
     </div>
     <br>
     <br>
     <div>
-        <h2>
-            Copia il tuo link partita per giocare e schiaccia sul tasto gioca o inserisci un codice di una partita in
+        <h2 class="importantMessage">
+            Copia il tuo link partita per giocare e schiaccia sul tasto Gioca o inserisci un codice di una partita in
             corso.
         </h2>
         <h2>
@@ -275,6 +293,13 @@ body {
 .button-30:active {
     box-shadow: #D6D6E7 0 3px 7px inset;
     transform: translateY(2px);
+}
+
+.importantMessage {
+    color: red;
+    font-size: 20px;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+
 }
 </style>
 
