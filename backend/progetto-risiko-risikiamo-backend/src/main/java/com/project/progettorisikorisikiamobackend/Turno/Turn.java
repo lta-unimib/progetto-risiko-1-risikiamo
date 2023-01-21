@@ -120,7 +120,7 @@ public class Turn {
     }
 
     public Player getWinner() {
-        if (inGamePlayerList.size() == 1)
+        if (inGamePlayerList.size() == 1 && currentPlayer != null)
             return inGamePlayerList.get(0);
         return null;
     }
