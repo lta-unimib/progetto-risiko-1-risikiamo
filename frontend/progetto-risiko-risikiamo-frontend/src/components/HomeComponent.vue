@@ -6,13 +6,14 @@ export default {
 
     name: "HomeComponent",
     components: {
-        PlayerData: () => import('./PlayerData.vue'),
+        //CardComponent: () => import('./CardComponent.vue'),
     },
     data() {
         return {
             idMatch: this.$route.query.id,
             playerName: this.$route.query.name,
-    
+            cards: [],
+            continents: [],
             player: [],
             currentPlayer: null,
             players: [],
@@ -28,10 +29,10 @@ export default {
             diffx: 0,
             diffy: 0,
             selectedPaths: [],
-        
+
 
         }
-        
+
     },
 
     methods: {
@@ -41,7 +42,6 @@ export default {
         openTradeWindow: openTradeWindow,
         impossibleTrade: impossibleTrade,
         closeTradeWindow: closeTradeWindow,
-        
         trade: trade,
         recoverPlayer() {
             axios.get('http://localhost:3000/api/v1/game/' + this.idMatch + '/watch')
@@ -172,6 +172,37 @@ export default {
                 }
             }
 
+        },
+        getCards() {
+            axios.get('http://localhost:3000/api/v1/game/' + this.idMatch + '/play/' + this.playerName + '/')
+                .then(response => {
+                    console.log(response.data);
+                    this.cards = response.data.cards;
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+
+        },
+        getContinents() {
+            axios.get('http://localhost:3000/api/v1/game/' + this.idMatch + '/watch')
+                .then(response => {
+                    console.log(response.data);
+                    this.continents = response.data.continents;
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+
+        },
+        surrend() {
+            axios.put('localhost:3000/api/v1/game/' + this.idMatch + '/play/' + this.playerName + '/surrend')
+                .then(response => {
+                    console.log(response.data);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
         }
     },
 
@@ -227,6 +258,10 @@ export default {
 
         setInterval(() => {
             this.setPOV();
+        }, 5000);
+
+        setInterval(() => {
+            this.getCards();
         }, 5000);
     }
 }
@@ -352,44 +387,45 @@ function getAdjacentCountries(value) {
 
 
 <template>
+    <div>
+        <h1> player : {{ playerName }} </h1>
+        <h1> id partita: {{ idMatch }} </h1>
+        <h1> current player : {{ currentPlayer }} </h1>
+    </div>
+    <br>
+    <br>
     <div class="container">
         <div class="title">
             <h1>Interactive Risk Map</h1>
         </div>
     </div>
-
-
+    <br>
+    <br>
     <div class="container">
         <h3>
             {{ hoverValue }}
         </h3>
 
     </div>
-
-
-
-    
-
-
+    <br>
     <div>
         <button @click="printid">Get Match</button>
     </div>
-
+    <br>
     <div>
         <button @click="startMatch">Start Match</button>
     </div>
-
-
+    <br>
+    <div>
+        <button @click="surrend">Bandiera Bianca</button>
+    </div>
+    <br>
     <div>
         <button @click="zoomIn">Zoom In</button>
     </div>
-
+    <br>
     <div>
         <button @click="zoomOut">Zoom Out</button>
-    </div>
-
-    <div>
-        <PlayerData :PlayerData="yourJsonData" />
     </div>
 
 

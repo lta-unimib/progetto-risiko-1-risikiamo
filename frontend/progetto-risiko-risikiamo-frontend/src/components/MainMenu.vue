@@ -26,7 +26,7 @@
         </select>
     </div>
     <br>
-    
+
     <br>
     <br>
     <div>
@@ -75,22 +75,16 @@
     <br>
     <br>
     <div>
-        <button class="button-30" @click="readString(playerName, selectedColor)">clicca Per confermare il nome e il
-            colore</button>
-    </div>
-    <br>
-    <br>
-    <div>
         <button class="button-30" @click="login">login</button>
     </div>
     <br>
     <br>
     <div>
-       
+
 
         <form action="/game">
- 
-            <input type="text" id="name" name="name" v-model="playerName"  hidden />
+
+            <input type="text" id="name" name="name" v-model="playerName" hidden />
             <input type="text" id="id" name="id" v-model="id" hidden />
             <input type="submit" value="LoadGame">
         </form>
@@ -163,6 +157,7 @@ export default {
         },
 
         login() {
+            this.readString(this.playerName, this.selectedColor);
             axios.post('http://localhost:3000/api/v1/game/' + this.id + '/addPlayer', this.player)
                 .then(response2 => {
                     console.log(response2);
