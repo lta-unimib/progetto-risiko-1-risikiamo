@@ -33,6 +33,8 @@ export default {
             diffy: 0,
             selectedPaths: [],
             winner: null,
+            paths: [],
+            pathsNode: [],
         }
 
     },
@@ -46,6 +48,8 @@ export default {
         closeTradeWindow: closeTradeWindow,
         openPlaceWindow: openPlaceWindow,
         closePlaceWindow: closePlaceWindow,
+        actionWindow: actionWindow,
+        closeActionWindow: closeActionWindow,
         trade: trade,
         recoverPlayer() {
             axios.get('http://localhost:3000/api/v1/game/' + this.idMatch + '/watch')
@@ -94,6 +98,10 @@ export default {
                 });
             if (this.playerName != this.currentPlayer) {
                 console.log("not your turn");
+                console.log(this.paths);
+                for (let i = 0; i < this.paths.length; i++) {
+                    this.paths[i].addEventListener("mouseover", this.changeHoverValue);
+                }
             } else {
                 console.log("your turn");
             }
@@ -281,11 +289,10 @@ export default {
 
     mounted() {
         this.getMap();
-        let paths = document.querySelectorAll("path");
-        for (let i = 0; i < paths.length; i++) {
-            paths[i].addEventListener("mouseover", this.changeHoverValue);
+        this.pathsNode = document.querySelectorAll(".path");
+        for (let i = 0; i < this.pathsNode.length; i++) {
+            this.paths[i] = this.pathsNode[i];
         }
-
         // window.addEventListener("click", this.setSelectedPath);
         // window.addEventListener("click", (event) => {
         //     const path = event.target;
@@ -319,6 +326,7 @@ export default {
 
         setInterval(() => {
             this.setPOV();
+
         }, 5000);
 
         setInterval(() => {
@@ -339,8 +347,29 @@ export default {
             }
             else {
                 console.log("game started");
+                console.log(this.paths);
+                for (let i = 0; i < this.paths.length; i++) {
+                    this.paths[i].addEventListener("mouseover", this.changeHoverValue);
+                }
             }
         }, 3000);
+        window.addEventListener("click", (event) => {
+            if (this.gameStarted === false) {
+                console.log("game not started");
+            }
+            else {
+                const path = event.target;
+                this.selectedPaths.push(path);
+                path.classList.remove("SelectedPath");
+                path.classList.add("pathFrom");
+                for (let i = 0; i < this.paths.length; i++) {
+                    this.paths[i].classList.remove("AdjacentPath");
+                }
+                this.actionWindow(path);
+            }
+
+        }
+        );
     }
 }
 
@@ -357,6 +386,37 @@ function impossibleTrade() {
         //console.log("closed");
     }, 5000);
 }
+
+function actionWindow(path) {
+    const instructions = '<p>scegli se posizionare i rinforzi (obbligatorio se non si sono posizionati tutti), attaccare o spostarsi</p><div><input type="radio" id="place" name="action" value="place"><label for="place">Piazza</label></div><div><input type="radio" id="attack" name="action" value="attack"><label for="attack">Attacca</label></div><div><input type="radio" id="move" name="action" value="move"><label for="move">Sposta</label></div><p>Inserisci nel caso di spostamento o attacco il territorio di destinazione</p><input type="text" id="destination"><p>inserisci il numero di truppe da spostare o attaccare o rifornire</p><input type="number" id="number" min="1" ><button id="doAction">ok</button><button id="exit">close</button>';
+    const actionWindow = window.open('', 'Trade Instructions', 'height=300,width=600');
+    actionWindow.document.write(instructions);
+    const actionButton = actionWindow.document.getElementById('doAction');
+    if (actionWindow.document.getElementById('place').checked) {
+        actionButton.addEventListener('click', () => this.place(actionWindow.document.getElementById('number').value, path));
+        console.log("place");
+    }
+    else if (actionWindow.document.getElementById('attack').checked) {
+        actionButton.addEventListener('click', () => this.attack(actionWindow.document.getElementById('number').value, path, actionWindow.document.getElementById('destination').value));
+        console.log("attack");
+    }
+    else if (actionWindow.document.getElementById('move').checked) {
+        actionButton.addEventListener('click', () => this.move(actionWindow.document.getElementById('number').value, path, actionWindow.document.getElementById('destination').value));
+        console.log("move");
+    }
+    const exitButton = actionWindow.document.getElementById('exit');
+    exitButton.addEventListener('click', () => this.closeActionWindow(path, actionWindow));
+
+}
+
+function closeActionWindow(path, actionWindow) {
+    actionWindow.window.close();
+    path.classList.remove("pathFrom");
+    path.classList.remove("pathTo");
+    path.classList.remove("AdjacentPath");
+    path.classList.remove("SelectedPath");
+}
+
 
 function openPlaceWindow(path) {
     const instructions = '<p>you can place from 1 to every reinforcement you have on the territory you choose.</p><input type="number" id="number" min="1" ><button id="button">place</button><button id="exit">close</button>';
@@ -457,14 +517,14 @@ function getAdjacentCountries(value) {
         for (let i = 0; i < adjacentCountries.length; i++) {
             countryNames.push(adjacentCountries[i]);
         }
-        let paths = document.querySelectorAll("path");
-        for (let i = 0; i < paths.length; i++) {
+        this.paths = document.querySelectorAll("path");
+        for (let i = 0; i < this.paths.length; i++) {
 
-            if (countryNames.includes(paths[i].attributes.title.value) && paths[i].classList.contains("AdjacentPath") && !paths[i].classList.contains("SelectedPath")) {
-                paths[i].classList.remove("AdjacentPath");
+            if (countryNames.includes(this.paths[i].attributes.title.value) && this.paths[i].classList.contains("AdjacentPath") && !this.paths[i].classList.contains("SelectedPath")) {
+                this.paths[i].classList.remove("AdjacentPath");
             }
-            else if (countryNames.includes(paths[i].attributes.title.value) && !paths[i].classList.contains("AdjacentPath")) {
-                paths[i].classList.add("AdjacentPath");
+            else if (countryNames.includes(this.paths[i].attributes.title.value) && !this.paths[i].classList.contains("AdjacentPath")) {
+                this.paths[i].classList.add("AdjacentPath");
             }
 
 
@@ -542,14 +602,11 @@ function getAdjacentCountries(value) {
     </li>
     </ul>
     </div>
-
-
-    <template>
-        <div>
-            <div class="map" v-html="svg"></div>
-        </div>
-    </template>
-
+    <br>
+    <br>
+    <div>
+        <div class="map" v-html="svg"></div>
+    </div>
 
 </template>
 
