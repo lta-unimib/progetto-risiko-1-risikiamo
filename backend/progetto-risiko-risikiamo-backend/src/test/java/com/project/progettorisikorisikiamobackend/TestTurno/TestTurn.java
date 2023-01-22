@@ -1,18 +1,12 @@
 package com.project.progettorisikorisikiamobackend.TestTurno;
 
 import org.junit.jupiter.api.BeforeEach;
-//jupiter
 import org.junit.jupiter.api.Test;
-
 import com.project.progettorisikorisikiamobackend.Turno.*;
 import com.project.progettorisikorisikiamobackend.map.Map;
 import com.project.progettorisikorisikiamobackend.obiettivi.TotTerritories;
 import com.project.progettorisikorisikiamobackend.player.Player;
-
-import jakarta.validation.constraints.Null;
-
 import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
