@@ -289,10 +289,6 @@ export default {
 
     mounted() {
         this.getMap();
-        this.pathsNode = document.querySelectorAll(".path");
-        for (let i = 0; i < this.pathsNode.length; i++) {
-            this.paths[i] = this.pathsNode[i];
-        }
         // window.addEventListener("click", this.setSelectedPath);
         // window.addEventListener("click", (event) => {
         //     const path = event.target;
@@ -324,6 +320,7 @@ export default {
     created() {
 
 
+
         setInterval(() => {
             this.setPOV();
 
@@ -344,10 +341,11 @@ export default {
         setInterval(() => {
             if (this.gameStarted === false) {
                 console.log("game not started");
+
             }
             else {
                 console.log("game started");
-                console.log(this.paths);
+                this.paths = document.querySelectorAll("path");
                 for (let i = 0; i < this.paths.length; i++) {
                     this.paths[i].addEventListener("mouseover", this.changeHoverValue);
                 }
@@ -362,6 +360,11 @@ export default {
                 this.selectedPaths.push(path);
                 path.classList.remove("SelectedPath");
                 path.classList.add("pathFrom");
+                for (let j = 0; j < this.paths.length; j++) {
+                    let item = this.paths[j];
+                    this.pathsNode.push(item);
+                    console.log(this.pathsNode);
+                }
                 for (let i = 0; i < this.paths.length; i++) {
                     this.paths[i].classList.remove("AdjacentPath");
                 }
