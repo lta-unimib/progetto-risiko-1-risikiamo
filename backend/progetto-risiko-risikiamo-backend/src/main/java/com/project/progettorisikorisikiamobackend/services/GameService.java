@@ -36,6 +36,13 @@ public class GameService implements IGameService {
     }
 
     @Override
+    public String getSvg(String gameId) {
+
+        return this.getGame(gameId).getSvgMap();
+
+    }
+
+    @Override
     public GameDto postCreate(GameDto gameDto) {
 
         String gameId = generateGameId();

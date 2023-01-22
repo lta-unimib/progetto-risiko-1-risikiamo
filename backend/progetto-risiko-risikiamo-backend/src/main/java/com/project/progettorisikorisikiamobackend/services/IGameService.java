@@ -19,4 +19,6 @@ public interface IGameService {
 
     public String postAddPlayer(PlayerDto playerDto, String gameId) throws NotFoundExeption;
 
+    public String getSvg(String gameId);
+
 }
