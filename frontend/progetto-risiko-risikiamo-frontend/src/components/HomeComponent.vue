@@ -336,6 +336,14 @@ export default {
         }, 3000);
 
         setInterval(() => {
+            axios.get('http://localhost:3000/api/v1/game/' + this.idMatch + '/watch')
+                .then(response => {
+                    this.gameStarted = response.data.gameStarted;
+                    console.log(this.gameStarted);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
             if (this.gameStarted === false) {
                 console.log("game not started");
 
