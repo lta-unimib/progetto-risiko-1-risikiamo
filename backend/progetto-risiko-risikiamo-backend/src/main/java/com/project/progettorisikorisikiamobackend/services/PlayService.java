@@ -170,8 +170,10 @@ public class PlayService implements IPlayerService {
         if (game.getTurn().getCurrentPlayer() == null)
             throw new IllegalArgumentException("Game not ready");
 
-        if (game.isGameEnded())
+        if (game.getTurn().getWinner() != null)
             throw new IllegalArgumentException("Game ended, Win: " + game.getTurn().getWinner().getName());
+        if (game.isGameEnded())
+            throw new IllegalArgumentException("Game ended");
     }
 
 }
