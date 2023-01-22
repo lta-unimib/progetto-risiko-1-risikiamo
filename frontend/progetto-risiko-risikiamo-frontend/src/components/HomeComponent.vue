@@ -14,7 +14,7 @@ export default {
             idMatch: this.$route.query.id,
             playerName: this.$route.query.name,
             reinforcement: 0,
-            map: null,
+            svg: null,
             cards: [],
             continents: [],
             player: [],
@@ -191,7 +191,8 @@ export default {
             axios.get('http://localhost:3000/api/v1/game/' + this.idMatch + '/svg')
                 .then(response => {
                     console.log(response.data);
-                    this.map = response.data;
+                    this.svg = response.data;
+                    console.log(this.svg);
                 })
                 .catch(error => {
                     console.log(error);
@@ -314,6 +315,8 @@ export default {
     },
 
     created() {
+
+
         setInterval(() => {
             this.setPOV();
         }, 5000);
@@ -541,11 +544,11 @@ function getAdjacentCountries(value) {
     </div>
 
 
-    <div class="map">
-        <template v-html="this.map"></template>
-    </div>
-
-
+    <template>
+        <div>
+            <div class="map" v-html="svg"></div>
+        </div>
+    </template>
 
 
 </template>

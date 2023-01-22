@@ -1,6 +1,6 @@
 {
     "name": "game",
-    "startingArmies" : 1,
+    "startingArmies": 1,
     "map": {
         "name": "World",
         "continents": [
@@ -10,35 +10,33 @@
                 "territory": [
                     {
                         "name": "Canada",
-                        
                         "neighbors": [
                             "Usa"
                         ]
                     },
                     {
                         "name": "Usa",
-                
                         "neighbors": [
-                            "Canada","Messico","numero 2","numero 3"
+                            "Canada",
+                            "Messico",
+                            "numero 2",
+                            "numero 3"
                         ]
                     },
-                     {
+                    {
                         "name": "Messico",
-                
                         "neighbors": [
                             "Usa"
                         ]
                     },
                     {
                         "name": "numero 2",
-                
                         "neighbors": [
                             "Usa"
                         ]
                     },
-                     {
+                    {
                         "name": "numero 3",
-                
                         "neighbors": [
                             "Usa"
                         ]
