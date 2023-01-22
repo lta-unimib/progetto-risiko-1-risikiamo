@@ -5,11 +5,6 @@
     </section>
 
     <div>
-        <h2>Seleziona un svg Map</h2>
-        <input type="file" ref="svgFile" @change="readSvgFile" accept=".svg" />
-        <div v-if="image">
-            <img :src="preview" />
-        </div>
         <h2>Seleziona un file json</h2>
         <input type="file" ref="jsonFile" @change="onFileChange" accept=".json" />
         <h2>Seleziona nome giocatore</h2>
@@ -104,7 +99,6 @@ export default {
             player: null,
             playerName: "",
             selectedColor: "",
-            svgFile: null,
             jsonFile: null,
             image: false,
             file: false,
@@ -152,8 +146,6 @@ export default {
                 .catch(error => {
                     console.log(error);
                 });
-
-
         },
 
         login() {
@@ -165,19 +157,6 @@ export default {
                 .catch(error2 => {
                     console.log(error2);
                 });
-        },
-
-        readSvgFile() {
-            this.svgFile = this.$refs.svgFile.files[0];
-            console.log(this.svgFile);
-            if (
-                this.svgFile.name.includes(".svg")
-            ) {
-                this.image = true;
-                this.preview = URL.createObjectURL(this.svgFile);
-            } else {
-                this.image = false;
-            }
         },
 
         readString(value, color) {
