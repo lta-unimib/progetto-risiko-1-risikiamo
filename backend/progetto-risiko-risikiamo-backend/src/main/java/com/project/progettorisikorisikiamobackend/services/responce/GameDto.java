@@ -15,5 +15,6 @@ public class GameDto {
     private String svgMap;
     private List<InternalPlayerDto> players;
     private String currentPlayer;
+    private boolean isGameStarted;
 
 }
