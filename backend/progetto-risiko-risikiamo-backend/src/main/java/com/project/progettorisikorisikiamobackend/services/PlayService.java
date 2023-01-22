@@ -83,7 +83,7 @@ public class PlayService implements IPlayerService {
         Territory tTarget = gameService.getGame(gameId).getMap().getTerritory(target);
 
         if (tOwner == null || tTarget == null) {
-            throw new NotFoundExeption("Territory not found");
+            throw new NotFoundExeption("Territory  not found");
         }
 
         this.isPlayerTurn(gameId, playerId);

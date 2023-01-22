@@ -124,4 +124,5 @@ public class GameControllerTest {
 
         verify(gameService, times(1)).getSvg(gameId);
     }
+
 }
