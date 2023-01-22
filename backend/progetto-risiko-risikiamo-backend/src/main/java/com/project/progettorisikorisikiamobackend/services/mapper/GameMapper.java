@@ -188,6 +188,7 @@ public class GameMapper {
             gameDto.setCurrentPlayer(game.getTurn().getCurrentPlayer().getName());
 
         }
+        gameDto.setGameStarted(game.isGameStarted());
         return gameDto;
 
     }
