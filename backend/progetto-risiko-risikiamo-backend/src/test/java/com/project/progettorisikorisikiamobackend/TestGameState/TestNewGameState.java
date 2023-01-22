@@ -20,28 +20,28 @@ class TestNewGameState {
     }
 
     @Test
-    void testAttack_shouldThrowUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> this.state.attack(null, null, 0));
+    void testAttack_shouldThrowIllegalStateException() {
+        assertThrows(IllegalStateException.class, () -> this.state.attack(null, null, 0));
     }
 
     @Test
-    void testMove_shouldThrowUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> this.state.move(null, null, 0));
+    void testMove_shouldThrowIllegalStateException() {
+        assertThrows(IllegalStateException.class, () -> this.state.move(null, null, 0));
     }
 
     @Test
-    void testPassTurn_shouldThrowUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> this.state.endTurn());
+    void testPassTurn_shouldThrowIllegalStateException() {
+        assertThrows(IllegalStateException.class, () -> this.state.endTurn());
     }
 
     @Test
-    void testRedeemReinforcementsCard_shouldThrowUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> this.state.redeemReinforcementsCard(null, null, null));
+    void testRedeemReinforcementsCard_shouldThrowIllegalStateException() {
+        assertThrows(IllegalStateException.class, () -> this.state.redeemReinforcementsCard(null, null, null));
     }
 
     @Test
-    void testPlaceReinforcements_shouldThrowUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> this.state.placeReinforcements(null, 0));
+    void testPlaceReinforcements_shouldThrowIllegalStateException() {
+        assertThrows(IllegalStateException.class, () -> this.state.placeReinforcements(null, 0));
     }
 
 }

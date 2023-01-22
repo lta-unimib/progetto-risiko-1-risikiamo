@@ -20,6 +20,7 @@ import com.project.progettorisikorisikiamobackend.gameState.interf.IState;
 import com.project.progettorisikorisikiamobackend.map.Continent;
 import com.project.progettorisikorisikiamobackend.map.Map;
 import com.project.progettorisikorisikiamobackend.map.Territory;
+import com.project.progettorisikorisikiamobackend.obiettivi.TotTerritories;
 import com.project.progettorisikorisikiamobackend.player.Player;
 
 public class TestActionState {
@@ -30,13 +31,17 @@ public class TestActionState {
     private Territory neighbor;
     private Map map;
 
+    private Player p2;
+
     @BeforeEach
     void setUp() {
 
         Player p1 = new Player("p1");
+
         Player p2 = new Player("p2");
+        Player p3 = new Player("p3");
         Continent c = new Continent("c", 1);
-        turn = new Turn(List.of(p1, p2));
+        turn = new Turn(new ArrayList<>(List.of(p1, p2, p3)));
         turn.nextTurn();
 
         ownTerritory = new Territory("test", p1);
@@ -53,18 +58,22 @@ public class TestActionState {
 
         List<Player> players = new ArrayList<>();
         players.addAll(turn.getInGamePlayerList());
+        p1.setObiettivi(List.of(new TotTerritories(50, map)));
+        p2.setObiettivi(List.of(new TotTerritories(50, map)));
+        p3.setObiettivi(List.of(new TotTerritories(50, map)));
+        this.p2 = p2;
         context = new MockContextClass(turn, map, null, null, new DeckTerritories(map));
         context.setState(new ActionState(context));
 
     }
 
     @Test
-    void test_shouldThrowUnsupportedOperationException() {
+    void test_shouldThrowIllegalStateException() {
 
         IState actionState = context.getState();
 
-        assertThrows(UnsupportedOperationException.class, () -> actionState.redeemReinforcementsCard(null, null, null));
-        assertThrows(UnsupportedOperationException.class, () -> actionState.placeReinforcements(ownTerritory, 0));
+        assertThrows(IllegalStateException.class, () -> actionState.redeemReinforcementsCard(null, null, null));
+        assertThrows(IllegalStateException.class, () -> actionState.placeReinforcements(ownTerritory, 0));
 
     }
 
@@ -108,7 +117,7 @@ public class TestActionState {
 
         assertEquals(2, context.getDeckTerritories().getDeck().size());
 
-        neighbor.setOwner(new Player("p2"));
+        neighbor.setOwner(this.p2);
 
         ownTerritory.addArmy(20);
         neighbor.addArmy(1);

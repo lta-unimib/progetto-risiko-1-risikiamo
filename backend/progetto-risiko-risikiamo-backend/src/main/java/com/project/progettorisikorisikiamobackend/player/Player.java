@@ -5,6 +5,7 @@ import com.project.progettorisikorisikiamobackend.obiettivi.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,10 +25,10 @@ public class Player implements IPlayer {
     private String id;
 
     private String color;
+    @Setter
     private List<Objective> obiettivi;
     private List<CardTerritory> carte;
     private int reinforce;
-    // Carte
 
     // costruttore
     public Player(String name, String color, String id) {

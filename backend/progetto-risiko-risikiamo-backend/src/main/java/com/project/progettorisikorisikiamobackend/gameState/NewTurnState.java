@@ -2,17 +2,34 @@ package com.project.progettorisikorisikiamobackend.gameState;
 
 import com.project.progettorisikorisikiamobackend.Cards.CardTerritory;
 import com.project.progettorisikorisikiamobackend.Cards.DeckTerritories;
+import com.project.progettorisikorisikiamobackend.Turno.Turn;
 import com.project.progettorisikorisikiamobackend.gameState.interf.IContext;
 import com.project.progettorisikorisikiamobackend.gameState.interf.IState;
 import com.project.progettorisikorisikiamobackend.map.*;
 import com.project.progettorisikorisikiamobackend.player.Player;
 
-import lombok.AllArgsConstructor;
-
-@AllArgsConstructor
 public class NewTurnState implements IState {
 
     private IContext context;
+
+    public NewTurnState(IContext context) {
+        this.context = context;
+
+        Player p = context.getTurn().getCurrentPlayer();
+        Map m = context.getMap();
+
+        p.setReinforce(p.getReinforce() + (m.getNumberOfTerritories(p) / 3));
+
+        // claculate the ammount of bousus armies
+        int bonus = 0;
+        for (Continent c : m.getContinents().values()) {
+            if (c.isOwnedBy(p)) {
+                bonus += c.getBonus();
+            }
+        }
+        p.setReinforce(p.getReinforce() + bonus);
+
+    }
 
     @Override
     public void endTurn() {
@@ -41,8 +58,18 @@ public class NewTurnState implements IState {
     public void placeReinforcements(Territory ownTerritory, int armies) {
 
         Player p = context.getTurn().getCurrentPlayer();
+
+        if (context.getTurn().getCurrentPlayer().getReinforce() <= 0) {
+            context.setState(new ActionState(context));
+        }
+
         p.placeReinforcements(ownTerritory, armies);
-        context.setState(new RenforceState(context));
+        if (context.getTurn().getCurrentPlayer().getReinforce() <= 0) {
+            context.setState(new ActionState(context));
+        } else {
+            context.setState(new RenforceState(context));
+        }
+
     }
 
 }

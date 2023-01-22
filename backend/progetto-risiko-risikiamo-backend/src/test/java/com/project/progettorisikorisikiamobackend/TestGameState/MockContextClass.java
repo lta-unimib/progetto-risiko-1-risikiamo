@@ -69,4 +69,9 @@ public class MockContextClass implements IContext {
 
         return deckTerritories;
     }
+
+    @Override
+    public void setGameEnded(boolean gameEnded) {
+
+    }
 }

@@ -33,7 +33,7 @@ class MapTests {
         map.addContinent(continent2);
 
         assertEquals(2, map.getContinents().size());
-        Collection<Continent> continents = map.getContinents();
+        Collection<Continent> continents = map.getContinents().values();
         assertEquals(Continent, continents.toArray()[0]);
         assertEquals(continent2, continents.toArray()[1]);
 
