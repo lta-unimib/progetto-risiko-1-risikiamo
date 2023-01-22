@@ -220,7 +220,6 @@ export default {
         getContinents() {
             axios.get('http://localhost:3000/api/v1/game/' + this.idMatch + '/watch')
                 .then(response => {
-                    console.log(response.data.map.continents.territory);
                     this.continents = response.data.map.continents;
                     console.log(this.continents);
                 })
@@ -276,7 +275,7 @@ export default {
                 });
         },
         getReinforcement() {
-            axios.get('http://localhost:3000/api/v1/game/' + this.idMatch + '/watch')
+            axios.get('http://localhost:3000/api/v1/game/' + this.idMatch + '/play/' + this.playerName + '/')
                 .then(response => {
                     console.log(response.data.reinforcement);
                     this.reinforcement = response.data.reinforcement;
@@ -319,8 +318,6 @@ export default {
 
     created() {
 
-
-
         setInterval(() => {
             this.setPOV();
 
@@ -351,28 +348,32 @@ export default {
                 }
             }
         }, 3000);
-        window.addEventListener("click", (event) => {
-            if (this.gameStarted === false) {
-                console.log("game not started");
-            }
-            else {
-                const path = event.target;
-                this.selectedPaths.push(path);
-                path.classList.remove("SelectedPath");
-                path.classList.add("pathFrom");
-                for (let j = 0; j < this.paths.length; j++) {
-                    let item = this.paths[j];
-                    this.pathsNode.push(item);
-                    console.log(this.pathsNode);
-                }
-                for (let i = 0; i < this.paths.length; i++) {
-                    this.paths[i].classList.remove("AdjacentPath");
-                }
-                this.actionWindow(path);
-            }
+        // window.addEventListener("click", (event) => {
+        //     if (this.gameStarted === false) {
+        //         console.log("game not started");
+        //     }
+        //     else {
+        //         const path = event.target;
+        //         this.selectedPaths.push(path);
+        //         path.classList.remove("SelectedPath");
+        //         path.classList.add("pathFrom");
+        //         for (let j = 0; j < this.paths.length; j++) {
+        //             let item = {
+        //                 name: this.paths[j].attributes.name,
+        //                 army: this.paths[j].attributes.army,
+        //                 owner: this.paths[j].attributes.owner,
+        //             }
+        //             this.pathsNode.push(item);
+        //             console.log(this.pathsNode);
+        //         }
+        //         for (let i = 0; i < this.paths.length; i++) {
+        //             this.paths[i].classList.remove("AdjacentPath");
+        //         }
+        //         this.actionWindow(path);
+        //     }
 
-        }
-        );
+        // }
+        // );
     }
 }
 
@@ -556,19 +557,6 @@ function getAdjacentCountries(value) {
             <h1>Interactive Risk Map</h1>
         </div>
     </div>
-    <br>
-    <br>
-    <div class="container">
-        <h3>
-            {{ hoverValue }}
-        </h3>
-
-    </div>
-    <br>
-    <div>
-        <button @click="printid">Get Match</button>
-    </div>
-    <br>
     <div>
         <button @click="startMatch">Start Match</button>
     </div>
@@ -577,19 +565,36 @@ function getAdjacentCountries(value) {
         <button @click="surrend">Bandiera Bianca</button>
     </div>
     <br>
-    <div>
-        <button @click="zoomIn">Zoom In</button>
-    </div>
-    <br>
-    <div>
-        <button @click="zoomOut">Zoom Out</button>
-    </div>
-    <br>
     <br>
     <div>
         <button @click="skip">Skip turn</button>
     </div>
     <br>
+    <br>
+    <div class="container">
+        <h3>
+            {{ hoverValue }}
+        </h3>
+    </div>
+    <br>
+    <div>
+        <p>scegli se posizionare i rinforzi (obbligatorio se non si sono posizionati tutti), attaccare o spostarsi</p>
+        <div><input type="radio" id="place" name="action" value="place"><label for="place">Piazza</label></div>
+        <div><input type="radio" id="attack" name="action" value="attack"><label for="attack">Attacca</label></div>
+        <div><input type="radio" id="move" name="action" value="move"><label for="move">Sposta</label></div>
+        <p>inserisci dove o vuoi piazzare o il luogo da cui vuoi muovere o attaccare</p>
+        <input type="text" id="start">
+        <p>Inserisci nel caso di spostamento o attacco il territorio di destinazione</p>
+        <input type="text" id="destination">
+        <p>inserisci il numero di truppe da spostare o attaccare o rifornire</p>
+        <input type="number" id="number" min="1">
+        <button id="doAction">ok</button>
+        <button id="exit">close</button>
+    </div>
+    <br>
+    <div>
+        <div class="map" v-html="svg"></div>
+    </div>
     <br>
     <div>
         <ul>
@@ -598,17 +603,12 @@ function getAdjacentCountries(value) {
                 <div>
             <li v-for="territory in continent.territory" :key="territory.name">
                 <h3>Nome territorio: {{ territory.name }}</h3>
-                <h3>Armate territorio: {{ territory.armies }}</h3>
+                <h3>Armate territorio: {{ territory.army }}</h3>
                 <h3>Possessore territorio: {{ territory.owner }}</h3>
             </li>
     </div>
     </li>
     </ul>
-    </div>
-    <br>
-    <br>
-    <div>
-        <div class="map" v-html="svg"></div>
     </div>
 
 </template>
