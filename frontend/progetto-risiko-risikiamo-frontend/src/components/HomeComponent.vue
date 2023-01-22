@@ -59,6 +59,15 @@ export default {
                     console.log(error);
                 });
         },
+        place() {
+            axios.put('http://localhost:3000/api/v1/game/' + this.idMatch + '/play/' + this.playerName + '/place?owner=' + this.$route.query.name + '&army=' + this.player.renforcements)
+                .then(response => {
+                    console.log(response.data);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        },
         startMatch() {
             axios.put('http://localhost:3000/api/v1/game/' + this.idMatch + '/start')
                 .then(response => {
@@ -187,8 +196,9 @@ export default {
         getContinents() {
             axios.get('http://localhost:3000/api/v1/game/' + this.idMatch + '/watch')
                 .then(response => {
-                    console.log(response.data);
-                    this.continents = response.data.continents;
+                    console.log(response.data.map.continents.territory);
+                    this.continents = response.data.map.continents;
+                    console.log(this.continents);
                 })
                 .catch(error => {
                     console.log(error);
@@ -196,7 +206,34 @@ export default {
 
         },
         surrend() {
-            axios.put('localhost:3000/api/v1/game/' + this.idMatch + '/play/' + this.playerName + '/surrend')
+            axios.put('http://localhost:3000/api/v1/game/' + this.idMatch + '/play/' + this.playerName + '/surrend')
+                .then(response => {
+                    console.log(response.data);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        },
+        skip() {
+            axios.put('http://localhost:3000/api/v1/game/' + this.idMatch + '/play/' + this.playerName + '/skip')
+                .then(response => {
+                    console.log(response.data);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        },
+        attack(value, path1) {
+            axios.put('http://localhost:3000/api/v1/game/' + this.idMatch + '/play/' + this.playerName + '/attack?owner=' + this.$route.query.name + '&army=' + value + '&neighbor=' + path1.attributes.title.value)
+                .then(response => {
+                    console.log(response.data);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        },
+        move(value, path) {
+            axios.put('http://localhost:3000/api/v1/game/' + this.idMatch + '/play/' + this.playerName + '/move?owner=' + this.$route.query.name + '&army=' + value + '&neighbor=' + path.attributes.title.value)
                 .then(response => {
                     console.log(response.data);
                 })
@@ -207,7 +244,6 @@ export default {
     },
 
     mounted() {
-
         let paths = document.querySelectorAll("path");
         for (let i = 0; i < paths.length; i++) {
             paths[i].addEventListener("mouseover", this.changeHoverValue);
@@ -239,8 +275,6 @@ export default {
                 this.selectedPaths = [];
             }
         });
-
-
     },
 
     created() {
@@ -251,9 +285,8 @@ export default {
         }
 
         if (this.startMatch === true) {
-            setInterval(() => {
-                console.log("match started");
-            }, 3000);
+            console.log("match started");
+            this.place();
         }
 
         setInterval(() => {
@@ -262,6 +295,10 @@ export default {
 
         setInterval(() => {
             this.getCards();
+        }, 5000);
+
+        setInterval(() => {
+            this.getContinents();
         }, 5000);
     }
 }
@@ -297,6 +334,7 @@ function closeTradeWindow(path1, path2, tradeWindow) {
     path2.classList.remove("pathTo");
     path2.classList.remove("AdjacentPath");
 }
+
 
 
 
@@ -427,8 +465,27 @@ function getAdjacentCountries(value) {
     <div>
         <button @click="zoomOut">Zoom Out</button>
     </div>
-
-
+    <br>
+    <br>
+    <div>
+        <button @click="skip">Skip turn</button>
+    </div>
+    <br>
+    <br>
+    <div>
+        <ul>
+            <li v-for="continent in continents" :key="continent.name">
+                <h3>{{ continent.name }}</h3>
+                <div>
+            <li v-for="territory in continent.territory" :key="territory.name">
+                <h3>Nome territorio: {{ territory.name }}</h3>
+                <h3>Armate territorio: {{ territory.armies }}</h3>
+                <h3>Possessore territorio: {{ territory.owner }}</h3>
+            </li>
+    </div>
+    </li>
+    </ul>
+    </div>
 
 
     <div class="map">
