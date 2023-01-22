@@ -37,6 +37,10 @@ public class PlayerMapper {
     }
 
     public static Player toEntity(PlayerDto playerDto) {
+        if (playerDto == null) {
+            throw new IllegalArgumentException("PlayerDto is null");
+        }
+
         return new Player(playerDto.getName(), playerDto.getColor(), playerDto.getName());
 
     }

@@ -15,6 +15,7 @@ import com.project.progettorisikorisikiamobackend.services.mapper.PlayerMapper;
 import com.project.progettorisikorisikiamobackend.services.responce.GameDto;
 import com.project.progettorisikorisikiamobackend.services.responce.PlayerDto;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Service
@@ -23,6 +24,7 @@ public class GameService implements IGameService {
 
     /* List of all active game */
 
+    @Getter
     private Map<String, Game> games = new HashMap<>();
 
     public Game getGame(String gameId) throws NotFoundExeption {
@@ -107,7 +109,7 @@ public class GameService implements IGameService {
 
     }
 
-    private void isValidGame(Game game) {
+    public void isValidGame(Game game) {
 
         if (game == null)
             throw new IllegalArgumentException("Game not found");

@@ -117,7 +117,6 @@ public class Game implements IContext, IState {
 
     public void endGame() {
         this.isGameEnded = true;
-        this.startGame();
 
     }
 
