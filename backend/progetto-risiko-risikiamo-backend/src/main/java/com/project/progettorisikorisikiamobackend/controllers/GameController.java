@@ -22,7 +22,7 @@ import com.project.progettorisikorisikiamobackend.services.responce.PlayerDto;
 
 import jakarta.validation.Valid;
 
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/api/v1/game")
 public class GameController {

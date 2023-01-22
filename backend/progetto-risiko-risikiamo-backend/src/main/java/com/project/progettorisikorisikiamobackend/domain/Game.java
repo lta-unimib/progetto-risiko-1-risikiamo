@@ -34,6 +34,7 @@ public class Game implements IContext, IState {
     private String id;
 
     private boolean isGameEnded;
+    private boolean isGameStarted;
 
     private Turn turn;
 
@@ -54,6 +55,7 @@ public class Game implements IContext, IState {
         this.deckObjectives = null;
         this.deckTerritories = null;
         this.isGameEnded = false;
+        this.isGameStarted = false;
     }
 
     public void addPlayer(Player player) {
@@ -113,11 +115,11 @@ public class Game implements IContext, IState {
 
         this.state = new InitialFaseState(this);
         this.turn.nextTurn();
+        this.isGameStarted = true;
     }
 
     public void endGame() {
         this.isGameEnded = true;
-        this.startGame();
 
     }
 

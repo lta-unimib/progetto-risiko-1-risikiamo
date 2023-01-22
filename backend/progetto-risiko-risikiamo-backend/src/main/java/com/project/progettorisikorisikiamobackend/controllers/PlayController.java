@@ -21,7 +21,7 @@ import com.project.progettorisikorisikiamobackend.services.IPlayerService;
 import com.project.progettorisikorisikiamobackend.services.mapper.PlayerMapper;
 import com.project.progettorisikorisikiamobackend.services.responce.PlayerDto;
 
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/api/v1/game/{gameId}/play/{playerId}")
 

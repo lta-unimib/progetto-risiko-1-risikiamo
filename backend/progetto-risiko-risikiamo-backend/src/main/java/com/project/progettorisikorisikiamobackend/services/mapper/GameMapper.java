@@ -3,9 +3,6 @@ package com.project.progettorisikorisikiamobackend.services.mapper;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.project.progettorisikorisikiamobackend.Turno.Turn;
 import com.project.progettorisikorisikiamobackend.domain.Game;
 import com.project.progettorisikorisikiamobackend.map.Continent;
@@ -16,8 +13,6 @@ import com.project.progettorisikorisikiamobackend.services.responce.GameDto;
 import com.project.progettorisikorisikiamobackend.services.responce.InternalPlayerDto;
 import com.project.progettorisikorisikiamobackend.services.responce.MapDto;
 import com.project.progettorisikorisikiamobackend.services.responce.TerritoryDto;
-
-import lombok.Data;
 
 public class GameMapper {
 
@@ -112,7 +107,7 @@ public class GameMapper {
     public static GameDto toDto(Game game) {
 
         if (game == null) {
-            return null;
+            throw new IllegalArgumentException("no null value allowed");
         }
         GameDto gameDto = new GameDto();
         gameDto.setId(game.getId());
@@ -121,6 +116,8 @@ public class GameMapper {
         Map map = game.getMap();
         MapDto mapDto = new MapDto();
 
+        if (map == null)
+            throw new IllegalArgumentException("map can't be null ");
         mapDto.setName(map.getMapId());
 
         List<ContinentDto> continentDto = new ArrayList<>();
@@ -191,6 +188,7 @@ public class GameMapper {
             gameDto.setCurrentPlayer(game.getTurn().getCurrentPlayer().getName());
 
         }
+        gameDto.setGameStarted(game.isGameStarted());
         return gameDto;
 
     }

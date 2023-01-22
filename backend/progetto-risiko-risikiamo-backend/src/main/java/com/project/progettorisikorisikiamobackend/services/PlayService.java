@@ -83,7 +83,7 @@ public class PlayService implements IPlayerService {
         Territory tTarget = gameService.getGame(gameId).getMap().getTerritory(target);
 
         if (tOwner == null || tTarget == null) {
-            throw new NotFoundExeption("Territory not found");
+            throw new NotFoundExeption("Territory  not found");
         }
 
         this.isPlayerTurn(gameId, playerId);
@@ -170,8 +170,10 @@ public class PlayService implements IPlayerService {
         if (game.getTurn().getCurrentPlayer() == null)
             throw new IllegalArgumentException("Game not ready");
 
-        if (game.isGameEnded())
+        if (game.getTurn().getWinner() != null)
             throw new IllegalArgumentException("Game ended, Win: " + game.getTurn().getWinner().getName());
+        if (game.isGameEnded())
+            throw new IllegalArgumentException("Game ended");
     }
 
 }
