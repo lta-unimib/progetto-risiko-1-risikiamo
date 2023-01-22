@@ -33,6 +33,12 @@ public class GameMapper {
         Game game = new Game();
         game.setId(id);
 
+        if (gameDto.getSvgMap() == null || gameDto.getSvgMap().isEmpty())
+            throw new IllegalArgumentException("svgMap can't be null");
+
+        String replaceIllegal = gameDto.getSvgMap().replaceAll("\n", "").replaceAll("\r", "").replaceAll("\t", "");
+        game.setSvgMap(replaceIllegal);
+
         // cast form string to int
 
         if (gameDto.getStartingArmies() < 1)

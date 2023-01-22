@@ -12,6 +12,7 @@ public class GameDto {
     private String id;
     private String winner;
     private MapDto map;
+    private String svgMap;
     private List<InternalPlayerDto> players;
     private String currentPlayer;
 

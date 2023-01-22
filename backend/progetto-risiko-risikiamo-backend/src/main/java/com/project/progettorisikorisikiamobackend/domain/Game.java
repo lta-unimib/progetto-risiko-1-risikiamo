@@ -1,5 +1,6 @@
 package com.project.progettorisikorisikiamobackend.domain;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -41,6 +42,8 @@ public class Game implements IContext, IState {
     private DeckObjectives deckObjectives;
 
     private DeckTerritories deckTerritories;
+
+    private String svgMap;
 
     public Game(String name, Map map, String gameId) {
         this.id = gameId;

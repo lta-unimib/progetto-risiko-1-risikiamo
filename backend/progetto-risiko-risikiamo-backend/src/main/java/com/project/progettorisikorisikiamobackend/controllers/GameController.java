@@ -1,7 +1,5 @@
 package com.project.progettorisikorisikiamobackend.controllers;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +36,15 @@ public class GameController {
     public GameDto getWatch(@PathVariable String gameId) {
 
         return gameService.getWatch(gameId);
+
+    }
+
+    @ResponseBody
+    @GetMapping("/{gameId}/svg")
+    @ResponseStatus(HttpStatus.OK)
+    public String getSvg(@PathVariable String gameId) {
+
+        return gameService.getSvg(gameId);
 
     }
 

@@ -23,8 +23,8 @@ public class TestOpponentDefeated {
 
     @Test
     public void testOpponentDefeated2() {
-        Player player1 = new Player("player1", null, null, "0");
-        Player player2 = new Player("player2", null, null, "0");
+        Player player1 = new Player("player1", "null", null, "0");
+        Player player2 = new Player("player2", "x", null, "0");
         Turn turn = new Turn();
         turn.addPlayer(player1);
         turn.addPlayer(player2);
