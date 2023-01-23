@@ -41,12 +41,24 @@ export default {
             paths: [],
             pathsNode: [],
             playerData: [],
+            objective: null,
+            playerList: [],
         }
 
     },
 
     methods: {
         changeHoverValue: changeHoverValue,
+        getPlayerList() {
+            axios.get('http://localhost:3000/api/v1/game/' + this.idMatch + '/watch')
+                .then(response => {
+                    this.playerList = response.data.players;
+                    console.log(this.playerList);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        },
         recoverPlayer() {
             axios.get('http://localhost:3000/api/v1/game/' + this.idMatch + '/watch')
                 .then(response => {
@@ -85,7 +97,7 @@ export default {
         setPOV() {
             axios.get('http://localhost:3000/api/v1/game/' + this.idMatch + '/watch')
                 .then(response => {
-                    //console.log(response.data);
+                    console.log(response.data);
                     this.currentPlayer = response.data.currentPlayer;
                     //console.log(this.currentPlayer);
                 })
@@ -193,11 +205,21 @@ export default {
                     console.log(error);
                 });
         },
+        getObjective() {
+            axios.get('http://localhost:3000/api/v1/game/' + this.idMatch + '/play/' + this.playerName + '/')
+                .then(response => {
+                    console.log(response.data.objectives);
+                    this.objective = response.data.objectives[0];
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        },
         getReinforcement() {
             axios.get('http://localhost:3000/api/v1/game/' + this.idMatch + '/play/' + this.playerName + '/')
                 .then(response => {
-                    console.log(response.data.reinforcement);
-                    this.reinforcement = response.data.reinforcement;
+                    console.log(response.data.renforcements);
+                    this.reinforcement = response.data.renforcements;
                 })
                 .catch(error => {
                     console.log(error);
@@ -244,24 +266,16 @@ export default {
 
         // window.console = console;
 
-
         setInterval(() => {
+            this.getObjective();
+            this.getWinner();
             this.setPOV();
-
-        }, 5000);
-
-        setInterval(() => {
+            this.getPlayerList();
             this.getPlayerData();
             console.log(this.playerData);
-        }, 5000);
-
-        setInterval(() => {
             this.getContinents();
-        }, 5000);
-
-        setInterval(() => {
             this.getReinforcement();
-        }, 3000);
+        }, 5000);
 
         setInterval(() => {
             axios.get('http://localhost:3000/api/v1/game/' + this.idMatch + '/watch')
@@ -311,6 +325,8 @@ function changeHoverValue(value) {
 
 <template>
     <div>
+        <h1>vincitore : {{ winner }}</h1>
+        <h1>obbiettivo : {{ objective }}</h1>
         <h1> player : {{ playerName }} </h1>
         <h1> current reinforcement: {{ reinforcement }} </h1>
         <h1> id partita: {{ idMatch }} </h1>
@@ -368,6 +384,7 @@ function changeHoverValue(value) {
         <div v-for="(message, index) in messages" :key="index">{{ message }}</div>
     </div>
     <br>
+
     <div>
         <ul>
             <li v-for="continent in continents" :key="continent.name">
@@ -376,12 +393,18 @@ function changeHoverValue(value) {
             <li v-for="territory in continent.territory" :key="territory.name">
                 <h3>Nome territorio: {{ territory.name }}</h3>
                 <h3>Armate territorio: {{ territory.army }}</h3>
-                <h3>Possessore territorio: {{ territory.owner }}</h3>
+                <div>
+            <li v-for="playerColor in playerList" :key="playerColor.name">
+                <h3 v-if="playerColor.name == territory.owner" style="color:{{ playerColor.color }}"> Possessore
+                    territorio: {{ territory.owner }}</h3>
             </li>
+    </div>
+    </li>
     </div>
     </li>
     </ul>
     </div>
+
     <br>
     <div>
         <card-component v-if="playerData.length > 0" :playerData="playerData"></card-component>

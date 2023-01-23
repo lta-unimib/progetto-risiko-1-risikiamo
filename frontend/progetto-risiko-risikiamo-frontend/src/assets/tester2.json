@@ -12,8 +12,7 @@
                         "name": "United States",
                         "neighbours": [
                             "Canada",
-                            "Mexico",
-                            "Russia"
+                            "Mexico"
                         ]
                     },
                     {
@@ -33,9 +32,7 @@
                     {
                         "name": "Greenland",
                         "neighbours": [
-                            "Canada",
-                            "Iceland",
-                            "Svalbard and Jan Mayen"
+                            "Canada"
                         ]
                     },
                     {
