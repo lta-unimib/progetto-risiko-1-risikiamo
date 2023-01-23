@@ -114,7 +114,7 @@ export default {
         readFile(file) {
             let reader = new FileReader();
             reader.onload = e => {
-                console.log(e.target.result);
+                //console.log(e.target.result);
                 let json = JSON.parse(e.target.result);
                 this.jsonFile = json;
             };
@@ -129,7 +129,7 @@ export default {
             const gameData = this.jsonFile;
             //const player = this.player;
             this.readString(this.playerName, this.selectedColor)
-            console.log(gameData);
+            //console.log(gameData);
             axios.post('http://localhost:3000/api/v1/game/create', gameData)
                 .then(response => {
                     axios.post('http://localhost:3000/api/v1/game/' + response.data.id + '/addPlayer', this.player)
@@ -140,7 +140,7 @@ export default {
                             console.log(error2);
                         });
                     this.id = response.data.id;
-                    console.log(this.id);
+                    //console.log(this.id);
                     console.log(response);
                 })
                 .catch(error => {

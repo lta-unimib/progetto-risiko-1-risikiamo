@@ -3,62 +3,57 @@
 //import { cardsList } from '../assets/cards.json';
 
 export default {
-
+    props: ['playerData'],
     name: "cardComponent",
     data() {
         return {
-            cardsPerPlayer: [],
+            playerHere: this.playerData,
             cardsArr: [],
+            cardsOfPlayer: this.playerData.cards,
         }
 
     },
 
     methods: {
-        getDataForCards() {
-            const cardsList = require('../assets/cards.json');
-            this.cardsPerPlayer = cardsList.players;
-        },
+        // getDataForCards() {
+        //     const cardsList = require('../assets/cards.json');
+        //     this.cardsPerPlayer = cardsList.players;
+        // },
         createCard() {
             let cardsArr = [];
-            for (let i = 0; i < this.cardsPerPlayer.length; i++) {
-                let player = {
-                    id: this.cardsPerPlayer[i].name,
-                    color: this.cardsPerPlayer[i].color,
-                    cards: this.cardsPerPlayer[i].cards,
-                }
-                for (let j = 0; j < player.cards.length; j++) {
+            if (this.playerHere !== undefined) {
+                for (let i = 0; i < this.cardsOfPlayer.length; i++) {
                     let card = {
-                        id: player.name,
-                        name: player.cards[j].name,
-                        type: player.cards[j].type,
-                        color: "background-color:" + player.color,
+                        id: this.playerHere.name,
+                        name: this.cardsOfPlayer[i].name,
+                        type: this.cardsOfPlayer[i].type,
+                        color: "background-color:" + this.playerHere.color,
                         img: null,
                     }
-                    if (card.type == "Artillery") {
+                    if (card.type === "CANNONE") {
                         card.img = "https://cdn.pixabay.com/photo/2016/04/01/12/20/armour-1300665__480.png";
                         cardsArr.push(card);
-                    } else if (card.type == "Cavalry") {
+                    } else if (card.type === "CAVALLO") {
                         card.img = "https://static.vecteezy.com/system/resources/thumbnails/000/153/079/small/cavalry-silhouettes-vector.png";
                         cardsArr.push(card);
-                    } else if (card.type == "Infantry") {
+                    } else if (card.type === "FANTE") {
                         card.img = "https://www.pngall.com/wp-content/uploads/5/Silhouette-Army-Transparent.png";
                         cardsArr.push(card);
                     } else {
-                        console.log("No type");
+                        console.log(card);
                     }
                 }
-            }
 
-            console.log(cardsArr);
-            return cardsArr;
+                console.log(cardsArr);
+                return cardsArr;
+            }
         }
     },
 
     mounted() {
-        this.getDataForCards();
+        //this.getDataForCards();
         this.createCard();
         this.cardsArr = this.createCard();
-
     }
 }
 
