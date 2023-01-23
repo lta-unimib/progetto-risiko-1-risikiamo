@@ -165,7 +165,7 @@ public class Territory {
         if (territory == this)
             throw new IllegalArgumentException("Neighbour Territory can't be itself " + territory.getName());
         if (territory == null)
-            throw new IllegalArgumentException("Neighbour Territory can't be null ");
+            throw new IllegalArgumentException("Neighbour Territory can't be null " + this.getName());
         if (this.isNeighbour(territory)) {
             throw new IllegalArgumentException("Neighbour Territory already a neighbour " + territory.getName());
         }
