@@ -32,11 +32,12 @@ public class DeckObjectives {
         }
         int numTerritories = 0;
         for (Continent c : map.getContinents().values()) {
-            numTerritories += c.getNumberOfTerritories();
+            numTerritories += c.getTerritories().size();
         }
         numTerritories = numTerritories * (58 / 100);
         if (numTerritories < 4)
             numTerritories = 4;
+
         for (int i = 0; i < players.size(); i++) {
             deckObj.add(new TotTerritories(numTerritories, map));
             deckObj.add(new TotTerritories(numTerritories, map));
