@@ -17,11 +17,13 @@ const routes = [
     name: "game",
     component: HomeVue,
     path: "/game",
+    props: true,
   },
   {
     name: "nested-route",
     component: NestedRoute,
     path: "/nested-route",
+    props: true,
   },
   {
     name: "players",
@@ -33,11 +35,13 @@ const routes = [
     name: "cards",
     component: CardsVue,
     path: "/cards",
+    props: true,
   },
   {
     name: "users",
     component: PlayerData,
     path: "/users",
+    props: true,
   },
 ];
 

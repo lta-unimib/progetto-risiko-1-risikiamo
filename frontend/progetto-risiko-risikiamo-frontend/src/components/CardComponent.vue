@@ -9,7 +9,7 @@ export default {
         return {
             playerHere: this.playerData,
             cardsArr: [],
-            cardsOfPlayer: this.playerData.cards,
+            cardsOfPlayer: [],
         }
 
     },
@@ -22,6 +22,9 @@ export default {
         createCard() {
             let cardsArr = [];
             if (this.playerHere !== undefined) {
+                console.log(this.playerHere);
+                console.log(this.cardsOfPlayer);
+                this.cardsOfPlayer = this.playerHere.cards;
                 for (let i = 0; i < this.cardsOfPlayer.length; i++) {
                     let card = {
                         id: this.playerHere.name,
