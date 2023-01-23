@@ -163,11 +163,11 @@ public class Territory {
      */
     public void addNeighbour(Territory territory) throws IllegalArgumentException {
         if (territory == this)
-            throw new IllegalArgumentException("Territory can't be itself");
+            throw new IllegalArgumentException("Neighbour Territory can't be itself " + territory.getName());
         if (territory == null)
-            throw new IllegalArgumentException("Territory can't be null");
+            throw new IllegalArgumentException("Neighbour Territory can't be null ");
         if (this.isNeighbour(territory)) {
-            throw new IllegalArgumentException("Territory already a neighbour");
+            throw new IllegalArgumentException("Neighbour Territory already a neighbour " + territory.getName());
         }
         this.neighbours.add(territory);
     }
