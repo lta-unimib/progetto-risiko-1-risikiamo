@@ -46,7 +46,7 @@ public class NewTurnState implements IState {
         DeckTerritories deck = context.getDeckTerritories();
         int r = deck.reedemCards(c1, c2, c3, p);
 
-        p.setReinforce(r);
+        p.setReinforce(p.getReinforce() + r);
 
         p.removeCard(c1);
         p.removeCard(c2);
