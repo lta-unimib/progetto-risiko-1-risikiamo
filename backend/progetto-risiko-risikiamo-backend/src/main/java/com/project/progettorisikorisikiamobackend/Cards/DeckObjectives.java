@@ -34,13 +34,13 @@ public class DeckObjectives {
         for (Continent c : map.getContinents().values()) {
             numTerritories += c.getTerritories().size();
         }
-        numTerritories = numTerritories * (58 / 100);
-        if (numTerritories < 4)
-            numTerritories = 4;
+        double fNumTerritories = numTerritories * (58.0 / 100.0);
+        if (fNumTerritories < 4)
+            fNumTerritories = 4;
 
         for (int i = 0; i < players.size(); i++) {
-            deckObj.add(new TotTerritories(numTerritories, map));
-            deckObj.add(new TotTerritories(numTerritories, map));
+            deckObj.add(new TotTerritories((int) fNumTerritories, map));
+            deckObj.add(new TotTerritories((int) fNumTerritories, map));
         }
         deck.addAll(deckObj);
     }
