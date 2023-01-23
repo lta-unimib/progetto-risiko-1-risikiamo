@@ -34,7 +34,13 @@ public class DeckObjectives {
         for (Continent c : map.getContinents().values()) {
             numTerritories += c.getTerritories().size();
         }
-        double fNumTerritories = numTerritories * (58.0 / 100.0);
+        double busted = 0.0;
+        if (players.size() == 2)
+            busted = 25;
+        else if (players.size() == 3)
+            busted = 10;
+
+        double fNumTerritories = numTerritories * ((58.0 + busted) / 100.0);
         if (fNumTerritories < 4)
             fNumTerritories = 4;
 
