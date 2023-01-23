@@ -46,19 +46,19 @@ class TestMapDto {
         playerDto.setColor("playerColor");
 
         territory1Dto.setName("territoryName");
-        territory1Dto.setNeighbors(new ArrayList<>(List.of("territoryName2")));
+        territory1Dto.setNeighbours(new ArrayList<>(List.of("territoryName2")));
 
         territory2Dto.setName("territoryName2");
-        territory2Dto.setNeighbors(new ArrayList<>(List.of("territoryName")));
+        territory2Dto.setNeighbours(new ArrayList<>(List.of("territoryName")));
 
         territory3Dto.setName("territoryName3");
-        territory3Dto.setNeighbors(new ArrayList<>(List.of("territoryName2")));
+        territory3Dto.setNeighbours(new ArrayList<>(List.of("territoryName2")));
 
         territory4Dto.setName("territoryName4");
-        territory4Dto.setNeighbors(new ArrayList<>(List.of("territoryName")));
+        territory4Dto.setNeighbours(new ArrayList<>(List.of("territoryName")));
 
         territory5Dto.setName("territoryName5");
-        territory5Dto.setNeighbors(new ArrayList<>(List.of("territoryName2")));
+        territory5Dto.setNeighbours(new ArrayList<>(List.of("territoryName2")));
 
         countryDto.setName("countryName");
         countryDto.setTerritory(new ArrayList<>(List.of(territory1Dto, territory2Dto)));

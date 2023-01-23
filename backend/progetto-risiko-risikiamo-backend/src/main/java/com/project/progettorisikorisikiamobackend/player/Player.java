@@ -68,7 +68,7 @@ public class Player implements IPlayer {
         if (owner.getArmy() <= army) {
             throw new IllegalArgumentException("Numero di truppe insufficienti");
         }
-        if (!owner.isNeighbor(neighbor)) {
+        if (!owner.isNeighbour(neighbor)) {
             throw new IllegalArgumentException("Territori non confinanti");
         }
         if (army < 1) {
@@ -100,7 +100,7 @@ public class Player implements IPlayer {
     }
 
     public void move(Territory owner, Territory neighbor, int army) throws IllegalArgumentException {
-        if (!owner.isNeighbor(neighbor)) {
+        if (!owner.isNeighbour(neighbor)) {
             throw new IllegalArgumentException("Territori non confinanti");
         }
         if (owner.getArmy() <= army) {

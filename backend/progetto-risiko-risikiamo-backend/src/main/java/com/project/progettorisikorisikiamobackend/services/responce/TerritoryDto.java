@@ -13,6 +13,6 @@ public class TerritoryDto {
 
     private String owner;
 
-    private List<String> neighbors;
+    private List<String> neighbours;
 
 }

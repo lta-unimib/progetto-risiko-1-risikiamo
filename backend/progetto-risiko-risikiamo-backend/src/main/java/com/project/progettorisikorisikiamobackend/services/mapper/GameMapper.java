@@ -79,10 +79,10 @@ public class GameMapper {
 
                 territories.put(territory.getName(), territory);
 
-                if (gameDto.getMap().getContinents().get(i).getTerritory().get(j).getNeighbors() == null)
-                    throw new IllegalArgumentException("territory neighbors can't be null ");
+                if (gameDto.getMap().getContinents().get(i).getTerritory().get(j).getNeighbours() == null)
+                    throw new IllegalArgumentException("territory neighbours can't be null ");
                 neigbors.put(territory.getName(), gameDto.getMap().getContinents().get(i).getTerritory().get(j)
-                        .getNeighbors());
+                        .getNeighbours());
 
                 continent.addTerritory(territory);
             }
@@ -93,7 +93,7 @@ public class GameMapper {
 
         for (String key : neigbors.keySet()) {
             for (int i = 0; i < neigbors.get(key).size(); i++) {
-                territories.get(key).addNeighbor(territories.get(neigbors.get(key).get(i)));
+                territories.get(key).addNeighbour(territories.get(neigbors.get(key).get(i)));
             }
         }
 
@@ -143,14 +143,14 @@ public class GameMapper {
                 territoryDtoResult.setOwner(owner);
                 territoryDtoResult.setArmy(territories.get(j).getArmy());
 
-                ArrayList<Territory> neighbors = territories.get(j).getNeighbors();
+                ArrayList<Territory> neighbours = territories.get(j).getNeighbours();
 
-                List<String> neighborsName = new ArrayList<>();
-                for (int k = 0; k < neighbors.size(); k++) {
-                    neighborsName.add(neighbors.get(k).getName());
+                List<String> neighboursName = new ArrayList<>();
+                for (int k = 0; k < neighbours.size(); k++) {
+                    neighboursName.add(neighbours.get(k).getName());
                 }
 
-                territoryDtoResult.setNeighbors(neighborsName);
+                territoryDtoResult.setNeighbours(neighboursName);
                 territoryDto.add(territoryDtoResult);
             }
 
