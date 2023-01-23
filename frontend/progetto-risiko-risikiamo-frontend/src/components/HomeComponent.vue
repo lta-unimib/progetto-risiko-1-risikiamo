@@ -6,6 +6,7 @@ export default {
     name: "HomeComponent",
     data() {
         return {
+            allData: [],
             messages: [],
             selectedAction: '',
             startLocation: '',
@@ -23,6 +24,7 @@ export default {
             currentPlayer: null,
             players: [],
             hoverValue: name,
+            hoverValue2: list,
             zoom: 1,
             isDragging: false,
             initialPosition: { xi: 0, yi: 0 },
@@ -46,6 +48,16 @@ export default {
 
     methods: {
         changeHoverValue: changeHoverValue,
+        getAllData() {
+            axios.get('http://localhost:3000/api/v1/game/' + this.idMatch + '/watch')
+                .then(response => {
+                    this.allData = response.data;
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+
+        },
         getPlayerList() {
             axios.get('http://localhost:3000/api/v1/game/' + this.idMatch + '/watch')
                 .then(response => {
@@ -287,24 +299,18 @@ export default {
 
                 return cardsArrPlaceholder;
             }
-        }
+        },
     },
+
 
     mounted() {
         this.getMap();
+        this.getAllData();
+
     },
 
     created() {
 
-
-
-        // const console = {
-        //     log: (...args) => {
-        //         this.messages.push(args.join(' '));
-        //     }
-        // };
-
-        // window.console = console;
 
         setInterval(() => {
             this.getObjective();
@@ -347,18 +353,22 @@ export default {
 
 
 const name = ref("place your mouse over a country");
+const list = ref([]);
 
 
 
 function changeHoverValue(value) {
     if (value != null && value.target != null) {
         let title = value.target.attributes.title;
+        let neighbour = this.allData.map.continents.find(x => x.territory.name === title.value);
         if (title != null) {
             name.value = title.value;
+            list.value = neighbour;
         }
     }
     else {
         name.value = "place your mouse over a country";
+        list.value = [];
     }
 }
 
@@ -400,6 +410,9 @@ function changeHoverValue(value) {
         <h3>
             {{ hoverValue }}
         </h3>
+        <h3>
+            {{ hoverValue2 }}
+        </h3>
     </div>
     <br>
     <div class="form">
@@ -423,12 +436,8 @@ function changeHoverValue(value) {
         <div class="map" v-html="svg"></div>
     </div>
     <br>
-    <div class="console">
-        <div v-for="(message, index) in messages" :key="index">{{ message }}</div>
-    </div>
-    <br>
 
-    <div class="console">
+    <div class="console2">
         <ul>
             <li v-for="continent in continents" :key="continent.name">
                 <h1>{{ continent.name }}</h1>
@@ -476,13 +485,12 @@ function changeHoverValue(value) {
 
 
 <style>
-.console {
+.console2 {
     width: 10%;
     height: 200px;
     border: 1px solid black;
     overflow: auto;
     margin-left: 45%;
-
 }
 
 .form {
@@ -589,8 +597,8 @@ body {
     grid-gap: 6rem;
     grid-template-columns: repeat(auto-fit, minmax(5rem, 1fr));
     align-items: center;
-    margin-left: 20%;
-    margin-right: 20%;
+    margin-left: 30%;
+    margin-right: 10%;
 
 }
 
