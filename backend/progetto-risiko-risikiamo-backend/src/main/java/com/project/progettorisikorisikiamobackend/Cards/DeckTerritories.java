@@ -39,6 +39,8 @@ public class DeckTerritories {
 
             }
         }
+        deck.add(new CardTerritory("Jolly", EnumCard.JOLLY));
+        deck.add(new CardTerritory("Jolly", EnumCard.JOLLY));
     }
 
     public CardTerritory draw() {
