@@ -391,18 +391,12 @@ function changeHoverValue(value) {
                 <h3>{{ continent.name }}</h3>
                 <div>
             <li v-for="territory in continent.territory" :key="territory.name">
+
                 <h3>Nome territorio: {{ territory.name }}</h3>
                 <h3>Armate territorio: {{ territory.army }}</h3>
-                <div>
-            <li v-for="playerColor in playerList" :key="playerColor.name">
-                <h3 v-if="playerColor.name == territory.owner" style="color: playerColor.color"> Possessore
-                    territorio: {{
-                        territory.owner
-                    }}</h3>
-                <h3 v-else style="color: black"> Possessore territorio: {{ territory.owner }}</h3>
+                <h3 :style="{ color: playerList.find(element => element.name === territory.owner).color }"> Possessore
+                    territorio: {{ territory.owner }}</h3>
             </li>
-    </div>
-    </li>
     </div>
     </li>
     </ul>
