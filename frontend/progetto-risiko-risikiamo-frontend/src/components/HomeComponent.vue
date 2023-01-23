@@ -117,9 +117,9 @@ export default {
             if (this.playerName != this.currentPlayer) {
                 console.log("not your turn");
                 //console.log(this.paths);
-             
+
             } else {
-                
+
                 console.log("your turn");
             }
         },
@@ -284,14 +284,16 @@ export default {
                         img: null,
                     }
                     if (card.type === "CANNONE") {
-                        card.img = "https://cdn.pixabay.com/photo/2016/04/01/12/20/armour-1300665__480.png";
+                        card.img = "../assets/Artillery.png";
                         cardsArrPlaceholder.push(card);
                     } else if (card.type === "CAVALLO") {
-                        card.img = "https://static.vecteezy.com/system/resources/thumbnails/000/153/079/small/cavalry-silhouettes-vector.png";
+                        card.img = "../assets/Cavalry.webp";
                         cardsArrPlaceholder.push(card);
                     } else if (card.type === "FANTE") {
-                        card.img = "https://www.pngall.com/wp-content/uploads/5/Silhouette-Army-Transparent.png";
+                        card.img = "../assets/Infantry.png";
                         cardsArrPlaceholder.push(card);
+                    } else if (card.type === "JOLLY") {
+                        card.img = require("../assets/Jolly.png");
                     } else {
                         console.log("error");
                     }
@@ -347,7 +349,7 @@ export default {
                     this.paths[i].addEventListener("mouseover", this.changeHoverValue);
                 }
 
-              
+
             }
         }, 3000);
 
@@ -376,22 +378,22 @@ function changeHoverValue(value) {
     }
 }
 
- function findNameTerritory(value, name) {
-    
-    let continents =value;
-     
+function findNameTerritory(value, name) {
+
+    let continents = value;
+
     let territory;
     for (let i = 0; i < continents.length; i++) {
         let countries = continents[i].territory;
         for (let j = 0; j < countries.length; j++) {
-            if (countries[j].name === name ) {
+            if (countries[j].name === name) {
                 territory = countries[j];
             }
         }
     }
     console.log(territory.neighbours);
-     return territory.neighbours;
- }
+    return territory.neighbours;
+}
 
 
 </script>
