@@ -42,6 +42,7 @@ export default {
             playerData: [],
             objective: null,
             playerList: [],
+
         }
 
     },
@@ -116,10 +117,9 @@ export default {
             if (this.playerName != this.currentPlayer) {
                 console.log("not your turn");
                 //console.log(this.paths);
-                for (let i = 0; i < this.paths.length; i++) {
-                    this.paths[i].addEventListener("mouseover", this.changeHoverValue);
-                }
+             
             } else {
+                
                 console.log("your turn");
             }
         },
@@ -342,9 +342,12 @@ export default {
             else {
                 console.log("game started");
                 this.paths = document.querySelectorAll("path");
+                console.log(this.paths);
                 for (let i = 0; i < this.paths.length; i++) {
                     this.paths[i].addEventListener("mouseover", this.changeHoverValue);
                 }
+
+              
             }
         }, 3000);
 
@@ -360,7 +363,8 @@ const list = ref([]);
 function changeHoverValue(value) {
     if (value != null && value.target != null) {
         let title = value.target.attributes.title;
-        let neighbour = this.allData.map.continents.find(x => x.territory.name === title.value);
+        let neighbour = findNameTerritory(this.allData.map.continents, title.value);
+        console.log(neighbour);
         if (title != null) {
             name.value = title.value;
             list.value = neighbour;
@@ -371,6 +375,23 @@ function changeHoverValue(value) {
         list.value = [];
     }
 }
+
+ function findNameTerritory(value, name) {
+    
+    let continents =value;
+     
+    let territory;
+    for (let i = 0; i < continents.length; i++) {
+        let countries = continents[i].territory;
+        for (let j = 0; j < countries.length; j++) {
+            if (countries[j].name === name ) {
+                territory = countries[j];
+            }
+        }
+    }
+    console.log(territory.neighbours);
+     return territory.neighbours;
+ }
 
 
 </script>
