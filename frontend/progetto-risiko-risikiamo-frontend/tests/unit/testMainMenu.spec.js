@@ -1,8 +1,7 @@
 import { mount } from "@vue/test-utils";
 import { createRouter, createWebHistory } from "vue-router";
 
-import MainMenu from "../../src/components/HomeComponent.vue";
-import App from "../../src/App.vue";
+import HomeComponent from "../../src/components/HomeComponent.vue";
 
 describe("test main menu", () => {
   it("test main menu", async () => {
@@ -12,13 +11,13 @@ describe("test main menu", () => {
         {
           path: "/game",
           name: "home",
-          component: MainMenu,
+          component: HomeComponent,
         },
       ],
     });
     router.push("/game?id=1&name=home");
     await router.isReady();
-    const wrapper = mount(MainMenu, {
+    const wrapper = mount(HomeComponent, {
       global: {
         plugins: [router],
       },
