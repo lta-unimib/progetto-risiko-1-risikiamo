@@ -430,14 +430,7 @@ function colorSet(owner)
     </div>
     <br>
     <br>
-    <div class="container">
-        <h3>
-            {{ hoverValue }}
-        </h3>
-        <h3>
-            {{ hoverValue2 }}
-        </h3>
-    </div>
+    
     <br>
     <div class="form">
         <p>scegli se posizionare i rinforzi (obbligatorio se non si sono posizionati tutti), attaccare o spostarsi</p>
@@ -454,6 +447,15 @@ function colorSet(owner)
         <p>inserisci il numero di truppe da spostare o attaccare o rifornire</p>
         <input type="number" id="number" min="1" v-model="armyNumber">
         <button id="doAction" @click="submitForm">ok</button>
+    </div>
+    <br>
+    <div class="container">
+        <h3>
+            {{ hoverValue }}
+        </h3>
+        <h3>
+            {{ hoverValue2 }}
+        </h3>
     </div>
     <br>
     <div>
@@ -508,23 +510,26 @@ function colorSet(owner)
 
 <style>
 .console2 {
-    width: 10%;
+    width: 20%;
     height: 200px;
     border: 1px solid black;
     overflow: auto;
-    margin-left: 45%;
+    margin-left: 40%;
+    font-size: 100%;
 }
 
 .form {
     width: 15%;
     border: 3px solid black;
-    margin-left: 45%;
+    margin-left: 40%;
+    font-size: 100%;
 }
 
 .form2 {
     width: 10%;
     border: 3px solid black;
-    margin-left: 45%;
+    margin-left: 40%;
+    font-size: 100%;
 }
 
 path[class="land Nord"] {
