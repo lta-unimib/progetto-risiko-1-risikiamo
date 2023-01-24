@@ -52,26 +52,11 @@ export default {
         getAllData() {
             axios.get('http://localhost:3000/api/v1/game/' + this.idMatch + '/watch')
                 .then(response => {
+                    this.gameStarted = response.data.gameStarted;
+                    console.log(this.gameStarted);
                     this.allData = response.data;
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-
-        },
-        getPlayerList() {
-            axios.get('http://localhost:3000/api/v1/game/' + this.idMatch + '/watch')
-                .then(response => {
                     this.playerList = response.data.players;
                     console.log(this.playerList);
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-        },
-        recoverPlayer() {
-            axios.get('http://localhost:3000/api/v1/game/' + this.idMatch + '/watch')
-                .then(response => {
                     for (let i = 0; i < response.data.players.length; i++) {
                         if (response.data.players[i].name == this.playerName) {
                             this.player = response.data.players[i];
@@ -80,10 +65,26 @@ export default {
                             console.log("error");
                         }
                     }
+                    console.log(response.data);
+                    this.currentPlayer = response.data.currentPlayer;
+                    this.continents = response.data.map.continents;
+                    //console.log(this.currentPlayer);
+                    if (this.playerName != this.currentPlayer) {
+                        console.log("not your turn");
+                        //console.log(this.paths);
+
+                    } else {
+
+                        console.log("your turn");
+                    }
+                    console.log(response.data.winner);
+                    this.winner = response.data.winner;
+                    
                 })
                 .catch(error => {
                     console.log(error);
                 });
+
         },
         place(value, path) {
             axios.put('http://localhost:3000/api/v1/game/' + this.idMatch + '/play/' + this.playerName + '/place?owner=' + path + '&army=' + value)
@@ -104,37 +105,6 @@ export default {
                     console.log(error);
                 });
         },
-        setPOV() {
-            axios.get('http://localhost:3000/api/v1/game/' + this.idMatch + '/watch')
-                .then(response => {
-                    console.log(response.data);
-                    this.currentPlayer = response.data.currentPlayer;
-                    //console.log(this.currentPlayer);
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-            if (this.playerName != this.currentPlayer) {
-                console.log("not your turn");
-                //console.log(this.paths);
-
-            } else {
-
-                console.log("your turn");
-            }
-        },
-        printid() {
-            axios.get('http://localhost:3000/api/v1/game/' + this.idMatch + '/watch')
-                .then(response => {
-                    console.log(response.data);
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-            this.recoverPlayer();
-        },
-
-
         getMap() {
             axios.get('http://localhost:3000/api/v1/game/' + this.idMatch + '/svg')
                 .then(response => {
@@ -151,17 +121,6 @@ export default {
                 .then(response => {
                     console.log(response.data);
                     this.cards = response.data.cards;
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-
-        },
-        getContinents() {
-            axios.get('http://localhost:3000/api/v1/game/' + this.idMatch + '/watch')
-                .then(response => {
-                    this.continents = response.data.map.continents;
-                    //console.log(this.continents);
                 })
                 .catch(error => {
                     console.log(error);
@@ -199,16 +158,6 @@ export default {
             axios.put('http://localhost:3000/api/v1/game/' + this.idMatch + '/play/' + this.playerName + '/move?owner=' + path1 + '&army=' + value + '&neighbor=' + path2)
                 .then(response => {
                     console.log(response.data);
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-        },
-        getWinner() {
-            axios.get('http://localhost:3000/api/v1/game/' + this.idMatch + '/watch')
-                .then(response => {
-                    console.log(response.data.winner);
-                    this.winner = response.data.winner;
                 })
                 .catch(error => {
                     console.log(error);
@@ -284,16 +233,16 @@ export default {
                         img: null,
                     }
                     if (card.type === "CANNONE") {
-                        card.img = "../assets/Artillery.png";
+                        card.img = require("../assets/img/Artillery.webp");
                         cardsArrPlaceholder.push(card);
                     } else if (card.type === "CAVALLO") {
-                        card.img = "../assets/Cavalry.webp";
+                        card.img = require("../assets/img/Cavalry.webp");
                         cardsArrPlaceholder.push(card);
                     } else if (card.type === "FANTE") {
-                        card.img = "../assets/Infantry.png";
+                        card.img = require("../assets/img/Infantry.png");
                         cardsArrPlaceholder.push(card);
                     } else if (card.type === "JOLLY") {
-                        card.img = require("../assets/Jolly.png");
+                        card.img = require("../assets/img/Jolly.png");
                     } else {
                         console.log("error");
                     }
@@ -315,28 +264,17 @@ export default {
 
 
         setInterval(() => {
-            this.getObjective();
-            this.getWinner();
-            this.setPOV();
-            this.getPlayerList();
+            this.getAllData();
             this.getPlayerData();
             console.log(this.playerData);
-            this.getContinents();
             this.getReinforcement();
             this.getCards();
             this.createCard();
             this.cardsArr = this.createCard();
-        }, 5000);
+        }, 2000);
 
         setInterval(() => {
-            axios.get('http://localhost:3000/api/v1/game/' + this.idMatch + '/watch')
-                .then(response => {
-                    this.gameStarted = response.data.gameStarted;
-                    console.log(this.gameStarted);
-                })
-                .catch(error => {
-                    console.log(error);
-                });
+            this.getAllData();
             if (this.gameStarted === false) {
                 console.log("game not started");
 
@@ -481,7 +419,7 @@ function findNameTerritory(value, name) {
         <div class="grid__item" :style="card.color" v-for="card in cardsArr" :key="card">
             <div class="card">
                 <img class="card__img"
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR50AiR1pByChKLMxe1evHAIlcwOJTGzK4yAw&usqp=CAU"
+                    src="../assets/img/RiskLogo.png"
                     alt="UpperImage">
                 <div class="card__content">
                     <h1 class="card__header">{{ card.name }}</h1>
