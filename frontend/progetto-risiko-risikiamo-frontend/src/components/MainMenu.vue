@@ -70,7 +70,7 @@
     <br>
     <br>
     <div>
-        <button class="button-30" @click="login">login</button>
+        <button class="button-30" @click="login">Create Player</button>
     </div>
     <br>
     <br>
@@ -137,25 +137,28 @@ export default {
                             console.log(response2);
                         })
                         .catch(error2 => {
-                            console.log(error2);
+                            showMessage(returnError(error2));
+                    
                         });
                     this.id = response.data.id;
-                    //console.log(this.id);
-                    console.log(response);
+                    showMessage("Game created with id: " + this.id);
+
                 })
                 .catch(error => {
-                    console.log(error);
+                    showMessage(returnError(error));
+                
                 });
         },
 
-        login() {
+       async login() {
             this.readString(this.playerName, this.selectedColor);
             axios.post('http://localhost:3000/api/v1/game/' + this.id + '/addPlayer', this.player)
                 .then(response2 => {
                     console.log(response2);
+                    showMessage("Player added to game");
                 })
                 .catch(error2 => {
-                    console.log(error2);
+                    showMessage(returnError(error2));
                 });
         },
 
@@ -177,6 +180,18 @@ export default {
     }
 
 
+}
+
+function returnError(error) {
+    if (error.response.status != 404)
+        return error.response.data;
+    else
+        return "Territorio non trovato";
+}
+function showMessage(message) {
+    const tradeWindow = window.open('', 'Message', 'height=80,width=300');
+    tradeWindow.document.body.innerHTML = message;
+    console.log(message);
 }
 </script>
 

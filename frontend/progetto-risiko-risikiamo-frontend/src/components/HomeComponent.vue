@@ -137,8 +137,8 @@ export default {
         async surrend() {
             let response = await axios.put('http://localhost:3000/api/v1/game/' + this.idMatch + '/play/' + this.playerName + '/surrend')
                 .then(response => {
-                   //console.log(response.data);
-                     return response.data;
+                   console.log(response.data);
+                     return "You have surrendered"
                 })
                 .catch(error => {
                     //console.log(error);
@@ -150,7 +150,7 @@ export default {
             let response = await axios.put('http://localhost:3000/api/v1/game/' + this.idMatch + '/play/' + this.playerName + '/skip')
                 .then(response => {
                     console.log("Messagione" +response);
-                    return response;
+                    return "You have skipped your turn"
                 })
                 .catch(error => {
                     //console.log(error);
@@ -197,6 +197,7 @@ export default {
                 .then(response => {
                     console.log(response.data.renforcements);
                     this.reinforcement = response.data.renforcements;
+                    
                 })
                 .catch(error => {
                     console.log(error);
@@ -206,9 +207,11 @@ export default {
             axios.put('http://localhost:3000/api/v1/game/' + this.idMatch + '/play/' + this.playerName + '/renforce?c1=' + card1 + '&c2=' + card2 + '&c3=' + card3)
                 .then(response => {
                     console.log(response.data);
+                   showMessage("Nuovi rinforzi");
                 })
                 .catch(error => {
                     console.log(error);
+                    showMessage(returnError(error));
                 });
         },
         submitCards() {
@@ -364,7 +367,7 @@ function returnError(error) {
     if (error.response.status != 404)
         return error.response.data;
     else
-        return "Not found";
+        return "Territorio non trovato";
 
 
 }
@@ -382,7 +385,9 @@ function showMessage(message) {
     <div>
         <h1>vincitore : {{ winner }}</h1>
         <h1>obbiettivo : {{ objective }}</h1>
-        <h1> player : {{ playerName }} </h1>
+     
+        <h1 :style="{ color: playerList.find(element => element.name === playerName).color }">
+             player : {{ playerName }} </h1>
         <h1> current reinforcement: {{ reinforcement }} </h1>
         <h1> id partita: {{ idMatch }} </h1>
         <h1> current player : {{ currentPlayer }} </h1>
