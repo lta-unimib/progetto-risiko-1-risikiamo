@@ -48,6 +48,7 @@ export default {
     },
 
     methods: {
+        colorSet: colorSet,
         changeHoverValue: changeHoverValue,
         getAllData() {
             axios.get('http://localhost:3000/api/v1/game/' + this.idMatch + '/watch')
@@ -286,6 +287,7 @@ export default {
 
 
         setInterval(() => {
+            this.getMap();
             this.getObjective();
             this.getAllData();
             this.getPlayerData();
@@ -378,6 +380,20 @@ function showMessage(message) {
     console.log(message);
 }
 
+function colorSet(owner)
+{
+    let color = this.playerList.find(element => element.name === owner) ;
+    if(color != null && color != undefined)
+    {
+        return color.color;
+    }
+    else
+    {
+        return "black";
+    }
+    
+}
+
 
 </script>
 
@@ -387,7 +403,7 @@ function showMessage(message) {
         <h1>vincitore : {{ winner }}</h1>
         <h1>obbiettivo : {{ objective }}</h1>
 
-        <h1>
+        <h1 :style="{ color: colorSet(playerName) }">
             player : {{ playerName }} </h1>
         <h1> current reinforcement: {{ reinforcement }} </h1>
         <h1> id partita: {{ idMatch }} </h1>
@@ -452,7 +468,7 @@ function showMessage(message) {
                 <div>
             <li v-for="territory in continent.territory" :key="territory.name">
 
-                <h3 :style="{ color: playerList.find(element => element.name === territory.owner).color }">
+                <h3 :style="{ color: colorSet(territory.owner) }">
                     {{ territory.name }} , {{ territory.army }}</h3>
             </li>
 
