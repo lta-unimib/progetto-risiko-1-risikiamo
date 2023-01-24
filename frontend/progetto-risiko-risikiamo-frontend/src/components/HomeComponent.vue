@@ -52,6 +52,7 @@ export default {
         getAllData() {
             axios.get('http://localhost:3000/api/v1/game/' + this.idMatch + '/watch')
                 .then(response => {
+                   
                     this.gameStarted = response.data.gameStarted;
                     console.log(this.gameStarted);
                     this.allData = response.data;
@@ -86,24 +87,30 @@ export default {
                 });
 
         },
-        place(value, path) {
-            axios.put('http://localhost:3000/api/v1/game/' + this.idMatch + '/play/' + this.playerName + '/place?owner=' + path + '&army=' + value)
+        async place(value, path) {
+
+            
+           let response = await axios.put('http://localhost:3000/api/v1/game/' + this.idMatch + '/play/' + this.playerName + '/place?owner=' + path + '&army=' + value)
                 .then(response => {
-                    console.log(response.data);
+                   return response.data;
+  
                 })
                 .catch(error => {
-                    console.log(error);
+                    return returnError(error);
                 });
+                return response;
         },
-        startMatch() {
-            axios.put('http://localhost:3000/api/v1/game/' + this.idMatch + '/start')
+        async startMatch() {
+            let response = await axios.put('http://localhost:3000/api/v1/game/' + this.idMatch + '/start')
                 .then(response => {
-                    console.log(response.data);
+                    //console.log(response.data);
                     this.gameStarted = true;
+                    return response.data;
                 })
                 .catch(error => {
-                    console.log(error);
+                    return returnError(error);
                 });
+            return response;
         },
         getMap() {
             axios.get('http://localhost:3000/api/v1/game/' + this.idMatch + '/svg')
@@ -127,41 +134,53 @@ export default {
                 });
 
         },
-        surrend() {
-            axios.put('http://localhost:3000/api/v1/game/' + this.idMatch + '/play/' + this.playerName + '/surrend')
+        async surrend() {
+            let response = await axios.put('http://localhost:3000/api/v1/game/' + this.idMatch + '/play/' + this.playerName + '/surrend')
                 .then(response => {
-                    console.log(response.data);
+                   //console.log(response.data);
+                     return response.data;
                 })
                 .catch(error => {
-                    console.log(error);
+                    //console.log(error);
+                   return returnError(error);
                 });
+            showMessage(response);
         },
-        skip() {
-            axios.put('http://localhost:3000/api/v1/game/' + this.idMatch + '/play/' + this.playerName + '/skip')
+        async skip() {
+            let response = await axios.put('http://localhost:3000/api/v1/game/' + this.idMatch + '/play/' + this.playerName + '/skip')
                 .then(response => {
-                    console.log(response.data);
+                    console.log("Messagione" +response);
+                    return response;
                 })
                 .catch(error => {
-                    console.log(error);
+                    //console.log(error);
+                    return returnError(error);
                 });
+            showMessage(response);
         },
-        attack(value, path1, path2) {
-            axios.put('http://localhost:3000/api/v1/game/' + this.idMatch + '/play/' + this.playerName + '/attack?owner=' + path1 + '&army=' + value + '&neighbor=' + path2)
+       async  attack(value, path1, path2) {
+           let response = await axios.put('http://localhost:3000/api/v1/game/' + this.idMatch + '/play/' + this.playerName + '/attack?owner=' + path1 + '&army=' + value + '&neighbor=' + path2)
                 .then(response => {
-                    console.log(response.data);
+                    //console.log(response.data);
+                    return response.data;
                 })
                 .catch(error => {
-                    console.log(error);
+                    //console.log(error);
+                    return returnError(error);
                 });
+            return response;
         },
-        move(value, path1, path2) {
-            axios.put('http://localhost:3000/api/v1/game/' + this.idMatch + '/play/' + this.playerName + '/move?owner=' + path1 + '&army=' + value + '&neighbor=' + path2)
+       async move(value, path1, path2) {
+            let response = await axios.put('http://localhost:3000/api/v1/game/' + this.idMatch + '/play/' + this.playerName + '/move?owner=' + path1 + '&army=' + value + '&neighbor=' + path2)
                 .then(response => {
-                    console.log(response.data);
+                   // console.log(response.data);
+                    return response.data;
                 })
                 .catch(error => {
-                    console.log(error);
+                   // console.log(error);
+                   return returnError(error);
                 });
+                return response;
         },
         getObjective() {
             axios.get('http://localhost:3000/api/v1/game/' + this.idMatch + '/play/' + this.playerName + '/')
@@ -196,16 +215,16 @@ export default {
             this.cardDiscard(this.card1, this.card2, this.card3);
 
         },
-        submitForm() {
+       async submitForm() {
             if (this.selectedAction === "attack") {
                 console.log("attack");
-                this.attack(this.armyNumber, this.startLocation, this.destination);
+                showWindow(this.attack(this.armyNumber, this.startLocation, this.destination));
             } else if (this.selectedAction === "move") {
                 console.log("move");
-                this.move(this.armyNumber, this.startLocation, this.destination);
+                showWindow(this.move(this.armyNumber, this.startLocation, this.destination));
             } else if (this.selectedAction === "place") {
                 console.log("place");
-                this.place(this.armyNumber, this.startLocation);
+                showWindow(this.place(this.armyNumber, this.startLocation));
             } else {
                 console.log("error");
             }
@@ -299,8 +318,8 @@ const name = ref("place your mouse over a country");
 const list = ref([]);
 
 
-
 function changeHoverValue(value) {
+   
     if (value != null && value.target != null) {
         let title = value.target.attributes.title;
         let neighbour = findNameTerritory(this.allData.map.continents, title.value);
@@ -331,6 +350,28 @@ function findNameTerritory(value, name) {
     }
     console.log(territory.neighbours);
     return territory.neighbours;
+}
+
+function showWindow(message) {
+    const tradeWindow = window.open('', 'Message', 'height=80,width=300');
+
+    message.then(message => {
+        tradeWindow.document.body.innerHTML = message;
+        console.log(message);
+    });
+}
+function returnError(error) {
+    if (error.response.status != 404)
+        return error.response.data;
+    else
+        return "Not found";
+
+
+}
+function showMessage(message) {
+    const tradeWindow = window.open('', 'Message', 'height=80,width=300');
+    tradeWindow.document.body.innerHTML = message;
+    console.log(message);
 }
 
 
