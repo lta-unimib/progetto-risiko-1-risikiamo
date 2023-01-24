@@ -106,8 +106,14 @@ public class TestCards {
         cards.add(card2);
         cards.add(card3);
 
+        daReedem.draw();
+        daReedem.draw();
+        daReedem.draw();
+        daReedem.draw();
+        daReedem.draw();
+
         assertEquals(4, daReedem.reedemCards(card1, card2, card3, player1));
-        assertEquals(8, daReedem.getDeck().size());
+        assertEquals(3, daReedem.getDeck().size());
         Territory t3 = new Territory("t3");
         Territory t4 = new Territory("t4");
         Territory t5 = new Territory("t5");
@@ -128,7 +134,7 @@ public class TestCards {
         cards2.add(card6);
 
         assertEquals(10, daReedem.reedemCards(card4, card5, card6, player2));
-        assertEquals(11, daReedem.getDeck().size());
+        assertEquals(6, daReedem.getDeck().size());
         daReedem.setDeck(cards2);
         assertEquals(card4, daReedem.getDeck().get(0));
         assertEquals(card5, daReedem.getDeck().get(1));
