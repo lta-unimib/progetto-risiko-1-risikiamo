@@ -1,10 +1,8 @@
 package com.project.progettorisikorisikiamobackend.domain;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import com.project.progettorisikorisikiamobackend.Cards.CardTerritory;
 import com.project.progettorisikorisikiamobackend.Cards.DeckObjectives;
 import com.project.progettorisikorisikiamobackend.Cards.DeckTerritories;

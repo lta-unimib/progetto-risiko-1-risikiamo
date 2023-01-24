@@ -307,7 +307,7 @@ public class TestPlayService {
 
         playService.redeemReinforcementsCard("game", "p1", t1.getName(), t2.getName(), t2.getName());
 
-        assertEquals(10, p1.getReinforce());
+        assertEquals(11, p1.getReinforce());
 
     }
 

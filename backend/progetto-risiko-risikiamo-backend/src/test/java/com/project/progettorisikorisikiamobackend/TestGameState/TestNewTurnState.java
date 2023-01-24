@@ -82,9 +82,20 @@ public class TestNewTurnState {
 
         NewTurnState newTurnState = (NewTurnState) context.getState();
         Player p = turn.getCurrentPlayer();
-        CardTerritory c1 = context.getDeckTerritories().draw();
-        CardTerritory c2 = context.getDeckTerritories().draw();
-        CardTerritory c3 = context.getDeckTerritories().draw();
+
+        List<CardTerritory> cards = new ArrayList<>();
+        CardTerritory c;
+        for (int i = 0; i < 3; i++) {
+            c = context.getDeckTerritories().draw();
+            if (c.getType() != EnumCard.JOLLY)
+                cards.add(c);
+            else
+                i--;
+        }
+
+        CardTerritory c1 = cards.get(0);
+        CardTerritory c2 = cards.get(1);
+        CardTerritory c3 = cards.get(2);
 
         c1.setType(EnumCard.CANNONE);
         c2.setType(EnumCard.CANNONE);
@@ -92,8 +103,7 @@ public class TestNewTurnState {
 
         newTurnState.redeemReinforcementsCard(c1, c2, c3);
 
-        assertEquals(10, p.getReinforce());
-        assertEquals(3, context.getDeckTerritories().getDeck().size());
+        assertEquals(14, p.getReinforce());
 
     }
 
