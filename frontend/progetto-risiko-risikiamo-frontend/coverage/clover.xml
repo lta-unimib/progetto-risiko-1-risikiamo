@@ -1,31 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1674580027450" clover="3.2.0">
-  <project timestamp="1674580027451" name="All files">
-    <metrics statements="107" coveredstatements="64" conditionals="52" coveredconditionals="30" methods="27" coveredmethods="3" elements="186" coveredelements="97" complexity="0" loc="107" ncloc="107" packages="3" files="3" classes="3"/>
-    <package name="src">
-      <metrics statements="10" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-      <file name="App.vue" path="C:\Users\mauze\Documents\GitHub\progetto-risiko-1-risikiamo\frontend\progetto-risiko-risikiamo-frontend\src\App.vue">
-        <metrics statements="10" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="4" count="2" type="stmt"/>
-        <line num="7" count="2" type="stmt"/>
-        <line num="8" count="2" type="stmt"/>
-        <line num="14" count="2" type="stmt"/>
-        <line num="16" count="2" type="stmt"/>
-        <line num="19" count="2" type="stmt"/>
-        <line num="20" count="2" type="stmt"/>
-        <line num="22" count="1" type="stmt"/>
-        <line num="23" count="1" type="stmt"/>
-        <line num="24" count="2" type="stmt"/>
-      </file>
-    </package>
-    <package name="src.assets.img">
+<coverage generated="1674580697205" clover="3.2.0">
+  <project timestamp="1674580697206" name="All files">
+    <metrics statements="97" coveredstatements="54" conditionals="52" coveredconditionals="30" methods="26" coveredmethods="2" elements="175" coveredelements="86" complexity="0" loc="97" ncloc="97" packages="2" files="2" classes="2"/>
+    <package name="assets.img">
       <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="RiskLogo.png" path="C:\Users\mauze\Documents\GitHub\progetto-risiko-1-risikiamo\frontend\progetto-risiko-risikiamo-frontend\src\assets\img\RiskLogo.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="2" type="stmt"/>
       </file>
     </package>
-    <package name="src.components">
+    <package name="components">
       <metrics statements="96" coveredstatements="53" conditionals="52" coveredconditionals="30" methods="26" coveredmethods="2"/>
       <file name="HomeComponent.vue" path="C:\Users\mauze\Documents\GitHub\progetto-risiko-1-risikiamo\frontend\progetto-risiko-risikiamo-frontend\src\components\HomeComponent.vue">
         <metrics statements="96" coveredstatements="53" conditionals="52" coveredconditionals="30" methods="26" coveredmethods="2"/>
@@ -60,10 +44,10 @@
         <line num="391" count="0" type="stmt"/>
         <line num="392" count="0" type="stmt"/>
         <line num="393" count="0" type="stmt"/>
-        <line num="396" count="1" type="stmt"/>
-        <line num="397" count="1" type="cond" truecount="2" falsecount="2"/>
+        <line num="396" count="2" type="stmt"/>
+        <line num="397" count="2" type="cond" truecount="2" falsecount="2"/>
         <line num="398" count="0" type="stmt"/>
-        <line num="400" count="1" type="stmt"/>
+        <line num="400" count="2" type="stmt"/>
         <line num="403" count="2" type="stmt"/>
         <line num="405" count="2" type="stmt"/>
         <line num="406" count="2" type="stmt"/>
@@ -106,7 +90,7 @@
         <line num="475" count="2" type="stmt"/>
         <line num="476" count="2" type="stmt"/>
         <line num="477" count="2" type="stmt"/>
-        <line num="480" count="1" type="stmt"/>
+        <line num="480" count="2" type="stmt"/>
         <line num="486" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="490" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="494" count="0" type="cond" truecount="0" falsecount="2"/>

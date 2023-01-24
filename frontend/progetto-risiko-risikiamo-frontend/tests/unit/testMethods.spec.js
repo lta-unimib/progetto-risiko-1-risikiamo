@@ -1,6 +1,7 @@
 import { shallowMount, mount } from "@vue/test-utils";
 import App from "../../src/App.vue";
 import HomeComponent from "../../src/components/HomeComponent.vue";
+import { createRouter, createWebHistory } from "vue-router";
 
 describe("App", () => {
   test("zoomIn method increases zoom by 0.5", () => {
@@ -157,16 +158,25 @@ describe("App", () => {
     expect(wrapper.vm.$data.hoverValue).toBe("place your mouse over a country");
   });
 
-  const $route = {
-    query: "game?id=1234&name=test",
-  };
-  test("sets the selectedPaths data property to the provided value", () => {
-    const wrapper = shallowMount(HomeComponent, {
-      mocks: {
-        $route,
+  test("sets the selectedPaths data property to the provided value", async () => {
+    const router = createRouter({
+      history: createWebHistory(),
+      routes: [
+        {
+          path: "/game",
+          name: "home",
+          component: HomeComponent,
+        },
+      ],
+    });
+    router.push("/game?id=1&name=home");
+    await router.isReady();
+    const wrapper = mount(HomeComponent, {
+      global: {
+        plugins: [router],
       },
     });
 
-    expect(wrapper.vm.selectedPaths).toEqual([]);
+    await expect(wrapper.vm.selectedPaths).toEqual([]);
   });
 });
