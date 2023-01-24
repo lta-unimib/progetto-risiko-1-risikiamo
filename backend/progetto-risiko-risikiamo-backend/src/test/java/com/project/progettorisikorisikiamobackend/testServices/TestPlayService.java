@@ -136,8 +136,8 @@ public class TestPlayService {
 
         Continent c = new Continent("c", 1);
 
-        t1.addNeighbor(t2);
-        t2.addNeighbor(t1);
+        t1.addNeighbour(t2);
+        t2.addNeighbour(t1);
 
         t1.setOwner(p1);
         t2.setOwner(p2);
@@ -177,8 +177,8 @@ public class TestPlayService {
 
         Continent c = new Continent("c", 1);
 
-        t1.addNeighbor(t2);
-        t2.addNeighbor(t1);
+        t1.addNeighbour(t2);
+        t2.addNeighbour(t1);
 
         t1.setOwner(p1);
         t2.setOwner(p1);
@@ -218,8 +218,8 @@ public class TestPlayService {
 
         Continent c = new Continent("c", 1);
 
-        t1.addNeighbor(t2);
-        t2.addNeighbor(t1);
+        t1.addNeighbour(t2);
+        t2.addNeighbour(t1);
 
         t1.setOwner(p1);
         t2.setOwner(p2);
@@ -262,9 +262,9 @@ public class TestPlayService {
 
         Continent c = new Continent("c", 1);
 
-        t1.addNeighbor(t2);
-        t2.addNeighbor(t1);
-        t3.addNeighbor(t1);
+        t1.addNeighbour(t2);
+        t2.addNeighbour(t1);
+        t3.addNeighbour(t1);
 
         t1.setOwner(p1);
         t2.setOwner(p2);
@@ -307,7 +307,7 @@ public class TestPlayService {
 
         playService.redeemReinforcementsCard("game", "p1", t1.getName(), t2.getName(), t2.getName());
 
-        assertEquals(10, p1.getReinforce());
+        assertEquals(11, p1.getReinforce());
 
     }
 

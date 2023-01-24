@@ -28,7 +28,7 @@ public class TestActionState {
     private IContext context;
     private Turn turn;
     private Territory ownTerritory;
-    private Territory neighbor;
+    private Territory neighbour;
     private Map map;
 
     private Player p2;
@@ -45,14 +45,14 @@ public class TestActionState {
         turn.nextTurn();
 
         ownTerritory = new Territory("test", p1);
-        neighbor = new Territory("neighbor", p1);
+        neighbour = new Territory("neighbour", p1);
 
         map = new Map("name");
         c.addTerritory(ownTerritory);
-        c.addTerritory(neighbor);
+        c.addTerritory(neighbour);
 
-        ownTerritory.addNeighbor(neighbor);
-        neighbor.addNeighbor(ownTerritory);
+        ownTerritory.addNeighbour(neighbour);
+        neighbour.addNeighbour(ownTerritory);
 
         map.addContinent(c);
 
@@ -85,7 +85,7 @@ public class TestActionState {
         Player p1 = turn.getCurrentPlayer();
         ownTerritory.addArmy(2);
 
-        actionState.move(ownTerritory, neighbor, 1);
+        actionState.move(ownTerritory, neighbour, 1);
 
         assertNotEquals(p1, context.getTurn().getCurrentPlayer());
         assertEquals(context.getState().getClass(), NewTurnState.class);
@@ -115,15 +115,15 @@ public class TestActionState {
 
         int size = context.getDeckTerritories().getDeck().size();
 
-        assertEquals(2, context.getDeckTerritories().getDeck().size());
+        assertEquals(4, context.getDeckTerritories().getDeck().size());
 
-        neighbor.setOwner(this.p2);
+        neighbour.setOwner(this.p2);
 
         ownTerritory.addArmy(20);
-        neighbor.addArmy(1);
+        neighbour.addArmy(1);
 
-        while (ownTerritory.getArmy() > 1 && neighbor.getOwner() != p1) {
-            actionState.attack(ownTerritory, neighbor, 1);
+        while (ownTerritory.getArmy() > 1 && neighbour.getOwner() != p1) {
+            actionState.attack(ownTerritory, neighbour, 1);
         }
 
         actionState.endTurn();
@@ -147,11 +147,11 @@ public class TestActionState {
 
         int size = context.getDeckTerritories().getDeck().size();
 
-        neighbor.setOwner(new Player("p2"));
+        neighbour.setOwner(new Player("p2"));
 
         ownTerritory.addArmy(2);
-        neighbor.addArmy(20);
-        actionState.attack(ownTerritory, neighbor, 1);
+        neighbour.addArmy(20);
+        actionState.attack(ownTerritory, neighbour, 1);
 
         actionState.endTurn();
 

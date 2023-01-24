@@ -21,14 +21,14 @@ public class Territory {
     @NonNull
     private final String name;
     private int army;
-    private ArrayList<Territory> neighbors;
+    private ArrayList<Territory> neighbours;
     private Player owner;
 
-    private Territory(String name, int army, ArrayList<Territory> neighbors, Player owner) {
+    private Territory(String name, int army, ArrayList<Territory> neighbours, Player owner) {
 
         this.name = name;
         this.army = army;
-        this.neighbors = neighbors;
+        this.neighbours = neighbours;
         this.owner = owner;
     }
 
@@ -83,12 +83,12 @@ public class Territory {
     /**
      * @author - Mauro Zorzin
      * @param territory
-     * @return true if the territory is a neighbor of this territory
+     * @return true if the territory is a neighbour of this territory
      */
-    public boolean isNeighbor(Territory territory) {
+    public boolean isNeighbour(Territory territory) {
 
-        for (Territory neighborTemporanei : this.neighbors) {
-            if (neighborTemporanei.equals(territory)) {
+        for (Territory neighbourTemporanei : this.neighbours) {
+            if (neighbourTemporanei.equals(territory)) {
                 return true;
             }
         }
@@ -98,12 +98,12 @@ public class Territory {
     /**
      * @author - Mauro Zorzin
      * @param territoryName
-     * @return true if the territory is a neighbor of this territory
+     * @return true if the territory is a neighbour of this territory
      */
-    public boolean isNeighbor(String territoryName) {
+    public boolean isNeighbour(String territoryName) {
 
-        for (Territory neighborTemporanei : this.neighbors) {
-            if (neighborTemporanei.getName().equals(territoryName)) {
+        for (Territory neighbourTemporanei : this.neighbours) {
+            if (neighbourTemporanei.getName().equals(territoryName)) {
                 return true;
             }
         }
@@ -112,21 +112,21 @@ public class Territory {
 
     /**
      * @author - MauroZorzin
-     * @return the neighbors of this territory not owned by the owner of this
+     * @return the neighbours of this territory not owned by the owner of this
      *         territory
      */
-    public Territory[] getNotOwnedNeighbor() {
+    public Territory[] getNotOwnedNeighbour() {
         int count = 0;
-        for (Territory neighborTemporanei : this.neighbors) {
-            if (neighborTemporanei.getOwner() != this.owner) {
+        for (Territory neighbourTemporanei : this.neighbours) {
+            if (neighbourTemporanei.getOwner() != this.owner) {
                 count++;
             }
         }
         Territory[] notOwnedTerritories = new Territory[count];
         count = 0;
-        for (Territory neighborTemporanei : this.neighbors) {
-            if (neighborTemporanei.getOwner() != this.owner) {
-                notOwnedTerritories[count] = neighborTemporanei;
+        for (Territory neighbourTemporanei : this.neighbours) {
+            if (neighbourTemporanei.getOwner() != this.owner) {
+                notOwnedTerritories[count] = neighbourTemporanei;
                 count++;
             }
         }
@@ -135,20 +135,20 @@ public class Territory {
 
     /**
      * @author - Mauro Zorzin
-     * @return the neighbors of this territory owned by the owner of this territory
+     * @return the neighbours of this territory owned by the owner of this territory
      */
-    public Territory[] getOwnedNeighbor() {
+    public Territory[] getOwnedNeighbour() {
         int count = 0;
-        for (Territory neighborTemporanei : this.neighbors) {
-            if (neighborTemporanei.getOwner() == this.owner) {
+        for (Territory neighbourTemporanei : this.neighbours) {
+            if (neighbourTemporanei.getOwner() == this.owner) {
                 count++;
             }
         }
         Territory[] ownedTerritories = new Territory[count];
         count = 0;
-        for (Territory neighborTemporanei : this.neighbors) {
-            if (neighborTemporanei.getOwner() == this.owner) {
-                ownedTerritories[count] = neighborTemporanei;
+        for (Territory neighbourTemporanei : this.neighbours) {
+            if (neighbourTemporanei.getOwner() == this.owner) {
+                ownedTerritories[count] = neighbourTemporanei;
                 count++;
             }
         }
@@ -156,30 +156,30 @@ public class Territory {
     }
 
     /**
-     * Add a neighbor to the neighbors list
+     * Add a neighbour to the neighbours list
      * 
      * @author - Mauro Zorzin
-     * @param territory the neighbor to add
+     * @param territory the neighbour to add
      */
-    public void addNeighbor(Territory territory) throws IllegalArgumentException {
+    public void addNeighbour(Territory territory) throws IllegalArgumentException {
         if (territory == this)
-            throw new IllegalArgumentException("Territory can't be itself");
+            throw new IllegalArgumentException("Neighbour Territory can't be itself " + territory.getName());
         if (territory == null)
-            throw new IllegalArgumentException("Territory can't be null");
-        if (this.isNeighbor(territory)) {
-            throw new IllegalArgumentException("Territory already a neighbor");
+            throw new IllegalArgumentException("Neighbour Territory can't be null " + this.getName());
+        if (this.isNeighbour(territory)) {
+            throw new IllegalArgumentException("Neighbour Territory already a neighbour " + territory.getName());
         }
-        this.neighbors.add(territory);
+        this.neighbours.add(territory);
     }
 
     /**
-     * Remove a neighbor from the neighbors list
+     * Remove a neighbour from the neighbours list
      * 
      * @author - Mauro Zorzin
-     * @param territory the neighbor to remove
+     * @param territory the neighbour to remove
      */
-    public void removeNeighbor(Territory territory) {
-        this.neighbors.remove(territory);
+    public void removeNeighbour(Territory territory) {
+        this.neighbours.remove(territory);
     }
 
 }

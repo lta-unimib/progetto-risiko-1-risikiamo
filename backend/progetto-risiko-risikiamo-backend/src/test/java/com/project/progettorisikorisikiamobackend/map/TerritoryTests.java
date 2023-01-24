@@ -67,125 +67,125 @@ class TerritoryTests {
 
     }
 
-    // test isNeighbor
+    // test isNeighbour
     @Test
-    void testIsNeighbor() {
+    void testIsNeighbour() {
         Territory territory1 = new Territory("Territory1");
         Territory territory2 = new Territory("Territory2");
         Territory territory3 = new Territory("Territory3");
-        territory1.addNeighbor(territory2);
-        territory1.addNeighbor(territory3);
-        assertEquals(true, territory1.isNeighbor(territory2));
-        assertEquals(true, territory1.isNeighbor(territory3));
-        assertEquals(false, territory1.isNeighbor(territory1));
-        assertEquals(false, territory1.isNeighbor(new Territory("Territory4")));
+        territory1.addNeighbour(territory2);
+        territory1.addNeighbour(territory3);
+        assertEquals(true, territory1.isNeighbour(territory2));
+        assertEquals(true, territory1.isNeighbour(territory3));
+        assertEquals(false, territory1.isNeighbour(territory1));
+        assertEquals(false, territory1.isNeighbour(new Territory("Territory4")));
 
         // by id
 
-        assertEquals(true, territory1.isNeighbor("Territory2"));
-        assertEquals(true, territory1.isNeighbor("Territory3"));
-        assertEquals(false, territory1.isNeighbor("Territory4"));
-        assertEquals(false, territory1.isNeighbor("Territory1"));
+        assertEquals(true, territory1.isNeighbour("Territory2"));
+        assertEquals(true, territory1.isNeighbour("Territory3"));
+        assertEquals(false, territory1.isNeighbour("Territory4"));
+        assertEquals(false, territory1.isNeighbour("Territory1"));
 
     }
 
-    // test addNeighbor
+    // test addNeighbour
     @Test
-    void testAddNeighbor() {
+    void testAddNeighbour() {
         Territory territory1 = new Territory("Territory1");
         Territory territory2 = new Territory("Territory2");
         Territory territory3 = new Territory("Territory3");
-        territory1.addNeighbor(territory2);
-        territory1.addNeighbor(territory3);
-        assertThrowsExactly(IllegalArgumentException.class, () -> territory1.addNeighbor(null));
-        assertThrowsExactly(IllegalArgumentException.class, () -> territory1.addNeighbor(territory1));
-        assertThrowsExactly(IllegalArgumentException.class, () -> territory1.addNeighbor(territory2));
+        territory1.addNeighbour(territory2);
+        territory1.addNeighbour(territory3);
+        assertThrowsExactly(IllegalArgumentException.class, () -> territory1.addNeighbour(null));
+        assertThrowsExactly(IllegalArgumentException.class, () -> territory1.addNeighbour(territory1));
+        assertThrowsExactly(IllegalArgumentException.class, () -> territory1.addNeighbour(territory2));
     }
 
-    // test removeNeighbor
+    // test removeNeighbour
     @Test
-    void testRemoveNeighbor() {
+    void testRemoveNeighbour() {
         Territory territory1 = new Territory("Territory1");
         Territory territory2 = new Territory("Territory2");
         Territory territory3 = new Territory("Territory3");
-        territory1.addNeighbor(territory2);
-        territory1.addNeighbor(territory3);
-        territory1.removeNeighbor(territory2);
-        assertEquals(false, territory1.isNeighbor(territory2));
-        assertEquals(true, territory1.isNeighbor(territory3));
+        territory1.addNeighbour(territory2);
+        territory1.addNeighbour(territory3);
+        territory1.removeNeighbour(territory2);
+        assertEquals(false, territory1.isNeighbour(territory2));
+        assertEquals(true, territory1.isNeighbour(territory3));
 
     }
 
-    // test getNeighbors
+    // test getNeighbours
     @Test
-    void testGetNeighbors() {
+    void testGetNeighbours() {
         Territory territory1 = new Territory("Territory1");
         Territory territory2 = new Territory("Territory2");
         Territory territory3 = new Territory("Territory3");
-        territory1.addNeighbor(territory2);
-        territory1.addNeighbor(territory3);
-        assertEquals(2, territory1.getNeighbors().size());
-        assertEquals(true, territory1.getNeighbors().contains(territory2));
-        assertEquals(true, territory1.getNeighbors().contains(territory3));
-        assertEquals(false, territory1.getNeighbors().contains(new Territory("Territory4")));
+        territory1.addNeighbour(territory2);
+        territory1.addNeighbour(territory3);
+        assertEquals(2, territory1.getNeighbours().size());
+        assertEquals(true, territory1.getNeighbours().contains(territory2));
+        assertEquals(true, territory1.getNeighbours().contains(territory3));
+        assertEquals(false, territory1.getNeighbours().contains(new Territory("Territory4")));
     }
 
-    // test getNotOwnedNeighbor
+    // test getNotOwnedNeighbour
     @Test
-    void testGetNotOwnedNeighbor() {
+    void testGetNotOwnedNeighbour() {
         Player player1 = new Player("Player1", null, null, "123");
         Player player2 = new Player("Player2", null, null, "123");
         Territory territory1 = new Territory("Territory1");
         Territory territory2 = new Territory("Territory2");
         Territory territory3 = new Territory("Territory3");
-        territory1.addNeighbor(territory2);
-        territory1.addNeighbor(territory3);
+        territory1.addNeighbour(territory2);
+        territory1.addNeighbour(territory3);
         territory2.setOwner(player1);
         territory3.setOwner(player2);
 
-        assertEquals(2, territory1.getNotOwnedNeighbor().length);
-        assertEquals(territory2, territory1.getNotOwnedNeighbor()[0]);
-        assertEquals(territory3, territory1.getNotOwnedNeighbor()[1]);
+        assertEquals(2, territory1.getNotOwnedNeighbour().length);
+        assertEquals(territory2, territory1.getNotOwnedNeighbour()[0]);
+        assertEquals(territory3, territory1.getNotOwnedNeighbour()[1]);
 
         territory1.setOwner(player1);
 
-        assertEquals(1, territory1.getNotOwnedNeighbor().length);
-        assertEquals(territory3, territory1.getNotOwnedNeighbor()[0]);
+        assertEquals(1, territory1.getNotOwnedNeighbour().length);
+        assertEquals(territory3, territory1.getNotOwnedNeighbour()[0]);
 
-        assertEquals(0, territory2.getNotOwnedNeighbor().length);
-        assertEquals(0, territory3.getNotOwnedNeighbor().length);
+        assertEquals(0, territory2.getNotOwnedNeighbour().length);
+        assertEquals(0, territory3.getNotOwnedNeighbour().length);
 
     }
 
-    // test getOwnedNeighbor
+    // test getOwnedNeighbour
     @Test
-    void testGetOwnedNeighbor() {
+    void testGetOwnedNeighbour() {
         Player player1 = new Player("Player1", null, null, "123");
         Player player2 = new Player("Player2", null, null, "123");
         Territory territory1 = new Territory("Territory1");
         Territory territory2 = new Territory("Territory2");
         Territory territory3 = new Territory("Territory3");
 
-        territory1.addNeighbor(territory2);
-        territory1.addNeighbor(territory3);
+        territory1.addNeighbour(territory2);
+        territory1.addNeighbour(territory3);
 
         territory2.setOwner(player1);
         territory3.setOwner(player2);
 
-        assertEquals(0, territory1.getOwnedNeighbor().length);
+        assertEquals(0, territory1.getOwnedNeighbour().length);
 
         territory1.setOwner(player1);
 
-        assertEquals(1, territory1.getOwnedNeighbor().length);
-        assertEquals(territory2, territory1.getOwnedNeighbor()[0]);
+        assertEquals(1, territory1.getOwnedNeighbour().length);
+        assertEquals(territory2, territory1.getOwnedNeighbour()[0]);
 
         territory2.setOwner(player2);
 
-        assertEquals(0, territory1.getOwnedNeighbor().length);
+        assertEquals(0, territory1.getOwnedNeighbour().length);
 
-        assertEquals(0, territory2.getOwnedNeighbor().length);
+        assertEquals(0, territory2.getOwnedNeighbour().length);
 
-        assertEquals(0, territory3.getOwnedNeighbor().length);
+        assertEquals(0, territory3.getOwnedNeighbour().length);
     }
 
     // test equals
@@ -194,16 +194,16 @@ class TerritoryTests {
         Territory territory1 = new Territory("Territory1");
         Territory territory2 = new Territory("Territory2");
         Territory territory3 = new Territory("Territory3");
-        territory1.addNeighbor(territory2);
-        territory1.addNeighbor(territory3);
+        territory1.addNeighbour(territory2);
+        territory1.addNeighbour(territory3);
         assertEquals(true, territory1.equals(territory1));
         assertEquals(false, territory1.equals(territory2));
         assertEquals(false, territory1.equals(null));
         assertEquals(false, territory1.equals(new Territory("Territory1")));
 
         Territory territory4 = new Territory("Territory1");
-        territory4.addNeighbor(territory2);
-        territory4.addNeighbor(territory3);
+        territory4.addNeighbour(territory2);
+        territory4.addNeighbour(territory3);
         assertEquals(true, territory1.equals(territory4));
 
         Object object = new Object();
@@ -220,16 +220,16 @@ class TerritoryTests {
         Territory territory1 = new Territory("Territory1");
         Territory territory2 = new Territory("Territory2");
         Territory territory3 = new Territory("Territory3");
-        territory1.addNeighbor(territory2);
-        territory1.addNeighbor(territory3);
+        territory1.addNeighbour(territory2);
+        territory1.addNeighbour(territory3);
         assertEquals(territory1.hashCode(), territory1.hashCode());
         assertNotEquals(territory1.hashCode(), new Territory("Territory1").hashCode());
         assertNotEquals(territory1.hashCode(), territory2.hashCode());
         assertNotEquals(territory1.hashCode(), territory3.hashCode());
 
         Territory territory4 = new Territory("Territory1");
-        territory4.addNeighbor(territory2);
-        territory4.addNeighbor(territory3);
+        territory4.addNeighbour(territory2);
+        territory4.addNeighbour(territory3);
 
         assertEquals(territory1.hashCode(), territory4.hashCode());
 

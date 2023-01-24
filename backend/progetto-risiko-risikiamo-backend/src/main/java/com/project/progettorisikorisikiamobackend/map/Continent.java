@@ -129,10 +129,12 @@ public class Continent {
             throw new IllegalArgumentException("The territory id is empty");
         }
         if (territories.containsKey(territory.getName())) {
-            throw new IllegalArgumentException("The territory id is already in the continent");
+            throw new IllegalArgumentException(
+                    "The territory id is already in the continent " + territory.getName() + "  " + name);
         }
         if (territories.containsValue(territory)) {
-            throw new IllegalArgumentException("The territory is already in the continent");
+            throw new IllegalArgumentException(
+                    "The territory is already in the continent" + territory.getName() + "" + name);
         }
 
         territories.put(territory.getName(), territory);

@@ -24,7 +24,7 @@ public class TestInitialFaseState {
     private List<Player> players;
     private Territory ownTerritory;
     private Territory owner;
-    private Territory neighbor;
+    private Territory neighbour;
     private Turn turn;
 
     private IContext context;
@@ -44,13 +44,13 @@ public class TestInitialFaseState {
         ownTerritory = new Territory("test", p1);
 
         owner = new Territory("owner", p1);
-        neighbor = new Territory("neighbor", p1);
+        neighbour = new Territory("neighbour", p1);
 
-        ownTerritory.addNeighbor(neighbor);
-        neighbor.addNeighbor(ownTerritory);
+        ownTerritory.addNeighbour(neighbour);
+        neighbour.addNeighbour(ownTerritory);
 
         ownTerritory.setOwner(p1);
-        neighbor.setOwner(p1);
+        neighbour.setOwner(p1);
 
         turn = new Turn(players);
         turn.nextTurn();
@@ -70,13 +70,13 @@ public class TestInitialFaseState {
 
         IState initialFaseState = context.getState();
 
-        assertThrows(IllegalStateException.class, () -> initialFaseState.attack(owner, neighbor, 1));
+        assertThrows(IllegalStateException.class, () -> initialFaseState.attack(owner, neighbour, 1));
     }
 
     @Test
     void testMove_shouldThrowIllegalStateException() {
         IState initialFaseState = context.getState();
-        assertThrows(IllegalStateException.class, () -> initialFaseState.move(owner, neighbor, 1));
+        assertThrows(IllegalStateException.class, () -> initialFaseState.move(owner, neighbour, 1));
     }
 
     @Test

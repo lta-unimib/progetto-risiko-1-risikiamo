@@ -14,12 +14,12 @@ public class TestPlayer {
         Player player = new Player("Player1", "Red", null, "1");
         Player player2 = new Player("Player1", "Red", null, "2");
         Territory owner = new Territory("Territory1", player);
-        Territory neighbor = new Territory("Territory2", player2);
+        Territory neighbour = new Territory("Territory2", player2);
         owner.addArmy(5);
-        neighbor.addArmy(3);
-        assertThrows(IllegalArgumentException.class, () -> player.attack(owner, neighbor, 3));
-        owner.addNeighbor(neighbor);
-        player.attack(owner, neighbor, 3);
+        neighbour.addArmy(3);
+        assertThrows(IllegalArgumentException.class, () -> player.attack(owner, neighbour, 3));
+        owner.addNeighbour(neighbour);
+        player.attack(owner, neighbour, 3);
 
     }
 
@@ -34,21 +34,21 @@ public class TestPlayer {
     public void testMove() {
         Player player = new Player("Player1", "Red", null, "1");
         Territory owner = new Territory("Territory1", player);
-        Territory neighbor = new Territory("Territory2", player);
+        Territory neighbour = new Territory("Territory2", player);
         owner.addArmy(5);
-        assertThrows(IllegalArgumentException.class, () -> player.move(owner, neighbor, 3));
-        owner.addNeighbor(neighbor);
-        player.move(owner, neighbor, 3);
+        assertThrows(IllegalArgumentException.class, () -> player.move(owner, neighbour, 3));
+        owner.addNeighbour(neighbour);
+        player.move(owner, neighbour, 3);
         assertEquals(2, owner.getArmy());
-        assertEquals(3, neighbor.getArmy());
+        assertEquals(3, neighbour.getArmy());
     }
 
     @Test
-    public void testMoveNonNeighbor() {
+    public void testMoveNonNeighbour() {
         Player player = new Player("Player1", "Red", null, "1");
         Territory owner = new Territory("Territory1", player);
-        Territory neighbor = new Territory("Territory2", player);
-        assertThrows(IllegalArgumentException.class, () -> player.move(owner, neighbor, 3));
+        Territory neighbour = new Territory("Territory2", player);
+        assertThrows(IllegalArgumentException.class, () -> player.move(owner, neighbour, 3));
     }
 
     @Test

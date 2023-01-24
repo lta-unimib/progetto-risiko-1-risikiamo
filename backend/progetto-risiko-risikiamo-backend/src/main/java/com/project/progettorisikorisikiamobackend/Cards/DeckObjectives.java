@@ -32,14 +32,21 @@ public class DeckObjectives {
         }
         int numTerritories = 0;
         for (Continent c : map.getContinents().values()) {
-            numTerritories += c.getNumberOfTerritories();
+            numTerritories += c.getTerritories().size();
         }
-        numTerritories = numTerritories * (58 / 100);
-        if (numTerritories < 4)
-            numTerritories = 4;
+        double busted = 0.0;
+        if (players.size() == 2)
+            busted = 25;
+        else if (players.size() == 3)
+            busted = 10;
+
+        double fNumTerritories = numTerritories * ((58.0 + busted) / 100.0);
+        if (fNumTerritories < 4)
+            fNumTerritories = 4;
+
         for (int i = 0; i < players.size(); i++) {
-            deckObj.add(new TotTerritories(numTerritories, map));
-            deckObj.add(new TotTerritories(numTerritories, map));
+            deckObj.add(new TotTerritories((int) fNumTerritories, map));
+            deckObj.add(new TotTerritories((int) fNumTerritories, map));
         }
         deck.addAll(deckObj);
     }
