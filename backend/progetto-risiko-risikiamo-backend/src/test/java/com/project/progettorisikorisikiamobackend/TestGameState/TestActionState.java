@@ -115,7 +115,7 @@ public class TestActionState {
 
         int size = context.getDeckTerritories().getDeck().size();
 
-        assertEquals(2, context.getDeckTerritories().getDeck().size());
+        assertEquals(4, context.getDeckTerritories().getDeck().size());
 
         neighbour.setOwner(this.p2);
 

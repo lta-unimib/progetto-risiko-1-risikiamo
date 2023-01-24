@@ -2,7 +2,6 @@ package com.project.progettorisikorisikiamobackend.gameState;
 
 import com.project.progettorisikorisikiamobackend.Cards.CardTerritory;
 import com.project.progettorisikorisikiamobackend.Cards.DeckTerritories;
-import com.project.progettorisikorisikiamobackend.Turno.Turn;
 import com.project.progettorisikorisikiamobackend.gameState.interf.IContext;
 import com.project.progettorisikorisikiamobackend.gameState.interf.IState;
 import com.project.progettorisikorisikiamobackend.map.*;

@@ -64,13 +64,13 @@ public class TestCards {
 
         try {
             DeckTerritories deck = new DeckTerritories(map);
-            assertEquals(2, deck.getDeck().size());
+            assertEquals(4, deck.getDeck().size());
             assertEquals(CardTerritory.class, deck.getDeck().get(0).getClass());
             assertEquals(CardTerritory.class, deck.getDeck().get(1).getClass());
             CardTerritory card = deck.draw();
-            assertEquals(1, deck.getDeck().size());
+            assertEquals(3, deck.getDeck().size());
             assertEquals(CardTerritory.class, card.getClass());
-            assertTrue(t1.getName() == card.getName() || t2.getName() == card.getName());
+            assertTrue(t1.getName() == card.getName() || t2.getName() == card.getName() || card.getName() == "jolly");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -107,7 +107,7 @@ public class TestCards {
         cards.add(card3);
 
         assertEquals(4, daReedem.reedemCards(card1, card2, card3, player1));
-        assertEquals(6, daReedem.getDeck().size());
+        assertEquals(8, daReedem.getDeck().size());
         Territory t3 = new Territory("t3");
         Territory t4 = new Territory("t4");
         Territory t5 = new Territory("t5");
@@ -128,7 +128,7 @@ public class TestCards {
         cards2.add(card6);
 
         assertEquals(10, daReedem.reedemCards(card4, card5, card6, player2));
-        assertEquals(9, daReedem.getDeck().size());
+        assertEquals(11, daReedem.getDeck().size());
         daReedem.setDeck(cards2);
         assertEquals(card4, daReedem.getDeck().get(0));
         assertEquals(card5, daReedem.getDeck().get(1));
@@ -143,70 +143,71 @@ public class TestCards {
         daReedem.setDeck(cards3);
         assertEquals(0, daReedem.reedemCards(card7, card8, card9, player2));
 
+    }
+
+    @Test
+    void testNewReedemCardsJolly() {
+        Map map = new Map("mappa");
+        Continent c1 = new Continent("c1", 1);
+        Territory t1 = new Territory("t1");
+        Territory t2 = new Territory("t2");
+        Territory t3 = new Territory("t3");
+        c1.addTerritory(t2);
+        c1.addTerritory(t1);
+        c1.addTerritory(t3);
+        map.addContinent(c1);
+        List<Player> players = new ArrayList<>();
+        Player player1 = new Player("player1");
+        Player player2 = new Player("player2");
+        players.add(player1);
+        players.add(player2);
+        t1.setOwner(player2);
+        t2.setOwner(player2);
+        t3.setOwner(player2);
+        CardTerritory card1 = new CardTerritory("Jolly", EnumCard.JOLLY);
+        CardTerritory card2 = new CardTerritory("t2", EnumCard.CANNONE);
+        CardTerritory card3 = new CardTerritory("t3", EnumCard.CANNONE);
+        List<CardTerritory> cards = new ArrayList<>();
+        cards.add(card1);
+        cards.add(card2);
+        cards.add(card3);
+        DeckTerritories daReedem = new DeckTerritories(map);
+        daReedem.setDeck(cards);
+        assertEquals(16, daReedem.reedemCards(card1, card2, card3, player2));
 
     }
-@Test
-void testNewReedemCardsJolly() {
-    Map map = new Map("mappa");
-    Continent c1 = new Continent("c1", 1);
-    Territory t1 = new Territory("t1");
-    Territory t2 = new Territory("t2");
-    Territory t3 = new Territory("t3");
-    c1.addTerritory(t2);
-    c1.addTerritory(t1);
-    c1.addTerritory(t3);
-    map.addContinent(c1);
-    List<Player> players = new ArrayList<>();
-    Player player1 = new Player("player1");
-    Player player2 = new Player("player2");
-    players.add(player1);
-    players.add(player2);
-    t1.setOwner(player2);
-    t2.setOwner(player2);
-    t3.setOwner(player2);
-    CardTerritory card1 = new CardTerritory("Jolly", EnumCard.JOLLY);
-    CardTerritory card2 = new CardTerritory("t2", EnumCard.CANNONE);
-    CardTerritory card3 = new CardTerritory("t3", EnumCard.CANNONE);
-    List<CardTerritory> cards = new ArrayList<>();
-    cards.add(card1);
-    cards.add(card2);
-    cards.add(card3);
-    DeckTerritories daReedem = new DeckTerritories(map);
-    daReedem.setDeck(cards);
-    assertEquals(16, daReedem.reedemCards(card1, card2, card3, player2));
 
-}
-@Test
-void testNewReedemCardsAllDifferent() {
-    Map map = new Map("mappa");
-    Continent c1 = new Continent("c1", 1);
-    Territory t1 = new Territory("t1");
-    Territory t2 = new Territory("t2");
-    Territory t3 = new Territory("t3");
-    c1.addTerritory(t2);
-    c1.addTerritory(t1);
-    c1.addTerritory(t3);
-    map.addContinent(c1);
-    List<Player> players = new ArrayList<>();
-    Player player1 = new Player("player1");
-    Player player2 = new Player("player2");
-    players.add(player1);
-    players.add(player2);
-    t1.setOwner(player2);
-    t2.setOwner(player2);
-    t3.setOwner(player2);
-    CardTerritory card1 = new CardTerritory("t1", EnumCard.CANNONE);
-    CardTerritory card2 = new CardTerritory("t2", EnumCard.CAVALLO);
-    CardTerritory card3 = new CardTerritory("t3", EnumCard.FANTE);
-    List<CardTerritory> cards = new ArrayList<>();
-    cards.add(card1);
-    cards.add(card2);
-    cards.add(card3);
-    DeckTerritories daReedem = new DeckTerritories(map);
-    daReedem.setDeck(cards);
-    assertEquals(16, daReedem.reedemCards(card1, card2, card3, player2));
+    @Test
+    void testNewReedemCardsAllDifferent() {
+        Map map = new Map("mappa");
+        Continent c1 = new Continent("c1", 1);
+        Territory t1 = new Territory("t1");
+        Territory t2 = new Territory("t2");
+        Territory t3 = new Territory("t3");
+        c1.addTerritory(t2);
+        c1.addTerritory(t1);
+        c1.addTerritory(t3);
+        map.addContinent(c1);
+        List<Player> players = new ArrayList<>();
+        Player player1 = new Player("player1");
+        Player player2 = new Player("player2");
+        players.add(player1);
+        players.add(player2);
+        t1.setOwner(player2);
+        t2.setOwner(player2);
+        t3.setOwner(player2);
+        CardTerritory card1 = new CardTerritory("t1", EnumCard.CANNONE);
+        CardTerritory card2 = new CardTerritory("t2", EnumCard.CAVALLO);
+        CardTerritory card3 = new CardTerritory("t3", EnumCard.FANTE);
+        List<CardTerritory> cards = new ArrayList<>();
+        cards.add(card1);
+        cards.add(card2);
+        cards.add(card3);
+        DeckTerritories daReedem = new DeckTerritories(map);
 
-}
+        assertEquals(16, daReedem.reedemCards(card1, card2, card3, player2));
+
+    }
 
     @Test
     void testCardTerritory() {
