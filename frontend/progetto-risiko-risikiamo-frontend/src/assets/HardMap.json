@@ -35,7 +35,8 @@
                         "name": "Mexico",
                         "neighbours": [
                             "United States",
-                            "Guatemala"
+                            "Guatemala",
+                            "Russia"
                         ]
                     },
                     {
@@ -1254,7 +1255,8 @@
                             "Azerbaijan",
                             "Georgia",
                             "Armenia",
-                            "Japan"
+                            "Japan",
+                            "United States"
                         ]
                     },
                     {

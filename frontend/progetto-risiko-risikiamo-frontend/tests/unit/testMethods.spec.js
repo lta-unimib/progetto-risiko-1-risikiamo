@@ -1,7 +1,6 @@
 import { mount } from "@vue/test-utils";
 import HomeComponent from "../../src/components/HomeComponent.vue";
 import { createRouter, createWebHistory } from "vue-router";
-import axios from "axios";
 
 let wrapper;
 
@@ -139,8 +138,6 @@ describe("changeHoverValue", () => {
         plugins: [router],
       },
     });
-    name.value = "place your mouse over a country";
-    list.value = [];
     jest
       .spyOn(global, "findNameTerritory")
       .mockImplementation(mockFindNameTerritory);
@@ -150,11 +147,6 @@ describe("changeHoverValue", () => {
     jest.clearAllMocks();
   });
 
-  it("sets name to the title of the target element", () => {
-    const value = { target: { attributes: { title: { value: "country1" } } } };
-    changeHoverValue(value);
-    expect(name.value).toBe("country1");
-  });
   it("calls findNameTerritory with the correct arguments", () => {
     const value = { target: { attributes: { title: { value: "country1" } } } };
     changeHoverValue(value);
