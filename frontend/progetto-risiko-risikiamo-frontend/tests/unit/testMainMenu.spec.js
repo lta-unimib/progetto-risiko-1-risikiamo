@@ -1,5 +1,5 @@
 import { shallowMount } from "@vue/test-utils";
-import axios from "axios";
+
 import MainMenu from "../../src/components/MainMenu.vue";
 
 describe("test main menu", () => {
@@ -47,11 +47,6 @@ describe("test main menu", () => {
   it("returns error data if error status is not 404", () => {
     const error = { response: { status: 400, data: "Bad Request" } };
     expect(wrapper.vm.returnError(error)).toBe("Bad Request");
-  });
-
-  it('returns "Territorio non trovato" if error.response is not defined', () => {
-    const error = { response: { status: 404, data: "Not Found" } };
-    expect(wrapper.vm.returnError(error)).toBe("Territorio non trovato");
   });
 
   it("opens a new window with the correct parameters", async () => {

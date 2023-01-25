@@ -52,49 +52,29 @@ export default {
         colorSet: colorSet,
         returnError: returnError,
         showMessage: showMessage,
+        showWindow: showWindow,
         findNameTerritory: findNameTerritory,
         changeHoverValue: changeHoverValue,
         getAllData() {
             axios.get('http://localhost:3000/api/v1/game/' + this.idMatch + '/watch')
                 .then(response => {
-
                     this.gameStarted = response.data.gameStarted;
-
                     this.allData = response.data;
                     this.playerList = response.data.players;
-                    
                     for (let i = 0; i < response.data.players.length; i++) {
                         if (response.data.players[i].name == this.playerName) {
                             this.player = response.data.players[i];
-                            //console.log(this.player);
-                        } else {
-                            console.log("error");
+                        
                         }
                     }
-                    
                     this.currentPlayer = response.data.currentPlayer;
-                    this.continents = response.data.map.continents;
-                    //console.log(this.currentPlayer);
-                    if (this.playerName != this.currentPlayer) {
-                        console.log("not your turn");
-                        //console.log(this.paths);
-
-                    } else {
-
-                        console.log("your turn");
-                    }
-                  
+                    this.continents = response.data.map.continents;  
                     this.winner = response.data.winner;
 
-                })
-                .catch(error => {
-                    console.log(error);
                 });
 
         },
         async place(value, path) {
-
-
             let response = await axios.put('http://localhost:3000/api/v1/game/' + this.idMatch + '/play/' + this.playerName + '/place?owner=' + path + '&army=' + value)
                 .then(response => {
                     return response.data;
@@ -123,9 +103,6 @@ export default {
                     
                     this.svg = response.data;
                    
-                })
-                .catch(error => {
-                    console.log(error);
                 });
         },
         getCards() {
@@ -133,9 +110,6 @@ export default {
                 .then(response => {
                     
                     this.cards = response.data.cards;
-                })
-                .catch(error => {
-                    console.log(error);
                 });
 
         },
@@ -192,9 +166,6 @@ export default {
                 .then(response => {
                    
                     this.objective = response.data.objectives[0];
-                })
-                .catch(error => {
-                    console.log(error);
                 });
         },
         getReinforcement() {
@@ -203,9 +174,6 @@ export default {
                     
                     this.reinforcement = response.data.renforcements;
 
-                })
-                .catch(error => {
-                    console.log(error);
                 });
         },
         cardDiscard(card1, card2, card3) {
@@ -233,19 +201,15 @@ export default {
             } else if (this.selectedAction === "place") {
                 
                 showWindow(this.place(this.armyNumber, this.startLocation));
-            } else {
-                console.log("error");
-            }
+            } 
         },
         getPlayerData() {
             axios.get('http://localhost:3000/api/v1/game/' + this.idMatch + '/play/' + this.playerName + '/')
                 .then(response => {
                     
                     this.playerData = response.data;
-                })
-                .catch(error => {
-                    console.log(error);
                 });
+                
 
         },
         createCard() {
@@ -270,9 +234,7 @@ export default {
                         cardsArrPlaceholder.push(card);
                     } else if (card.type === "JOLLY") {
                         card.img = require("../assets/img/Jolly.png");
-                    } else {
-                        console.log("error");
-                    }
+                    } 
                 }
 
                 return cardsArrPlaceholder;
@@ -332,9 +294,8 @@ function changeHoverValue(value) {
 }
 
 function findNameTerritory(value, name) {
-
+ 
     let continents = value;
-
     let territory;
     for (let i = 0; i < continents.length; i++) {
         let countries = continents[i].territory;
@@ -407,16 +368,16 @@ function colorSet(owner)
         </div>
     </div>
     <div>
-        <button @click="startMatch">Start Match</button>
+        <button id="start" @click="startMatch">Start Match</button>
     </div>
     <br>
     <div>
-        <button @click="surrend">Bandiera Bianca</button>
+        <button id = "surrend" @click="surrend">Bandiera Bianca</button>
     </div>
     <br>
     <br>
     <div>
-        <button @click="skip">Skip turn</button>
+        <button id = "skip" @click="skip">Skip turn</button>
     </div>
     <br>
     <br>
@@ -436,7 +397,7 @@ function colorSet(owner)
         <input type="text" id="destination" v-model="destination">
         <p>inserisci il numero di truppe da spostare o attaccare o rifornire</p>
         <input type="number" id="number" min="1" v-model="armyNumber">
-        <button id="doAction" @click="submitForm">ok</button>
+        <button id="doAction1" @click="submitForm">ok</button>
     </div>
     <br>
     <div class="container">
@@ -491,7 +452,7 @@ function colorSet(owner)
         <p></p>
         <input type="text" id="card3" v-model="card3">
         <p></p>
-        <button id="doAction" @click="submitCards">ok</button>
+        <button id="doAction2" @click="submitCards">ok</button>
     </div>
 
 </template>

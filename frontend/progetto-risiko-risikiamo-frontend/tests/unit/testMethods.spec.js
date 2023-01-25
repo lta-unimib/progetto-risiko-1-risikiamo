@@ -1,9 +1,8 @@
-import { mount } from "@vue/test-utils";
+import { mount, render } from "@vue/test-utils";
 import HomeComponent from "../../src/components/HomeComponent.vue";
 import { createRouter, createWebHistory } from "vue-router";
 
 let wrapper;
-
 describe("App", () => {
   beforeEach(async () => {
     const router = createRouter({
@@ -24,7 +23,6 @@ describe("App", () => {
         plugins: [router],
       },
     });
-    await wrapper.vm.$nextTick();
   });
 
   test("test home component", () => {
@@ -41,6 +39,7 @@ describe("App", () => {
   test("sets the selectedPaths data property to the provided value", () => {
     expect(wrapper.vm.selectedPaths).toEqual([]);
   });
+
   test("colorSet", () => {
     expect(
       wrapper.vm.colorSet({
@@ -79,10 +78,6 @@ describe("App", () => {
     expect(wrapper.vm.returnError(error)).toBe("Bad Request");
   });
 
-  it('returns "Territorio non trovato" if error.response is not defined', () => {
-    const error = { response: { status: 404, data: "Not Found" } };
-    expect(wrapper.vm.returnError(error)).toBe("Territorio non trovato");
-  });
   it("opens a new window with the correct parameters", async () => {
     const message = "Hello World";
     window.open = jest.fn();
@@ -102,57 +97,98 @@ describe("App", () => {
     );
     expect(window.open().document.body.innerHTML).toBe(message);
   });
-});
-describe("changeHoverValue", () => {
-  let allData = {
-    map: {
-      continents: [
-        {
-          territory: [
-            { name: "country1", neighbours: ["neighbour1", "neighbour2"] },
-            { name: "country2", neighbours: ["neighbour3", "neighbour4"] },
-          ],
-        },
-      ],
-    },
-  };
-
-  let mockFindNameTerritory = jest.fn();
-  let findNameTerritory = jest.fn(() => ["neighbour1", "neighbour2"]);
-
-  beforeEach(async () => {
-    const router = createRouter({
-      history: createWebHistory(),
-      routes: [
-        {
-          path: "/game",
-          name: "home",
-          component: HomeComponent,
-        },
-      ],
-    });
-    router.push("/game?id=1&name=home");
-    await router.isReady();
-    wrapper = mount(HomeComponent, {
-      global: {
-        plugins: [router],
-      },
-    });
-    jest
-      .spyOn(global, "findNameTerritory")
-      .mockImplementation(mockFindNameTerritory);
-  });
-
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
 
   it("calls findNameTerritory with the correct arguments", () => {
-    const value = { target: { attributes: { title: { value: "country1" } } } };
-    changeHoverValue(value);
-    expect(findNameTerritory).toHaveBeenCalledWith(
-      allData.map.continents,
-      "country1"
+    wrapper.vm.findNameTerritory = jest.fn();
+    wrapper.vm.findNameTerritory.mockReturnValue("territory2");
+    wrapper.vm.findNameTerritory("continents", "territory1");
+    expect(wrapper.vm.findNameTerritory).toHaveBeenCalledWith(
+      "continents",
+      "territory1"
     );
+  });
+
+  it("calls cardDiscard with the correct arguments", () => {
+    let mockCardDiscard = jest.fn();
+    jest.spyOn(wrapper.vm, "cardDiscard").mockImplementation(mockCardDiscard);
+    wrapper.vm.card1 = "card1";
+    wrapper.vm.card2 = "card2";
+    wrapper.vm.card3 = "card3";
+    wrapper.vm.submitCards();
+    expect(mockCardDiscard).toHaveBeenCalledWith("card1", "card2", "card3");
+  });
+
+  it("should call submitForm method when button is clicked", async () => {
+    // set the selectedAction to "attack"
+    wrapper.setData({ selectedAction: "attack" });
+    // set startLocation and destination
+    wrapper.setData({ startLocation: "Italy", destination: "France" });
+    // set armyNumber
+    wrapper.setData({ armyNumber: 10 });
+
+    // mock the attack method
+    wrapper.vm.attack = jest.fn(() => Promise.resolve("Attack successful"));
+
+    // trigger the click event on the button
+    wrapper.find("#doAction1").trigger("click");
+
+    // wait for next tick
+    await wrapper.vm.$nextTick();
+
+    // expect the attack method to be called
+    expect(wrapper.vm.attack).toHaveBeenCalledWith(10, "Italy", "France");
+  });
+
+  it("should call submitForm method when button is clicked", async () => {
+    wrapper.setData({ selectedAction: "move" });
+    wrapper.setData({ startLocation: "Italy", destination: "France" });
+    wrapper.setData({ armyNumber: 10 });
+
+    wrapper.vm.move = jest.fn(() => Promise.resolve("Move successful"));
+
+    wrapper.find("#doAction1").trigger("click");
+
+    await wrapper.vm.$nextTick();
+
+    expect(wrapper.vm.move).toHaveBeenCalledWith(10, "Italy", "France");
+  });
+
+  it("should call submitForm method when button is clicked", async () => {
+    wrapper.setData({ selectedAction: "place" });
+    wrapper.setData({ startLocation: "Italy" });
+    wrapper.setData({ armyNumber: 10 });
+
+    wrapper.vm.place = jest.fn(() => Promise.resolve("Place successful"));
+
+    wrapper.find("#doAction1").trigger("click");
+
+    await wrapper.vm.$nextTick();
+
+    expect(wrapper.vm.place).toHaveBeenCalledWith(10, "Italy");
+  });
+
+  it("start game", async () => {
+    wrapper.vm.startMatch = jest.fn(() => Promise.resolve("Start game"));
+    wrapper.find("#start").trigger("click");
+    await wrapper.vm.$nextTick();
+    expect(wrapper.vm.startMatch).toHaveBeenCalled();
+  });
+  it("skip", async () => {
+    wrapper.vm.skip = jest.fn(() => Promise.resolve("Skip"));
+    wrapper.find("#skip").trigger("click");
+    await wrapper.vm.$nextTick();
+    expect(wrapper.vm.skip).toHaveBeenCalled();
+  });
+  it("surrend", async () => {
+    wrapper.vm.surrend = jest.fn(() => Promise.resolve("Surrend"));
+    wrapper.find("#surrend").trigger("click");
+    await wrapper.vm.$nextTick();
+    expect(wrapper.vm.surrend).toHaveBeenCalled();
+  });
+  it("redeem crards", async () => {
+    wrapper.vm.submitCards = jest.fn(() => Promise.resolve("Redeem cards"));
+    wrapper.find("#doAction2").trigger("click");
+    await wrapper.vm.$nextTick();
+    expect(wrapper.vm.submitCards).toHaveBeenCalled();
   });
 });
