@@ -50,16 +50,19 @@ export default {
 
     methods: {
         colorSet: colorSet,
+        returnError: returnError,
+        showMessage: showMessage,
+        findNameTerritory: findNameTerritory,
         changeHoverValue: changeHoverValue,
         getAllData() {
             axios.get('http://localhost:3000/api/v1/game/' + this.idMatch + '/watch')
                 .then(response => {
 
                     this.gameStarted = response.data.gameStarted;
-                    console.log(this.gameStarted);
+
                     this.allData = response.data;
                     this.playerList = response.data.players;
-                    console.log(this.playerList);
+                    
                     for (let i = 0; i < response.data.players.length; i++) {
                         if (response.data.players[i].name == this.playerName) {
                             this.player = response.data.players[i];
@@ -68,7 +71,7 @@ export default {
                             console.log("error");
                         }
                     }
-                    console.log(response.data);
+                    
                     this.currentPlayer = response.data.currentPlayer;
                     this.continents = response.data.map.continents;
                     //console.log(this.currentPlayer);
@@ -80,7 +83,7 @@ export default {
 
                         console.log("your turn");
                     }
-                    console.log(response.data.winner);
+                  
                     this.winner = response.data.winner;
 
                 })
@@ -105,7 +108,7 @@ export default {
         async startMatch() {
             let response = await axios.put('http://localhost:3000/api/v1/game/' + this.idMatch + '/start')
                 .then(response => {
-                    //console.log(response.data);
+                   
                     this.gameStarted = true;
                     return response.data;
                 })
@@ -117,9 +120,9 @@ export default {
         getMap() {
             axios.get('http://localhost:3000/api/v1/game/' + this.idMatch + '/svg')
                 .then(response => {
-                    //console.log(response.data);
+                    
                     this.svg = response.data;
-                    //console.log(this.svg);
+                   
                 })
                 .catch(error => {
                     console.log(error);
@@ -128,7 +131,7 @@ export default {
         getCards() {
             axios.get('http://localhost:3000/api/v1/game/' + this.idMatch + '/play/' + this.playerName + '/')
                 .then(response => {
-                    console.log(response.data);
+                    
                     this.cards = response.data.cards;
                 })
                 .catch(error => {
@@ -139,11 +142,11 @@ export default {
         async surrend() {
             let response = await axios.put('http://localhost:3000/api/v1/game/' + this.idMatch + '/play/' + this.playerName + '/surrend')
                 .then(response => {
-                    console.log(response.data);
+                    
                     return "You have surrendered"
                 })
                 .catch(error => {
-                    //console.log(error);
+                    
                     return returnError(error);
                 });
             showMessage(response);
@@ -151,11 +154,11 @@ export default {
         async skip() {
             let response = await axios.put('http://localhost:3000/api/v1/game/' + this.idMatch + '/play/' + this.playerName + '/skip')
                 .then(response => {
-                    console.log("Messagione" + response);
+                   
                     return "You have skipped your turn"
                 })
                 .catch(error => {
-                    //console.log(error);
+                    
                     return returnError(error);
                 });
             showMessage(response);
@@ -163,11 +166,11 @@ export default {
         async attack(value, path1, path2) {
             let response = await axios.put('http://localhost:3000/api/v1/game/' + this.idMatch + '/play/' + this.playerName + '/attack?owner=' + path1 + '&army=' + value + '&neighbor=' + path2)
                 .then(response => {
-                    //console.log(response.data);
+                  
                     return response.data;
                 })
                 .catch(error => {
-                    //console.log(error);
+                   
                     return returnError(error);
                 });
             return response;
@@ -175,11 +178,11 @@ export default {
         async move(value, path1, path2) {
             let response = await axios.put('http://localhost:3000/api/v1/game/' + this.idMatch + '/play/' + this.playerName + '/move?owner=' + path1 + '&army=' + value + '&neighbor=' + path2)
                 .then(response => {
-                    // console.log(response.data);
+                    
                     return response.data;
                 })
                 .catch(error => {
-                    // console.log(error);
+                 
                     return returnError(error);
                 });
             return response;
@@ -187,7 +190,7 @@ export default {
         getObjective() {
             axios.get('http://localhost:3000/api/v1/game/' + this.idMatch + '/play/' + this.playerName + '/')
                 .then(response => {
-                    console.log(response.data.objectives);
+                   
                     this.objective = response.data.objectives[0];
                 })
                 .catch(error => {
@@ -197,7 +200,7 @@ export default {
         getReinforcement() {
             axios.get('http://localhost:3000/api/v1/game/' + this.idMatch + '/play/' + this.playerName + '/')
                 .then(response => {
-                    console.log(response.data.renforcements);
+                    
                     this.reinforcement = response.data.renforcements;
 
                 })
@@ -208,11 +211,11 @@ export default {
         cardDiscard(card1, card2, card3) {
             axios.put('http://localhost:3000/api/v1/game/' + this.idMatch + '/play/' + this.playerName + '/renforce?c1=' + card1 + '&c2=' + card2 + '&c3=' + card3)
                 .then(response => {
-                    console.log(response.data);
+                   
                     showMessage("Nuovi rinforzi");
                 })
                 .catch(error => {
-                    console.log(error);
+                   
                     showMessage(returnError(error));
                 });
         },
@@ -222,13 +225,13 @@ export default {
         },
         async submitForm() {
             if (this.selectedAction === "attack") {
-                console.log("attack");
+                
                 showWindow(this.attack(this.armyNumber, this.startLocation, this.destination));
             } else if (this.selectedAction === "move") {
-                console.log("move");
+               
                 showWindow(this.move(this.armyNumber, this.startLocation, this.destination));
             } else if (this.selectedAction === "place") {
-                console.log("place");
+                
                 showWindow(this.place(this.armyNumber, this.startLocation));
             } else {
                 console.log("error");
@@ -237,7 +240,7 @@ export default {
         getPlayerData() {
             axios.get('http://localhost:3000/api/v1/game/' + this.idMatch + '/play/' + this.playerName + '/')
                 .then(response => {
-                    console.log(response.data);
+                    
                     this.playerData = response.data;
                 })
                 .catch(error => {
@@ -285,14 +288,11 @@ export default {
     },
 
     created() {
-
-
         setInterval(() => {
             this.getMap();
             this.getObjective();
             this.getAllData();
             this.getPlayerData();
-            console.log(this.playerData);
             this.getReinforcement();
             this.getCards();
             this.createCard();
@@ -301,19 +301,11 @@ export default {
 
         setInterval(() => {
             this.getAllData();
-            if (this.gameStarted === false) {
-                console.log("game not started");
-
-            }
-            else {
-                console.log("game started");
+            if (this.gameStarted !== false) {     
                 this.paths = document.querySelectorAll("path");
-                console.log(this.paths);
                 for (let i = 0; i < this.paths.length; i++) {
                     this.paths[i].addEventListener("mouseover", this.changeHoverValue);
                 }
-
-
             }
         }, 3000);
 
@@ -323,14 +315,11 @@ export default {
 
 const name = ref("place your mouse over a country");
 const list = ref([]);
-
-
 function changeHoverValue(value) {
-
     if (value != null && value.target != null) {
         let title = value.target.attributes.title;
         let neighbour = findNameTerritory(this.allData.map.continents, title.value);
-        console.log(neighbour);
+     
         if (title != null) {
             name.value = title.value;
             list.value = neighbour;
@@ -355,7 +344,7 @@ function findNameTerritory(value, name) {
             }
         }
     }
-    console.log(territory.neighbours);
+
     return territory.neighbours;
 }
 
@@ -364,7 +353,7 @@ function showWindow(message) {
 
     message.then(message => {
         tradeWindow.document.body.innerHTML = message;
-        console.log(message);
+        
     });
 }
 function returnError(error) {
@@ -378,7 +367,7 @@ function returnError(error) {
 function showMessage(message) {
     const tradeWindow = window.open('', 'Message', 'height=80,width=300');
     tradeWindow.document.body.innerHTML = message;
-    console.log(message);
+ 
 }
 
 function colorSet(owner)

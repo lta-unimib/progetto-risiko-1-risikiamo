@@ -106,6 +106,8 @@ export default {
         }
     },
     methods: {
+        returnError: returnError,
+        showMessage: showMessage,
         onFileChange(e) {
             let files = e.target.files || e.dataTransfer.files;
             if (!files.length) return;
