@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">82.45% </span>
+                <span class="strong">82.75% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>47/57</span>
+                <span class='fraction'>48/58</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">81.81% </span>
+                <span class="strong">82.14% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>45/55</span>
+                <span class='fraction'>46/56</span>
             </div>
         
             
@@ -359,7 +359,9 @@
 <a name='L294'></a><a href='#L294'>294</a>
 <a name='L295'></a><a href='#L295'>295</a>
 <a name='L296'></a><a href='#L296'>296</a>
-<a name='L297'></a><a href='#L297'>297</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L297'></a><a href='#L297'>297</a>
+<a name='L298'></a><a href='#L298'>298</a>
+<a name='L299'></a><a href='#L299'>299</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -367,7 +369,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -499,6 +500,11 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -515,6 +521,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -652,9 +659,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;template&gt;
     &lt;section class="wrapper"&gt;
         &lt;div class="top"&gt;Welcome to DRISK&lt;/div&gt;
@@ -700,6 +704,7 @@
         &lt;/h2&gt;
     &lt;/div&gt;
     &lt;br&gt;
+    &lt;h1 style="color: red"&gt;{{ this.$route.query.error }}&lt;/h1&gt;
     &lt;br&gt;
     &lt;div&gt;
         &lt;input type="text" v-model="playerName" /&gt;
@@ -738,8 +743,9 @@
 &nbsp;
             &lt;input type="text" id="name" name="name" v-model="playerName" hidden /&gt;
             &lt;input type="text" id="id" name="id" v-model="id" hidden /&gt;
-            &lt;input type="submit" value="LoadGame"&gt;
+            &lt;input  class="button-30" type="submit" value="LoadGame"&gt;
         &lt;/form&gt;
+       
     &lt;/div&gt;
 &lt;/template&gt;
 &nbsp;
@@ -773,7 +779,7 @@ export default {
         readFile(file) {
             let reader = new FileReader();
             reader.onload = e =&gt; {
-                //console.log(e.target.result);
+                
                 let json = JSON.parse(e.target.result);
                 this.jsonFile = json;
             };
@@ -819,49 +825,49 @@ export default {
                 .catch(error2 =&gt; {
                     showMessage(returnError(error2));
                 });
-        },<span class="fstat-no" title="function not covered" ></span>
-<span class="cstat-no" title="statement not covered" ></span>
-        readString(value, color) {
-            this.playerName = value;
-            this.selectedColor = color;
-            if (value == "" || value == null) {
-                alert("Inserisci un nome valido");<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
-            }
-            else {<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
-                let playerPlaceHolder = {
-                    name: this.playerName,
-                    color: this.selecte<span class="fstat-no" title="function not covered" >dC</span>olor
-<span class="cstat-no" title="statement not covered" >                }</span>
-                this.player = playerPlaceHolder;
-            }
+        },
 &nbsp;
+        readString(value, color) {
+            this.playerName = value;<span class="fstat-no" title="function not covered" ></span>
+<span class="cstat-no" title="statement not covered" >            this.selectedColor = color;</span>
+            if (value == "" || value == null) {
+                alert("Inserisci un nome valido");
+            }
+            else {
+                let playerPlaceHolder = {<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+                    name: this.playerName,
+                    color: this.selectedColor<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+                }
+                this.player = playerPlaceHolder;
+            }<span class="fstat-no" title="function not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
         }
     }
+&nbsp;
+&nbsp;
+}
 <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
-&nbsp;
-}<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
-&nbsp;
 function returnError(error) {
     if (error.response.status != 404)<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
         return error.response.data;
     else
-        return "Territorio non trovato"<span class="fstat-no" title="function not covered" >;</span>
-}<span class="cstat-no" title="statement not covered" ></span>
+        return "Territorio non trovato";<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+}
 function showMessage(message) {
-    const tradeWindow = window.open('', 'Message', 'height=80,width=300');
-    tradeWindow.document.body.innerHTML = message;
+    const tradeWindow = window.open('',<span class="fstat-no" title="function not covered" > '</span>Message', 'height=80,width=300');
+    tr<span class="cstat-no" title="statement not covered" >adeWindow.document.body.innerHTML = message;</span>
     console.log(message);
 }
-&lt;/script&gt;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+&lt;/script&gt;
 &nbsp;
 &lt;style&gt;
-* {
+* {<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
     box-sizing: border-box;
 }
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+&nbsp;
 :root {
     --background-color: black;
-    --text-color: hsl(0, 0%, 100%);
+    --text-color: hsl(0, 0%, 100%);<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
 }
 &nbsp;
 body {
@@ -958,7 +964,7 @@ body {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-01-25T22:31:15.796Z
+                at 2023-01-26T11:54:17.797Z
             </div>
         <script src="prettify.js"></script>
         <script>

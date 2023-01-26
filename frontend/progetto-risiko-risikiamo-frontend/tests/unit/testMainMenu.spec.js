@@ -6,18 +6,18 @@ import { createRouter, createWebHistory } from "vue-router";
 describe("test main menu", () => {
   let wrapper;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const router = createRouter({
       history: createWebHistory(),
       routes: [
         {
-          path: "/game",
+          path: "/",
           name: "home",
           component: MainMenu,
         },
       ],
     });
-    router.push("/game?id=1&name=home");
+    router.push("/");
     await router.isReady();
 
     wrapper = mount(MainMenu, {

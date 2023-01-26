@@ -15,6 +15,7 @@ describe("App", () => {
         },
       ],
     });
+
     router.push("/game?id=1&name=home");
     await router.isReady();
 
@@ -25,8 +26,9 @@ describe("App", () => {
     });
   });
 
-  afterEach(() => {
+  afterEach(async () => {
     wrapper.vm.destoyed();
+    await wrapper.vm.$nextTick();
   });
 
   test("test home component", () => {

@@ -745,15 +745,7 @@
 <a name='L680'></a><a href='#L680'>680</a>
 <a name='L681'></a><a href='#L681'>681</a>
 <a name='L682'></a><a href='#L682'>682</a>
-<a name='L683'></a><a href='#L683'>683</a>
-<a name='L684'></a><a href='#L684'>684</a>
-<a name='L685'></a><a href='#L685'>685</a>
-<a name='L686'></a><a href='#L686'>686</a>
-<a name='L687'></a><a href='#L687'>687</a>
-<a name='L688'></a><a href='#L688'>688</a>
-<a name='L689'></a><a href='#L689'>689</a>
-<a name='L690'></a><a href='#L690'>690</a>
-<a name='L691'></a><a href='#L691'>691</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L683'></a><a href='#L683'>683</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -762,10 +754,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1439,10 +1427,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;script&gt;
 import axios from 'axios';
 import { ref } from 'vue';
@@ -1527,7 +1511,7 @@ export default {
 &nbsp;
                     
                     this.destoyed();
-                    this.$router.push({ name: 'main menu', query: { mgs: "Id or Name not Found" } });
+                    this.$router.push({ name: 'main menu', query: { error: "Id or Name not Found" } });
                     
 &nbsp;
                 });
@@ -1563,12 +1547,6 @@ export default {
                     
                     this.svg = response.data;
                    
-                }).catch(() =&gt; {
-                    
-                    this.$router.push({ name: 'main menu' , query: { error: 404 }});
-                        console.log("404");
-                    
-&nbsp;
                 });
         },
         getCards() {
@@ -1583,10 +1561,13 @@ export default {
             let response = await axios.put('http://localhost:3000/api/v1/game/' + this.idMatch + '/play/' + this.playerName + '/surrend')
                 .then(() =&gt; {
                     
-                    return "You have surrendered"
+                    this.destoyed();
+                    this.$router.push({ name: 'main menu'});
+                    return "You have surrended";
                 })
                 .catch(error =&gt; {
-                    
+                    this.destoyed();
+                    this.$router.push({ name: 'main menu' });
                     return returnError(error);
                 });
             showMessage(response);
@@ -1709,12 +1690,7 @@ export default {
     },
 &nbsp;
 &nbsp;
-    mounted() {
-        
-        this.getAllData();
-        this.getMap();
-&nbsp;
-    },
+    
 &nbsp;
     created() {
         this.int1= setInterval(() =&gt; {
@@ -1766,16 +1742,16 @@ function findNameTerritory(value, name) {
     let territory;
     for (let i = 0; i &lt; continents.length; i++) {
         let countries = continents[i].territory;
-  <span class="missing-if-branch" title="if path not taken" >I</span>      for (let j = 0; j &lt; countries.length; j++) {
-            if (<span class="cstat-no" title="statement not covered" >countries[j].name === name) {</span>
-                terr<span class="cstat-no" title="statement not covered" >itory = countries[j];</span>
-<span class="cstat-no" title="statement not covered" >            }</span>
-<span class="cstat-no" title="statement not covered" >        }</span>
+        for (let j = 0; j &lt; countries.length; j++) {
+            if (countries[j].name === name) {
+                territory = countries[j];
+            }
+  <span class="missing-if-branch" title="if path not taken" >I</span>      }
     }<span class="cstat-no" title="statement not covered" ></span>
-&nbsp;
-    return territory.neighbours;
-}
-&nbsp;
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    return territory.neighbours;</span>
+}<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
 function showWindow(message) {
     const tradeWindow = window.open('', 'Message', 'height=80,width=300');
 &nbsp;
@@ -1805,13 +1781,13 @@ function colorSet(owner)
     {
         return color.color;
     }
-    else<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
-  <span class="missing-if-branch" title="if path not taken" >I</span>  {<span class="branch-1 cbranch-no" title="branch not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        return "black";</span>
+    else
+    {
+        return "black";
     }
-    
-}
-&nbsp;
+    <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+}<span class="branch-1 cbranch-no" title="branch not covered" ><span class="missing-if-branch" title="if path not taken" >I</span></span>
+<span class="cstat-no" title="statement not covered" ></span>
 &nbsp;
 &lt;/script&gt;
 &nbsp;
@@ -1912,24 +1888,24 @@ function colorSet(owner)
     &lt;/div&gt;
     &lt;br&gt;
     &lt;div class="form2"&gt;
-        &lt;p&gt;che carte vuoi scartare per privilegi?&lt;/p&gt;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+        &lt;p&gt;che carte vuoi scartare per privilegi?&lt;/p&gt;
         &lt;input type="text" id="card1" v-model="card1"&gt;
         &lt;p&gt;&lt;/p&gt;
         &lt;input type="text" id="card2" v-model="card2"&gt;
-        &lt;p&gt;&lt;/p&gt;
-        &lt;input type="text" id="card3" v-model="card3"&gt;
         &lt;p&gt;&lt;/p&gt;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+        &lt;input type="text" id="card3" v-model="card3"&gt;
+        &lt;p&gt;&lt;/p&gt;
         &lt;button id="doAction2" @click="submitCards"&gt;ok&lt;/button&gt;
     &lt;/div&gt;
 &nbsp;
-&lt;/template&gt;
+&lt;/template&gt;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+&nbsp;
 &nbsp;
 &lt;style&gt;
 .console2 {
-    width: 20%;
-    height: 200px;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+    width: 20%;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+    height: 200px;
     border: 1px solid black;
     overflow: auto;
     margin-left: 40%;
@@ -1937,34 +1913,34 @@ function colorSet(owner)
 }
 &nbsp;
 .form {
-    width: 15%;
-    border: 3px solid black;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+    width: 15%;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+    border: 3px solid black;
     margin-left: 40%;
     font-size: 100%;
 }
-&nbsp;
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
 .form2 {
     width: 10%;
     border: 3px solid black;
     margin-left: 40%;
-    font-size: 100%;<span class="fstat-no" title="function not covered" ></span>
-}<span class="cstat-no" title="statement not covered" ></span>
-&nbsp;
-path[class="land Nord"] {<span class="fstat-no" title="function not covered" ></span>
-    fi<span class="cstat-no" title="statement not covered" >ll: green;</span>
+    font-size: 100%;
 }
 &nbsp;
-path[class="land Sud"] {
-    fill: red;
+path[class="land Nord"] {
+    fill: green;<span class="fstat-no" title="function not covered" ></span>
+}<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+path[class="land Sud"] {<span class="fstat-no" title="function not covered" ></span>
+    fi<span class="cstat-no" title="statement not covered" >ll: red;</span>
 }
 &nbsp;
 path[class="land Centro"] {
-    fill: yellow;<span class="fstat-no" title="function not covered" ></span>
-}<span class="cstat-no" title="statement not covered" ></span>
+    fill: yellow;
+}
 &nbsp;
 path[class="land Europe"] {
-&nbsp;
-    fill: Purple;
+<span class="fstat-no" title="function not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    fill: Purple;</span>
 }
 &nbsp;
 path[class="land Asia"] {
@@ -1972,7 +1948,7 @@ path[class="land Asia"] {
 }
 &nbsp;
 path[class="land Africa"] {
-    fill: brown;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+    fill: brown;
 }
 &nbsp;
 path[class="land North_America"] {
@@ -1984,7 +1960,7 @@ path[class="land South_America"] {
 }
 &nbsp;
 path[class="land Oceania"] {
-    fill: pink;
+    fill: pink;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
 }
 &nbsp;
 .pathFrom {
@@ -2049,9 +2025,9 @@ body {
 &nbsp;
 .grid {
     display: grid;
-    width: 5rem;
+    width: 30%;
     grid-gap: 6rem;
-    grid-template-columns: repeat(auto-fit, minmax(5rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(50rem, 1fr));
     align-items: center;
     margin-left: 30%;
     margin-right: 10%;
@@ -2140,7 +2116,7 @@ body {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-01-26T09:17:59.247Z
+                at 2023-01-26T12:49:26.952Z
             </div>
         <script src="../prettify.js"></script>
         <script>

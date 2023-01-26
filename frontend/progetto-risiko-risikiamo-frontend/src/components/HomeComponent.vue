@@ -261,12 +261,7 @@ export default {
     },
 
 
-    mounted() {
-        
-        this.getAllData();
-        this.getMap();
-
-    },
+    
 
     created() {
         this.int1= setInterval(() => {
