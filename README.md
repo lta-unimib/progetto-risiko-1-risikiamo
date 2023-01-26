@@ -15,6 +15,6 @@
 
 ## Pages
 
-- [Installing,Running and Play](https://github.com/lta-unimib/progetto-risiko-1-risikiamo/wiki/Installing,Running and Play)
+- [Installing,Running and Play](https://github.com/lta-unimib/progetto-risiko-1-risikiamo/wiki/Installing,Running-and-Play)
 - [Organizational Flow](https://github.com/lta-unimib/progetto-risiko-1-risikiamo/wiki/Organizational-Flow)
 - [Tech Stack](https://github.com/lta-unimib/progetto-risiko-1-risikiamo/wiki/Tech-Stack)
