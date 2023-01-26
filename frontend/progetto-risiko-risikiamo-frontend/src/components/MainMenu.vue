@@ -43,6 +43,7 @@
         </h2>
     </div>
     <br>
+    <h1 style="color: red">{{ this.$route.query.error }}</h1>
     <br>
     <div>
         <input type="text" v-model="playerName" />
@@ -81,8 +82,9 @@
 
             <input type="text" id="name" name="name" v-model="playerName" hidden />
             <input type="text" id="id" name="id" v-model="id" hidden />
-            <input type="submit" value="LoadGame">
+            <input  class="button-30" type="submit" value="LoadGame">
         </form>
+       
     </div>
 </template>
 
@@ -116,7 +118,7 @@ export default {
         readFile(file) {
             let reader = new FileReader();
             reader.onload = e => {
-                //console.log(e.target.result);
+                
                 let json = JSON.parse(e.target.result);
                 this.jsonFile = json;
             };

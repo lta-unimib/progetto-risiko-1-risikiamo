@@ -731,7 +731,29 @@
 <a name='L666'></a><a href='#L666'>666</a>
 <a name='L667'></a><a href='#L667'>667</a>
 <a name='L668'></a><a href='#L668'>668</a>
-<a name='L669'></a><a href='#L669'>669</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L669'></a><a href='#L669'>669</a>
+<a name='L670'></a><a href='#L670'>670</a>
+<a name='L671'></a><a href='#L671'>671</a>
+<a name='L672'></a><a href='#L672'>672</a>
+<a name='L673'></a><a href='#L673'>673</a>
+<a name='L674'></a><a href='#L674'>674</a>
+<a name='L675'></a><a href='#L675'>675</a>
+<a name='L676'></a><a href='#L676'>676</a>
+<a name='L677'></a><a href='#L677'>677</a>
+<a name='L678'></a><a href='#L678'>678</a>
+<a name='L679'></a><a href='#L679'>679</a>
+<a name='L680'></a><a href='#L680'>680</a>
+<a name='L681'></a><a href='#L681'>681</a>
+<a name='L682'></a><a href='#L682'>682</a>
+<a name='L683'></a><a href='#L683'>683</a>
+<a name='L684'></a><a href='#L684'>684</a>
+<a name='L685'></a><a href='#L685'>685</a>
+<a name='L686'></a><a href='#L686'>686</a>
+<a name='L687'></a><a href='#L687'>687</a>
+<a name='L688'></a><a href='#L688'>688</a>
+<a name='L689'></a><a href='#L689'>689</a>
+<a name='L690'></a><a href='#L690'>690</a>
+<a name='L691'></a><a href='#L691'>691</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -740,6 +762,28 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1444,6 +1488,8 @@ export default {
             playerData: [],
             objective: null,
             playerList: [],
+            int1: null,
+            int2: null,
 &nbsp;
         }
 &nbsp;
@@ -1451,12 +1497,17 @@ export default {
 &nbsp;
     methods: {
         colorSet: colorSet,
+        destoyed: function () {
+            clearInterval(this.int1);
+            clearInterval(this.int2);
+        },
         returnError: returnError,
         showMessage: showMessage,
         showWindow: showWindow,
         findNameTerritory: findNameTerritory,
         changeHoverValue: changeHoverValue,
         getAllData() {
+           
             axios.get('http://localhost:3000/api/v1/game/' + this.idMatch + '/watch')
                 .then(response =&gt; {
                     this.gameStarted = response.data.gameStarted;
@@ -1472,7 +1523,15 @@ export default {
                     this.continents = response.data.map.continents;  
                     this.winner = response.data.winner;
 &nbsp;
+                }).catch(() =&gt; {
+&nbsp;
+                    
+                    this.destoyed();
+                    this.$router.push({ name: 'main menu', query: { mgs: "Id or Name not Found" } });
+                    
+&nbsp;
                 });
+            
 &nbsp;
         },
         async place(value, path) {
@@ -1504,6 +1563,12 @@ export default {
                     
                     this.svg = response.data;
                    
+                }).catch(() =&gt; {
+                    
+                    this.$router.push({ name: 'main menu' , query: { error: 404 }});
+                        console.log("404");
+                    
+&nbsp;
                 });
         },
         getCards() {
@@ -1516,7 +1581,7 @@ export default {
         },
         async surrend() {
             let response = await axios.put('http://localhost:3000/api/v1/game/' + this.idMatch + '/play/' + this.playerName + '/surrend')
-                .then(response =&gt; {
+                .then(() =&gt; {
                     
                     return "You have surrendered"
                 })
@@ -1528,8 +1593,8 @@ export default {
         },
         async skip() {
             let response = await axios.put('http://localhost:3000/api/v1/game/' + this.idMatch + '/play/' + this.playerName + '/skip')
-                .then(response =&gt; {
-                   
+                .then(() =&gt; {
+                    
                     return "You have skipped your turn"
                 })
                 .catch(error =&gt; {
@@ -1579,7 +1644,7 @@ export default {
         },
         cardDiscard(card1, card2, card3) {
             axios.put('http://localhost:3000/api/v1/game/' + this.idMatch + '/play/' + this.playerName + '/renforce?c1=' + card1 + '&amp;c2=' + card2 + '&amp;c3=' + card3)
-                .then(response =&gt; {
+                .then(() =&gt; {
                    
                     showMessage("Nuovi rinforzi");
                 })
@@ -1645,13 +1710,14 @@ export default {
 &nbsp;
 &nbsp;
     mounted() {
-        this.getMap();
+        
         this.getAllData();
+        this.getMap();
 &nbsp;
     },
 &nbsp;
     created() {
-        setInterval(() =&gt; {
+        this.int1= setInterval(() =&gt; {
             this.getMap();
             this.getObjective();
             this.getAllData();
@@ -1662,7 +1728,7 @@ export default {
             this.cardsArr = this.createCard();
         }, 2000);
 &nbsp;
-        setInterval(() =&gt; {
+        this.int2 = setInterval(() =&gt; {
             this.getAllData();
             if (this.gameStarted !== false) {     
                 this.paths = document.querySelectorAll("path");
@@ -2074,7 +2140,7 @@ body {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-01-25T22:45:17.368Z
+                at 2023-01-26T09:17:59.247Z
             </div>
         <script src="../prettify.js"></script>
         <script>

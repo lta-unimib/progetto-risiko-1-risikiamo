@@ -25,6 +25,10 @@ describe("App", () => {
     });
   });
 
+  afterEach(() => {
+    wrapper.vm.destoyed();
+  });
+
   test("test home component", () => {
     expect(wrapper.vm).toBeTruthy();
   });

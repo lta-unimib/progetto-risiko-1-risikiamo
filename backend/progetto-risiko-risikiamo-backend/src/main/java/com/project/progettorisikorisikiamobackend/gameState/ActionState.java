@@ -59,30 +59,9 @@ public class ActionState implements IState {
             Player p = context.getTurn().getCurrentPlayer();
 
             CardTerritory t = context.getDeckTerritories().draw();
-            CardTerritory t2 = context.getDeckTerritories().draw();
-            CardTerritory t3 = context.getDeckTerritories().draw();
-            CardTerritory t4 = context.getDeckTerritories().draw();
-            CardTerritory t5 = context.getDeckTerritories().draw();
-            CardTerritory t6 = context.getDeckTerritories().draw();
-            CardTerritory t7 = context.getDeckTerritories().draw();
-            CardTerritory t8 = context.getDeckTerritories().draw();
-            CardTerritory t9 = context.getDeckTerritories().draw();
-            CardTerritory t10 = context.getDeckTerritories().draw();
-            CardTerritory t11 = context.getDeckTerritories().draw();
-            CardTerritory t12 = context.getDeckTerritories().draw();
 
             p.addCard(t);
-            p.addCard(t2);
-            p.addCard(t3);
-            p.addCard(t4);
-            p.addCard(t5);
-            p.addCard(t6);
-            p.addCard(t7);
-            p.addCard(t8);
-            p.addCard(t9);
-            p.addCard(t10);
-            p.addCard(t11);
-            p.addCard(t12);
+
         }
 
         context.getTurn().nextTurn();

@@ -1,12 +1,30 @@
-import { shallowMount } from "@vue/test-utils";
+import { mount } from "@vue/test-utils";
 
 import MainMenu from "../../src/components/MainMenu.vue";
+import { createRouter, createWebHistory } from "vue-router";
 
 describe("test main menu", () => {
   let wrapper;
 
-  beforeEach(() => {
-    wrapper = shallowMount(MainMenu);
+  beforeEach(async () => {
+    const router = createRouter({
+      history: createWebHistory(),
+      routes: [
+        {
+          path: "/game",
+          name: "home",
+          component: MainMenu,
+        },
+      ],
+    });
+    router.push("/game?id=1&name=home");
+    await router.isReady();
+
+    wrapper = mount(MainMenu, {
+      global: {
+        plugins: [router],
+      },
+    });
 
     wrapper.setData({
       playerName: "player1",

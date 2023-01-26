@@ -12,7 +12,6 @@
     "ammap3": "^3.21.15",
     "axios": "^0.27.2",
     "core-js": "^3.8.3",
-    "flush-promises": "^1.0.2",
     "path-browserify": "1.0.1",
     "typescript-require": "^0.3.0",
     "vue": "^3.2.13",

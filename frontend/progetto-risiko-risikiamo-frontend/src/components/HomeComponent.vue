@@ -43,6 +43,8 @@ export default {
             playerData: [],
             objective: null,
             playerList: [],
+            int1: null,
+            int2: null,
 
         }
 
@@ -50,12 +52,17 @@ export default {
 
     methods: {
         colorSet: colorSet,
+        destoyed: function () {
+            clearInterval(this.int1);
+            clearInterval(this.int2);
+        },
         returnError: returnError,
         showMessage: showMessage,
         showWindow: showWindow,
         findNameTerritory: findNameTerritory,
         changeHoverValue: changeHoverValue,
         getAllData() {
+           
             axios.get('http://localhost:3000/api/v1/game/' + this.idMatch + '/watch')
                 .then(response => {
                     this.gameStarted = response.data.gameStarted;
@@ -71,7 +78,15 @@ export default {
                     this.continents = response.data.map.continents;  
                     this.winner = response.data.winner;
 
+                }).catch(() => {
+
+                    
+                    this.destoyed();
+                    this.$router.push({ name: 'main menu', query: { error: "Id or Name not Found" } });
+                    
+
                 });
+            
 
         },
         async place(value, path) {
@@ -115,20 +130,23 @@ export default {
         },
         async surrend() {
             let response = await axios.put('http://localhost:3000/api/v1/game/' + this.idMatch + '/play/' + this.playerName + '/surrend')
-                .then(response => {
+                .then(() => {
                     
-                    return "You have surrendered"
+                    this.destoyed();
+                    this.$router.push({ name: 'main menu'});
+                    return "You have surrended";
                 })
                 .catch(error => {
-                    
+                    this.destoyed();
+                    this.$router.push({ name: 'main menu' });
                     return returnError(error);
                 });
             showMessage(response);
         },
         async skip() {
             let response = await axios.put('http://localhost:3000/api/v1/game/' + this.idMatch + '/play/' + this.playerName + '/skip')
-                .then(response => {
-                   
+                .then(() => {
+                    
                     return "You have skipped your turn"
                 })
                 .catch(error => {
@@ -178,7 +196,7 @@ export default {
         },
         cardDiscard(card1, card2, card3) {
             axios.put('http://localhost:3000/api/v1/game/' + this.idMatch + '/play/' + this.playerName + '/renforce?c1=' + card1 + '&c2=' + card2 + '&c3=' + card3)
-                .then(response => {
+                .then(() => {
                    
                     showMessage("Nuovi rinforzi");
                 })
@@ -244,13 +262,14 @@ export default {
 
 
     mounted() {
-        this.getMap();
+        
         this.getAllData();
+        this.getMap();
 
     },
 
     created() {
-        setInterval(() => {
+        this.int1= setInterval(() => {
             this.getMap();
             this.getObjective();
             this.getAllData();
@@ -261,7 +280,7 @@ export default {
             this.cardsArr = this.createCard();
         }, 2000);
 
-        setInterval(() => {
+        this.int2 = setInterval(() => {
             this.getAllData();
             if (this.gameStarted !== false) {     
                 this.paths = document.querySelectorAll("path");
@@ -582,9 +601,9 @@ body {
 
 .grid {
     display: grid;
-    width: 5rem;
+    width: 30%;
     grid-gap: 6rem;
-    grid-template-columns: repeat(auto-fit, minmax(5rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(50rem, 1fr));
     align-items: center;
     margin-left: 30%;
     margin-right: 10%;
