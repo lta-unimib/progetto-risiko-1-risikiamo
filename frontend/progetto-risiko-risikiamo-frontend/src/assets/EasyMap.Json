@@ -1,6 +1,6 @@
 {
     "name": "game",
-    "startingArmies": 1,
+    "startingArmies": 4,
     "map": {
         "name": "Italy",
         "continents": [
