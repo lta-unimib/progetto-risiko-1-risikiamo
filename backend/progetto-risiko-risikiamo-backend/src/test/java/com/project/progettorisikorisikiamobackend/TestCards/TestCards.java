@@ -70,7 +70,8 @@ public class TestCards {
             CardTerritory card = deck.draw();
             assertEquals(3, deck.getDeck().size());
             assertEquals(CardTerritory.class, card.getClass());
-            assertTrue(t1.getName() == card.getName() || t2.getName() == card.getName() || card.getName() == null);
+            assertTrue(t1.getName() == card.getName() || t2.getName() == card.getName() || card.getName() == null ||
+                    card.getName() == "Jolly1" || card.getName() == "Jolly2");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
