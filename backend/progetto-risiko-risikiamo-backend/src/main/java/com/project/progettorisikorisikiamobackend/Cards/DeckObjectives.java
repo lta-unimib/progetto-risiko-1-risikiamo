@@ -35,10 +35,11 @@ public class DeckObjectives {
             numTerritories += c.getTerritories().size();
         }
         double busted = 0.0;
+
         if (players.size() == 2)
-            busted = 25;
+            busted = 7;
         else if (players.size() == 3)
-            busted = 10;
+            busted = 4;
 
         double fNumTerritories = numTerritories * ((58.0 + busted) / 100.0);
         if (fNumTerritories < 4)

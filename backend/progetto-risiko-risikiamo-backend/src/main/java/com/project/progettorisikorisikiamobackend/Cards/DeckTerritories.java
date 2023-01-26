@@ -40,6 +40,8 @@ public class DeckTerritories {
         }
         deck.add(new CardTerritory("Jolly1", EnumCard.JOLLY));
         deck.add(new CardTerritory("Jolly2", EnumCard.JOLLY));
+
+        Collections.shuffle(deck);
     }
 
     public CardTerritory draw() {

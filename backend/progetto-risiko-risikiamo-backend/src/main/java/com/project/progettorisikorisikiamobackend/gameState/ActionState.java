@@ -61,6 +61,7 @@ public class ActionState implements IState {
             CardTerritory t = context.getDeckTerritories().draw();
 
             p.addCard(t);
+
         }
 
         context.getTurn().nextTurn();
