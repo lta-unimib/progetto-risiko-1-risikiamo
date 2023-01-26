@@ -1,32 +1,37 @@
 package com.project.progettorisikorisikiamobackend.gameState;
 
 //import
-import com.project.progettorisikorisikiamobackend.Turno.*;
-import java.util.Scanner;
+import com.project.progettorisikorisikiamobackend.gameState.interf.IContext;
+import com.project.progettorisikorisikiamobackend.gameState.interf.IState;
+import com.project.progettorisikorisikiamobackend.map.Territory;
+import com.project.progettorisikorisikiamobackend.player.Player;
 
-public class RenforceState extends GameState {
-    public RenforceState(GameStateManager gameStateManager, String name, Turn turno) {
-        super(gameStateManager, name, turno);
-    }
+import lombok.AllArgsConstructor;
 
-    public void move() {
+@AllArgsConstructor
 
-        // super.getGameStateManager().changeState("sposta");
+public class RenforceState implements IState {
 
-    }
+    private IContext context;
 
-    public void attack() {
-
-        // super.getGameStateManager().changeState("attacca");
-    }
-
-    public void renforce() {
-
-        // super.getTurno().getCurrentPlayer().placeReinforcements(rinforzi);
-    }
-
+    @Override
     public void endTurn() {
-        super.getGameStateManager().changeState("fineTurno");
+        context.setState(new NewTurnState(context));
+        context.getTurn().nextTurn();
+    }
+
+    @Override
+    public void placeReinforcements(Territory ownTerritory, int armies) {
+
+        Player player = context.getTurn().getCurrentPlayer();
+        if (player.getReinforce() <= 0) {
+            context.setState(new ActionState(context));
+        }
+        player.placeReinforcements(ownTerritory, armies);
+
+        if (player.getReinforce() <= 0) {
+            context.setState(new ActionState(context));
+        }
     }
 
 }

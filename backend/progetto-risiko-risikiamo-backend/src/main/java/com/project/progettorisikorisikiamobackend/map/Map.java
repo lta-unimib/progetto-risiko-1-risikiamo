@@ -43,16 +43,19 @@ public class Map {
      * @throws IllegalArgumentException if the continent id is null
      * @author Mauro Zorzin
      */
-    public void addContinent(Continent continent, String continentId) throws IllegalArgumentException {
-        if (isContinentInMap(continentId)) {
-            throw new IllegalArgumentException("Continent already in the map");
-        }
+    public void addContinent(Continent continent) throws IllegalArgumentException {
+
         if (isContinentInMap(continent)) {
             throw new IllegalArgumentException("Continent already in the map");
         }
 
         if (continent == null) {
             throw new IllegalArgumentException("Continent id can't be null");
+        }
+        String continentId = continent.getName();
+
+        if (isContinentInMap(continentId)) {
+            throw new IllegalArgumentException("Continent already in the map");
         }
 
         if (continentId.isEmpty() || continentId.isBlank()) {
@@ -234,17 +237,6 @@ public class Map {
             }
         }
         return continentsTemp;
-    }
-
-    /**
-     * Return the continents owned by the player
-     * 
-     * @param player
-     * @return the continents owned by the player
-     * @author Mauro Zorzin
-     */
-    public Collection<Continent> getContinents() {
-        return continents.values();
     }
 
 }
